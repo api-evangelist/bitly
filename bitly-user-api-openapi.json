@@ -1,0 +1,182 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "v3",
+        "title": "Bitly User API",
+        "description": "The Bitly User API",
+        "termsOfService": "http:\/\/dev.bitly.com\/best_practices.html"
+    },
+    "servers": [
+        "httpsapi-ssl.bitly.com\/v3"
+    ],
+    "paths": {
+        "\/v3\/oauth\/app": {
+            "get": {
+                "summary": "OAuth App",
+                "description": "Return information about an OAuth app.",
+                "operationId": "OauthApp",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "the client ID of the app."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/info": {
+            "get": {
+                "summary": "User Info",
+                "description": "Return or update information about a user.",
+                "operationId": "UserInfo",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "full_name",
+                        "in": "query",
+                        "description": "set the users full name value. (only available for the authenticated user.)"
+                    },
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "description": "the bitly login of the user whose info to look up. If not given, the authenticated user will be used."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/link_history": {
+            "get": {
+                "summary": "User Link History",
+                "description": "Returns entries from a users link history in reverse chronological order.",
+                "operationId": "UserLinkHistory",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "archived",
+                        "in": "query",
+                        "description": "on, offor both whether to include or exclude archived history entries. (on = return only archived history entries) default: off."
+                    },
+                    {
+                        "name": "campaign_id",
+                        "in": "query",
+                        "description": "filter to return only links for the given campaign_id, can be provided multiple times"
+                    },
+                    {
+                        "name": "created_after",
+                        "in": "query",
+                        "description": "timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "created_before",
+                        "in": "query",
+                        "description": "timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "exact_domain",
+                        "in": "query",
+                        "description": "n exact domain to filter on history entries"
+                    },
+                    {
+                        "name": "expand_client_id",
+                        "in": "query",
+                        "description": "whether to provide additional information about encoding application. default: false."
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "custom keyword to filter on history entries"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "integer in the range 1 to 100 default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "optional the Bitlink or Bitlinks to return metadata for (when specified, overrides all other options), can be provided multiple times."
+                    },
+                    {
+                        "name": "modified_after",
+                        "in": "query",
+                        "description": "timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "integer specifying the numbered result at which to start (for pagination)."
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "on, off and both whether to include or exclude private history entries. (on = return only private history entries) default: both."
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "optional ad hoc text search string"
+                    },
+                    {
+                        "name": "root_domain",
+                        "in": "query",
+                        "description": "a root domain to filter on history entries"
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "the user for whom to retrieve history entries (if different from authenticated user)."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/network_history": {
+            "get": {
+                "summary": "User Network History",
+                "description": "Returns entries from a users network history in reverse chronogical order. (A users network history includes publicly saved links from Twitter and Facebook connections.)",
+                "operationId": "UserNetworkHistory",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_client_id",
+                        "in": "query",
+                        "description": "whether to provide additional information about encoding application. default: false."
+                    },
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "include extra user info in response (login, avatar_url, display_name, profile_url, full_name)."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "integer in the range 1 to 100 default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "integer specifying the numbered result at which to start (for pagination)."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/tracking_domain_list": {
+            "get": {
+                "summary": "User Tracking Domain List",
+                "description": "Returns a list of tracking domains a user has configured.",
+                "operationId": "UserTrackingDomainList",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "tracking_domains",
+                        "in": "query",
+                        "description": "a list of tracking domains configured for the authenticated user."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
