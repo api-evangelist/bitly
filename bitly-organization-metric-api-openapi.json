@@ -1,0 +1,317 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "v3",
+        "title": "Bitly Organization Metric API",
+        "description": "The Bitly Organization Metric API",
+        "termsOfService": "http:\/\/dev.bitly.com\/best_practices.html"
+    },
+    "servers": [
+        "httpsapi-ssl.bitly.com\/v3"
+    ],
+    "paths": {
+        "\/v3\/organization\/brand_messages": {
+            "get": {
+                "summary": "Organization Brand Messages",
+                "description": "Returns the top Bitlinks created by you with traffic, that did not also have non-organization traffic in the same time period, ordered by clicks.",
+                "operationId": "OrganizationBrandMessages",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1..1000 (default=100)"
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "hour | day | week | month default:day"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now "
+                    }
+                ]
+            }
+        },
+        "\/v3\/organization\/clicks": {
+            "get": {
+                "summary": "Organization Clicks",
+                "description": "Returns the number of clicks on Bitlinks created by your organization or by other Bitly users that point to your domains.",
+                "operationId": "OrganizationClicks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1..1000 (default=100)"
+                    },
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "hour | day | week | month default:day"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now "
+                    }
+                ]
+            }
+        },
+        "\/v3\/organization\/intersecting_links": {
+            "get": {
+                "summary": "Organization Intersecting Links",
+                "description": "Returns the top links shared by both your audience and by your account, ordered by clicks.",
+                "operationId": "OrganizationIntersectingLinks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1..1000 (default=100)"
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "hour | day | week | month default:day"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now "
+                    }
+                ]
+            }
+        },
+        "\/v3\/organization\/leaderboard": {
+            "get": {
+                "summary": "Organization Leaderboard",
+                "description": "Returns the top-performing organization members ordered by clicks or shortens.",
+                "operationId": "OrganizationLeaderBoard",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1..1000 (default=100)"
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "either clicks or shortens. Default is clicks."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "hour | day | week | month default:day"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now "
+                    }
+                ]
+            }
+        },
+        "\/v3\/organization\/missed_opportunities": {
+            "get": {
+                "summary": "Organization Missed Opportunities",
+                "description": "Returns the top links shared by your audience, but not by you, ordered by clicks.",
+                "operationId": "OrganizationMissedOpportunities",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "an epoch timestamp, indicating the most recent time for which to pull metrics. default",
+                        "in": "query",
+                        "description": "hour | day | week | month default:day"
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1..1000 (default=100)"
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "hour | day | week | month default:day"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now "
+                    }
+                ]
+            }
+        },
+        "\/v3\/organization\/popular_links": {
+            "get": {
+                "summary": "Organization Popular Links",
+                "description": "Returns the top links shared by you or your audience, ordered by clicks",
+                "operationId": "OrganizationPopularLinks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1..1000 (default=100)"
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "hour | day | week | month default:day"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now "
+                    }
+                ]
+            }
+        },
+        "\/v3\/organization\/shorten_counts": {
+            "get": {
+                "summary": "Organization Shorten Counts",
+                "description": "Returns the number of Bitlinks created by your organization or by other Bitly users that point to your domains.",
+                "operationId": "OrganizationShortenCounts",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1..1000 (default=100)"
+                    },
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "hour | day | week | month default:day"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now "
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
