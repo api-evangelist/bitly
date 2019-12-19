@@ -1,0 +1,320 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "3.0",
+        "title": "Bitly Link API",
+        "description": "The Bitly Link API.",
+        "termsOfService": "http:\/\/dev.bitly.com\/best_practices.html"
+    },
+    "servers": [
+        "httpsapi-ssl.bitly.com\/v3"
+    ],
+    "paths": {
+        "\/search": {
+            "get": {
+                "summary": "Get Search",
+                "description": "Get search.",
+                "operationId": "GetSearch",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "cities",
+                        "in": "query",
+                        "description": "show links active in this city (ordered like country-state-city, e.g. us-il-chicago)."
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "restrict results to this web domain (like bitly.com)."
+                    },
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "which fields to return in the response (comma-separated). May be any of: domain, initial_epoch, h2, h3, site, lastindexed, keywords, last_indexed_epoch, title, initial, summaryText, content, score, summaryTitle, type, description, cities, lang, url, referrer, aggregate_link, lastseen, page, ogtitle, aggregate_link. By default, all will be returned."
+                    },
+                    {
+                        "name": "full_domain",
+                        "in": "query",
+                        "description": "restrict results to this full web domain (like blog.bitly.com)."
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "favor results in this language (two letter ISO code)."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": ""
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "which result to start with (defaults to 0)."
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "string to query for."
+                    }
+                ]
+            }
+        },
+        "\/v3\/expand": {
+            "get": {
+                "summary": "Get Expand",
+                "description": "Get expand.",
+                "operationId": "GetV3Expand",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "json, xml, txt. Default: json."
+                    },
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "refers to one or more bitly hashes. e.g.: 2bYgqR or a-custom-name."
+                    },
+                    {
+                        "name": "shortUrl",
+                        "in": "query",
+                        "description": "refers to one or more Bitlinks. e.g.: http:\/\/bit.ly\/1RmnUT or http:\/\/j.mp\/1RmnUT."
+                    }
+                ]
+            }
+        },
+        "\/v3\/info": {
+            "get": {
+                "summary": "Get Info",
+                "description": "Get info.",
+                "operationId": "GetV3Info",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "optional true|false - include extra user info in response."
+                    },
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "refers to one or more bitly hashes. e.g.: 2bYgqR or a-custom-name."
+                    },
+                    {
+                        "name": "shortUrl",
+                        "in": "query",
+                        "description": "refers to one or more Bitlinks. e.g.: http:\/\/bit.ly\/1RmnUT or http:\/\/j.mp\/1RmnUT."
+                    }
+                ]
+            }
+        },
+        "\/v3\/link\/lookup": {
+            "get": {
+                "summary": "Get Link Lookup",
+                "description": "Get link lookup.",
+                "operationId": "GetV3LinkLookup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "one or more long URLs to lookup."
+                    }
+                ]
+            }
+        },
+        "\/v3\/shorten": {
+            "get": {
+                "summary": "Get Shorten",
+                "description": "Get shorten.",
+                "operationId": "GetV3Shorten",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "restrict results to this web domain (like bitly.com)."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "json, xml, txt. Default: json."
+                    },
+                    {
+                        "name": "longUrl",
+                        "in": "query",
+                        "description": "a long URL to be shortened (example: http:\/\/betaworks.com\/)."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/link_edit": {
+            "get": {
+                "summary": "Get User Link Edit",
+                "description": "Get user link edit.",
+                "operationId": "GetV3UserLinkEdit",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "archived",
+                        "in": "query",
+                        "description": "indicating whether or not link is to be archived."
+                    },
+                    {
+                        "name": "clear_deeplinks",
+                        "in": "query",
+                        "description": "indicating that all deeplinks should be removed form the bitlink"
+                    },
+                    {
+                        "name": "deeplinks",
+                        "in": "query",
+                        "description": "urlencoded json array of deeplink items"
+                    },
+                    {
+                        "name": "edit",
+                        "in": "query",
+                        "description": "a comma separated string of fields to be edited. ie: to edit the note field you also need to pass edit=note."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "Successful response"
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "a description of, or note about, this Bitlink."
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "boolean true or false indicating privacy setting (defaults to user-level setting)."
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "the title of this Bitlink."
+                    },
+                    {
+                        "name": "user_ts",
+                        "in": "query",
+                        "description": "timestamp as an integer epoch."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/link_lookup": {
+            "get": {
+                "summary": "Get User Link Lookup",
+                "description": "Get user link lookup.",
+                "operationId": "GetV3UserLinkLookup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "Successful response"
+                    },
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "one or more long URLs to lookup."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/link_save": {
+            "get": {
+                "summary": "Get User Link Save",
+                "description": "Get user link save.",
+                "operationId": "GetV3UserLinkSave",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "deeplinks",
+                        "in": "query",
+                        "description": "urlencoded json array of deeplink items"
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "restrict results to this web domain (like bitly.com)."
+                    },
+                    {
+                        "name": "longUrl",
+                        "in": "query",
+                        "description": "a long URL to be shortened (example: http:\/\/betaworks.com\/)."
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "a description of, or note about, this Bitlink."
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "boolean true or false indicating privacy setting (defaults to user-level setting)."
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "the title of this Bitlink."
+                    },
+                    {
+                        "name": "user_ts",
+                        "in": "query",
+                        "description": "timestamp as an integer epoch."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/save_custom_domain_keyword": {
+            "get": {
+                "summary": "Get User Save Custom Domain Keyword",
+                "description": "Get user save custom domain keyword.",
+                "operationId": "GetV3UserSaveCustomDomainKeyword",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "keyword_link",
+                        "in": "query",
+                        "description": "the Custom Bitlink (short domain and keyword combination) to set"
+                    },
+                    {
+                        "name": "overwrite",
+                        "in": "query",
+                        "description": "Ovewrite existing entry if one exists. Default: false."
+                    },
+                    {
+                        "name": "target_link",
+                        "in": "query",
+                        "description": "the Bitlink the specified keyword will map to (as returned from \/v3\/shorten)"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Link": {
+                "type": "object",
+                "properties": {
+                    "aggregate_link": {
+                        "description": "",
+                        "type": "get"
+                    },
+                    "title": {
+                        "description": "",
+                        "type": "get"
+                    },
+                    "url": {
+                        "description": "",
+                        "type": "get"
+                    }
+                }
+            }
+        }
+    }
+}
