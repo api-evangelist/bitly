@@ -1,0 +1,708 @@
+{
+    "id": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+    "name": "Bitly User Metrics API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "6d8cdd0f7db1f5fdb1c2a00c8bcd602b",
+            "name": "User Clicks",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/clicks",
+            "description": "Returns the aggregate number of clicks on all of the authenticated users Bitlinks.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "format",
+                    "description": "json, xml, txt. Default: json.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "rollup",
+                    "description": "Return data for multiple units rolled up to a single result instead of a separate value for each period of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        },
+        {
+            "id": "de155ca3b5c9748d7075c9a25b70179c",
+            "name": "User Countries",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/countries",
+            "description": "Returns aggregate metrics about the countries referring click traffic to all of the authenticated users Bitlinks.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "rollup",
+                    "description": "Return data for multiple units rolled up to a single result instead of a separate value for each period of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        },
+        {
+            "id": "84201cc88246bb9f30a2c3d00238940c",
+            "name": "User Popular Earned By Clicks",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_earned_by_clicks",
+            "description": "Returns the top links to your tracking domain (or domains) created by users not associated with your account, ordered by clicks.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking domain as returned from \/v3\/user\/tracking_domain_list.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        },
+        {
+            "id": "954a9b83c4177a2f6222c68cee6065a1",
+            "name": "User Popular Earned By Shortens",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_earned_by_shortens",
+            "description": "Returns the top links to your tracking domain (or domains) created by users not associated with your account, ordered by shortens.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking domain as returned from \/v3\/user\/tracking_domain_list.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        },
+        {
+            "id": "953d96eaee593c2cf53d24c218889147",
+            "name": "User Popular Links",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_links",
+            "description": "Returns the authenticated users most-clicked Bitlinks (ordered by number of clicks) in a given time period.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        },
+        {
+            "id": "bb62e4c86837c7186bf92d0179440fe6",
+            "name": "User Popular Owned By Clicks",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_owned_by_clicks",
+            "description": "Returns the top links to your tracking domain (or domains) created by you or your subaccounts ordered by clicks.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking domain as returned from \/v3\/user\/tracking_domain_list.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "subaccount",
+                    "description": "restrict to links created by this subaccount (may be specified multiple times).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        },
+        {
+            "id": "3b2dd9737a06ec67b457b41fd6d794a6",
+            "name": "User Popular Owned by Shortens",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_owned_by_shortens",
+            "description": "Returns the top links to your tracking domain (or domains) created by you or your subaccounts ordered by number of shortens.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking domain as returned from \/v3\/user\/tracking_domain_list.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "subaccount",
+                    "description": "restrict to links created by this subaccount (may be specified multiple times).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        },
+        {
+            "id": "46afb2975ffa14a6e8c3eefef2a58d94",
+            "name": "User Referrers",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/referrers",
+            "description": "Returns aggregate metrics about the pages referring click traffic to all of the authenticated users Bitlinks.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "rollup",
+                    "description": "Return data for multiple units rolled up to a single result instead of a separate value for each period of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        },
+        {
+            "id": "fa8ebd08fce65a8bdfbdfec321d57ca1",
+            "name": "User Referring Domains",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/referring_domains",
+            "description": "eturns aggregate metrics about the domains referring click traffic to all of the authenticated users Bitlinks. If the user is a master account, or is a subaccount with full_reports permission, the user may choose to view the metrics of any account belonging to the master account.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "exclude_social_networks",
+                    "description": "If true, exclude domains that are part of a social network that bitly tracks (default=true).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "login",
+                    "description": "an optional string consisting of the account name used to report the appropriate statistics; defaults to the current user.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "rollup",
+                    "description": "Return data for multiple units rolled up to a single result instead of a separate value for each period of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        },
+        {
+            "id": "b189dc0aed563535f8b5f2f6f825e10d",
+            "name": "User Shorten Counts",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/shorten_counts",
+            "description": "Returns the number of Bitlinks created in a given time period by the authenticated user.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "format",
+                    "description": "json, xml, txt. Default: json.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "rollup",
+                    "description": "Return data for multiple units rolled up to a single result instead of a separate value for each period of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "rawModeData": ""
+        }
+    ]
+}
