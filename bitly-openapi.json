@@ -1,0 +1,2942 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "",
+        "title": "Bitly",
+        "description": "Shorten, Share and Track your links with the Bitly APIs.",
+        "termsOfService": ""
+    },
+    "servers": [
+        "httpsapi-ssl.bitly.com\/",
+        "http:\/\/api-ssl.bitly.com\/v3\/",
+        "http:\/\/api-ssl.bitly.com\/v3"
+    ],
+    "paths": {
+        "\/v3\/shorten": {
+            "get": {
+                "summary": "Get Shorten",
+                "description": "Given a long URL, returns a bitly short URL.",
+                "operationId": "GetShorten",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "longUrl",
+                        "in": "query",
+                        "description": "a long URL to be shortened (example: http:\/\/betaworks.com\/)"
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "(optional) refers to a preferred domain; either bit.ly, j.mp, or bitly.com, for users who do NOT have a custom short domain set up with bitly. This affects the output value of url. The default for this parameter is the short domain selected by each user in his\/her bitly account settings. Passing a specific domain via this parameter will override the default settings for users who do NOT have a custom short domain set up with bitly. For users who have implemented a custom short domain, bitly will"
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/expand": {
+            "get": {
+                "summary": "Get Expand",
+                "description": "Given a bitly URL or hash (or multiple), returns the target (long) URL.",
+                "operationId": "GetExpand",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "shortUrl",
+                        "in": "query",
+                        "description": "Short URL to be expanded."
+                    },
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "Refers to one or more bitly hashes."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/link\/lookup": {
+            "get": {
+                "summary": "Get Link Lookup",
+                "description": "This is used to query for a bitly link based on a long URL.",
+                "operationId": "GetLookup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "One or more long URLs to lookup."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/info": {
+            "get": {
+                "summary": "Get Info",
+                "description": "This is used to return the page title for a given bitly link.",
+                "operationId": "GetInfo",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "shortUrl",
+                        "in": "query",
+                        "description": "Short URL to be expanded."
+                    },
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "Refers to one or more bitly hashes."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/info": {
+            "get": {
+                "summary": "Get User Info",
+                "description": "Return information about a user.",
+                "operationId": "GetUserInfo",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "description": "(optional) the bitly login of the user whose info to look up. If not given, the authenticated user will be used."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/link_history": {
+            "get": {
+                "summary": "Get User Link History",
+                "description": "Returns entries from a user's link history in reverse chronological order.",
+                "operationId": "GetUserLinkHistory",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "created_before",
+                        "in": "query",
+                        "description": "(optional) timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "created_after",
+                        "in": "query",
+                        "description": "(optional) timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "(optional)    the user for whom to retrieve history entries (if different from authenticated user)."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/user\/popular_links": {
+            "get": {
+                "summary": "Get User Popular Links",
+                "description": "Returns the authenticated user's most-clicked bitly links (ordered by number of clicks) in a given time period.",
+                "operationId": "GetUserPopularLinks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/link\/clicks": {
+            "get": {
+                "summary": "Get Link Clicks",
+                "description": "Returns entries from a user's link history in reverse chronological order.",
+                "operationId": "GetLinkClicks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/link\/countries": {
+            "get": {
+                "summary": "Get Link Countries",
+                "description": "Returns metrics about the countries referring click traffic to a single bitly link.",
+                "operationId": "GetLinkCountries",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/link\/referrers": {
+            "get": {
+                "summary": "Get Link Referrers",
+                "description": "Returns metrics about the pages referring click traffic to a single bitly link.",
+                "operationId": "GetLinkReferrers",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/link\/shares": {
+            "get": {
+                "summary": "Get Link Shares",
+                "description": "Returns metrics about a shares of a single link.",
+                "operationId": "GetLinkShares",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/search": {
+            "get": {
+                "summary": "Get Search",
+                "description": "Search links receiving clicks across bitly by content, language, location, and more.",
+                "operationId": "GetRealtimeSearch",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "string to query for."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "(optional) which result to start with (defaults to 0)."
+                    },
+                    {
+                        "name": "cities",
+                        "in": "query",
+                        "description": "(optional) show links active in this city (ordered like country-state-city, e.g. us-il-chicago)."
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "(optional) favor results in this language (two letter ISO code)."
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "(optional) refers to a preferred domain; either bit.ly, j.mp, or bitly.com, for users who do NOT have a custom short domain set up with bitly. This affects the output value of url. The default for this parameter is the short domain selected by each user in his\/her bitly account settings. Passing a specific domain via this parameter will override the default settings for users who do NOT have a custom short domain set up with bitly. For users who have implemented a custom short domain, bitly will"
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/realtime\/bursting_phrases": {
+            "get": {
+                "summary": "Get Realtime Bursting Phrases",
+                "description": "Returns phrases that are receiving an uncharacteristically high volume of click traffic, and the individual links (hashes) driving traffic to pages containing these phrases.",
+                "operationId": "GetRealtimeBurstingPhrases",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/v3\/realtime\/hot_phrases": {
+            "get": {
+                "summary": "Get Realtime Hot Phrases",
+                "description": "Returns phrases that are receiving a consistently high volume of click traffic, and the individual links (hashes) driving traffic to pages containing these phrases.",
+                "operationId": "GetRealtimeHotPhrases",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Response format."
+                    }
+                ]
+            }
+        },
+        "\/bitly_pro_domain": {
+            "get": {
+                "summary": "Query whether a given domain is a valid bitly pro domain. Keep in mind tha\r\nbitly custom short domains are restricted to less than 15 characters in\r\nlength.\r\n",
+                "description": "Query whether a given domain is a valid bitly pro domain. Ke...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "(optional) refers to a preferred domain; either bit.ly, j.mp, or bitly.com, for users who do NOT have a custom short domain set up with bitly. This affects the output value of url. The default for this parameter is the short domain selected by each user in his\/her bitly account settings. Passing a specific domain via this parameter will override the default settings for users who do NOT have a custom short domain set up with bitly. For users who have implemented a custom short domain, bitly will"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/archive": {
+            "get": {
+                "summary": "Archive a bundle for the authenticated user. Only a bundle's owner is\r\nallowed to archive a bundle.\r\n",
+                "description": "Archive a bundle for the authenticated user. Only a bundle's...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/bundles_by_user": {
+            "get": {
+                "summary": "Returns a list of public bundles created by a user.",
+                "description": "Returns a list of public bundles created by a user.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "Include extra user info in response."
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "(optional)    the user for whom to retrieve history entries (if different from authenticated user)."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/clone": {
+            "get": {
+                "summary": "Clone a bundle for the authenticated user.",
+                "description": "Clone a bundle for the authenticated user.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/collaborator_add": {
+            "get": {
+                "summary": "Add a collaborator to a bundle.",
+                "description": "Add a collaborator to a bundle.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    },
+                    {
+                        "name": "collaborator",
+                        "in": "query",
+                        "description": "Bitly login or email address of the collaborator to add."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/collaborator_remove": {
+            "get": {
+                "summary": "Remove a collaborator from a bundle.",
+                "description": "Remove a collaborator from a bundle.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    },
+                    {
+                        "name": "collaborator",
+                        "in": "query",
+                        "description": "Bitly login or email address of the collaborator to add."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/contents": {
+            "get": {
+                "summary": "Returns information about a bundle.",
+                "description": "Returns information about a bundle.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "Include extra user info in response."
+                    },
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/create": {
+            "get": {
+                "summary": "Create a new bundle for the authenticated user.",
+                "description": "Create a new bundle for the authenticated user.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "A value true or false designating the privacy setting of the bundle to be created.\r\n"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "The title of the bundle to be created."
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "A description of the bundle to be created."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/edit": {
+            "get": {
+                "summary": "Edit a bundle for the authenticated user.",
+                "description": "Edit a bundle for the authenticated user.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "A description of the bundle to be created."
+                    },
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "The title of the bundle to be created."
+                    },
+                    {
+                        "name": "og_image",
+                        "in": "query",
+                        "description": "The URL to the bundle's cover image."
+                    },
+                    {
+                        "name": "edit",
+                        "in": "query",
+                        "description": "A field designating which properties (e.g., 'title', 'description') are\r\nto be edited, allowing for these fields to be updated with empty values.\r\n"
+                    },
+                    {
+                        "name": "preview",
+                        "in": "query",
+                        "description": "A true or false value representing whether or not content previews should\r\nbe shown for the specified bundle's links.\r\n"
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "A value true or false designating the privacy setting of the bundle to be created.\r\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/link_add": {
+            "get": {
+                "summary": "Adds a link to a bitly bundle. Links are automatically added to the top (position 0) of a bundle.",
+                "description": "Adds a link to a bitly bundle. Links are automatically added...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "The title of the bundle to be created."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/link_comment_add": {
+            "get": {
+                "summary": "Add a comment to bundle item.",
+                "description": "Add a comment to bundle item.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "description": "The comment to add."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/link_comment_edit": {
+            "get": {
+                "summary": "Edit a comment.",
+                "description": "Edit a comment.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    },
+                    {
+                        "name": "comment_id",
+                        "in": "query",
+                        "description": "The id of the comment to edit."
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "description": "The comment to add."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/link_comment_remove": {
+            "get": {
+                "summary": "Remove a comment from a bundle item. Only the original commenter and the\r\nbundles owner may perform this action.\r\n",
+                "description": "Remove a comment from a bundle item. Only the original comme...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    },
+                    {
+                        "name": "comment_id",
+                        "in": "query",
+                        "description": "The id of the comment to edit."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/link_edit": {
+            "get": {
+                "summary": "Edit the title for a link.",
+                "description": "Edit the title for a link.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "The title of the bundle to be created."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    },
+                    {
+                        "name": "preview",
+                        "in": "query",
+                        "description": "A true or false value representing whether or not content previews should\r\nbe shown for the specified bundle's links.\r\n"
+                    },
+                    {
+                        "name": "edit",
+                        "in": "query",
+                        "description": "A field designating which properties (e.g., 'title', 'description') are\r\nto be edited, allowing for these fields to be updated with empty values.\r\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/link_remove": {
+            "get": {
+                "summary": "Remove a link from a bitly bundle",
+                "description": "Remove a link from a bitly bundle",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/link_reorder": {
+            "get": {
+                "summary": "Change the position of a link in a bitly bundle.",
+                "description": "Change the position of a link in a bitly bundle.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    },
+                    {
+                        "name": "display_order",
+                        "in": "query",
+                        "description": "The new display_order value to be assigned to the the specified link. (A\r\nvalue of -1 moves to end, 0 to the front, any other number moves it to\r\nthat spot, bumping everythign else down.)\r\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/pending_collaborator_remove": {
+            "get": {
+                "summary": "Removes a pending\/invited collaborator from a bundle.",
+                "description": "Removes a pending\/invited collaborator from a bundle.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "collaborator",
+                        "in": "query",
+                        "description": "Bitly login or email address of the collaborator to add."
+                    },
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/reorder": {
+            "get": {
+                "summary": "Re-order the links in a bundle.\r\nThe link parameter should be repeated for each link to be reordered, and each link should be given in the order in which it should appear in the bundle.\r\n",
+                "description": "Re-order the links in a bundle.\r\nThe link parameter should be...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bundle\/view_count": {
+            "get": {
+                "summary": "Get the number of views for a bundle.",
+                "description": "Get the number of views for a bundle.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "bundle_link",
+                        "in": "query",
+                        "description": "The URL corresponding to the bundle to be archived."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/expand": {
+            "get": {
+                "summary": "Given a bitly URL or hash (or multiple), returns the target (long) URL.\r\nNote: either shortUrl or hash must be given as a parameter.\r\n",
+                "description": "Given a bitly URL or hash (or multiple), returns the target ...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "shortUrl",
+                        "in": "query",
+                        "description": "Short URL to be expanded."
+                    },
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "Refers to one or more bitly hashes."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/highvalue": {
+            "get": {
+                "summary": "Returns a specified number of \"high-value\" bitly links that are popular\r\nacross bitly at this particular moment.\r\n\r\nDeprecated endpoint.\r\n",
+                "description": "Returns a specified number of \"high-value\" bitly links that ...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/category": {
+            "get": {
+                "summary": "Returns the detected categories for a document, in descending order of\r\nconfidence.\r\n\r\nDeprecated endpoint.\r\n",
+                "description": "Returns the detected categories for a document, in descendin...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/content": {
+            "get": {
+                "summary": "Returns the \"main article\" from the linked page, as determined by the conten\r\nextractor, in either HTML or plain text format.\r\n\r\nDeprecated endpoint.\r\n",
+                "description": "Returns the \"main article\" from the linked page, as determin...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "content_type",
+                        "in": "query",
+                        "description": "Specifies whether to return the content as html or plain text.\r\n"
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/encoders": {
+            "get": {
+                "summary": "Returns users who have encoded this link (optionally only those in the\r\nrequesting user's social graph).\r\nNote: Some users may not be returned from this call depending on link\r\nprivacy settings.\r\n",
+                "description": "Returns users who have encoded this link (optionally only th...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "my_network",
+                        "in": "query",
+                        "description": "True or false - restrict to my network."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "Include extra user info in response."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/encoders_count": {
+            "get": {
+                "summary": "Returns the number of users who have shortened (encoded) a single bitly link.\r\n",
+                "description": "Returns the number of users who have shortened (encoded) a s...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/language": {
+            "get": {
+                "summary": "Returns the significant languages for the bitly link. Note that languages\r\nare highly dependent upon activity (clicks) occurring on the bitly link.\r\nIf there have not been clicks on a bitly link within the last 24 hours, i\r\nis possible that language ",
+                "description": "Returns the significant languages for the bitly link. Note t...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/location": {
+            "get": {
+                "summary": "Returns the significant locations for the bitly link or None if locations\r\ndo not exist. Note that locations are highly dependent upon activity\r\n(clicks) occurring on the bitly link. If there have not been clicks on a\r\nbitly link within the last 24 h",
+                "description": "Returns the significant locations for the bitly link or None...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/lookup": {
+            "get": {
+                "summary": "This is used to query for a bitly link based on a long URL.\r\n",
+                "description": "This is used to query for a bitly link based on a long URL.\r\n",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "One or more long URLs to lookup."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/referrers_by_domain": {
+            "get": {
+                "summary": "Returns metrics about the pages referring click traffic to a single bitly\r\nlink, grouped by referring domain.\r\n",
+                "description": "Returns metrics about the pages referring click traffic to a...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/shares": {
+            "get": {
+                "summary": "Returns metrics about a shares of a single link.\r\n",
+                "description": "Returns metrics about a shares of a single link.\r\n",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/social": {
+            "get": {
+                "summary": "Returns the \"social score\" for a specified bitly link. Note that the social\r\nscore are highly dependent upon activity (clicks) occurring on the bitly\r\nlink. If there have not been clicks on a bitly link within the last 24\r\nhours, it is possible a soc",
+                "description": "Returns the \"social score\" for a specified bitly link. Note ...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/realtime\/bursting_phrases": {
+            "get": {
+                "summary": "Returns phrases that are receiving an uncharacteristically high volume of\r\nclick traffic, and the individual links (hashes) driving traffic to pages\r\ncontaining these phrases.\r\n\r\nDeprecated endpoint.\r\n",
+                "description": "Returns phrases that are receiving an uncharacteristically h...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/realtime\/clickrate": {
+            "get": {
+                "summary": "Returns the click rate for content containing a specified phrase.\r\n\r\nDeprecated endpoint.\r\n",
+                "description": "Returns the click rate for content containing a specified ph...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "phrase",
+                        "in": "query",
+                        "description": "The phrase for which you'd like to get the click rate."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/realtime\/hot_phrases": {
+            "get": {
+                "summary": "Returns phrases that are receiving a consistently high volume of click\r\ntraffic, and the individual links (hashes) driving traffic to pages\r\ncontaining these phrases.\r\n\r\nDeprecated endpoint.\r\n",
+                "description": "Returns phrases that are receiving a consistently high volum...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/search": {
+            "get": {
+                "summary": "Search links receiving clicks across bitly by content, language, location,\r\nand more.\r\n\r\nDeprecated endpoint.\r\n",
+                "description": "Search links receiving clicks across bitly by content, langu...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "(optional) which result to start with (defaults to 0)."
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "(optional) favor results in this language (two letter ISO code)."
+                    },
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "Which fields to return in the response (comma-separated).\r\nBy default, all will be returned.\r\n"
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "string to query for."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "(optional) refers to a preferred domain; either bit.ly, j.mp, or bitly.com, for users who do NOT have a custom short domain set up with bitly. This affects the output value of url. The default for this parameter is the short domain selected by each user in his\/her bitly account settings. Passing a specific domain via this parameter will override the default settings for users who do NOT have a custom short domain set up with bitly. For users who have implemented a custom short domain, bitly will"
+                    },
+                    {
+                        "name": "cities",
+                        "in": "query",
+                        "description": "(optional) show links active in this city (ordered like country-state-city, e.g. us-il-chicago)."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/shorten": {
+            "get": {
+                "summary": "Given a long URL, returns a bitly short URL.",
+                "description": "Given a long URL, returns a bitly short URL.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "longUrl",
+                        "in": "query",
+                        "description": "a long URL to be shortened (example: http:\/\/betaworks.com\/)"
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "(optional) refers to a preferred domain; either bit.ly, j.mp, or bitly.com, for users who do NOT have a custom short domain set up with bitly. This affects the output value of url. The default for this parameter is the short domain selected by each user in his\/her bitly account settings. Passing a specific domain via this parameter will override the default settings for users who do NOT have a custom short domain set up with bitly. For users who have implemented a custom short domain, bitly will"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/bundle_history": {
+            "get": {
+                "summary": "Returns all bundles this user has access to (public + private + collaborator).",
+                "description": "Returns all bundles this user has access to (public + privat...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "Include extra user info in response."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/clicks": {
+            "get": {
+                "summary": "Returns the aggregate number of clicks on all of the authenticated user's\r\nbitly links.\r\n",
+                "description": "Returns the aggregate number of clicks on all of the authent...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/countries": {
+            "get": {
+                "summary": "Returns aggregate metrics about the countries referring click traffic to all of the authenticated user's bitly links.",
+                "description": "Returns aggregate metrics about the countries referring clic...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/info": {
+            "get": {
+                "summary": "Return or update information about a user.",
+                "description": "Return or update information about a user.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "description": "(optional) the bitly login of the user whose info to look up. If not given, the authenticated user will be used."
+                    },
+                    {
+                        "name": "full_name",
+                        "in": "query",
+                        "description": "Set the users full name value. (only available for the authenticated user.)\r\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/link_history": {
+            "get": {
+                "summary": "Returns entries from a user's link history in reverse chronological order.\r\nNote: Entries will be sorted by the user_ts field found in the response data.\r\n",
+                "description": "Returns entries from a user's link history in reverse chrono...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "archived",
+                        "in": "query",
+                        "description": "On, off or both whether to include or exclude archived history entries.\r\n(on = return only archived history entries)\r\n"
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "modified_after",
+                        "in": "query",
+                        "description": "Timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "created_before",
+                        "in": "query",
+                        "description": "(optional) timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "expand_client_id",
+                        "in": "query",
+                        "description": "true or false whether to provide additional information about encoding\r\napplication. default: false.\r\n"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "(optional) which result to start with (defaults to 0)."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "created_after",
+                        "in": "query",
+                        "description": "(optional) timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "A value true or false designating the privacy setting of the bundle to be created.\r\n"
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "(optional)    the user for whom to retrieve history entries (if different from authenticated user)."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/link_lookup": {
+            "get": {
+                "summary": "This is used to query for a bitly link shortened by the authenticated user\r\nbased on a long URL.\r\n",
+                "description": "This is used to query for a bitly link shortened by the auth...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "One or more long URLs to lookup."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/link_save": {
+            "get": {
+                "summary": "Saves a link as a bitmark in a user's history, with optional pre-set metadata.\r\n(Also returns a short URL for that link.)\r\n",
+                "description": "Saves a link as a bitmark in a user's history, with optional...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "The title of the bundle to be created."
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "A description of, or note about, this bitmark."
+                    },
+                    {
+                        "name": "longUrl",
+                        "in": "query",
+                        "description": "a long URL to be shortened (example: http:\/\/betaworks.com\/)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/network_history": {
+            "get": {
+                "summary": "Returns entries from a user's network history in reverse chronogical order.\r\n(A user's network history includes publicly saved links from Twitter and\r\nFacebook connections.)\r\n",
+                "description": "Returns entries from a user's network history in reverse chr...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "(optional) which result to start with (defaults to 0)."
+                    },
+                    {
+                        "name": "expand_client_id",
+                        "in": "query",
+                        "description": "true or false whether to provide additional information about encoding\r\napplication. default: false.\r\n"
+                    },
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "Include extra user info in response."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/popular_links": {
+            "get": {
+                "summary": "Returns the authenticated user's most-clicked bitly links (ordered by number\r\nof clicks) in a given time period.\r\nNote: This replaces the realtime_links endpoint.\r\n",
+                "description": "Returns the authenticated user's most-clicked bitly links (o...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/referrers": {
+            "get": {
+                "summary": "Returns aggregate metrics about the pages referring click traffic to all\r\nof the authenticated user's bitly links.\r\n",
+                "description": "Returns aggregate metrics about the pages referring click tr...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/referring_domains": {
+            "get": {
+                "summary": "Returns aggregate metrics about the domains referring click traffic to all of the authenticated user's bitly links.\r\nIf the user is a master account, or is a subaccount with full_reports permission,\r\nthe user may choose to view the metrics of any acc",
+                "description": "Returns aggregate metrics about the domains referring click ...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/share_counts": {
+            "get": {
+                "summary": "Returns the number of shares by the authenticated user in a given time period.\r\n",
+                "description": "Returns the number of shares by the authenticated user in a ...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/shorten_counts": {
+            "get": {
+                "summary": "Returns the number of links shortened (encoded) in a given time period by\r\nthe authenticated user.\r\n",
+                "description": "Returns the number of links shortened (encoded) in a given t...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/tracking_domain_clicks": {
+            "get": {
+                "summary": "Returns the number of clicks on bitly links pointing to the specified\r\ntracking domain that have occured in a given time period.\r\nUsers can register a tracking domain from their bitly settings page.\r\n",
+                "description": "Returns the number of clicks on bitly links pointing to the ...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "(optional) refers to a preferred domain; either bit.ly, j.mp, or bitly.com, for users who do NOT have a custom short domain set up with bitly. This affects the output value of url. The default for this parameter is the short domain selected by each user in his\/her bitly account settings. Passing a specific domain via this parameter will override the default settings for users who do NOT have a custom short domain set up with bitly. For users who have implemented a custom short domain, bitly will"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/tracking_domain_list": {
+            "get": {
+                "summary": "Returns a list of tracking domains a user has configured.",
+                "description": "Returns a list of tracking domains a user has configured.",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/tracking_domain_shorten_counts": {
+            "get": {
+                "summary": "Returns the number of links, pointing to a specified tracking domain, shortened\r\n(encoded) in a given time period by all bitly users.\r\nUsers can register a tracking domain from their bitly settings page.\r\n",
+                "description": "Returns the number of links, pointing to a specified trackin...",
+                "operationId": "GET",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "(optional) refers to a preferred domain; either bit.ly, j.mp, or bitly.com, for users who do NOT have a custom short domain set up with bitly. This affects the output value of url. The default for this parameter is the short domain selected by each user in his\/her bitly account settings. Passing a specific domain via this parameter will override the default settings for users who do NOT have a custom short domain set up with bitly. For users who have implemented a custom short domain, bitly will"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/info": {
+            "get": {
+                "summary": "",
+                "description": "This is used to return the page title for a given bitly link.\n",
+                "operationId": "",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "Refers to one or more bitly hashes."
+                    },
+                    {
+                        "name": "shortUrl",
+                        "in": "query",
+                        "description": "Short URL to be expanded."
+                    },
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "Include extra user info in response."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/clicks": {
+            "get": {
+                "summary": "",
+                "description": "Returns the number of clicks on a single bitly link.\nNote: historical data is stored hourly beyond the most recent 60 minutes.\nIf a unit_reference_ts is specified, unit cannot be minute.\n",
+                "operationId": "",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/countries": {
+            "get": {
+                "summary": "",
+                "description": "Returns metrics about the countries referring click traffic to a single bitly link.",
+                "operationId": "",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "(optional) true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/info": {
+            "get": {
+                "summary": "",
+                "description": "Returns metadata about a single bitly link.\n",
+                "operationId": "",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/referrers": {
+            "get": {
+                "summary": "",
+                "description": "Returns metrics about the pages referring click traffic to a single bitly link.\n",
+                "operationId": "",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/referring_domains": {
+            "get": {
+                "summary": "",
+                "description": "Returns metrics about the domains referring click traffic to a single bitly link.\n",
+                "operationId": "",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month"
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "(optional) an integer hour offset from UTC (-14 to 14)"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "(optional) integer in the range 1 to 100 -    default: 50, specifying the max number of results to return."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "An epoch timestamp, indicating the most recent time for which to pull\r\nmetrics, default: now.\r\nThe value of unit_reference_ts rounds to the nearest unit.\r\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/link_edit": {
+            "get": {
+                "summary": "",
+                "description": "Changes link metadata in a user's history.\nBecause link metadata is modified asynchronously, it may take a few moments\nfor changes made via this API method to update.\n",
+                "operationId": "",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a bltly link."
+                    },
+                    {
+                        "name": "edit",
+                        "in": "query",
+                        "description": "A field designating which properties (e.g., 'title', 'description') are\r\nto be edited, allowing for these fields to be updated with empty values.\r\n"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "The title of the bundle to be created."
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "A description of, or note about, this bitmark."
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "A value true or false designating the privacy setting of the bundle to be created.\r\n"
+                    },
+                    {
+                        "name": "user_ts",
+                        "in": "query",
+                        "description": "Timestamp as an integer epoch."
+                    },
+                    {
+                        "name": "archived",
+                        "in": "query",
+                        "description": "On, off or both whether to include or exclude archived history entries.\r\n(on = return only archived history entries)\r\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/bitly_pro_domain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "user-referrers": {
+                "type": "object"
+            },
+            "bundle-clone": {
+                "type": "object"
+            },
+            "user-shorten_counts": {
+                "type": "object"
+            },
+            "bitly_pro_domain": {
+                "type": "object"
+            },
+            "shorten": {
+                "type": "object"
+            },
+            "link-encoders_count": {
+                "type": "object"
+            },
+            "bundle-view_count": {
+                "type": "object",
+                "properties": {
+                    "bundle_link": {
+                        "description": "An echo of the input bundle_link parameter.",
+                        "type": "string"
+                    },
+                    "view_count": {
+                        "description": "The number of times the bundle has been viewed.",
+                        "type": "integer"
+                    }
+                }
+            },
+            "link-lookup": {
+                "type": "object"
+            },
+            "link-shares": {
+                "type": "object"
+            },
+            "user-network_history": {
+                "type": "object"
+            },
+            "user-countries": {
+                "type": "object"
+            },
+            "bundle-bundles_by_user": {
+                "type": "object"
+            },
+            "user-link_save": {
+                "type": "object"
+            },
+            "user-referring_domains": {
+                "type": "object"
+            },
+            "user-tracking_domain_shorten_counts": {
+                "type": "object"
+            },
+            "link-referrers": {
+                "type": "object"
+            },
+            "user-link_lookup": {
+                "type": "object"
+            },
+            "bundle-clone-schema": {
+                "type": "object"
+            },
+            "link-encoders": {
+                "type": "object"
+            },
+            "user-link_history": {
+                "type": "object"
+            },
+            "user-info-enterprise_user": {
+                "type": "object",
+                "properties": {
+                    "login": {
+                        "description": "The specified bitly login or the login of the authenticated user.",
+                        "type": "string"
+                    },
+                    "profile_url": {
+                        "description": "URL of user's profile page.",
+                        "type": "string"
+                    },
+                    "profile_image": {
+                        "description": "URL of user's profile image.",
+                        "type": "string"
+                    },
+                    "member_since": {
+                        "description": "Unix timestamp for the moment the user signed up.",
+                        "type": "string"
+                    },
+                    "full_name": {
+                        "description": "The user's full name, if set.",
+                        "type": "string"
+                    },
+                    "display_name": {
+                        "description": "The user's display name, if set.",
+                        "type": "string"
+                    },
+                    "share_accounts": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "apiKey": {
+                        "description": "The user's bitly API key.",
+                        "type": "string"
+                    },
+                    "is_enterprise": {
+                        "description": "0 or 1 to indicate if this account is signed up for bitly enterprise.",
+                        "type": "boolean"
+                    },
+                    "sub_accounts": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "e2e_domains": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "tracking_url_prefxies": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "master_account": {
+                        "description": "The login of a master account, if this is associated with an enterprise account.",
+                        "type": "string"
+                    },
+                    "enterprise_permissions": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "share_accounts": {
+                "type": "array"
+            },
+            "sub_accounts": {
+                "type": "array"
+            },
+            "e2e_domains": {
+                "type": "array"
+            },
+            "tracking_url_prefxies": {
+                "type": "array"
+            },
+            "enterprise_permissions": {
+                "type": "array"
+            },
+            "expand": {
+                "type": "object"
+            },
+            "user-share_counts": {
+                "type": "object"
+            },
+            "user-tracking_domain_clicks": {
+                "type": "object"
+            },
+            "user-popular_links": {
+                "type": "object"
+            },
+            "user-clicks": {
+                "type": "object"
+            },
+            "user-tracking_domain_list": {
+                "type": "object"
+            },
+            "user-link_edit": {
+                "type": "object"
+            },
+            "link-referring_domains": {
+                "type": "object"
+            },
+            "info": {
+                "type": "object"
+            },
+            "link-countries": {
+                "type": "object"
+            },
+            "link-clicks": {
+                "type": "object"
+            },
+            "link-referrers-schema": {
+                "type": "object"
+            }
+        }
+    }
+}
