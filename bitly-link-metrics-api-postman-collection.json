@@ -1,0 +1,419 @@
+{
+    "id": "f11061cd2fee199f7cad71d60e12068a",
+    "name": "Bitly Link Metrics API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "4a8d5e4ad354a0363cdfe08c7c8707d0",
+            "name": "Link Clicks",
+            "url": "httpsapi-ssl.bitly.com\/v3\/link\/clicks",
+            "description": "Returns the number of clicks on a single Bitlink.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "format",
+                    "description": "json, xml, txt. Default: json.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "link",
+                    "description": "a Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "rollup",
+                    "description": "Return data for multiple units rolled up to a single result instead of a separate value for each period of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "rawModeData": ""
+        },
+        {
+            "id": "ac8716e1390ffe5c0fa52c3bf166e02a",
+            "name": "Link Clicks by Country",
+            "url": "httpsapi-ssl.bitly.com\/v3\/link\/countries",
+            "description": "Returns metrics about the countries referring click traffic to a single Bitlink.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "link",
+                    "description": "a Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "rawModeData": ""
+        },
+        {
+            "id": "d7e3e7e48ae599313475f6393f27aee5",
+            "name": "User Who Encoded Link",
+            "url": "httpsapi-ssl.bitly.com\/v3\/link\/encoders",
+            "description": "Returns users who have encoded this long URL (optionally only those in the requesting users social graph).",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "expand_user",
+                    "description": "include display names of encoders.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "link",
+                    "description": "a Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "my_network",
+                    "description": "restrict to my network.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "subaccounts",
+                    "description": "true or false - restrict to this enterprise account and its subaccounts",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "rawModeData": ""
+        },
+        {
+            "id": "b54ce56d78f0bba0ef675c5e376dc392",
+            "name": "Users Who Encoded Link",
+            "url": "httpsapi-ssl.bitly.com\/v3\/link\/encoders_by_count",
+            "description": "Returns users who have encoded this link (optionally only those in the requesting users social graph), sorted by the number of clicks on each encoding users link.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "expand_user",
+                    "description": "include display names of encoders.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1 to 1000 (default=100).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "link",
+                    "description": "a Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "my_network",
+                    "description": "restrict to my network.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "subaccounts",
+                    "description": "true or false - restrict to this enterprise account and its subaccounts",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "rawModeData": ""
+        },
+        {
+            "id": "256ab535878534fbf9a6005f310bf86b",
+            "name": "Number of Encoders",
+            "url": "httpsapi-ssl.bitly.com\/v3\/link\/encoders_count",
+            "description": "Returns the number of users who have shortened (encoded) a single Bitlink.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "link",
+                    "description": "a Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "rawModeData": ""
+        },
+        {
+            "id": "377de94e0616f7fabd91de70ef1bc073",
+            "name": "Link Referrers",
+            "url": "httpsapi-ssl.bitly.com\/v3\/link\/referrers",
+            "description": "Returns metrics about the pages referring click traffic to a single Bitlink.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "link",
+                    "description": "a Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "rawModeData": ""
+        },
+        {
+            "id": "26941ee84c7dcff97155bba478273ba2",
+            "name": "Link Referrers by Domain",
+            "url": "httpsapi-ssl.bitly.com\/v3\/link\/referrers_by_domain",
+            "description": "Returns metrics about the pages referring click traffic to a single Bitlink, grouped by referring domain.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "link",
+                    "description": "a Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "minute, hour, day, week or month, default: day ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for. Pass -1 to return all units of time.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "rawModeData": ""
+        }
+    ]
+}
