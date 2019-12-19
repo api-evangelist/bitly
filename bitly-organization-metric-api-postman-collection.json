@@ -1,0 +1,503 @@
+{
+    "id": "eb1a29a90ad4a2c55e7f056d75e3123a",
+    "name": "Bitly Organization Metric API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "a32119c5f3f2125d1816f60e85aaf15c",
+            "name": "Organization Brand Messages",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/brand_messages",
+            "description": "Returns the top Bitlinks created by you with traffic, that did not also have non-organization traffic in the same time period, ordered by clicks.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1..1000 (default=100)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "hour | day | week | month default:day",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "rawModeData": ""
+        },
+        {
+            "id": "8b442ce0eafd698be34d050837b7f3c7",
+            "name": "Organization Clicks",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/clicks",
+            "description": "Returns the number of clicks on Bitlinks created by your organization or by other Bitly users that point to your domains.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1..1000 (default=100)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "login",
+                    "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "hour | day | week | month default:day",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "rawModeData": ""
+        },
+        {
+            "id": "682196d57fdeca8e63a893995f373f26",
+            "name": "Organization Intersecting Links",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/intersecting_links",
+            "description": "Returns the top links shared by both your audience and by your account, ordered by clicks.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1..1000 (default=100)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "hour | day | week | month default:day",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "rawModeData": ""
+        },
+        {
+            "id": "1976626113bb6c069546ae9000f97596",
+            "name": "Organization Leaderboard",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/leaderboard",
+            "description": "Returns the top-performing organization members ordered by clicks or shortens.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1..1000 (default=100)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "orderby",
+                    "description": "either clicks or shortens. Default is clicks.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "hour | day | week | month default:day",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "rawModeData": ""
+        },
+        {
+            "id": "430ea05570aeb19d3cc455b2bef2b271",
+            "name": "Organization Missed Opportunities",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/missed_opportunities",
+            "description": "Returns the top links shared by your audience, but not by you, ordered by clicks.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "an epoch timestamp, indicating the most recent time for which to pull metrics. default",
+                    "description": "hour | day | week | month default:day",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "domain",
+                    "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1..1000 (default=100)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "hour | day | week | month default:day",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "rawModeData": ""
+        },
+        {
+            "id": "40af0dc09dcba6c4275a596f7620b3bf",
+            "name": "Organization Popular Links",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/popular_links",
+            "description": "Returns the top links shared by you or your audience, ordered by clicks",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1..1000 (default=100)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "hour | day | week | month default:day",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "rawModeData": ""
+        },
+        {
+            "id": "c7c6b751204e30bbf88a953a3df94172",
+            "name": "Organization Shorten Counts",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/shorten_counts",
+            "description": "Returns the number of Bitlinks created by your organization or by other Bitly users that point to your domains.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "a tracking or e2e domain for this organization. May be specified more than once, or omitted for all domains.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "1..1000 (default=100)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "login",
+                    "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "timezone",
+                    "description": "an integer hour offset from UTC (-14..14), or a timezone string. default:America\/New_York",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit",
+                    "description": "hour | day | week | month default:day",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "units",
+                    "description": "an integer representing the time units to query data for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "unit_reference_ts",
+                    "description": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now ",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "rawModeData": ""
+        }
+    ]
+}
