@@ -1,0 +1,356 @@
+{
+    "name": "Bitly",
+    "description": "Get the most out of your social and online marketing efforts. Own, understand and activate your best audience through the power of the link with Bitly Enterprise.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1503-bitly.jpg",
+    "tags": [
+        "api provider",
+        "have api",
+        "have swagger",
+        "links",
+        "relative data",
+        "service api"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/bitly\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Bitly Organization Metric API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1503-bitly.jpg",
+            "humanURL": "http:\/\/bitly.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-organization-metric-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/bitly-organization-metric-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-organization-metric-api-postman-collection.json"
+                }
+            ]
+        },
+        {
+            "name": "Bitly",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1503-bitly.jpg",
+            "humanURL": "http:\/\/bitly.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/bitly.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-postman-collection.json"
+                }
+            ]
+        },
+        {
+            "name": "Bitly API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1503-bitly.jpg",
+            "humanURL": "http:\/\/bitly.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/bitly-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-api-postman-collection.json"
+                }
+            ]
+        },
+        {
+            "name": "Bitly User Metrics API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1503-bitly.jpg",
+            "humanURL": "http:\/\/bitly.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-user-metrics-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/bitly-user-metrics-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-user-metrics-api-postman-collection.json"
+                }
+            ]
+        },
+        {
+            "name": "Bitly User API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1503-bitly.jpg",
+            "humanURL": "http:\/\/bitly.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-user-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/bitly-user-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-user-api-postman-collection.json"
+                }
+            ]
+        },
+        {
+            "name": "Bitly Link Metrics API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1503-bitly.jpg",
+            "humanURL": "http:\/\/bitly.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-link-metrics-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/bitly-link-metrics-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-link-metrics-api-postman-collection.json"
+                }
+            ]
+        },
+        {
+            "name": "Bitly Link API",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/1503-bitly.jpg",
+            "humanURL": "http:\/\/bitly.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-link-api-openapi.json"
+                },
+                {
+                    "type": "x-openapi",
+                    "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/openapis\/bitly-link-api.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bitly-link-api-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": ".NET LIbrary",
+            "url": "http:\/\/code.google.com\/p\/bitly-dot-net"
+        },
+        {
+            "type": "Application Management",
+            "url": "http:\/\/dev.bitly.com\/my_apps.html"
+        },
+        {
+            "type": "Base",
+            "url": "http:\/\/api.bitly.com"
+        },
+        {
+            "type": "Best Practices",
+            "url": "http:\/\/dev.bitly.com\/best_practices.html"
+        },
+        {
+            "type": "Blog",
+            "url": "http:\/\/word.bitly.com\/"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "http:\/\/word.bitly.com\/rss"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "http:\/\/www.crunchbase.com\/company\/bit-ly"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/hootsuite"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/bitly"
+        },
+        {
+            "type": "Email",
+            "url": "media@hootsuite.com"
+        },
+        {
+            "type": "Email",
+            "url": "legal@hootsuite.com"
+        },
+        {
+            "type": "Email",
+            "url": "privacy@hootsuite.com"
+        },
+        {
+            "type": "Email",
+            "url": "hootsuite-dpa@hootsuite.com"
+        },
+        {
+            "type": "Email",
+            "url": "security@hootsuite.com"
+        },
+        {
+            "type": "Email",
+            "url": "app.directory@hootsuite.com"
+        },
+        {
+            "type": "Email",
+            "url": "apis@hootsuite.com"
+        },
+        {
+            "type": "Email",
+            "url": "partnersupport@hootsuite.com"
+        },
+        {
+            "type": "Email",
+            "url": "partners@bitly.com"
+        },
+        {
+            "type": "Email",
+            "url": "press@bitly.com"
+        },
+        {
+            "type": "Email",
+            "url": "office@bitly.com"
+        },
+        {
+            "type": "Email",
+            "url": "support@bitly.com"
+        },
+        {
+            "type": "Email",
+            "url": "api@bitly.com"
+        },
+        {
+            "type": "Forums",
+            "url": "http:\/\/dev.bitly.com\/api_discussion_group.html"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/bitly"
+        },
+        {
+            "type": "Java Library",
+            "url": "https:\/\/github.com\/stackmagic\/bitly-api-client"
+        },
+        {
+            "type": "JavaScript Library",
+            "url": "https:\/\/npmjs.org\/package\/node-bitlyapi"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/1503-2019-09-03-19-55-53.json"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/1503-2019-09-03-17-23-16.json"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/1503-2019-09-03-21-50-40.json"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/1503-2019-09-03-17-27-39.json"
+        },
+        {
+            "type": "Swagger",
+            "url": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-definitions\/swagger\/1503-2019-09-03-17-27-48.json"
+        },
+        {
+            "type": "Partners",
+            "url": "https:\/\/bitly.com\/pages\/partners"
+        },
+        {
+            "type": "PHP LIbrary",
+            "url": "http:\/\/github.com\/Falicon\/BitlyPHP"
+        },
+        {
+            "type": "Privacy",
+            "url": "https:\/\/bitly.com\/pages\/privacy"
+        },
+        {
+            "type": "Python Library",
+            "url": "http:\/\/github.com\/bitly\/bitly-api-python"
+        },
+        {
+            "type": "Ruby LIbrary",
+            "url": "http:\/\/github.com\/nas\/url_shortener"
+        },
+        {
+            "type": "SDKs.io",
+            "url": "https:\/\/sdks.io\/SDK\/View\/bitly-13"
+        },
+        {
+            "type": "Support",
+            "url": "http:\/\/support.bitly.com\/"
+        },
+        {
+            "type": "Temboo PDK",
+            "url": "https:\/\/live.temboo.com\/library\/Library\/Bitly\/"
+        },
+        {
+            "type": "Terms Of Service",
+            "url": "https:\/\/bitly.com\/pages\/terms-of-service"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/Bitly"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/hootsuite"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/Bitly"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/bitly.com"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/bit.ly"
+        }
+    ]
+}
