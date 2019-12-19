@@ -1,0 +1,4043 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "3.0",
+        "title": "Bitly API",
+        "description": "Bitly RESTful API",
+        "termsOfService": "http:\/\/exmple.com\/license\/"
+    },
+    "servers": [
+        "http:\/\/api-ssl.bitly.com\/v3",
+        "http:\/\/api-ssl.bitly.com\/v4"
+    ],
+    "paths": {
+        "\/bitly_pro_domain": {
+            "get": {
+                "summary": "Bitly Pro Domain",
+                "description": "Query whether a given domain is a valid bitly pro domain. Keep in mind that bitly custom short domains are restricted to less than 15 characters in length",
+                "operationId": "BitlyProDomain",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/tracking_domain_clicks": {
+            "get": {
+                "summary": "Tracking Domain Clicks",
+                "description": "Returns the number of clicks on Bitlinks pointing to the specified tracking domain that have occured in a given time period.",
+                "operationId": "TrackingDomainClicks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/tracking_domain_shorten_counts": {
+            "get": {
+                "summary": "User Tracking Domain Shortens Counts",
+                "description": "Returns the number of links, pointing to a specified tracking domain, shortened (encoded) in a given time period by all bitly users.",
+                "operationId": "UserTrackingDomainShortensCounts",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/link_save": {
+            "get": {
+                "summary": "Save User Link",
+                "description": "Saves a long URL as a Bitlink in a users history, with optional pre-set metadata. (Also returns a short URL for that link.)",
+                "operationId": "SaveUserLink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "deeplinks",
+                        "in": "query",
+                        "description": "urlencoded json array of deeplink items"
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "longUrl",
+                        "in": "query",
+                        "description": "the URL to be saved as a Bitlink."
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "a description of, or note about, this Bitlink."
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "indicating privacy setting (defaults to user-level setting)."
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "the title of this Bitlink."
+                    },
+                    {
+                        "name": "user_ts",
+                        "in": "query",
+                        "description": "timestamp as an integer epoch."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/link_lookup": {
+            "get": {
+                "summary": "User Link Lookup",
+                "description": "This is used to query for a Bitlink shortened by the authenticated user based on a long URL or a Bitlink.",
+                "operationId": "UserLinkLookup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    },
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "one or more long URLs to lookup."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/save_custom_domain_keyword": {
+            "get": {
+                "summary": "Save Custom Bitlink",
+                "description": "Save a Custom Bitlink for a custom short domain.",
+                "operationId": "SaveCustomBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "keyword_link",
+                        "in": "query",
+                        "description": "the Custom Bitlink (short domain and keyword combination) to set"
+                    },
+                    {
+                        "name": "overwrite",
+                        "in": "query",
+                        "description": "Ovewrite existing entry if one exists. Default: false."
+                    },
+                    {
+                        "name": "target_link",
+                        "in": "query",
+                        "description": "the Bitlink the specified keyword will map to (as returned from \/v3\/shorten)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/lookup": {
+            "get": {
+                "summary": "lookup",
+                "description": "lookup",
+                "operationId": "Lookup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "one or more long URLs to lookup."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/info": {
+            "get": {
+                "summary": "info",
+                "description": "info",
+                "operationId": "Info",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "optional true|false - include extra user info in response."
+                    },
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "refers to one or more bitly hashes, (e.g.: 2bYgqR or a-custom-name )."
+                    },
+                    {
+                        "name": "shortUrl",
+                        "in": "query",
+                        "description": "refers to one or more Bitlinks e.g.: http:\/\/bit.ly\/1RmnUT or http:\/\/j.mp\/1RmnUT."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/shorten": {
+            "get": {
+                "summary": "shorten",
+                "description": "shorten",
+                "operationId": "Shorten",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "json, xml, txt. Default: json."
+                    },
+                    {
+                        "name": "longUrl",
+                        "in": "query",
+                        "description": "the URL to be saved as a Bitlink."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Shorten a Link",
+                "description": "Convert a long url to a Bitlink",
+                "operationId": "CreateBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "417": {
+                        "description": "EXPECTATION_FAILED",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ExpectationFailed"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/link_edit": {
+            "get": {
+                "summary": "Edit User Link",
+                "description": "Changes link metadata in a users history.",
+                "operationId": "EditUserLink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "archived",
+                        "in": "query",
+                        "description": "indicating whether or not link is to be archived."
+                    },
+                    {
+                        "name": "clear_deeplinks",
+                        "in": "query",
+                        "description": "indicating that all deeplinks should be removed form the bitlink"
+                    },
+                    {
+                        "name": "deeplinks",
+                        "in": "query",
+                        "description": "urlencoded json array of deeplink items"
+                    },
+                    {
+                        "name": "edit",
+                        "in": "query",
+                        "description": "a comma separated string of fields to be edited. ie: to edit the note field you also need to pass edit=note."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    },
+                    {
+                        "name": "note",
+                        "in": "query",
+                        "description": "a description of, or note about, this Bitlink."
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "indicating privacy setting (defaults to user-level setting)."
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "the title of this Bitlink."
+                    },
+                    {
+                        "name": "user_ts",
+                        "in": "query",
+                        "description": "timestamp as an integer epoch."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/expand": {
+            "get": {
+                "summary": "expand",
+                "description": "expand",
+                "operationId": "Expand",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "json, xml, txt. Default: json."
+                    },
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "refers to one or more bitly hashes, (e.g.: 2bYgqR or a-custom-name )."
+                    },
+                    {
+                        "name": "shortUrl",
+                        "in": "query",
+                        "description": "refers to one or more Bitlinks e.g.: http:\/\/bit.ly\/1RmnUT or http:\/\/j.mp\/1RmnUT."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Expand a Bitlink",
+                "description": "This endpoint returns public information for a Bitlink.",
+                "operationId": "ExpandBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/BadRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/referrers_by_domain": {
+            "get": {
+                "summary": "Link Referrers by Domain",
+                "description": "Returns metrics about the pages referring click traffic to a single Bitlink, grouped by referring domain.",
+                "operationId": "LinkReferrersByDomain",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/referrers": {
+            "get": {
+                "summary": "Link Referrers",
+                "description": "Returns metrics about the pages referring click traffic to a single Bitlink.",
+                "operationId": "LinkReferrers",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/encoders_by_count": {
+            "get": {
+                "summary": "Users Who Encoded Link",
+                "description": "Returns users who have encoded this link (optionally only those in the requesting users social graph), sorted by the number of clicks on each encoding users link.",
+                "operationId": "UsersWhoEncodedLink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "optional true|false - include extra user info in response."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    },
+                    {
+                        "name": "my_network",
+                        "in": "query",
+                        "description": "restrict to my network"
+                    },
+                    {
+                        "name": "subaccounts",
+                        "in": "query",
+                        "description": "restrict to this enterprise account and its subaccounts"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/encoders_count": {
+            "get": {
+                "summary": "Number of Encoders",
+                "description": "Returns the number of users who have shortened (encoded) a single Bitlink.",
+                "operationId": "NumberOfEncoders",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/countries": {
+            "get": {
+                "summary": "Link Clicks by Country",
+                "description": "Returns metrics about the countries referring click traffic to a single Bitlink.",
+                "operationId": "LinkClicksbyCountry",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/clicks": {
+            "get": {
+                "summary": "Link Clicks",
+                "description": "Returns the number of clicks on a single Bitlink.",
+                "operationId": "LinkClicks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "json, xml, txt. Default: json."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/link\/encoders": {
+            "get": {
+                "summary": "User Who Encoded Link",
+                "description": "Returns users who have encoded this long URL (optionally only those in the requesting users social graph).",
+                "operationId": "UserWhoEncodedLink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "optional true|false - include extra user info in response."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    },
+                    {
+                        "name": "my_network",
+                        "in": "query",
+                        "description": "restrict to my network"
+                    },
+                    {
+                        "name": "subaccounts",
+                        "in": "query",
+                        "description": "restrict to this enterprise account and its subaccounts"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organization\/leaderboard": {
+            "get": {
+                "summary": "Organization Leaderboard",
+                "description": "Returns the top-performing organization members ordered by clicks or shortens.",
+                "operationId": "OrganizationLeaderBoard",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "either clicks or shortens. Default is clicks."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organization\/shorten_counts": {
+            "get": {
+                "summary": "Organization Shorten Counts",
+                "description": "Returns the number of Bitlinks created by your organization or by other Bitly users that point to your domains.",
+                "operationId": "OrganizationShortenCounts",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organization\/clicks": {
+            "get": {
+                "summary": "Organization Clicks",
+                "description": "Returns the number of clicks on Bitlinks created by your organization or by other Bitly users that point to your domains.",
+                "operationId": "OrganizationClicks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organization\/popular_links": {
+            "get": {
+                "summary": "Organization Popular Links",
+                "description": "Returns the top links shared by you or your audience, ordered by clicks",
+                "operationId": "OrganizationPopularLinks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organization\/brand_messages": {
+            "get": {
+                "summary": "Organization Brand Messages",
+                "description": "Returns the top Bitlinks created by you with traffic, that did not also have non-organization traffic in the same time period, ordered by clicks.",
+                "operationId": "OrganizationBrandMessages",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organization\/intersecting_links": {
+            "get": {
+                "summary": "Organization Intersecting Links",
+                "description": "Returns the top links shared by both your audience and by your account, ordered by clicks.",
+                "operationId": "OrganizationIntersectingLinks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organization\/missed_opportunities": {
+            "get": {
+                "summary": "Organization Missed Opportunities",
+                "description": "Returns the top links shared by your audience, but not by you, ordered by clicks.",
+                "operationId": "OrganizationMissedOpportunities",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "an epoch timestamp, indicating the most recent time for which to pull metrics. default:now ",
+                        "in": "query",
+                        "description": "hour | day | week | month default:day"
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/info": {
+            "get": {
+                "summary": "User Info",
+                "description": "Return or update information about a user.",
+                "operationId": "UserInfo",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "full_name",
+                        "in": "query",
+                        "description": "set the users full name value. (only available for the authenticated user.)"
+                    },
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/oauth\/app": {
+            "get": {
+                "summary": "OAuth App",
+                "description": "Return information about an OAuth app.",
+                "operationId": "OauthApp",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "the client ID of the app."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/link_history": {
+            "get": {
+                "summary": "User Link History",
+                "description": "Returns entries from a users link history in reverse chronological order.",
+                "operationId": "UserLinkHistory",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "archived",
+                        "in": "query",
+                        "description": "indicating whether or not link is to be archived."
+                    },
+                    {
+                        "name": "campaign_id",
+                        "in": "query",
+                        "description": "filter to return only links for the given campaign_id, can be provided multiple times"
+                    },
+                    {
+                        "name": "created_after",
+                        "in": "query",
+                        "description": "timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "created_before",
+                        "in": "query",
+                        "description": "timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "exact_domain",
+                        "in": "query",
+                        "description": "n exact domain to filter on history entries"
+                    },
+                    {
+                        "name": "expand_client_id",
+                        "in": "query",
+                        "description": "whether to provide additional information about encoding application. default: false."
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "custom keyword to filter on history entries"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "one or more Bitlinks to lookup."
+                    },
+                    {
+                        "name": "modified_after",
+                        "in": "query",
+                        "description": "timestamp as an integer unix epoch."
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "integer specifying the numbered result at which to start (for pagination)."
+                    },
+                    {
+                        "name": "private",
+                        "in": "query",
+                        "description": "indicating privacy setting (defaults to user-level setting)."
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "optional ad hoc text search string"
+                    },
+                    {
+                        "name": "root_domain",
+                        "in": "query",
+                        "description": "a root domain to filter on history entries"
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "the user for whom to retrieve history entries (if different from authenticated user)."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/network_history": {
+            "get": {
+                "summary": "User Network History",
+                "description": "Returns entries from a users network history in reverse chronogical order. (A users network history includes publicly saved links from Twitter and Facebook connections.)",
+                "operationId": "UserNetworkHistory",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_client_id",
+                        "in": "query",
+                        "description": "whether to provide additional information about encoding application. default: false."
+                    },
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "optional true|false - include extra user info in response."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "integer specifying the numbered result at which to start (for pagination)."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/tracking_domain_list": {
+            "get": {
+                "summary": "User Tracking Domain List",
+                "description": "Returns a list of tracking domains a user has configured.",
+                "operationId": "UserTrackingDomainList",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "tracking_domains",
+                        "in": "query",
+                        "description": "a list of tracking domains configured for the authenticated user."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/popular_links": {
+            "get": {
+                "summary": "User Popular Links",
+                "description": "Returns the authenticated users most-clicked Bitlinks (ordered by number of clicks) in a given time period.",
+                "operationId": "UserPopularLinks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/clicks": {
+            "get": {
+                "summary": "User Clicks",
+                "description": "Returns the aggregate number of clicks on all of the authenticated users Bitlinks.",
+                "operationId": "UserClicks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "json, xml, txt. Default: json."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/popular_earned_by_clicks": {
+            "get": {
+                "summary": "User Popular Earned By Clicks",
+                "description": "Returns the top links to your tracking domain (or domains) created by users not associated with your account, ordered by clicks.",
+                "operationId": "UserPopularEarnedbyClicks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/referrers": {
+            "get": {
+                "summary": "User Referrers",
+                "description": "Returns aggregate metrics about the pages referring click traffic to all of the authenticated users Bitlinks.",
+                "operationId": "UserReferrers",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/popular_owned_by_shortens": {
+            "get": {
+                "summary": "User Popular Owned by Shortens",
+                "description": "Returns the top links to your tracking domain (or domains) created by you or your subaccounts ordered by number of shortens.",
+                "operationId": "UserPopularOwnedByShortens",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "subaccount",
+                        "in": "query",
+                        "description": "restrict to links created by this subaccount (may be specified multiple times)."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/popular_owned_by_clicks": {
+            "get": {
+                "summary": "User Popular Owned By Clicks",
+                "description": "Returns the top links to your tracking domain (or domains) created by you or your subaccounts ordered by clicks.",
+                "operationId": "UserPopularOwnedByClicks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "subaccount",
+                        "in": "query",
+                        "description": "restrict to links created by this subaccount (may be specified multiple times)."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/popular_earned_by_shortens": {
+            "get": {
+                "summary": "User Popular Earned By Shortens",
+                "description": "Returns the top links to your tracking domain (or domains) created by users not associated with your account, ordered by shortens.",
+                "operationId": "UserPopularEarnedByShortens",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "description": "A short domain. ie: nyti.ms."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/referring_domains": {
+            "get": {
+                "summary": "User Referring Domains",
+                "description": "eturns aggregate metrics about the domains referring click traffic to all of the authenticated users Bitlinks. If the user is a master account, or is a subaccount with full_reports permission, the user may choose to view the metrics of any account belonging to the master account.",
+                "operationId": "UserReferringDomains",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "exclude_social_networks",
+                        "in": "query",
+                        "description": "If true, exclude domains that are part of a social network that bitly tracks (default=true)."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/shorten_counts": {
+            "get": {
+                "summary": "User Shorten Counts",
+                "description": "Returns the number of Bitlinks created in a given time period by the authenticated user.",
+                "operationId": "UserShortenCounts",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "json, xml, txt. Default: json."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user\/countries": {
+            "get": {
+                "summary": "User Countries",
+                "description": "Returns aggregate metrics about the countries referring click traffic to all of the authenticated users Bitlinks.",
+                "operationId": "UserCountries",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "true or false. Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now. "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bitlinks\/{bitlink}\/countries": {
+            "get": {
+                "summary": "Get Metrics for a Bitlink by countries",
+                "description": "This endpoint will return metrics about the countries referring click traffic to a single Bitlink.",
+                "operationId": "GetMetricsForBitlinkByCountries",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/BadRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/groups\/{group_guid}\/preferences": {
+            "get": {
+                "summary": "Retrieve Group Preferences",
+                "description": "Retrieve preferences for a specific group",
+                "operationId": "GetGroupPreferences",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Group Preferences",
+                "description": "Update preferences for a specific group",
+                "operationId": "UpdateGroupPreferences",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/BadRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organizations\/{organization_guid}": {
+            "get": {
+                "summary": "Retrieve an Organization",
+                "description": "Retrive details for an organization",
+                "operationId": "GetOrganization",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bitlinks\/{bitlink}\/referrers": {
+            "get": {
+                "summary": "Get Metrics for a Bitlink by referrers",
+                "description": "This endpoint will return metrics about the referrers referring click traffic to a single Bitlink.",
+                "operationId": "GetMetricsForBitlinkByReferrers",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/BadRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bitlinks": {
+            "post": {
+                "summary": "Create a Bitlink",
+                "description": "Convert a long url to a Bitlink and set additional parameters",
+                "operationId": "CreateFullBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "417": {
+                        "description": "EXPECTATION_FAILED",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ExpectationFailed"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/custom_bitlinks": {
+            "post": {
+                "summary": "Add Custom Bitlink",
+                "description": "Add a Keyword to a Bitlink",
+                "operationId": "AddCustomBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/groups\/{group_guid}\/bitlinks": {
+            "get": {
+                "summary": "Retrieve Bitlinks by Group",
+                "description": "Retrieve a paginated collection of Bitlinks for a Group",
+                "operationId": "GetBitlinksByGroup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/groups\/{group_guid}\/tags": {
+            "get": {
+                "summary": "Retrieve Tags by Group",
+                "description": "Retrieve the currently used tags for a group",
+                "operationId": "GetGroupTags",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/campaigns": {
+            "post": {
+                "summary": "Create Campaign",
+                "description": "Create a new campaign",
+                "operationId": "CreateCampaign",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "UNPROCESSABLE_ENTITY",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UnprocessableEntity"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve Campaigns",
+                "description": "Retrieve the campaigns for the current user",
+                "operationId": "GetCampaigns",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/apps\/{client_id}": {
+            "get": {
+                "summary": "Retrieve OAuth App",
+                "description": "Retrieve the details for the provided OAuth App client ID",
+                "operationId": "GetOAuthApp",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/channels": {
+            "post": {
+                "summary": "Create Channel",
+                "description": "Create a new channel",
+                "operationId": "CreateChannel",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "UNPROCESSABLE_ENTITY",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UnprocessableEntity"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve Channels",
+                "description": "Retrieve the channels available to a user",
+                "operationId": "GetChannels",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "402": {
+                        "description": "UPGRADE_REQUIRED",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UpgradeRequired"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/groups\/{group_guid}\/countries": {
+            "get": {
+                "summary": "Get Click Metrics for a Group by countries",
+                "description": "This endpoint will return metrics about the countries referring click traffic rolled up to a Group",
+                "operationId": "GetGroupMetricsByCountries",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/groups\/{group_guid}\/referring_networks": {
+            "get": {
+                "summary": "Get Click Metrics for a Group by referring networks",
+                "description": "This endpoint will return metrics about the referring network click traffic rolled up to a Group",
+                "operationId": "GetGroupMetricsByReferringNetworks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bitlinks\/{bitlink}\/clicks\/summary": {
+            "get": {
+                "summary": "Get Clicks Summary for a Bitlink",
+                "description": "This will return the click counts for a specified Bitlink. This rolls up all the data into a single field of clicks.",
+                "operationId": "GetClicksSummaryForBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/custom_bitlinks\/{custom_bitlink}\/clicks_by_destination": {
+            "get": {
+                "summary": "Get Metrics for a Custom Bitlink by destination",
+                "description": "Get Click Metrics for a Custom Bitlink by historical Bitlink destinations",
+                "operationId": "GetCustomBitlinkMetricsByDestination",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "402": {
+                        "description": "UPGRADE_REQUIRED",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UpgradeRequired"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bitlinks\/{bitlink}\/clicks": {
+            "get": {
+                "summary": "Get Clicks for a Bitlink",
+                "description": "This will return the click counts for a specified Bitlink. This returns an array with clicks based on a date.",
+                "operationId": "GetClicksForBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/custom_bitlinks\/{custom_bitlink}": {
+            "patch": {
+                "summary": "Update Custom Bitlink",
+                "description": "Move a Keyword to a different Bitlink",
+                "operationId": "UpdateCustomBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "UNPROCESSABLE_ENTITY",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UnprocessableEntity"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve Custom Bitlink",
+                "description": "Retrieve the details and history of a Custom Bitlink",
+                "operationId": "GetCustomBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "402": {
+                        "description": "UPGRADE_REQUIRED",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UpgradeRequired"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/groups\/{group_guid}\/shorten_counts": {
+            "get": {
+                "summary": "Retrieve Group Shorten Counts",
+                "description": "Get all the shorten counts for a specific group",
+                "operationId": "GetGroupShortenCounts",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bitlinks\/{bitlink}": {
+            "patch": {
+                "summary": "Update a Bitlink",
+                "description": "Update fields in the Bitlink",
+                "operationId": "UpdateBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "UNPROCESSABLE_ENTITY",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UnprocessableEntity"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve a Bitlink",
+                "description": "This endpoint returns information for a Bitlink.",
+                "operationId": "GetBitlink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/campaigns\/{campaign_guid}": {
+            "get": {
+                "summary": "Retrieve a Campaign",
+                "description": "Retrive details for a campaign",
+                "operationId": "GetCampaign",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "402": {
+                        "description": "UPGRADE_REQUIRED",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UpgradeRequired"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Campaign",
+                "description": "Update a campaign's details",
+                "operationId": "UpdateCampaign",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "UNPROCESSABLE_ENTITY",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UnprocessableEntity"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/groups": {
+            "get": {
+                "summary": "Retrieve Groups",
+                "description": "Retrieve a list of Groups",
+                "operationId": "GetGroups",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/BadRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organizations": {
+            "get": {
+                "summary": "Retrieve Organizations",
+                "description": "Retrieve a list of organizations",
+                "operationId": "GetOrganizations",
+                "deprecated": 0,
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bitlinks\/{bitlink}\/referrers_by_domains": {
+            "get": {
+                "summary": "Get Metrics for a Bitlink by referrers by domain",
+                "description": "This endpoint will group referrers metrics about a single Bitlink.",
+                "operationId": "GetMetricsForBitlinkByReferrersByDomains",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/BadRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/groups\/{group_guid}\/bitlinks\/{sort}": {
+            "get": {
+                "summary": "Retrieve Sorted Bitlinks for Group",
+                "description": "This will retrieve a paginated response for Bitlinks that are sorted for the Group",
+                "operationId": "GetSortedBitlinks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/organizations\/{organization_guid}\/shorten_counts": {
+            "get": {
+                "summary": "Retrieve Organization Shorten Counts",
+                "description": "Retrieve all the shorten counts for a specific organization",
+                "operationId": "GetOrganizationShortenCounts",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/user": {
+            "patch": {
+                "summary": "Update a User",
+                "description": "Update fields in the user",
+                "operationId": "UpdateUser",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/BadRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve a User",
+                "description": "Retrive information for the current authenticated user",
+                "operationId": "GetUser",
+                "deprecated": 0,
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bsds": {
+            "get": {
+                "summary": "Get BSDs",
+                "description": "Fetch all Branded Short Domains",
+                "operationId": "GetBSDs",
+                "deprecated": 0,
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/bitlinks\/{bitlink}\/referring_domains": {
+            "get": {
+                "summary": "Get Metrics for a Bitlink by referring domains",
+                "description": "This endpoint will rollup the click counts to a referrer about a single Bitlink.",
+                "operationId": "GetMetricsForBitlinkByReferringDomains",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/BadRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/groups\/{group_guid}": {
+            "patch": {
+                "summary": "Update a Group",
+                "description": "Update the details of a group",
+                "operationId": "UpdateGroup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/BadRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve a Group",
+                "description": "Retrive details for a group",
+                "operationId": "GetGroup",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/ClickMetrics"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/channels\/{channel_guid}": {
+            "get": {
+                "summary": "Get A Channel",
+                "description": "Get a channel's details",
+                "operationId": "GetChannel",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "402": {
+                        "description": "UPGRADE_REQUIRED",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UpgradeRequired"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update A Channel",
+                "description": "Update an existing Channel",
+                "operationId": "UpdateChannel",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "No Name",
+                        "in": "query",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "UNPROCESSABLE_ENTITY",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$href": "#\/components\/schemas\/UnprocessableEntity"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UserUpdate": {
+                "type": "object",
+                "properties": {
+                    "default_group_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "Metrics": {
+                "type": "object"
+            },
+            "Group": {
+                "type": "object"
+            },
+            "CustomBitlinkHistory": {
+                "type": "object",
+                "properties": {
+                    "hash": {
+                        "description": "refers to one or more bitly hashes, (e.g.: 2bYgqR or a-custom-name ).",
+                        "type": "string"
+                    },
+                    "uuid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "keyword": {
+                        "description": "custom keyword to filter on history entries",
+                        "type": "string"
+                    },
+                    "created": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "group_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "first_created": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "is_active": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "long_url": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "deactivated": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "bsd": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "login": {
+                        "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks.",
+                        "type": "string"
+                    }
+                }
+            },
+            "ClickLink": {
+                "type": "object",
+                "properties": {
+                    "clicks": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "Channels": {
+                "type": "object",
+                "properties": {
+                    "channels": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "channels": {
+                "type": "array"
+            },
+            "InternalError": {
+                "type": "object"
+            },
+            "Shorten": {
+                "type": "object",
+                "properties": {
+                    "group_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "domain": {
+                        "description": "A short domain. ie: nyti.ms.",
+                        "type": "string"
+                    },
+                    "long_url": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "DomainStatus": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "domain": {
+                        "description": "A short domain. ie: nyti.ms.",
+                        "type": "string"
+                    },
+                    "zone": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "BSDsResponse": {
+                "type": "object",
+                "properties": {
+                    "bsds": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "bsds": {
+                "type": "array"
+            },
+            "ExpandBitlink": {
+                "type": "object",
+                "properties": {
+                    "bitlink_id": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "Bitlinks": {
+                "type": "object",
+                "properties": {
+                    "pagination": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "links": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "pagination": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "prev": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "page": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "next": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "links": {
+                "type": "array"
+            },
+            "GroupPreferences": {
+                "type": "object",
+                "properties": {
+                    "group_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "domain_preference": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "ShareAccount": {
+                "type": "object",
+                "properties": {
+                    "numeric_id": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "account_login": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "account_type": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "account_id": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "oauth_error": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "primary": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "visible": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "connected": {
+                        "description": "ISO timestamp",
+                        "type": "string"
+                    },
+                    "account_name": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "DomainRegister": {
+                "type": "object",
+                "properties": {
+                    "redirect_url": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "ClicksSummary": {
+                "type": "object",
+                "properties": {
+                    "units": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "unit": {
+                        "description": "minute, hour, day, week or month, default: day ",
+                        "type": "string"
+                    },
+                    "total_clicks": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "unit_reference": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "BaseMetrics": {
+                "type": "object",
+                "properties": {
+                    "units": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "facet": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "unit_reference": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "unit": {
+                        "description": "minute, hour, day, week or month, default: day ",
+                        "type": "string"
+                    }
+                }
+            },
+            "BadGateway": {
+                "type": "object"
+            },
+            "Clicks": {
+                "type": "object",
+                "properties": {
+                    "units": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "unit_reference": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "unit": {
+                        "description": "minute, hour, day, week or month, default: day ",
+                        "type": "string"
+                    },
+                    "link_clicks": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "link_clicks": {
+                "type": "array"
+            },
+            "Channel": {
+                "type": "object"
+            },
+            "ExpectationFailed": {
+                "type": "object"
+            },
+            "Campaigns": {
+                "type": "object",
+                "properties": {
+                    "campaigns": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "campaigns": {
+                "type": "array"
+            },
+            "EncodingLogin": {
+                "type": "object",
+                "properties": {
+                    "encoding_login": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "encoding_login": {
+                "type": "array"
+            },
+            "Users": {
+                "type": "object",
+                "properties": {
+                    "pagination": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "users": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "users": {
+                "type": "array"
+            },
+            "Tags": {
+                "type": "object",
+                "properties": {
+                    "tags": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "tags": {
+                "type": "array"
+            },
+            "Forbidden": {
+                "type": "object"
+            },
+            "Email": {
+                "type": "object",
+                "properties": {
+                    "is_primary": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "is_verified": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "email": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "ShareAccounts": {
+                "type": "object",
+                "properties": {
+                    "share_accounts": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "share_accounts": {
+                "type": "array"
+            },
+            "ClickMetrics": {
+                "type": "object"
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "default_group_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "created": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "is_active": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "modified": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "is_sso_user": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "is_2fa_enabled": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "login": {
+                        "description": "an account in this organization. If unspecified, aggregate of all accounts in this organization is pulled. ! is a valid option to exclude the organizations Bitlinks.",
+                        "type": "string"
+                    },
+                    "emails": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "emails": {
+                "type": "array"
+            },
+            "Groups": {
+                "type": "object",
+                "properties": {
+                    "groups": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "groups": {
+                "type": "array"
+            },
+            "BaseChannel": {
+                "type": "object",
+                "properties": {
+                    "group_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "modified": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "created": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "SortedLinks": {
+                "type": "object",
+                "properties": {
+                    "sorted_links": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "links": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "sorted_links": {
+                "type": "array"
+            },
+            "CampaignModify": {
+                "type": "object",
+                "properties": {
+                    "group_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "channel_guids": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "description": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "channel_guids": {
+                "type": "array"
+            },
+            "FullShorten": {
+                "type": "object",
+                "properties": {
+                    "group_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "domain": {
+                        "description": "A short domain. ie: nyti.ms.",
+                        "type": "string"
+                    },
+                    "long_url": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "deeplinks": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "title": {
+                        "description": "the title of this Bitlink.",
+                        "type": "string"
+                    }
+                }
+            },
+            "deeplinks": {
+                "type": "array"
+            },
+            "Organizations": {
+                "type": "object",
+                "properties": {
+                    "organizations": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "organizations": {
+                "type": "array"
+            },
+            "ChannelBitlink": {
+                "type": "object",
+                "properties": {
+                    "campaign_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "bitlink_id": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "NotFound": {
+                "type": "object"
+            },
+            "UpdateCustomBitlink": {
+                "type": "object",
+                "properties": {
+                    "bitlink_id": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "CustomBitlink": {
+                "type": "object",
+                "properties": {
+                    "bitlink": {
+                        "description": "",
+                        "type": ""
+                    },
+                    "bitlink_history": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "custom_bitlink": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "bitlink": {
+                "type": "object"
+            },
+            "bitlink_history": {
+                "type": "array"
+            },
+            "ReferrersByDomain": {
+                "type": "object",
+                "properties": {
+                    "Referrers": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "network": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "Referrers": {
+                "type": "array"
+            },
+            "BadRequest": {
+                "type": "object"
+            },
+            "ClickMetric": {
+                "type": "object",
+                "properties": {
+                    "clicks": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "value": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "Metric": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "key": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "ExpandedBitlink": {
+                "type": "object",
+                "properties": {
+                    "long_url": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "link": {
+                        "description": "one or more Bitlinks to lookup.",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "CreateShare": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "bitlink": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "account_type": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "account_id": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "group_guid": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "errors": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "resource": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "errors": {
+                "type": "array"
+            },
+            "UpgradeRequired": {
+                "type": "object"
+            },
+            "Organization": {
+                "type": "object"
+            },
+            "BSDSearchResults": {
+                "type": "object",
+                "properties": {
+                    "results": {
+                        "description": "",
+                        "type": "array"
+                    }
+                }
+            },
+            "results": {
+                "type": "array"
+            },
+            "LinkClicks": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "clicks": {
+                        "description": "",
+                        "type": "integer"
+                    }
+                }
+            },
+            "Campaign": {
+                "type": "object"
+            },
+            "UnprocessableEntity": {
+                "type": "object"
+            },
+            "HasReferences": {
+                "type": "object",
+                "properties": {
+                    "references": {
+                        "description": "",
+                        "type": "object"
+                    }
+                }
+            },
+            "references": {
+                "type": "object"
+            },
+            "Share": {
+                "type": "object",
+                "properties": {
+                    "numeric_id": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "account_type": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "account_id": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "text": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "link": {
+                        "description": "one or more Bitlinks to lookup.",
+                        "type": "string"
+                    },
+                    "account_name": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "BSDSearchResult": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "domain": {
+                        "description": "A short domain. ie: nyti.ms.",
+                        "type": "string"
+                    },
+                    "subdomain": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "link": {
+                        "description": "one or more Bitlinks to lookup.",
+                        "type": "string"
+                    },
+                    "zone": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "OAuthApp": {
+                "type": "object",
+                "properties": {
+                    "link": {
+                        "description": "one or more Bitlinks to lookup.",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "client_id": {
+                        "description": "the client ID of the app.",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "TemporarilyUnavailable": {
+                "type": "object"
+            },
+            "FieldError": {
+                "type": "object",
+                "properties": {
+                    "field": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "message": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "error_code": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "AddCustomBitlink": {
+                "type": "object",
+                "properties": {
+                    "bitlink_id": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "custom_bitlink": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "ChannelModify": {
+                "type": "object"
+            },
+            "ReferrersByDomains": {
+                "type": "object",
+                "properties": {
+                    "units": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "facet": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "referrers_by_domain": {
+                        "description": "",
+                        "type": "array"
+                    },
+                    "unit_reference": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "unit": {
+                        "description": "minute, hour, day, week or month, default: day ",
+                        "type": "string"
+                    }
+                }
+            },
+            "referrers_by_domain": {
+                "type": "array"
+            },
+            "Deeplink": {
+                "type": "object",
+                "properties": {
+                    "app_uri_path": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "install_type": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "install_url": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "app_id": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "GroupUpdate": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "organization_guid": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "DeeplinkRule": {
+                "type": "object",
+                "properties": {
+                    "bitlink": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "install_url": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "created": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "app_uri_path": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "modified": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "install_type": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "app_guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "guid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "os": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "UserInternal": {
+                "type": "object"
+            }
+        }
+    }
+}
