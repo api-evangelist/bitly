@@ -1,0 +1,294 @@
+{
+    "id": "e5b7acfe1ed700c89a80bf77509cd1e6",
+    "name": "Bitly User API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "626b10ebcff0d62866f0c010990f1322",
+            "name": "OAuth App",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/oauth\/app",
+            "description": "Return information about an OAuth app.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "client_id",
+                    "description": "the client ID of the app.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "rawModeData": ""
+        },
+        {
+            "id": "142206984f1b9313b63cffd470c8cc84",
+            "name": "User Info",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/info",
+            "description": "Return or update information about a user.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "full_name",
+                    "description": "set the users full name value. (only available for the authenticated user.)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "login",
+                    "description": "the bitly login of the user whose info to look up. If not given, the authenticated user will be used.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "rawModeData": ""
+        },
+        {
+            "id": "65744ae7207169d8255e17bbd9c231dd",
+            "name": "User Link History",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/link_history",
+            "description": "Returns entries from a users link history in reverse chronological order.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "archived",
+                    "description": "on, offor both whether to include or exclude archived history entries. (on = return only archived history entries) default: off.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "campaign_id",
+                    "description": "filter to return only links for the given campaign_id, can be provided multiple times",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "created_after",
+                    "description": "timestamp as an integer unix epoch.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "created_before",
+                    "description": "timestamp as an integer unix epoch.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "exact_domain",
+                    "description": "n exact domain to filter on history entries",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "expand_client_id",
+                    "description": "whether to provide additional information about encoding application. default: false.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "keyword",
+                    "description": "custom keyword to filter on history entries",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "integer in the range 1 to 100 default: 50, specifying the max number of results to return.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "link",
+                    "description": "optional the Bitlink or Bitlinks to return metadata for (when specified, overrides all other options), can be provided multiple times.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "modified_after",
+                    "description": "timestamp as an integer unix epoch.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "offset",
+                    "description": "integer specifying the numbered result at which to start (for pagination).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "private",
+                    "description": "on, off and both whether to include or exclude private history entries. (on = return only private history entries) default: both.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "query",
+                    "description": "optional ad hoc text search string",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "root_domain",
+                    "description": "a root domain to filter on history entries",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "user",
+                    "description": "the user for whom to retrieve history entries (if different from authenticated user).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "rawModeData": ""
+        },
+        {
+            "id": "495ca47d0777fe6c648e3a539691651e",
+            "name": "User Network History",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/network_history",
+            "description": "Returns entries from a users network history in reverse chronogical order. (A users network history includes publicly saved links from Twitter and Facebook connections.)",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "expand_client_id",
+                    "description": "whether to provide additional information about encoding application. default: false.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "expand_user",
+                    "description": "include extra user info in response (login, avatar_url, display_name, profile_url, full_name).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "integer in the range 1 to 100 default: 50, specifying the max number of results to return.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "offset",
+                    "description": "integer specifying the numbered result at which to start (for pagination).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "rawModeData": ""
+        },
+        {
+            "id": "8f12936b1eb45f3a13a80c41820ab67f",
+            "name": "User Tracking Domain List",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/tracking_domain_list",
+            "description": "Returns a list of tracking domains a user has configured.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "tracking_domains",
+                    "description": "a list of tracking domains configured for the authenticated user.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "rawModeData": ""
+        }
+    ]
+}
