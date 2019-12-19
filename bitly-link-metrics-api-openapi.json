@@ -1,0 +1,257 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "v3",
+        "title": "Bitly Link Metrics API",
+        "description": "The Bitly Link Metrics API",
+        "termsOfService": "http:\/\/dev.bitly.com\/best_practices.html"
+    },
+    "servers": [
+        "httpsapi-ssl.bitly.com\/v3"
+    ],
+    "paths": {
+        "\/link\/clicks": {
+            "get": {
+                "summary": "Link Clicks",
+                "description": "Returns the number of clicks on a single Bitlink.",
+                "operationId": "LinkClicks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "json, xml, txt. Default: json."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a Bitlink."
+                    },
+                    {
+                        "name": "rollup",
+                        "in": "query",
+                        "description": "Return data for multiple units rolled up to a single result instead of a separate value for each period of time."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now."
+                    }
+                ]
+            }
+        },
+        "\/link\/countries": {
+            "get": {
+                "summary": "Link Clicks by Country",
+                "description": "Returns metrics about the countries referring click traffic to a single Bitlink.",
+                "operationId": "LinkClicksbyCountry",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a Bitlink."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now."
+                    }
+                ]
+            }
+        },
+        "\/link\/encoders": {
+            "get": {
+                "summary": "User Who Encoded Link",
+                "description": "Returns users who have encoded this long URL (optionally only those in the requesting users social graph).",
+                "operationId": "UserWhoEncodedLink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "include display names of encoders."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a Bitlink."
+                    },
+                    {
+                        "name": "my_network",
+                        "in": "query",
+                        "description": "restrict to my network."
+                    },
+                    {
+                        "name": "subaccounts",
+                        "in": "query",
+                        "description": "true or false - restrict to this enterprise account and its subaccounts"
+                    }
+                ]
+            }
+        },
+        "\/link\/encoders_by_count": {
+            "get": {
+                "summary": "Users Who Encoded Link",
+                "description": "Returns users who have encoded this link (optionally only those in the requesting users social graph), sorted by the number of clicks on each encoding users link.",
+                "operationId": "UsersWhoEncodedLink",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "expand_user",
+                        "in": "query",
+                        "description": "include display names of encoders."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "1 to 1000 (default=100)."
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a Bitlink."
+                    },
+                    {
+                        "name": "my_network",
+                        "in": "query",
+                        "description": "restrict to my network."
+                    },
+                    {
+                        "name": "subaccounts",
+                        "in": "query",
+                        "description": "true or false - restrict to this enterprise account and its subaccounts"
+                    }
+                ]
+            }
+        },
+        "\/link\/encoders_count": {
+            "get": {
+                "summary": "Number of Encoders",
+                "description": "Returns the number of users who have shortened (encoded) a single Bitlink.",
+                "operationId": "NumberOfEncoders",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a Bitlink."
+                    }
+                ]
+            }
+        },
+        "\/link\/referrers": {
+            "get": {
+                "summary": "Link Referrers",
+                "description": "Returns metrics about the pages referring click traffic to a single Bitlink.",
+                "operationId": "LinkReferrers",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a Bitlink."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now."
+                    }
+                ]
+            }
+        },
+        "\/link\/referrers_by_domain": {
+            "get": {
+                "summary": "Link Referrers by Domain",
+                "description": "Returns metrics about the pages referring click traffic to a single Bitlink, grouped by referring domain.",
+                "operationId": "LinkReferrersByDomain",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "a Bitlink."
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "query",
+                        "description": "an integer hour offset from UTC (-14 to 14), or a timezone string default: America\/New_York."
+                    },
+                    {
+                        "name": "unit",
+                        "in": "query",
+                        "description": "minute, hour, day, week or month, default: day "
+                    },
+                    {
+                        "name": "units",
+                        "in": "query",
+                        "description": "an integer representing the time units to query data for. Pass -1 to return all units of time."
+                    },
+                    {
+                        "name": "unit_reference_ts",
+                        "in": "query",
+                        "description": "an epoch timestamp, indicating the most recent time for which to pull metrics, default: now."
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": []
+    }
+}
