@@ -1,0 +1,502 @@
+{
+    "id": "6de695e22159bd83a7010d86ca3d0489",
+    "name": "Bitly Link API",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "70baf88ef998949cc606bb1171b5b7a4",
+            "name": "Get Search",
+            "url": "httpsapi-ssl.bitly.com\/v3\/search",
+            "description": "Get search.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "cities",
+                    "description": "show links active in this city (ordered like country-state-city, e.g. us-il-chicago).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "domain",
+                    "description": "restrict results to this web domain (like bitly.com).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "fields",
+                    "description": "which fields to return in the response (comma-separated). May be any of: domain, initial_epoch, h2, h3, site, lastindexed, keywords, last_indexed_epoch, title, initial, summaryText, content, score, summaryTitle, type, description, cities, lang, url, referrer, aggregate_link, lastseen, page, ogtitle, aggregate_link. By default, all will be returned.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "full_domain",
+                    "description": "restrict results to this full web domain (like blog.bitly.com).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "lang",
+                    "description": "favor results in this language (two letter ISO code).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "limit",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "offset",
+                    "description": "which result to start with (defaults to 0).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "query",
+                    "description": "string to query for.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "rawModeData": ""
+        },
+        {
+            "id": "ae4de0db7ed657c733a996e47257fad5",
+            "name": "Get Expand",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/expand",
+            "description": "Get expand.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "format",
+                    "description": "json, xml, txt. Default: json.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "hash",
+                    "description": "refers to one or more bitly hashes. e.g.: 2bYgqR or a-custom-name.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "shortUrl",
+                    "description": "refers to one or more Bitlinks. e.g.: http:\/\/bit.ly\/1RmnUT or http:\/\/j.mp\/1RmnUT.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "rawModeData": ""
+        },
+        {
+            "id": "a9f83da1f795e8ae7f62e25a483c125b",
+            "name": "Get Info",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/info",
+            "description": "Get info.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "expand_user",
+                    "description": "optional true|false - include extra user info in response.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "hash",
+                    "description": "refers to one or more bitly hashes. e.g.: 2bYgqR or a-custom-name.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "shortUrl",
+                    "description": "refers to one or more Bitlinks. e.g.: http:\/\/bit.ly\/1RmnUT or http:\/\/j.mp\/1RmnUT.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "rawModeData": ""
+        },
+        {
+            "id": "a1fce931c69ffec2822962381836b0b6",
+            "name": "Get Link Lookup",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/link\/lookup",
+            "description": "Get link lookup.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "url",
+                    "description": "one or more long URLs to lookup.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "rawModeData": ""
+        },
+        {
+            "id": "c19fc1c120202635f8eb03e20d3963e2",
+            "name": "Get Shorten",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/shorten",
+            "description": "Get shorten.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "domain",
+                    "description": "restrict results to this web domain (like bitly.com).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "format",
+                    "description": "json, xml, txt. Default: json.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "longUrl",
+                    "description": "a long URL to be shortened (example: http:\/\/betaworks.com\/).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "rawModeData": ""
+        },
+        {
+            "id": "aabe755773a5f43aa3ab63cc6fb95ac3",
+            "name": "Get User Link Edit",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/link_edit",
+            "description": "Get user link edit.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "archived",
+                    "description": "indicating whether or not link is to be archived.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "clear_deeplinks",
+                    "description": "indicating that all deeplinks should be removed form the bitlink",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "deeplinks",
+                    "description": "urlencoded json array of deeplink items",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "edit",
+                    "description": "a comma separated string of fields to be edited. ie: to edit the note field you also need to pass edit=note.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "link",
+                    "description": "Successful response",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "note",
+                    "description": "a description of, or note about, this Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "private",
+                    "description": "boolean true or false indicating privacy setting (defaults to user-level setting).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "title",
+                    "description": "the title of this Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "user_ts",
+                    "description": "timestamp as an integer epoch.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "rawModeData": ""
+        },
+        {
+            "id": "7f6226a3580de8152c9ee1cbf60d79f6",
+            "name": "Get User Link Lookup",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/link_lookup",
+            "description": "Get user link lookup.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "link",
+                    "description": "Successful response",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "url",
+                    "description": "one or more long URLs to lookup.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "rawModeData": ""
+        },
+        {
+            "id": "c436fff355409e110e9da735de80f8ee",
+            "name": "Get User Link Save",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/link_save",
+            "description": "Get user link save.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "deeplinks",
+                    "description": "urlencoded json array of deeplink items",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "domain",
+                    "description": "restrict results to this web domain (like bitly.com).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "longUrl",
+                    "description": "a long URL to be shortened (example: http:\/\/betaworks.com\/).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "note",
+                    "description": "a description of, or note about, this Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "private",
+                    "description": "boolean true or false indicating privacy setting (defaults to user-level setting).",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "title",
+                    "description": "the title of this Bitlink.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "user_ts",
+                    "description": "timestamp as an integer epoch.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "rawModeData": ""
+        },
+        {
+            "id": "e9998bb056d35b103268ebd5e182cb60",
+            "name": "Get User Save Custom Domain Keyword",
+            "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/save_custom_domain_keyword",
+            "description": "Get user save custom domain keyword.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "keyword_link",
+                    "description": "the Custom Bitlink (short domain and keyword combination) to set",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "overwrite",
+                    "description": "Ovewrite existing entry if one exists. Default: false.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "target_link",
+                    "description": "the Bitlink the specified keyword will map to (as returned from \/v3\/shorten)",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "rawModeData": ""
+        }
+    ]
+}
