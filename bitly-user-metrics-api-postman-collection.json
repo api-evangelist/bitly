@@ -1,5 +1,5 @@
 {
-    "id": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+    "id": "dabad59a7773b88f783bcc78a4ab2a24",
     "name": "Bitly User Metrics API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "6d8cdd0f7db1f5fdb1c2a00c8bcd602b",
+            "id": "1c3f7d4bd851fb52110a932bf3b6034a",
             "name": "User Clicks",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/clicks",
             "description": "Returns the aggregate number of clicks on all of the authenticated users Bitlinks.",
@@ -79,11 +79,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         },
         {
-            "id": "de155ca3b5c9748d7075c9a25b70179c",
+            "id": "2a875ceda9964ca8d7f82667be027a84",
             "name": "User Countries",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/countries",
             "description": "Returns aggregate metrics about the countries referring click traffic to all of the authenticated users Bitlinks.",
@@ -145,11 +145,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         },
         {
-            "id": "84201cc88246bb9f30a2c3d00238940c",
+            "id": "7a321b996d4c185710f4026d339ff37c",
             "name": "User Popular Earned By Clicks",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_earned_by_clicks",
             "description": "Returns the top links to your tracking domain (or domains) created by users not associated with your account, ordered by clicks.",
@@ -211,11 +211,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         },
         {
-            "id": "954a9b83c4177a2f6222c68cee6065a1",
+            "id": "06aa1e565c0497e642dba1587dedf778",
             "name": "User Popular Earned By Shortens",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_earned_by_shortens",
             "description": "Returns the top links to your tracking domain (or domains) created by users not associated with your account, ordered by shortens.",
@@ -277,11 +277,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         },
         {
-            "id": "953d96eaee593c2cf53d24c218889147",
+            "id": "5f1cecf17e080342fd9ee7f0c6c81ef4",
             "name": "User Popular Links",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_links",
             "description": "Returns the authenticated users most-clicked Bitlinks (ordered by number of clicks) in a given time period.",
@@ -336,11 +336,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         },
         {
-            "id": "bb62e4c86837c7186bf92d0179440fe6",
+            "id": "f399841861c8b3689c4f44a5b4d1cfae",
             "name": "User Popular Owned By Clicks",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_owned_by_clicks",
             "description": "Returns the top links to your tracking domain (or domains) created by you or your subaccounts ordered by clicks.",
@@ -409,11 +409,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         },
         {
-            "id": "3b2dd9737a06ec67b457b41fd6d794a6",
+            "id": "c72a26e6c687bd29f083ccdac881b092",
             "name": "User Popular Owned by Shortens",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/popular_owned_by_shortens",
             "description": "Returns the top links to your tracking domain (or domains) created by you or your subaccounts ordered by number of shortens.",
@@ -482,11 +482,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         },
         {
-            "id": "46afb2975ffa14a6e8c3eefef2a58d94",
+            "id": "cef994d231db93daba3217707dbf1f6a",
             "name": "User Referrers",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/referrers",
             "description": "Returns aggregate metrics about the pages referring click traffic to all of the authenticated users Bitlinks.",
@@ -548,11 +548,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         },
         {
-            "id": "fa8ebd08fce65a8bdfbdfec321d57ca1",
+            "id": "1e6a71b99e0e36ab9580a13374cbc997",
             "name": "User Referring Domains",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/referring_domains",
             "description": "eturns aggregate metrics about the domains referring click traffic to all of the authenticated users Bitlinks. If the user is a master account, or is a subaccount with full_reports permission, the user may choose to view the metrics of any account belonging to the master account.",
@@ -628,11 +628,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         },
         {
-            "id": "b189dc0aed563535f8b5f2f6f825e10d",
+            "id": "707bb035ca9c150c9212e9242b730c74",
             "name": "User Shorten Counts",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/shorten_counts",
             "description": "Returns the number of Bitlinks created in a given time period by the authenticated user.",
@@ -701,7 +701,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "a2f587b799da2f8e8f9bd8ae129ea5fe",
+            "collectionId": "dabad59a7773b88f783bcc78a4ab2a24",
             "rawModeData": ""
         }
     ]
