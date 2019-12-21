@@ -1,5 +1,5 @@
 {
-    "id": "ac920607bea194a06e6ad68c33cfcc66",
+    "id": "003ee616beed4d870c277d419cb13eb1",
     "name": "Bitly",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "e7512403620b80df9d2c97e0039077b9",
+            "id": "edf8aa28d764b6196516a1fa61b95bc7",
             "name": "Get Shorten",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/shorten",
             "description": "Given a long URL, returns a bitly short URL.",
@@ -51,11 +51,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "189f665f71606d14dbcd9bda96fbe76e",
+            "id": "c1e368e4e0fb30b2ee11690e222b9c8c",
             "name": "Get Expand",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/expand",
             "description": "Given a bitly URL or hash (or multiple), returns the target (long) URL.",
@@ -96,11 +96,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "62888bd97ae18d33a21e4b264ca3bfc8",
+            "id": "d12d80309163e4337f7a7242e76b3c11",
             "name": "Get Link Lookup",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/link\/lookup",
             "description": "This is used to query for a bitly link based on a long URL.",
@@ -134,11 +134,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "d86e4d10029bcad1567c528eb09d1c0c",
+            "id": "32018f2024b263ace7fbd59fcdd7421b",
             "name": "Get Info",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/info",
             "description": "This is used to return the page title for a given bitly link.",
@@ -179,11 +179,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "d6f45ec1db108a2cff9f2d8cf574e49d",
+            "id": "146f150edf71d17341e83f4494bdd9d1",
             "name": "Get User Info",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/user\/info",
             "description": "Return information about a user.",
@@ -217,11 +217,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "e8839d3ef01660e8d1f0c300f4b3a745",
+            "id": "ac1fe1f0ba0904a42fca9fedd522b96c",
             "name": "Get User Link History",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/user\/link_history",
             "description": "Returns entries from a user's link history in reverse chronological order.",
@@ -276,11 +276,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "3d7d7e8136400bebd57a26c568a28b64",
+            "id": "41082317a769cf0628356abb5d8856d5",
             "name": "Get User Popular Links",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/user\/popular_links",
             "description": "Returns the authenticated user's most-clicked bitly links (ordered by number of clicks) in a given time period.",
@@ -342,11 +342,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "3af59a779b478873721c249e06d7b169",
+            "id": "a2331234ea7be2b92e85f31f2fa16722",
             "name": "Get Link Clicks",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/link\/clicks",
             "description": "Returns entries from a user's link history in reverse chronological order.",
@@ -415,11 +415,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "2c66f7725ed0b227196636a1f1b9cd16",
+            "id": "f1519de8205611f664902682fd54b223",
             "name": "Get Link Countries",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/link\/countries",
             "description": "Returns metrics about the countries referring click traffic to a single bitly link.",
@@ -488,11 +488,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "0dc41618c2d0443da14fb132897337bd",
+            "id": "4bdd2e41cba6e2a8ee17677ae2c8cf7e",
             "name": "Get Link Referrers",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/link\/referrers",
             "description": "Returns metrics about the pages referring click traffic to a single bitly link.",
@@ -561,11 +561,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "520f0beecd11b9b5b5810125b38e9866",
+            "id": "1ad21bbfdc13f502308fd939fd69c413",
             "name": "Get Link Shares",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/link\/shares",
             "description": "Returns metrics about a shares of a single link.",
@@ -634,11 +634,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "6d20f393b97914e63d961215de4ecc28",
+            "id": "83538b0a4066e25b1a58a4cd9adbb3cc",
             "name": "Get Search",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/search",
             "description": "Search links receiving clicks across bitly by content, language, location, and more.",
@@ -707,11 +707,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "196379ecc8bb698102ac94e7063d2c17",
+            "id": "31d4968338b5fcee485e89bdad73a710",
             "name": "Get Realtime Bursting Phrases",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/realtime\/bursting_phrases",
             "description": "Returns phrases that are receiving an uncharacteristically high volume of click traffic, and the individual links (hashes) driving traffic to pages containing these phrases.",
@@ -738,11 +738,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "4e402208d8bfd46a54cb709555651efc",
+            "id": "2a50b124b49a5404de7559041dc83e33",
             "name": "Get Realtime Hot Phrases",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/v3\/realtime\/hot_phrases",
             "description": "Returns phrases that are receiving a consistently high volume of click traffic, and the individual links (hashes) driving traffic to pages containing these phrases.",
@@ -769,11 +769,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "f2f11ee2428427be002fdb99afd83da5",
+            "id": "95897d5b1534a67ce6415ec5ac35d913",
             "name": "Query whether a given domain is a valid bitly pro domain. Keep in mind tha\r\nbitly custom short domains are restricted to less than 15 characters in\r\nlength.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bitly_pro_domain",
             "description": "Query whether a given domain is a valid bitly pro domain. Ke...",
@@ -800,11 +800,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "d8c8817713dd143650f5bd1325840b72",
+            "id": "aae160eabe5338e217ffeb8f96ab4fbf",
             "name": "Archive a bundle for the authenticated user. Only a bundle's owner is\r\nallowed to archive a bundle.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/archive",
             "description": "Archive a bundle for the authenticated user. Only a bundle's...",
@@ -831,11 +831,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "cc8b4509744575c0a94733195369f6fd",
+            "id": "e95f9d0c36c68e4d3969a999df1bfc16",
             "name": "Returns a list of public bundles created by a user.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/bundles_by_user",
             "description": "Returns a list of public bundles created by a user.",
@@ -869,11 +869,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "83b9734050d67dd42a91694e083c8b87",
+            "id": "154ed4bdf737f8ac73b27fd1873375e9",
             "name": "Clone a bundle for the authenticated user.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/clone",
             "description": "Clone a bundle for the authenticated user.",
@@ -900,11 +900,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "73a4b827ada50b049511869e75303df2",
+            "id": "b87e11dd1299771f5e56520bd812c823",
             "name": "Add a collaborator to a bundle.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/collaborator_add",
             "description": "Add a collaborator to a bundle.",
@@ -938,11 +938,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "9fc0c36d3c1f17d254d5f8d1a6ef0a88",
+            "id": "bd3e265a1f8a66cb612b05b4c19612a7",
             "name": "Remove a collaborator from a bundle.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/collaborator_remove",
             "description": "Remove a collaborator from a bundle.",
@@ -976,11 +976,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "d8b72efc3025fc697d074beb7c7dcea6",
+            "id": "7c3c9acbec61ff32796172bb4da4eff4",
             "name": "Returns information about a bundle.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/contents",
             "description": "Returns information about a bundle.",
@@ -1014,11 +1014,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "35b8472b69af6d47cad2603c0f7e743a",
+            "id": "f0ecd181a25068b6d7afb4735aa05457",
             "name": "Create a new bundle for the authenticated user.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/create",
             "description": "Create a new bundle for the authenticated user.",
@@ -1059,11 +1059,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "161c073e1310c18baf73305fe52df1f6",
+            "id": "272dd14c9ce890df37264df2e3a2e088",
             "name": "Edit a bundle for the authenticated user.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/edit",
             "description": "Edit a bundle for the authenticated user.",
@@ -1132,11 +1132,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "25b0d17b1983731795d7d5633df87796",
+            "id": "c86f161f81cc6700d0de12800d35fad0",
             "name": "Adds a link to a bitly bundle. Links are automatically added to the top (position 0) of a bundle.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/link_add",
             "description": "Adds a link to a bitly bundle. Links are automatically added...",
@@ -1177,11 +1177,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "edbb8b172e7fd48ba25fe2f9b63c50f8",
+            "id": "7678cd4c95b97bfa03fb49295813e4c3",
             "name": "Add a comment to bundle item.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/link_comment_add",
             "description": "Add a comment to bundle item.",
@@ -1222,11 +1222,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "f7649b498ce4d0a825222c50300cbc61",
+            "id": "64110a83147ac1ae64749a4f45cc70e5",
             "name": "Edit a comment.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/link_comment_edit",
             "description": "Edit a comment.",
@@ -1274,11 +1274,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "4ae0ac052391b8859b42b42cce213240",
+            "id": "599750385c62189d760440975a1f2e14",
             "name": "Remove a comment from a bundle item. Only the original commenter and the\r\nbundles owner may perform this action.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/link_comment_remove",
             "description": "Remove a comment from a bundle item. Only the original comme...",
@@ -1319,11 +1319,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "ba302689057f8573648961ebb5cc1e94",
+            "id": "d43e1e9706b57210518827f7c5b0bfe2",
             "name": "Edit the title for a link.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/link_edit",
             "description": "Edit the title for a link.",
@@ -1378,11 +1378,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "7fecab7343ef13b97acc20badc18f153",
+            "id": "9963707f8b47701fd06c8d7fe2a9c3e1",
             "name": "Remove a link from a bitly bundle",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/link_remove",
             "description": "Remove a link from a bitly bundle",
@@ -1416,11 +1416,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "c9d86377f462bc8af93c6a486202663e",
+            "id": "a9ec4cabc462d09d28de2815051f7fb2",
             "name": "Change the position of a link in a bitly bundle.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/link_reorder",
             "description": "Change the position of a link in a bitly bundle.",
@@ -1461,11 +1461,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "75b0c217b3b70fe9cbc2b5c666533ec4",
+            "id": "47082e2a49eb8205c02ac8ceca501f02",
             "name": "Removes a pending\/invited collaborator from a bundle.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/pending_collaborator_remove",
             "description": "Removes a pending\/invited collaborator from a bundle.",
@@ -1499,11 +1499,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "4fbfbc9c42c91c00ea9f0b2591c32fbe",
+            "id": "c64523e87846c50a5c554c3487bf504f",
             "name": "Re-order the links in a bundle.\r\nThe link parameter should be repeated for each link to be reordered, and each link should be given in the order in which it should appear in the bundle.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/reorder",
             "description": "Re-order the links in a bundle.\r\nThe link parameter should be...",
@@ -1537,11 +1537,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "837ec36cc0220af534f81ae159f67627",
+            "id": "7e6499d7ac6bbdc05c8bfd745c0e9190",
             "name": "Get the number of views for a bundle.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/bundle\/view_count",
             "description": "Get the number of views for a bundle.",
@@ -1568,11 +1568,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "4a3df99d1c21f40d22f3b6ceb61d4cf4",
+            "id": "c864b1fe29ad631801873b665942fd65",
             "name": "Given a bitly URL or hash (or multiple), returns the target (long) URL.\r\nNote: either shortUrl or hash must be given as a parameter.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/expand",
             "description": "Given a bitly URL or hash (or multiple), returns the target ...",
@@ -1606,11 +1606,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "0251239011912917deaf106fd67eda85",
+            "id": "9cc488060d066734fc07f9222c0a178d",
             "name": "Returns a specified number of \"high-value\" bitly links that are popular\r\nacross bitly at this particular moment.\r\n\r\nDeprecated endpoint.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/highvalue",
             "description": "Returns a specified number of \"high-value\" bitly links that ...",
@@ -1637,11 +1637,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "85275088e9e2be6faccc7dbcb8d9906f",
+            "id": "11a283ab61d2f861042781cf06dbd6f8",
             "name": "Returns the detected categories for a document, in descending order of\r\nconfidence.\r\n\r\nDeprecated endpoint.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/category",
             "description": "Returns the detected categories for a document, in descendin...",
@@ -1668,11 +1668,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "3ef6af44d3598bd08751f97345679634",
+            "id": "1a63de39500c2ebe3eacee0d04e14eef",
             "name": "Returns the \"main article\" from the linked page, as determined by the conten\r\nextractor, in either HTML or plain text format.\r\n\r\nDeprecated endpoint.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/content",
             "description": "Returns the \"main article\" from the linked page, as determin...",
@@ -1706,11 +1706,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "bc0793061fc056342d8c5644f7aac2c4",
+            "id": "720b3abe09bdd7b1d97dcf7c986eb5d1",
             "name": "Returns users who have encoded this link (optionally only those in the\r\nrequesting user's social graph).\r\nNote: Some users may not be returned from this call depending on link\r\nprivacy settings.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/encoders",
             "description": "Returns users who have encoded this link (optionally only th...",
@@ -1758,11 +1758,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "ebbc55b2a5361ba274396a30ef3ec9ab",
+            "id": "04db1d83a3e9090fa63ad55faede17f0",
             "name": "Returns the number of users who have shortened (encoded) a single bitly link.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/encoders_count",
             "description": "Returns the number of users who have shortened (encoded) a s...",
@@ -1789,11 +1789,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "7b264d1580c558d14cbbe7cd73aa9e88",
+            "id": "1540ec9f07b339cfa9a909beb7037f1d",
             "name": "Returns the significant languages for the bitly link. Note that languages\r\nare highly dependent upon activity (clicks) occurring on the bitly link.\r\nIf there have not been clicks on a bitly link within the last 24 hours, i\r\nis possible that language ",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/language",
             "description": "Returns the significant languages for the bitly link. Note t...",
@@ -1820,11 +1820,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "917c4368b4548c746bd3892e60d1b270",
+            "id": "7be74efc04c09cd33b3fdf03b1f8eefe",
             "name": "Returns the significant locations for the bitly link or None if locations\r\ndo not exist. Note that locations are highly dependent upon activity\r\n(clicks) occurring on the bitly link. If there have not been clicks on a\r\nbitly link within the last 24 h",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/location",
             "description": "Returns the significant locations for the bitly link or None...",
@@ -1851,11 +1851,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "e809d8ab085dd096342b7917df2180a5",
+            "id": "a838a281179661b22fb7f7911fb38ade",
             "name": "This is used to query for a bitly link based on a long URL.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/lookup",
             "description": "This is used to query for a bitly link based on a long URL.\r\n",
@@ -1882,11 +1882,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "7566afc76659d318e8cfa30763014c49",
+            "id": "a4b2abfc8e92f8df454f9e3d0264313b",
             "name": "Returns metrics about the pages referring click traffic to a single bitly\r\nlink, grouped by referring domain.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/referrers_by_domain",
             "description": "Returns metrics about the pages referring click traffic to a...",
@@ -1948,11 +1948,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "8a8258ef8445b0ff71f991b022d807cc",
+            "id": "b1c29fa60d9f3ec29710ab340cd13b44",
             "name": "Returns metrics about a shares of a single link.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/shares",
             "description": "Returns metrics about a shares of a single link.\r\n",
@@ -2021,11 +2021,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "5812c9b7ed9da2298be0c2592abfd895",
+            "id": "4831efa800586c04e3db42d47085e3a7",
             "name": "Returns the \"social score\" for a specified bitly link. Note that the social\r\nscore are highly dependent upon activity (clicks) occurring on the bitly\r\nlink. If there have not been clicks on a bitly link within the last 24\r\nhours, it is possible a soc",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/social",
             "description": "Returns the \"social score\" for a specified bitly link. Note ...",
@@ -2052,11 +2052,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "722366d8171c6d76e620d97bd80b676c",
+            "id": "1f086256e944e16db68421457c4a071d",
             "name": "Returns phrases that are receiving an uncharacteristically high volume of\r\nclick traffic, and the individual links (hashes) driving traffic to pages\r\ncontaining these phrases.\r\n\r\nDeprecated endpoint.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/realtime\/bursting_phrases",
             "description": "Returns phrases that are receiving an uncharacteristically h...",
@@ -2075,11 +2075,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "07b2bf8ecb97b3f6fe373ef04f16928c",
+            "id": "9e5ace4a3519a48e4eee69bb8abbb8b2",
             "name": "Returns the click rate for content containing a specified phrase.\r\n\r\nDeprecated endpoint.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/realtime\/clickrate",
             "description": "Returns the click rate for content containing a specified ph...",
@@ -2106,11 +2106,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "c17abf0a3368fa897b924767b895a1f1",
+            "id": "0a9f21473e4a3374038e2e438ba5db3c",
             "name": "Returns phrases that are receiving a consistently high volume of click\r\ntraffic, and the individual links (hashes) driving traffic to pages\r\ncontaining these phrases.\r\n\r\nDeprecated endpoint.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/realtime\/hot_phrases",
             "description": "Returns phrases that are receiving a consistently high volum...",
@@ -2129,11 +2129,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "ee0becbcc87b2e21b2f2c3f6a7ca8d26",
+            "id": "01db08649a3de33a2d326926798189d5",
             "name": "Search links receiving clicks across bitly by content, language, location,\r\nand more.\r\n\r\nDeprecated endpoint.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/search",
             "description": "Search links receiving clicks across bitly by content, langu...",
@@ -2202,11 +2202,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "2032d451b0880f2bf2a8c44dcde3f586",
+            "id": "072dfb7f9ced1777913708d11a2d18e0",
             "name": "Given a long URL, returns a bitly short URL.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/shorten",
             "description": "Given a long URL, returns a bitly short URL.",
@@ -2240,11 +2240,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "e72ddd5bc95c019175cf709faa627e93",
+            "id": "bd8872e6e03c2aa94a887325bb4d7dcb",
             "name": "Returns all bundles this user has access to (public + private + collaborator).",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/bundle_history",
             "description": "Returns all bundles this user has access to (public + privat...",
@@ -2271,11 +2271,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "00fa3d09c90f1eeb5b271ffddfa5a9b2",
+            "id": "3ddf894ac86f99249b74cdeb1a9009f7",
             "name": "Returns the aggregate number of clicks on all of the authenticated user's\r\nbitly links.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/clicks",
             "description": "Returns the aggregate number of clicks on all of the authent...",
@@ -2337,11 +2337,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "270394a35581291d20eb3484933474df",
+            "id": "e2a7abbc0639827499fc337ed23842d8",
             "name": "Returns aggregate metrics about the countries referring click traffic to all of the authenticated user's bitly links.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/countries",
             "description": "Returns aggregate metrics about the countries referring clic...",
@@ -2403,11 +2403,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "97fe54e777a67b34d1fc4390343a93eb",
+            "id": "12a2e079dd6fc7ad2c6d6da24d523d0b",
             "name": "Return or update information about a user.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/info",
             "description": "Return or update information about a user.",
@@ -2441,11 +2441,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "083d4ea207c11412dd6394f28d4e1631",
+            "id": "42e7dcf86c82873914da74a81fd2a67c",
             "name": "Returns entries from a user's link history in reverse chronological order.\r\nNote: Entries will be sorted by the user_ts field found in the response data.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/link_history",
             "description": "Returns entries from a user's link history in reverse chrono...",
@@ -2535,11 +2535,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "352405ce599c4e47f1bab6c19328303e",
+            "id": "201e9574d2cf98c6a59c7107b5a6db25",
             "name": "This is used to query for a bitly link shortened by the authenticated user\r\nbased on a long URL.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/link_lookup",
             "description": "This is used to query for a bitly link shortened by the auth...",
@@ -2566,11 +2566,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "3e4c5a8c6aaebae2ff1b41568ca06846",
+            "id": "eaed947e77a70e5299771c999bc39f40",
             "name": "Saves a link as a bitmark in a user's history, with optional pre-set metadata.\r\n(Also returns a short URL for that link.)\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/link_save",
             "description": "Saves a link as a bitmark in a user's history, with optional...",
@@ -2611,11 +2611,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "7565c786a13b602b82ce8243e710415b",
+            "id": "6c009b8d3e841055a81d57a53b524672",
             "name": "Returns entries from a user's network history in reverse chronogical order.\r\n(A user's network history includes publicly saved links from Twitter and\r\nFacebook connections.)\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/network_history",
             "description": "Returns entries from a user's network history in reverse chr...",
@@ -2663,11 +2663,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "2e664f5cab56f6d3e8a5e4e800c521a4",
+            "id": "e4b9b05e49b8195cc283eac72243dd5e",
             "name": "Returns the authenticated user's most-clicked bitly links (ordered by number\r\nof clicks) in a given time period.\r\nNote: This replaces the realtime_links endpoint.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/popular_links",
             "description": "Returns the authenticated user's most-clicked bitly links (o...",
@@ -2722,11 +2722,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "bfc12428b6cdd83a7a35c55b6ed9b5c6",
+            "id": "5b9fc3685c219cc79d760e1440dcd82d",
             "name": "Returns aggregate metrics about the pages referring click traffic to all\r\nof the authenticated user's bitly links.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/referrers",
             "description": "Returns aggregate metrics about the pages referring click tr...",
@@ -2788,11 +2788,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "d2cd1ac6489057a32abb141dc52ec6eb",
+            "id": "f7dd860dd2d6c1d2ed0577807c70260e",
             "name": "Returns aggregate metrics about the domains referring click traffic to all of the authenticated user's bitly links.\r\nIf the user is a master account, or is a subaccount with full_reports permission,\r\nthe user may choose to view the metrics of any acc",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/referring_domains",
             "description": "Returns aggregate metrics about the domains referring click ...",
@@ -2854,11 +2854,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "8340a6040953e118f20ea57b096bc6ec",
+            "id": "8d8c6dc9f9b4632e18a23e43b4d34f4d",
             "name": "Returns the number of shares by the authenticated user in a given time period.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/share_counts",
             "description": "Returns the number of shares by the authenticated user in a ...",
@@ -2920,11 +2920,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "9516dd942665427cadb5e9af729a6fc1",
+            "id": "31860a281f0cddf78dc9d8e596304a8c",
             "name": "Returns the number of links shortened (encoded) in a given time period by\r\nthe authenticated user.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/shorten_counts",
             "description": "Returns the number of links shortened (encoded) in a given t...",
@@ -2986,11 +2986,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "ea639e76a794ffbc93cc0655b5aeda66",
+            "id": "79516e0fea66a6ce450b1a5d1257cecf",
             "name": "Returns the number of clicks on bitly links pointing to the specified\r\ntracking domain that have occured in a given time period.\r\nUsers can register a tracking domain from their bitly settings page.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/tracking_domain_clicks",
             "description": "Returns the number of clicks on bitly links pointing to the ...",
@@ -3059,11 +3059,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "3420d1133dc9096fd5ddb4a4c7c55b61",
+            "id": "4d2723c7f6c9f39602e5590a06c29562",
             "name": "Returns a list of tracking domains a user has configured.",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/tracking_domain_list",
             "description": "Returns a list of tracking domains a user has configured.",
@@ -3082,11 +3082,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "22f2e1a5418b6db4720a3920ba0bcfb3",
+            "id": "d8bdd13a03d140d0ed6acc485933d5e4",
             "name": "Returns the number of links, pointing to a specified tracking domain, shortened\r\n(encoded) in a given time period by all bitly users.\r\nUsers can register a tracking domain from their bitly settings page.\r\n",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/tracking_domain_shorten_counts",
             "description": "Returns the number of links, pointing to a specified trackin...",
@@ -3155,11 +3155,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "e9a36725b07e58606d20833a5c97314a",
+            "id": "8aa1b1a89f18bd92ee660558741bc6db",
             "name": "",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/info",
             "description": "This is used to return the page title for a given bitly link.\n",
@@ -3200,11 +3200,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "56f30ffbe28aa8bb2022f0fd28578db7",
+            "id": "eacc4ec141936d8c5a1f5974554bd5ef",
             "name": "",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/clicks",
             "description": "Returns the number of clicks on a single bitly link.\nNote: historical data is stored hourly beyond the most recent 60 minutes.\nIf a unit_reference_ts is specified, unit cannot be minute.\n",
@@ -3273,11 +3273,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "18f4c7afdfd9e5b1fccc7ed63d8b7f4a",
+            "id": "52b54885a99d17ab86f450f273d1cd64",
             "name": "",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/countries",
             "description": "Returns metrics about the countries referring click traffic to a single bitly link.",
@@ -3346,11 +3346,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "d49e41d7d8d1db72b3e70b3287a5f1bc",
+            "id": "8408faf91c1291908eb6122a46326f34",
             "name": "",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/info",
             "description": "Returns metadata about a single bitly link.\n",
@@ -3377,11 +3377,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "e873c0fdba5007dab6f9aa6468b71ccf",
+            "id": "75f4743d0ce62938d7fc9f19db7d5b48",
             "name": "",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/referrers",
             "description": "Returns metrics about the pages referring click traffic to a single bitly link.\n",
@@ -3443,11 +3443,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "8c3ba8faba6021851207d190795a34b4",
+            "id": "e60ea382dfb938221464d9524ad8f368",
             "name": "",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/link\/referring_domains",
             "description": "Returns metrics about the domains referring click traffic to a single bitly link.\n",
@@ -3509,11 +3509,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         },
         {
-            "id": "4092c242fced0c72e98a0f66018a994a",
+            "id": "5fc5c1b21f3bd2cbbdd9867cdf640b72",
             "name": "",
             "url": "http:\/\/api-ssl.bitly.com\/v3\/user\/link_edit",
             "description": "Changes link metadata in a user's history.\nBecause link metadata is modified asynchronously, it may take a few moments\nfor changes made via this API method to update.\n",
@@ -3582,7 +3582,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "ac920607bea194a06e6ad68c33cfcc66",
+            "collectionId": "003ee616beed4d870c277d419cb13eb1",
             "rawModeData": ""
         }
     ]
