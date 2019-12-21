@@ -1,5 +1,5 @@
 {
-    "id": "6de695e22159bd83a7010d86ca3d0489",
+    "id": "78ed31a64dd6a91b2ef624c625628ef8",
     "name": "Bitly Link API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "70baf88ef998949cc606bb1171b5b7a4",
+            "id": "95a8d441b864f0f2139c19d25d44d489",
             "name": "Get Search",
             "url": "httpsapi-ssl.bitly.com\/v3\/search",
             "description": "Get search.",
@@ -86,11 +86,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "collectionId": "78ed31a64dd6a91b2ef624c625628ef8",
             "rawModeData": ""
         },
         {
-            "id": "ae4de0db7ed657c733a996e47257fad5",
+            "id": "5e2ad741beb546c23fb9d3029d95d990",
             "name": "Get Expand",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/expand",
             "description": "Get expand.",
@@ -131,11 +131,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "collectionId": "78ed31a64dd6a91b2ef624c625628ef8",
             "rawModeData": ""
         },
         {
-            "id": "a9f83da1f795e8ae7f62e25a483c125b",
+            "id": "3d0c8636b24eb582dc182b16c4933ba0",
             "name": "Get Info",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/info",
             "description": "Get info.",
@@ -176,11 +176,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "collectionId": "78ed31a64dd6a91b2ef624c625628ef8",
             "rawModeData": ""
         },
         {
-            "id": "a1fce931c69ffec2822962381836b0b6",
+            "id": "cf156205e307180aa5a9b88ba932c544",
             "name": "Get Link Lookup",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/link\/lookup",
             "description": "Get link lookup.",
@@ -207,11 +207,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "collectionId": "78ed31a64dd6a91b2ef624c625628ef8",
             "rawModeData": ""
         },
         {
-            "id": "c19fc1c120202635f8eb03e20d3963e2",
+            "id": "ab152da379439708905b39cc4dc2f935",
             "name": "Get Shorten",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/shorten",
             "description": "Get shorten.",
@@ -252,11 +252,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "collectionId": "78ed31a64dd6a91b2ef624c625628ef8",
             "rawModeData": ""
         },
         {
-            "id": "aabe755773a5f43aa3ab63cc6fb95ac3",
+            "id": "8490d37ce20a2959cb2a31640104bbc2",
             "name": "Get User Link Edit",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/link_edit",
             "description": "Get user link edit.",
@@ -339,11 +339,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "collectionId": "78ed31a64dd6a91b2ef624c625628ef8",
             "rawModeData": ""
         },
         {
-            "id": "7f6226a3580de8152c9ee1cbf60d79f6",
+            "id": "b8d3f3c67d4fce79e138e7685e565b1a",
             "name": "Get User Link Lookup",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/link_lookup",
             "description": "Get user link lookup.",
@@ -377,11 +377,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "collectionId": "78ed31a64dd6a91b2ef624c625628ef8",
             "rawModeData": ""
         },
         {
-            "id": "c436fff355409e110e9da735de80f8ee",
+            "id": "21280035f7ff1001eef8f450eabec930",
             "name": "Get User Link Save",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/link_save",
             "description": "Get user link save.",
@@ -450,11 +450,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "collectionId": "78ed31a64dd6a91b2ef624c625628ef8",
             "rawModeData": ""
         },
         {
-            "id": "e9998bb056d35b103268ebd5e182cb60",
+            "id": "65c3c3fafb2cb6fd033bb4a52b3bec79",
             "name": "Get User Save Custom Domain Keyword",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/save_custom_domain_keyword",
             "description": "Get user save custom domain keyword.",
@@ -495,7 +495,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "6de695e22159bd83a7010d86ca3d0489",
+            "collectionId": "78ed31a64dd6a91b2ef624c625628ef8",
             "rawModeData": ""
         }
     ]
