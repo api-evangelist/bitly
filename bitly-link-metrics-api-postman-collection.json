@@ -1,5 +1,5 @@
 {
-    "id": "f11061cd2fee199f7cad71d60e12068a",
+    "id": "03af00bf66ec6662c24b377eb5d55845",
     "name": "Bitly Link Metrics API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "4a8d5e4ad354a0363cdfe08c7c8707d0",
+            "id": "b2d58a03a59366e8a3720e076bfe26c1",
             "name": "Link Clicks",
             "url": "httpsapi-ssl.bitly.com\/v3\/link\/clicks",
             "description": "Returns the number of clicks on a single Bitlink.",
@@ -86,11 +86,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "collectionId": "03af00bf66ec6662c24b377eb5d55845",
             "rawModeData": ""
         },
         {
-            "id": "ac8716e1390ffe5c0fa52c3bf166e02a",
+            "id": "05700a07c2189791fac93b0eb113a075",
             "name": "Link Clicks by Country",
             "url": "httpsapi-ssl.bitly.com\/v3\/link\/countries",
             "description": "Returns metrics about the countries referring click traffic to a single Bitlink.",
@@ -145,11 +145,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "collectionId": "03af00bf66ec6662c24b377eb5d55845",
             "rawModeData": ""
         },
         {
-            "id": "d7e3e7e48ae599313475f6393f27aee5",
+            "id": "eb1d6820e03aa0ffe73fb127ab4e592b",
             "name": "User Who Encoded Link",
             "url": "httpsapi-ssl.bitly.com\/v3\/link\/encoders",
             "description": "Returns users who have encoded this long URL (optionally only those in the requesting users social graph).",
@@ -204,11 +204,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "collectionId": "03af00bf66ec6662c24b377eb5d55845",
             "rawModeData": ""
         },
         {
-            "id": "b54ce56d78f0bba0ef675c5e376dc392",
+            "id": "2a029db69fa2c2a348374fa940f04087",
             "name": "Users Who Encoded Link",
             "url": "httpsapi-ssl.bitly.com\/v3\/link\/encoders_by_count",
             "description": "Returns users who have encoded this link (optionally only those in the requesting users social graph), sorted by the number of clicks on each encoding users link.",
@@ -263,11 +263,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "collectionId": "03af00bf66ec6662c24b377eb5d55845",
             "rawModeData": ""
         },
         {
-            "id": "256ab535878534fbf9a6005f310bf86b",
+            "id": "b53431d7c74ec204ff004f8e2296f8f3",
             "name": "Number of Encoders",
             "url": "httpsapi-ssl.bitly.com\/v3\/link\/encoders_count",
             "description": "Returns the number of users who have shortened (encoded) a single Bitlink.",
@@ -294,11 +294,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "collectionId": "03af00bf66ec6662c24b377eb5d55845",
             "rawModeData": ""
         },
         {
-            "id": "377de94e0616f7fabd91de70ef1bc073",
+            "id": "854001f98b9682e3411cda8d7d5ad3ab",
             "name": "Link Referrers",
             "url": "httpsapi-ssl.bitly.com\/v3\/link\/referrers",
             "description": "Returns metrics about the pages referring click traffic to a single Bitlink.",
@@ -353,11 +353,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "collectionId": "03af00bf66ec6662c24b377eb5d55845",
             "rawModeData": ""
         },
         {
-            "id": "26941ee84c7dcff97155bba478273ba2",
+            "id": "51854f1d98ff4cf58bd4f098d58ec90f",
             "name": "Link Referrers by Domain",
             "url": "httpsapi-ssl.bitly.com\/v3\/link\/referrers_by_domain",
             "description": "Returns metrics about the pages referring click traffic to a single Bitlink, grouped by referring domain.",
@@ -412,7 +412,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "f11061cd2fee199f7cad71d60e12068a",
+            "collectionId": "03af00bf66ec6662c24b377eb5d55845",
             "rawModeData": ""
         }
     ]
