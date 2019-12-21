@@ -1,5 +1,5 @@
 {
-    "id": "eb1a29a90ad4a2c55e7f056d75e3123a",
+    "id": "f7a5e47e4ed01dacb68d4c0b51bbe9f8",
     "name": "Bitly Organization Metric API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "a32119c5f3f2125d1816f60e85aaf15c",
+            "id": "5bd4ccf2d1de27d3ce155867143831bf",
             "name": "Organization Brand Messages",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/brand_messages",
             "description": "Returns the top Bitlinks created by you with traffic, that did not also have non-organization traffic in the same time period, ordered by clicks.",
@@ -72,11 +72,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "collectionId": "f7a5e47e4ed01dacb68d4c0b51bbe9f8",
             "rawModeData": ""
         },
         {
-            "id": "8b442ce0eafd698be34d050837b7f3c7",
+            "id": "2cf7962a15555e594d2d6156b6b9755d",
             "name": "Organization Clicks",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/clicks",
             "description": "Returns the number of clicks on Bitlinks created by your organization or by other Bitly users that point to your domains.",
@@ -145,11 +145,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "collectionId": "f7a5e47e4ed01dacb68d4c0b51bbe9f8",
             "rawModeData": ""
         },
         {
-            "id": "682196d57fdeca8e63a893995f373f26",
+            "id": "02eb1eb69be2c5ef7ea2742ce5263b0b",
             "name": "Organization Intersecting Links",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/intersecting_links",
             "description": "Returns the top links shared by both your audience and by your account, ordered by clicks.",
@@ -211,11 +211,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "collectionId": "f7a5e47e4ed01dacb68d4c0b51bbe9f8",
             "rawModeData": ""
         },
         {
-            "id": "1976626113bb6c069546ae9000f97596",
+            "id": "5402045076211c410061a21af6cf0224",
             "name": "Organization Leaderboard",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/leaderboard",
             "description": "Returns the top-performing organization members ordered by clicks or shortens.",
@@ -284,11 +284,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "collectionId": "f7a5e47e4ed01dacb68d4c0b51bbe9f8",
             "rawModeData": ""
         },
         {
-            "id": "430ea05570aeb19d3cc455b2bef2b271",
+            "id": "a3d9b83b3ecd1930edf13adef50d1676",
             "name": "Organization Missed Opportunities",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/missed_opportunities",
             "description": "Returns the top links shared by your audience, but not by you, ordered by clicks.",
@@ -357,11 +357,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "collectionId": "f7a5e47e4ed01dacb68d4c0b51bbe9f8",
             "rawModeData": ""
         },
         {
-            "id": "40af0dc09dcba6c4275a596f7620b3bf",
+            "id": "ff9f8cdc623fd7992b75f7026cca0e36",
             "name": "Organization Popular Links",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/popular_links",
             "description": "Returns the top links shared by you or your audience, ordered by clicks",
@@ -423,11 +423,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "collectionId": "f7a5e47e4ed01dacb68d4c0b51bbe9f8",
             "rawModeData": ""
         },
         {
-            "id": "c7c6b751204e30bbf88a953a3df94172",
+            "id": "7962e09df2d2e7797db2ccb9d8b92f31",
             "name": "Organization Shorten Counts",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/organization\/shorten_counts",
             "description": "Returns the number of Bitlinks created by your organization or by other Bitly users that point to your domains.",
@@ -496,7 +496,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "eb1a29a90ad4a2c55e7f056d75e3123a",
+            "collectionId": "f7a5e47e4ed01dacb68d4c0b51bbe9f8",
             "rawModeData": ""
         }
     ]
