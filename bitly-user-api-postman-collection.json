@@ -1,5 +1,5 @@
 {
-    "id": "e5b7acfe1ed700c89a80bf77509cd1e6",
+    "id": "1dda0d17625399513da2093e6a6458f2",
     "name": "Bitly User API",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "626b10ebcff0d62866f0c010990f1322",
+            "id": "5183e57d9f37a56ec27d4dcda7b3d1f1",
             "name": "OAuth App",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/oauth\/app",
             "description": "Return information about an OAuth app.",
@@ -37,11 +37,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "collectionId": "1dda0d17625399513da2093e6a6458f2",
             "rawModeData": ""
         },
         {
-            "id": "142206984f1b9313b63cffd470c8cc84",
+            "id": "eca107533267d2ed99a12749cd20c698",
             "name": "User Info",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/info",
             "description": "Return or update information about a user.",
@@ -75,11 +75,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "collectionId": "1dda0d17625399513da2093e6a6458f2",
             "rawModeData": ""
         },
         {
-            "id": "65744ae7207169d8255e17bbd9c231dd",
+            "id": "29c71a4d22f41483be65b63932bd040b",
             "name": "User Link History",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/link_history",
             "description": "Returns entries from a users link history in reverse chronological order.",
@@ -204,11 +204,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "collectionId": "1dda0d17625399513da2093e6a6458f2",
             "rawModeData": ""
         },
         {
-            "id": "495ca47d0777fe6c648e3a539691651e",
+            "id": "70360fdc62b1bdc313c0a9df91372a42",
             "name": "User Network History",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/network_history",
             "description": "Returns entries from a users network history in reverse chronogical order. (A users network history includes publicly saved links from Twitter and Facebook connections.)",
@@ -256,11 +256,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "collectionId": "1dda0d17625399513da2093e6a6458f2",
             "rawModeData": ""
         },
         {
-            "id": "8f12936b1eb45f3a13a80c41820ab67f",
+            "id": "e435c08aa3779a784a41149825ef1cf4",
             "name": "User Tracking Domain List",
             "url": "httpsapi-ssl.bitly.com\/v3\/v3\/user\/tracking_domain_list",
             "description": "Returns a list of tracking domains a user has configured.",
@@ -287,7 +287,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e5b7acfe1ed700c89a80bf77509cd1e6",
+            "collectionId": "1dda0d17625399513da2093e6a6458f2",
             "rawModeData": ""
         }
     ]
