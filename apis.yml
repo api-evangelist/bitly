@@ -1,0 +1,71 @@
+aid: bitly
+name: Bitly
+description: >-
+  Bitly is a URL shortening and link management platform that enables
+  developers and marketers to create branded short links, generate QR codes,
+  track engagement analytics, and manage link campaigns at scale. The Bitly v4
+  REST API provides programmatic access to link creation, custom domains,
+  groups, campaigns, click metrics, and QR codes using Bearer token
+  authentication.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Links
+  - URL Shortener
+  - QR Codes
+  - Analytics
+  - Marketing
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/bitly/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: bitly:bitly-api
+    name: Bitly API v4
+    description: >-
+      REST API for creating and managing Bitlinks, custom domains, groups,
+      campaigns, QR codes, and click analytics. Authentication uses Bearer
+      tokens issued from Bitly account settings or via OAuth 2.0.
+    humanURL: https://dev.bitly.com/api-reference
+    baseURL: https://api-ssl.bitly.com/v4
+    tags:
+      - Links
+      - URL Shortener
+      - QR Codes
+      - Analytics
+    properties:
+      - type: Documentation
+        url: https://dev.bitly.com/api-reference
+      - type: OpenAPI
+        url: https://dev.bitly.com/v4/v4.json
+      - type: Getting Started
+        url: https://dev.bitly.com/docs/getting-started/introduction
+
+common:
+  - type: Website
+    url: https://bitly.com
+  - type: Documentation
+    url: https://dev.bitly.com
+  - type: API Reference
+    url: https://dev.bitly.com/api-reference
+  - type: Pricing
+    url: https://bitly.com/pages/pricing
+  - type: Sign Up
+    url: https://app.bitly.com/sign_up
+  - type: Login
+    url: https://app.bitly.com/sign_in
+  - type: Authentication
+    url: https://dev.bitly.com/docs/getting-started/authentication
+  - type: Rate Limits
+    url: https://dev.bitly.com/docs/getting-started/rate-limits
+  - type: Support
+    url: https://support.bitly.com
+  - type: Status
+    url: https://bitly.statuspage.io
+  - type: GitHub Organization
+    url: https://github.com/bitly
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
