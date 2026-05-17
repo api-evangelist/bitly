@@ -39,7 +39,7 @@ apis:
         url: https://dev.bitly.com/api-reference
       - type: OpenAPI
         url: https://dev.bitly.com/v4/v4.json
-      - type: Getting Started
+      - type: GettingStarted
         url: https://dev.bitly.com/docs/getting-started/introduction
 
 common:
@@ -47,23 +47,23 @@ common:
     url: https://bitly.com
   - type: Documentation
     url: https://dev.bitly.com
-  - type: API Reference
+  - type: APIReference
     url: https://dev.bitly.com/api-reference
   - type: Pricing
     url: https://bitly.com/pages/pricing
-  - type: Sign Up
+  - type: SignUp
     url: https://app.bitly.com/sign_up
   - type: Login
     url: https://app.bitly.com/sign_in
   - type: Authentication
     url: https://dev.bitly.com/docs/getting-started/authentication
-  - type: Rate Limits
+  - type: RateLimits
     url: https://dev.bitly.com/docs/getting-started/rate-limits
   - type: Support
     url: https://support.bitly.com
-  - type: Status
+  - type: StatusPage
     url: https://bitly.statuspage.io
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/bitly
 
 maintainers:
