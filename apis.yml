@@ -43,6 +43,8 @@ apis:
         url: https://dev.bitly.com/docs/getting-started/introduction
 
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/bitly
   - type: Website
     url: https://bitly.com
   - type: Documentation
