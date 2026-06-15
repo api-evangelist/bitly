@@ -1,0 +1,1090 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly API v4",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bitlinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Shorten a long URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/shorten",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Shorten a long URL"
+        },
+        {
+          "info": {
+            "name": "Expand a Bitlink to its long URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/expand",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Expand a Bitlink to its long URL"
+        },
+        {
+          "info": {
+            "name": "Create a Bitlink with metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Bitlink with metadata"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              }
+            ]
+          },
+          "docs": "Retrieve a Bitlink"
+        },
+        {
+          "info": {
+            "name": "Update a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Bitlink"
+        },
+        {
+          "info": {
+            "name": "Delete a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              }
+            ]
+          },
+          "docs": "Delete a Bitlink"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get clicks for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/clicks",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unit_reference",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get clicks for a Bitlink"
+        },
+        {
+          "info": {
+            "name": "Get summary of clicks for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/clicks/summary",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unit_reference",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get summary of clicks for a Bitlink"
+        },
+        {
+          "info": {
+            "name": "Get engagements (clicks and scans) for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/engagements",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              }
+            ]
+          },
+          "docs": "Get engagements (clicks and scans) for a Bitlink"
+        },
+        {
+          "info": {
+            "name": "Get countries by clicks for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/countries",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get countries by clicks for a Bitlink"
+        },
+        {
+          "info": {
+            "name": "Get cities by clicks for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/cities",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get cities by clicks for a Bitlink"
+        },
+        {
+          "info": {
+            "name": "Get device type breakdown",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/devices",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              }
+            ]
+          },
+          "docs": "Get device type breakdown"
+        },
+        {
+          "info": {
+            "name": "Get referrers for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/referrers",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get referrers for a Bitlink"
+        },
+        {
+          "info": {
+            "name": "Get referring domains for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/referring_domains",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "",
+                "type": "path",
+                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get referring domains for a Bitlink"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Custom Bitlinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a custom back-half",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a custom back-half"
+        },
+        {
+          "info": {
+            "name": "Retrieve a custom Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/:custom_bitlink",
+            "params": [
+              {
+                "name": "custom_bitlink",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a custom Bitlink"
+        },
+        {
+          "info": {
+            "name": "Move a custom keyword to a different Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/:custom_bitlink",
+            "params": [
+              {
+                "name": "custom_bitlink",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Move a custom keyword to a different Bitlink"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List groups for the authenticated user's organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List groups for the authenticated user's organization"
+        },
+        {
+          "info": {
+            "name": "Retrieve a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a group"
+        },
+        {
+          "info": {
+            "name": "Update a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a group"
+        },
+        {
+          "info": {
+            "name": "List Bitlinks in a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/bitlinks",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "modified_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deeplinks",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "domain_deeplinks",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "campaign_guid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channel_guid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "custom_bitlink",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "launchpad_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "encoding_login",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Bitlinks in a group"
+        },
+        {
+          "info": {
+            "name": "Bulk update Bitlinks in a group (e.g. archive, tag)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/bitlinks",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "modified_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deeplinks",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "domain_deeplinks",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "campaign_guid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channel_guid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "custom_bitlink",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "launchpad_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "encoding_login",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk update Bitlinks in a group (e.g. archive, tag)"
+        },
+        {
+          "info": {
+            "name": "List tags for a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/tags",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List tags for a group"
+        },
+        {
+          "info": {
+            "name": "Get group preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/preferences",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get group preferences"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Group Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get clicks for the group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/clicks",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get clicks for the group"
+        },
+        {
+          "info": {
+            "name": "Get countries by group clicks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/countries",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get countries by group clicks"
+        },
+        {
+          "info": {
+            "name": "Get cities by group clicks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/cities",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get cities by group clicks"
+        },
+        {
+          "info": {
+            "name": "Get devices breakdown for group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/devices",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get devices breakdown for group"
+        },
+        {
+          "info": {
+            "name": "Top performing links for group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/links/clicks/top",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Top performing links for group"
+        },
+        {
+          "info": {
+            "name": "QR scan trends over time for group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/codes/scans/over_time",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "QR scan trends over time for group"
+        },
+        {
+          "info": {
+            "name": "Feature usage and limit consumption",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/feature_usage",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Feature usage and limit consumption"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List organizations for the authenticated user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations"
+          },
+          "docs": "List organizations for the authenticated user"
+        },
+        {
+          "info": {
+            "name": "Retrieve an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an organization"
+        },
+        {
+          "info": {
+            "name": "Get organization plan limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid/plan_limits",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get organization plan limits"
+        },
+        {
+          "info": {
+            "name": "Get organization shorten counts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid/shorten_counts",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get organization shorten counts"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Campaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List campaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/campaigns"
+          },
+          "docs": "List campaigns"
+        },
+        {
+          "info": {
+            "name": "Create a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/campaigns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a campaign"
+        },
+        {
+          "info": {
+            "name": "Update a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/campaigns/:campaign_guid",
+            "params": [
+              {
+                "name": "campaign_guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a campaign"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Channels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/channels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a channel"
+        },
+        {
+          "info": {
+            "name": "Update a channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/channels/:channel_guid",
+            "params": [
+              {
+                "name": "channel_guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a channel"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "QR Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate a QR code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a QR code"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "BSDs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List branded short domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bsds"
+          },
+          "docs": "List branded short domains"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
