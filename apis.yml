@@ -53,7 +53,7 @@ common:
     url: https://dev.bitly.com/api-reference
   - type: Pricing
     url: https://bitly.com/pages/pricing
-  - type: SignUp
+  - type: Signup
     url: https://app.bitly.com/sign_up
   - type: Login
     url: https://app.bitly.com/sign_in
