@@ -43,6 +43,14 @@ apis:
         url: https://dev.bitly.com/docs/getting-started/introduction
 
 common:
+  - type: TrustCenter
+    url: security/bitly-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/bitly-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/bitly-domain-security.yml
+  - type: Authentication
+    url: authentication/bitly-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/bitly
   - type: Website
@@ -67,6 +75,8 @@ common:
     url: https://bitly.statuspage.io
   - type: GitHubOrganization
     url: https://github.com/bitly
+  - url: https://bitly.com/blog/
+    type: Blog
 
 maintainers:
   - FN: Kin Lane

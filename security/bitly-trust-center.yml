@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://bitly.com/pages/landing/branded-short-domains-powered-by-bitly?bsd=trust.bitly.com
+url: https://bitly.com/pages/landing/branded-short-domains-powered-by-bitly?bsd=trust.bitly.com
+certifications:
+- SOC 2
+- GDPR
+evidence:
+- source: https://bitly.com/pages/landing/branded-short-domains-powered-by-bitly?bsd=trust.bitly.com
+  keywords:
+  - soc 2
+  - soc2
+  - trust center
+  - gdpr

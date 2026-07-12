@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/bitly-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: |-
+    Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
+    Send as `Authorization: Bearer {token}`.
+  sources:
+  - openapi/bitly-openapi.yml
