@@ -43,6 +43,8 @@ apis:
         url: https://dev.bitly.com/docs/getting-started/introduction
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/bitly-agentic-access.yml
   - type: TrustCenter
     url: security/bitly-trust-center.yml
   - type: VulnerabilityDisclosure
