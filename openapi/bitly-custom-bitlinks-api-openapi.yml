@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Bitly API v4 Bitlinks Custom Bitlinks API
+  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
+
+    organizations, campaigns, channels, QR codes, and click analytics.
+
+
+    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
+
+    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
+
+    spec at https://dev.bitly.com/v4/v4.json.
+
+    '
+  version: 4.0.0
+  contact:
+    name: Bitly API
+    url: https://dev.bitly.com/api-reference
+  license:
+    name: Proprietary
+servers:
+- url: https://api-ssl.bitly.com/v4
+  description: Bitly v4 REST API
+security:
+- bearerAuth: []
+tags:
+- name: Custom Bitlinks
+paths:
+  /custom_bitlinks:
+    post:
+      tags:
+      - Custom Bitlinks
+      summary: Add a custom back-half
+      operationId: createCustomBitlink
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - custom_bitlink
+              - bitlink_id
+              properties:
+                custom_bitlink:
+                  type: string
+                bitlink_id:
+                  type: string
+      responses:
+        '200':
+          description: Created custom bitlink.
+  /custom_bitlinks/{custom_bitlink}:
+    parameters:
+    - name: custom_bitlink
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Custom Bitlinks
+      summary: Retrieve a custom Bitlink
+      operationId: getCustomBitlink
+      responses:
+        '200':
+          description: Custom bitlink.
+    patch:
+      tags:
+      - Custom Bitlinks
+      summary: Move a custom keyword to a different Bitlink
+      operationId: updateCustomBitlink
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bitlink_id:
+                  type: string
+      responses:
+        '200':
+          description: Updated.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
+
+        Send as `Authorization: Bearer {token}`.
+
+        '

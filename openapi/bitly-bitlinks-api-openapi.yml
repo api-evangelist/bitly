@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: Bitly API v4 Bitlinks API
+  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
+
+    organizations, campaigns, channels, QR codes, and click analytics.
+
+
+    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
+
+    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
+
+    spec at https://dev.bitly.com/v4/v4.json.
+
+    '
+  version: 4.0.0
+  contact:
+    name: Bitly API
+    url: https://dev.bitly.com/api-reference
+  license:
+    name: Proprietary
+servers:
+- url: https://api-ssl.bitly.com/v4
+  description: Bitly v4 REST API
+security:
+- bearerAuth: []
+tags:
+- name: Bitlinks
+paths:
+  /shorten:
+    post:
+      tags:
+      - Bitlinks
+      summary: Shorten a long URL
+      operationId: shorten
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - long_url
+              properties:
+                long_url:
+                  type: string
+                  format: uri
+                domain:
+                  type: string
+                group_guid:
+                  type: string
+      responses:
+        '200':
+          description: Shortened bitlink.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bitlink'
+  /expand:
+    post:
+      tags:
+      - Bitlinks
+      summary: Expand a Bitlink to its long URL
+      operationId: expand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bitlink_id
+              properties:
+                bitlink_id:
+                  type: string
+      responses:
+        '200':
+          description: Expanded link.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bitlink_id:
+                    type: string
+                  long_url:
+                    type: string
+                    format: uri
+                  created_at:
+                    type: string
+                    format: date-time
+                  link:
+                    type: string
+                    format: uri
+                  id:
+                    type: string
+  /bitlinks:
+    post:
+      tags:
+      - Bitlinks
+      summary: Create a Bitlink with metadata
+      operationId: createBitlink
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BitlinkCreate'
+      responses:
+        '200':
+          description: Created bitlink.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bitlink'
+  /bitlinks/{bitlink}:
+    parameters:
+    - $ref: '#/components/parameters/Bitlink'
+    get:
+      tags:
+      - Bitlinks
+      summary: Retrieve a Bitlink
+      operationId: getBitlink
+      responses:
+        '200':
+          description: The bitlink.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bitlink'
+    patch:
+      tags:
+      - Bitlinks
+      summary: Update a Bitlink
+      operationId: updateBitlink
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BitlinkUpdate'
+      responses:
+        '200':
+          description: Updated bitlink.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bitlink'
+    delete:
+      tags:
+      - Bitlinks
+      summary: Delete a Bitlink
+      operationId: deleteBitlink
+      responses:
+        '204':
+          description: Deleted.
+components:
+  schemas:
+    BitlinkCreate:
+      type: object
+      required:
+      - long_url
+      properties:
+        long_url:
+          type: string
+          format: uri
+        domain:
+          type: string
+        group_guid:
+          type: string
+        title:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        deeplinks:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Bitlink:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        link:
+          type: string
+          format: uri
+        custom_bitlinks:
+          type: array
+          items:
+            type: string
+        long_url:
+          type: string
+          format: uri
+        archived:
+          type: boolean
+        tags:
+          type: array
+          items:
+            type: string
+        deeplinks:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        references:
+          type: object
+          additionalProperties:
+            type: string
+        title:
+          type: string
+        created_by:
+          type: string
+        client_id:
+          type: string
+        is_deleted:
+          type: boolean
+        launchpad_ids:
+          type: array
+          items:
+            type: string
+        campaign_ids:
+          type: array
+          items:
+            type: string
+    BitlinkUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        archived:
+          type: boolean
+        tags:
+          type: array
+          items:
+            type: string
+        deeplinks:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        long_url:
+          type: string
+          format: uri
+        client_id:
+          type: string
+        custom_bitlinks:
+          type: array
+          items:
+            type: string
+        link:
+          type: string
+          format: uri
+        id:
+          type: string
+        references:
+          type: object
+          additionalProperties:
+            type: string
+  parameters:
+    Bitlink:
+      name: bitlink
+      in: path
+      required: true
+      description: A Bitlink (e.g. `bit.ly/abc123`).
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
+
+        Send as `Authorization: Bearer {token}`.
+
+        '

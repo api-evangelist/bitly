@@ -1,0 +1,240 @@
+openapi: 3.1.0
+info:
+  title: Bitly API v4 Bitlinks Groups API
+  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
+
+    organizations, campaigns, channels, QR codes, and click analytics.
+
+
+    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
+
+    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
+
+    spec at https://dev.bitly.com/v4/v4.json.
+
+    '
+  version: 4.0.0
+  contact:
+    name: Bitly API
+    url: https://dev.bitly.com/api-reference
+  license:
+    name: Proprietary
+servers:
+- url: https://api-ssl.bitly.com/v4
+  description: Bitly v4 REST API
+security:
+- bearerAuth: []
+tags:
+- name: Groups
+paths:
+  /groups:
+    get:
+      tags:
+      - Groups
+      summary: List groups for the authenticated user's organization
+      operationId: listGroups
+      parameters:
+      - name: organization_guid
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Groups.
+  /groups/{group_guid}:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    get:
+      tags:
+      - Groups
+      summary: Retrieve a group
+      operationId: getGroup
+      responses:
+        '200':
+          description: Group.
+    patch:
+      tags:
+      - Groups
+      summary: Update a group
+      operationId: updateGroup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                organization_guid:
+                  type: string
+      responses:
+        '200':
+          description: Updated.
+  /groups/{group_guid}/bitlinks:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    - $ref: '#/components/parameters/Size'
+    - name: page
+      in: query
+      schema:
+        type: integer
+    - name: keyword
+      in: query
+      schema:
+        type: string
+    - name: query
+      in: query
+      schema:
+        type: string
+    - name: created_before
+      in: query
+      schema:
+        type: integer
+    - name: created_after
+      in: query
+      schema:
+        type: integer
+    - name: modified_after
+      in: query
+      schema:
+        type: integer
+    - name: archived
+      in: query
+      schema:
+        type: string
+        enum:
+        - true
+        - false
+        - both
+    - name: deeplinks
+      in: query
+      schema:
+        type: string
+        enum:
+        - true
+        - false
+        - both
+    - name: domain_deeplinks
+      in: query
+      schema:
+        type: string
+        enum:
+        - true
+        - false
+        - both
+    - name: campaign_guid
+      in: query
+      schema:
+        type: string
+    - name: channel_guid
+      in: query
+      schema:
+        type: string
+    - name: custom_bitlink
+      in: query
+      schema:
+        type: string
+        enum:
+        - true
+        - false
+        - both
+    - name: tags
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+    - name: launchpad_ids
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+    - name: encoding_login
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+    get:
+      tags:
+      - Groups
+      summary: List Bitlinks in a group
+      operationId: listGroupBitlinks
+      responses:
+        '200':
+          description: Paginated bitlinks.
+    patch:
+      tags:
+      - Groups
+      summary: Bulk update Bitlinks in a group (e.g. archive, tag)
+      operationId: bulkUpdateGroupBitlinks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - archive
+                  - tag
+                bitlink_ids:
+                  type: array
+                  items:
+                    type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Bulk update result.
+  /groups/{group_guid}/tags:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    get:
+      tags:
+      - Groups
+      summary: List tags for a group
+      operationId: listGroupTags
+      responses:
+        '200':
+          description: Tags.
+  /groups/{group_guid}/preferences:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    get:
+      tags:
+      - Groups
+      summary: Get group preferences
+      operationId: getGroupPreferences
+      responses:
+        '200':
+          description: Preferences.
+components:
+  parameters:
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    GroupGuid:
+      name: group_guid
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
+
+        Send as `Authorization: Bearer {token}`.
+
+        '

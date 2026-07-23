@@ -1,0 +1,93 @@
+openapi: 3.1.0
+info:
+  title: Bitly API v4 Bitlinks Organizations API
+  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
+
+    organizations, campaigns, channels, QR codes, and click analytics.
+
+
+    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
+
+    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
+
+    spec at https://dev.bitly.com/v4/v4.json.
+
+    '
+  version: 4.0.0
+  contact:
+    name: Bitly API
+    url: https://dev.bitly.com/api-reference
+  license:
+    name: Proprietary
+servers:
+- url: https://api-ssl.bitly.com/v4
+  description: Bitly v4 REST API
+security:
+- bearerAuth: []
+tags:
+- name: Organizations
+paths:
+  /organizations:
+    get:
+      tags:
+      - Organizations
+      summary: List organizations for the authenticated user
+      operationId: listOrganizations
+      responses:
+        '200':
+          description: Organizations.
+  /organizations/{organization_guid}:
+    parameters:
+    - name: organization_guid
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Organizations
+      summary: Retrieve an organization
+      operationId: getOrganization
+      responses:
+        '200':
+          description: Organization.
+  /organizations/{organization_guid}/plan_limits:
+    parameters:
+    - name: organization_guid
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Organizations
+      summary: Get organization plan limits
+      operationId: getOrganizationPlanLimits
+      responses:
+        '200':
+          description: Plan limits.
+  /organizations/{organization_guid}/shorten_counts:
+    parameters:
+    - name: organization_guid
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Organizations
+      summary: Get organization shorten counts
+      operationId: getOrganizationShortenCounts
+      responses:
+        '200':
+          description: Shorten counts.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
+
+        Send as `Authorization: Bearer {token}`.
+
+        '

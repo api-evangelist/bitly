@@ -1,0 +1,142 @@
+openapi: 3.1.0
+info:
+  title: Bitly API v4 Bitlinks Group Metrics API
+  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
+
+    organizations, campaigns, channels, QR codes, and click analytics.
+
+
+    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
+
+    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
+
+    spec at https://dev.bitly.com/v4/v4.json.
+
+    '
+  version: 4.0.0
+  contact:
+    name: Bitly API
+    url: https://dev.bitly.com/api-reference
+  license:
+    name: Proprietary
+servers:
+- url: https://api-ssl.bitly.com/v4
+  description: Bitly v4 REST API
+security:
+- bearerAuth: []
+tags:
+- name: Group Metrics
+paths:
+  /groups/{group_guid}/clicks:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    - $ref: '#/components/parameters/Unit'
+    - $ref: '#/components/parameters/Units'
+    get:
+      tags:
+      - Group Metrics
+      summary: Get clicks for the group
+      operationId: getGroupClicks
+      responses:
+        '200':
+          description: Click data.
+  /groups/{group_guid}/countries:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    get:
+      tags:
+      - Group Metrics
+      summary: Get countries by group clicks
+      operationId: getGroupCountries
+      responses:
+        '200':
+          description: Country breakdown.
+  /groups/{group_guid}/cities:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    get:
+      tags:
+      - Group Metrics
+      summary: Get cities by group clicks
+      operationId: getGroupCities
+      responses:
+        '200':
+          description: City breakdown.
+  /groups/{group_guid}/devices:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    get:
+      tags:
+      - Group Metrics
+      summary: Get devices breakdown for group
+      operationId: getGroupDevices
+      responses:
+        '200':
+          description: Device breakdown.
+  /groups/{group_guid}/links/clicks/top:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    get:
+      tags:
+      - Group Metrics
+      summary: Top performing links for group
+      operationId: getGroupTopLinks
+      responses:
+        '200':
+          description: Top links.
+  /groups/{group_guid}/codes/scans/over_time:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    get:
+      tags:
+      - Group Metrics
+      summary: QR scan trends over time for group
+      operationId: getGroupQrScansOverTime
+      responses:
+        '200':
+          description: Scan trends.
+  /groups/{group_guid}/feature_usage:
+    parameters:
+    - $ref: '#/components/parameters/GroupGuid'
+    get:
+      tags:
+      - Group Metrics
+      summary: Feature usage and limit consumption
+      operationId: getGroupFeatureUsage
+      responses:
+        '200':
+          description: Feature usage.
+components:
+  parameters:
+    Units:
+      name: units
+      in: query
+      schema:
+        type: integer
+        default: -1
+    GroupGuid:
+      name: group_guid
+      in: path
+      required: true
+      schema:
+        type: string
+    Unit:
+      name: unit
+      in: query
+      schema:
+        type: string
+        enum:
+        - minute
+        - hour
+        - day
+        - week
+        - month
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
+
+        Send as `Authorization: Bearer {token}`.
+
+        '

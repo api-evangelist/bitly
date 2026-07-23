@@ -1,0 +1,90 @@
+openapi: 3.1.0
+info:
+  title: Bitly API v4 Bitlinks Channels API
+  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
+
+    organizations, campaigns, channels, QR codes, and click analytics.
+
+
+    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
+
+    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
+
+    spec at https://dev.bitly.com/v4/v4.json.
+
+    '
+  version: 4.0.0
+  contact:
+    name: Bitly API
+    url: https://dev.bitly.com/api-reference
+  license:
+    name: Proprietary
+servers:
+- url: https://api-ssl.bitly.com/v4
+  description: Bitly v4 REST API
+security:
+- bearerAuth: []
+tags:
+- name: Channels
+paths:
+  /channels:
+    post:
+      tags:
+      - Channels
+      summary: Create a channel
+      operationId: createChannel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - group_guid
+              properties:
+                name:
+                  type: string
+                guid:
+                  type: string
+                group_guid:
+                  type: string
+                campaign_guid:
+                  type: string
+      responses:
+        '201':
+          description: Created channel.
+  /channels/{channel_guid}:
+    parameters:
+    - name: channel_guid
+      in: path
+      required: true
+      schema:
+        type: string
+    patch:
+      tags:
+      - Channels
+      summary: Update a channel
+      operationId: updateChannel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Updated.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
+
+        Send as `Authorization: Bearer {token}`.
+
+        '

@@ -1,0 +1,72 @@
+openapi: 3.1.0
+info:
+  title: Bitly API v4 Bitlinks QR Codes API
+  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
+
+    organizations, campaigns, channels, QR codes, and click analytics.
+
+
+    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
+
+    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
+
+    spec at https://dev.bitly.com/v4/v4.json.
+
+    '
+  version: 4.0.0
+  contact:
+    name: Bitly API
+    url: https://dev.bitly.com/api-reference
+  license:
+    name: Proprietary
+servers:
+- url: https://api-ssl.bitly.com/v4
+  description: Bitly v4 REST API
+security:
+- bearerAuth: []
+tags:
+- name: QR Codes
+paths:
+  /qr-codes:
+    post:
+      tags:
+      - QR Codes
+      summary: Generate a QR code
+      operationId: createQrCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - destination
+              properties:
+                destination:
+                  type: object
+                  properties:
+                    long_url:
+                      type: string
+                      format: uri
+                    bitlink_id:
+                      type: string
+                group_guid:
+                  type: string
+                title:
+                  type: string
+                render_customizations:
+                  type: object
+                  additionalProperties: true
+      responses:
+        '200':
+          description: QR code.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
+
+        Send as `Authorization: Bearer {token}`.
+
+        '
