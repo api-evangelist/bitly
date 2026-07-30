@@ -8,7 +8,19 @@ description: >-
   groups, campaigns, click metrics, and QR codes using Bearer token
   authentication.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bitly.png
 tags:
   - Links
   - URL Shortener
@@ -21,27 +33,146 @@ created: '2026-05-11'
 modified: '2026-05-11'
 specificationVersion: '0.19'
 apis:
-  - aid: bitly:bitly-api
-    name: Bitly API v4
-    description: >-
-      REST API for creating and managing Bitlinks, custom domains, groups,
-      campaigns, QR codes, and click analytics. Authentication uses Bearer
-      tokens issued from Bitly account settings or via OAuth 2.0.
-    humanURL: https://dev.bitly.com/api-reference
-    baseURL: https://api-ssl.bitly.com/v4
-    tags:
-      - Links
-      - URL Shortener
-      - QR Codes
-      - Analytics
-    properties:
-      - type: Documentation
-        url: https://dev.bitly.com/api-reference
-      - type: OpenAPI
-        url: https://dev.bitly.com/v4/v4.json
-      - type: GettingStarted
-        url: https://dev.bitly.com/docs/getting-started/introduction
-
+- aid: bitly:bitly-bitlinks-api
+  name: Bitly Bitlinks API
+  description: The Bitlinks API from Bitly — 4 operation(s) for bitlinks.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Bitlinks
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-bitlinks-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+- aid: bitly:bitly-bsds-api
+  name: Bitly BSDs API
+  description: The BSDs API from Bitly — 1 operation(s) for bsds.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - BSDs
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-bsds-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+- aid: bitly:bitly-campaigns-api
+  name: Bitly Campaigns API
+  description: The Campaigns API from Bitly — 2 operation(s) for campaigns.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+- aid: bitly:bitly-channels-api
+  name: Bitly Channels API
+  description: The Channels API from Bitly — 2 operation(s) for channels.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Channels
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-channels-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+- aid: bitly:bitly-custom-bitlinks-api
+  name: Bitly Custom Bitlinks API
+  description: The Custom Bitlinks API from Bitly — 2 operation(s) for custom bitlinks.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Custom Bitlinks
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-custom-bitlinks-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+- aid: bitly:bitly-group-metrics-api
+  name: Bitly Group Metrics API
+  description: The Group Metrics API from Bitly — 7 operation(s) for group metrics.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Group Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-group-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+- aid: bitly:bitly-groups-api
+  name: Bitly Groups API
+  description: The Groups API from Bitly — 5 operation(s) for groups.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-groups-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+- aid: bitly:bitly-metrics-api
+  name: Bitly Metrics API
+  description: The Metrics API from Bitly — 8 operation(s) for metrics.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+- aid: bitly:bitly-organizations-api
+  name: Bitly Organizations API
+  description: The Organizations API from Bitly — 4 operation(s) for organizations.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+- aid: bitly:bitly-qr-codes-api
+  name: Bitly QR Codes API
+  description: The QR Codes API from Bitly — 1 operation(s) for qr codes.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - QR Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-qr-codes-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
 common:
   - type: AgenticAccess
     url: agentic-access/bitly-agentic-access.yml
