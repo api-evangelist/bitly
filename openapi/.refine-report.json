@@ -1,0 +1,32 @@
+{
+  "provider": "bitly",
+  "sources": [
+    "bitly-bitlinks-api-openapi.yml",
+    "bitly-bsds-api-openapi.yml",
+    "bitly-campaigns-api-openapi.yml",
+    "bitly-channels-api-openapi.yml",
+    "bitly-custom-bitlinks-api-openapi.yml",
+    "bitly-group-metrics-api-openapi.yml",
+    "bitly-groups-api-openapi.yml",
+    "bitly-metrics-api-openapi.yml",
+    "bitly-organizations-api-openapi.yml",
+    "bitly-qr-codes-api-openapi.yml"
+  ],
+  "outputs": [
+    "bitly-bitlinks-api-openapi.yml",
+    "bitly-bsds-api-openapi.yml",
+    "bitly-campaigns-api-openapi.yml",
+    "bitly-channels-api-openapi.yml",
+    "bitly-custom-bitlinks-api-openapi.yml",
+    "bitly-group-metrics-api-openapi.yml",
+    "bitly-groups-api-openapi.yml",
+    "bitly-metrics-api-openapi.yml",
+    "bitly-organizations-api-openapi.yml",
+    "bitly-qr-codes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
