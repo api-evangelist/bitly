@@ -1,12 +1,12 @@
 aid: bitly
 name: Bitly
-description: >-
-  Bitly is a URL shortening and link management platform that enables
-  developers and marketers to create branded short links, generate QR codes,
-  track engagement analytics, and manage link campaigns at scale. The Bitly v4
-  REST API provides programmatic access to link creation, custom domains,
-  groups, campaigns, click metrics, and QR codes using Bearer token
-  authentication.
+description: Bitly is a link management platform for creating, branding, routing and measuring short links,
+  QR Codes and link-in-bio pages at scale. The Bitly v4 REST API is a 94-operation, bearer-authenticated
+  JSON API at https://api-ssl.bitly.com/v4 covering Bitlink creation and expansion, custom back-halves,
+  branded short domains, groups (workspaces) and organizations, campaigns and channels, dynamic and static
+  QR Codes, bulk shortening, engagement webhooks, and a deep click/scan analytics surface sliced by country,
+  city, device, OS, browser and referrer. Bitly publishes its own OpenAPI 3.0 definition and operates
+  an official remote Model Context Protocol server, making it directly callable by AI agents.
 type: Index
 accessModel:
   pricing: unknown
@@ -22,34 +22,25 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bitly.png
 tags:
-  - Links
-  - URL Shortener
-  - QR Codes
-  - Analytics
-  - Marketing
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/bitly/refs/heads/main/apis.yml
+- Links
+- URL Shortener
+- QR Codes
+- Analytics
+- Marketing
+- Link Management
+- Webhooks
+- Attribution
+- Agents
+- MCP
+url: https://raw.githubusercontent.com/api-evangelist/bitly/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
-specificationVersion: '0.19'
+modified: '2026-08-13'
+specificationVersion: '0.21'
 apis:
-- aid: bitly:bitly-bitlinks-api
-  name: Bitly Bitlinks API
-  description: The Bitlinks API from Bitly — 4 operation(s) for bitlinks.
-  humanURL: https://dev.bitly.com/api-reference
-  baseURL: https://api-ssl.bitly.com/v4
-  tags:
-  - Bitlinks
-  properties:
-  - type: OpenAPI
-    url: openapi/bitly-bitlinks-api-openapi.yml
-  - type: Documentation
-    url: https://dev.bitly.com/api-reference
-  - type: GettingStarted
-    url: https://dev.bitly.com/docs/getting-started/introduction
 - aid: bitly:bitly-bsds-api
   name: Bitly BSDs API
-  description: The BSDs API from Bitly — 1 operation(s) for bsds.
+  description: List the branded short domains (BSDs) available to the authenticated account. 1 operation(s),
+    extracted verbatim from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
@@ -59,11 +50,44 @@ apis:
     url: openapi/bitly-bsds-api-openapi.yml
   - type: Documentation
     url: https://dev.bitly.com/api-reference
+  - type: APIReference
+    url: https://dev.bitly.com/api-reference
   - type: GettingStarted
     url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-bsds-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/bitly-bsds-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-bsds-overlay.yaml
+- aid: bitly:bitly-bitlinks-api
+  name: Bitly Bitlinks API
+  description: Create, expand, update, archive and delete Bitlinks, list them by group, and read per-link
+    click, engagement, country, city, device and referrer metrics. 21 operation(s), extracted verbatim
+    from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Bitlinks
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-bitlinks-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: APIReference
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-bitlinks-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/bitly-bitlinks-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-bitlinks-overlay.yaml
 - aid: bitly:bitly-campaigns-api
   name: Bitly Campaigns API
-  description: The Campaigns API from Bitly — 2 operation(s) for campaigns.
+  description: Manage marketing campaigns and the channels inside them, grouping Bitlinks for attribution.
+    8 operation(s), extracted verbatim from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
@@ -73,25 +97,20 @@ apis:
     url: openapi/bitly-campaigns-api-openapi.yml
   - type: Documentation
     url: https://dev.bitly.com/api-reference
-  - type: GettingStarted
-    url: https://dev.bitly.com/docs/getting-started/introduction
-- aid: bitly:bitly-channels-api
-  name: Bitly Channels API
-  description: The Channels API from Bitly — 2 operation(s) for channels.
-  humanURL: https://dev.bitly.com/api-reference
-  baseURL: https://api-ssl.bitly.com/v4
-  tags:
-  - Channels
-  properties:
-  - type: OpenAPI
-    url: openapi/bitly-channels-api-openapi.yml
-  - type: Documentation
+  - type: APIReference
     url: https://dev.bitly.com/api-reference
   - type: GettingStarted
     url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-campaigns-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/bitly-campaigns-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-campaigns-overlay.yaml
 - aid: bitly:bitly-custom-bitlinks-api
   name: Bitly Custom Bitlinks API
-  description: The Custom Bitlinks API from Bitly — 2 operation(s) for custom bitlinks.
+  description: Create and update custom back-halves on existing Bitlinks and read clicks by destination
+    for A/B rotations. 5 operation(s), extracted verbatim from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
@@ -101,25 +120,21 @@ apis:
     url: openapi/bitly-custom-bitlinks-api-openapi.yml
   - type: Documentation
     url: https://dev.bitly.com/api-reference
-  - type: GettingStarted
-    url: https://dev.bitly.com/docs/getting-started/introduction
-- aid: bitly:bitly-group-metrics-api
-  name: Bitly Group Metrics API
-  description: The Group Metrics API from Bitly — 7 operation(s) for group metrics.
-  humanURL: https://dev.bitly.com/api-reference
-  baseURL: https://api-ssl.bitly.com/v4
-  tags:
-  - Group Metrics
-  properties:
-  - type: OpenAPI
-    url: openapi/bitly-group-metrics-api-openapi.yml
-  - type: Documentation
+  - type: APIReference
     url: https://dev.bitly.com/api-reference
   - type: GettingStarted
     url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-custom-bitlinks-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/bitly-custom-bitlinks-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-custom-bitlinks-overlay.yaml
 - aid: bitly:bitly-groups-api
   name: Bitly Groups API
-  description: The Groups API from Bitly — 5 operation(s) for groups.
+  description: Manage groups (workspaces) — preferences, tags, shorten counts, exports, feature usage
+    and historical usage — plus the full group-level click, scan and engagement analytics surface. 28
+    operation(s), extracted verbatim from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
@@ -129,25 +144,43 @@ apis:
     url: openapi/bitly-groups-api-openapi.yml
   - type: Documentation
     url: https://dev.bitly.com/api-reference
-  - type: GettingStarted
-    url: https://dev.bitly.com/docs/getting-started/introduction
-- aid: bitly:bitly-metrics-api
-  name: Bitly Metrics API
-  description: The Metrics API from Bitly — 8 operation(s) for metrics.
-  humanURL: https://dev.bitly.com/api-reference
-  baseURL: https://api-ssl.bitly.com/v4
-  tags:
-  - Metrics
-  properties:
-  - type: OpenAPI
-    url: openapi/bitly-metrics-api-openapi.yml
-  - type: Documentation
+  - type: APIReference
     url: https://dev.bitly.com/api-reference
   - type: GettingStarted
     url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-groups-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/bitly-groups-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-groups-overlay.yaml
+- aid: bitly:bitly-oauth-apps-api
+  name: Bitly OAuth Apps API
+  description: Look up the public metadata of a registered Bitly OAuth application by client_id. 1 operation(s),
+    extracted verbatim from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - OAuth Apps
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-oauth-apps-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: APIReference
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-oauth-apps-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/bitly-oauth-apps-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-oauth-apps-overlay.yaml
 - aid: bitly:bitly-organizations-api
   name: Bitly Organizations API
-  description: The Organizations API from Bitly — 4 operation(s) for organizations.
+  description: Read organizations, their plan limits, and shorten counts overall and by group. 5 operation(s),
+    extracted verbatim from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
@@ -157,11 +190,21 @@ apis:
     url: openapi/bitly-organizations-api-openapi.yml
   - type: Documentation
     url: https://dev.bitly.com/api-reference
+  - type: APIReference
+    url: https://dev.bitly.com/api-reference
   - type: GettingStarted
     url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-organizations-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/bitly-organizations-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-organizations-overlay.yaml
 - aid: bitly:bitly-qr-codes-api
   name: Bitly QR Codes API
-  description: The QR Codes API from Bitly — 1 operation(s) for qr codes.
+  description: Create dynamic and static QR Codes, customize their render, fetch the image, upgrade a
+    code to a Bitlink, and read scan metrics by browser, city, country and device OS. 16 operation(s),
+    extracted verbatim from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
@@ -171,46 +214,189 @@ apis:
     url: openapi/bitly-qr-codes-api-openapi.yml
   - type: Documentation
     url: https://dev.bitly.com/api-reference
-  - type: GettingStarted
-    url: https://dev.bitly.com/docs/getting-started/introduction
-common:
-  - type: AgenticAccess
-    url: agentic-access/bitly-agentic-access.yml
-  - type: TrustCenter
-    url: security/bitly-trust-center.yml
-  - type: VulnerabilityDisclosure
-    url: security/bitly-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/bitly-domain-security.yml
-  - type: Authentication
-    url: authentication/bitly-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/bitly
-  - type: Website
-    url: https://bitly.com
-  - type: Documentation
-    url: https://dev.bitly.com
   - type: APIReference
     url: https://dev.bitly.com/api-reference
-  - type: Pricing
-    url: https://bitly.com/pages/pricing
-  - type: Signup
-    url: https://app.bitly.com/sign_up
-  - type: Login
-    url: https://app.bitly.com/sign_in
-  - type: Authentication
-    url: https://dev.bitly.com/docs/getting-started/authentication
-  - type: RateLimits
-    url: https://dev.bitly.com/docs/getting-started/rate-limits
-  - type: Support
-    url: https://support.bitly.com
-  - type: StatusPage
-    url: https://bitly.statuspage.io
-  - type: GitHubOrganization
-    url: https://github.com/bitly
-  - url: https://bitly.com/blog/
-    type: Blog
-
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-qr-codes-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/bitly-qr-codes-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-qr-codes-overlay.yaml
+- aid: bitly:bitly-user-api
+  name: Bitly User API
+  description: Read and update the authenticated user profile and read the platform limits applied to
+    the account. 3 operation(s), extracted verbatim from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-user-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: APIReference
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-user-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/bitly-user-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-user-overlay.yaml
+- aid: bitly:bitly-webhooks-api
+  name: Bitly Webhooks API
+  description: Create, read, update, delete and verify webhook endpoints that receive Bitly engagement
+    events. 6 operation(s), extracted verbatim from the OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json.
+  humanURL: https://dev.bitly.com/api-reference
+  baseURL: https://api-ssl.bitly.com/v4
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/bitly-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://dev.bitly.com/api-reference
+  - type: APIReference
+    url: https://dev.bitly.com/api-reference
+  - type: GettingStarted
+    url: https://dev.bitly.com/docs/getting-started/introduction
+  - type: PostmanCollection
+    url: collections/bitly-webhooks-api.postman_collection.json
+  - type: Webhooks
+    url: asyncapi/bitly-engagement-webhooks.yml
+  - type: OpenCollection
+    url: collections/bitly-webhooks-api.opencollection.json
+  - type: Overlay
+    url: overlays/bitly-webhooks-overlay.yaml
+- aid: bitly:bitly-mcp-server
+  name: Bitly MCP Server
+  description: Bitly's official remote Model Context Protocol server, exposing 25 tools for link creation,
+    QR Codes, analytics, groups, custom domains and bulk upload. Hosted by Bitly at https://api-ssl.bitly.com/v4/mcp;
+    authentication is required (bearer token or OAuth 2.1 with Dynamic Client Registration).
+  humanURL: https://dev.bitly.com/bitly-mcp/
+  baseURL: https://api-ssl.bitly.com/v4/mcp
+  tags:
+  - MCP
+  - Agents
+  properties:
+  - type: MCPServer
+    url: mcp/bitly-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/bitly-tool-crosswalk.yml
+  - type: Documentation
+    url: https://dev.bitly.com/bitly-mcp/
+  - type: GettingStarted
+    url: https://dev.bitly.com/bitly-mcp/overview/quickstart/
+  - type: ChangeLog
+    url: https://dev.bitly.com/bitly-mcp/overview/mcp-changelog/
+common:
+- type: AgenticAccess
+  url: agentic-access/bitly-agentic-access.yml
+- type: TrustCenter
+  url: security/bitly-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/bitly-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/bitly-domain-security.yml
+- type: Authentication
+  url: authentication/bitly-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/bitly
+- type: Website
+  url: https://bitly.com
+- type: Documentation
+  url: https://dev.bitly.com
+- type: APIReference
+  url: https://dev.bitly.com/api-reference
+- type: Pricing
+  url: https://bitly.com/pages/pricing
+- type: Signup
+  url: https://app.bitly.com/sign_up
+- type: Login
+  url: https://app.bitly.com/sign_in
+- type: Authentication
+  url: https://dev.bitly.com/docs/getting-started/authentication
+- type: RateLimits
+  url: https://dev.bitly.com/docs/getting-started/rate-limits
+- type: Support
+  url: https://support.bitly.com
+- type: StatusPage
+  url: https://bitly.statuspage.io
+- type: GitHubOrganization
+  url: https://github.com/bitly
+- url: https://bitly.com/blog/
+  type: Blog
+- type: Packages
+  url: packages/bitly-packages.yml
+- type: SDKs
+  url: packages/bitly-packages.yml
+- type: WellKnown
+  url: well-known/bitly-well-known.yml
+- type: SecurityTxt
+  url: well-known/bitly-security.txt
+- type: LLMsTxt
+  url: llms/bitly-llms.txt
+- type: Conformance
+  url: conformance/bitly-conformance.yml
+- type: Compliance
+  url: security/bitly-trust-center.yml
+- type: ErrorCatalog
+  url: errors/bitly-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/bitly-lifecycle.yml
+- type: Conventions
+  url: conventions/bitly-conventions.yml
+- type: ChangeLog
+  url: changelog/bitly-changelog.yml
+- type: DataModel
+  url: data-model/bitly-data-model.yml
+- type: Sandbox
+  url: sandbox/bitly-sandbox.yml
+- type: Plans
+  url: plans/bitly-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/bitly-rate-limits.yml
+- type: Webhooks
+  url: asyncapi/bitly-engagement-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Security
+  url: security/bitly-vulnerability-disclosure.yml
+- type: OAuthScopes
+  url: scopes/bitly-scopes.yml
+- type: DeveloperPortal
+  url: https://dev.bitly.com
+- type: TrustCenter
+  url: https://security.bitly.com
+- type: Changelog
+  url: https://dev.bitly.com/bitly-mcp/overview/mcp-changelog/
+- type: TermsOfService
+  url: https://bitly.com/pages/terms-of-service
+- type: PrivacyPolicy
+  url: https://bitly.com/pages/privacy
+- type: MCPServer
+  url: https://dev.bitly.com/bitly-mcp/
+- type: PostmanCollection
+  url: collections/bitly.postman_collection.json
+- type: OpenCollection
+  url: collections/bitly.opencollection.json
+- type: AgentSkill
+  url: skills/bitly-shorten-and-brand-a-link.md
+- type: AgentSkill
+  url: skills/bitly-report-link-performance.md
+- type: AgentSkill
+  url: skills/bitly-create-and-measure-a-qr-code.md
+- type: AgentSkill
+  url: skills/bitly-subscribe-to-engagement-events.md
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 38
+  pass: local-v1
