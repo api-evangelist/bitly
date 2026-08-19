@@ -1,0 +1,75 @@
+generated: '2026-08-13'
+method: searched
+source: https://dev.bitly.com/bitly-mcp/overview/mcp-changelog/
+docs: https://dev.bitly.com/bitly-mcp/overview/mcp-changelog/
+scope: mcp-server
+scope_note: >-
+  This changelog covers Bitly's MCP server only. Bitly publishes no dated changelog for the v4
+  REST API — see lifecycle/bitly-lifecycle.yml. The single dated REST notice is the 2024-06-12
+  "changes to engagement metrics" migration page, recorded at the bottom of this file.
+scheme: dated (month granularity, no version numbers)
+current_version: null
+current_version_note: >-
+  Bitly does not version its MCP server. Entries are dated to the month with no semver tag, so a
+  client cannot pin or detect a version — including across the two breaking changes below.
+entries:
+- date: '2026-08'
+  breaking: true
+  highlights:
+  - >-
+    Consolidated the 32 per-endpoint analytics tools into three: get_link_analytics,
+    get_group_analytics and get_qr_code_analytics.
+  - Replaced tool names such as link_metrics and link_countries no longer function.
+  impact: >-
+    Any agent configuration referencing the old per-metric tool names broke. This is the change
+    that produced the `dimension`/`dataset` parameters now used across all three analytics tools.
+- date: '2026-06'
+  breaking: false
+  additions:
+  - Retrieve group preferences, including the default domain used when creating links.
+- date: '2026-04'
+  breaking: false
+  highlights:
+  - >-
+    Documentation improved to distinguish device operating system from device form factor in tool
+    descriptions.
+- date: '2026-03'
+  breaking: false
+  additions:
+  - Unified tool to create a short link and a QR Code in a single step.
+- date: '2026-02'
+  breaking: false
+  additions:
+  - Tools for time-series and summary engagement metrics on a single link.
+- date: '2026-01'
+  breaking: false
+  additions:
+  - Bulk creation tools from .CSV/.XLSX files.
+  - Short link creation now supports custom back-halves on new and existing links.
+- date: '2025-12'
+  breaking: true
+  highlights:
+  - All MCP endpoints now require authentication.
+  - Implemented OAuth 2.1 with Dynamic Client Registration.
+  additions:
+  - QR Code appearance customization — foreground/background colors, gradients, frame, pips.
+  impact: >-
+    Anonymous MCP access was removed. This is why an unauthenticated tools/list against
+    https://api-ssl.bitly.com/v4/mcp returns 401 today.
+- date: '2025-10'
+  breaking: false
+  additions:
+  - Six new QR Code scan metrics tools for performance analysis.
+  note: Superseded eleven months later by the 2026-08 analytics consolidation.
+- date: '2025-08'
+  breaking: false
+  highlights:
+  - Initial release with core link management, analytics and QR Code functionality.
+related_rest_notices:
+- date: '2024-06-12'
+  url: https://dev.bitly.com/docs/tutorials/changes-to-engagement-metrics/
+  breaking: false
+  summary: >-
+    Across 24 analytics endpoints, responses can now include engagements for all versions of an
+    edited or redirected link rather than only the most recent version. No endpoint was replaced
+    or sunset.

@@ -1,0 +1,223 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  mcp/bitly-mcp.yml (tool names + parameters transcribed from
+  https://dev.bitly.com/bitly-mcp/using-the-bitly-mcp-server/mcp-tools-reference/) bound against
+  openapi/_original/bitly-v4-openapi.json (Bitly's own OpenAPI, fetched from
+  https://dev.bitly.com/v4/v4.json)
+note: >-
+  Bitly's live MCP tools/list is auth-gated (HTTP 401), so tool inputSchemas could not be read
+  directly. Bindings below are made on documented tool name + documented parameter names against
+  real operationIds in Bitly's own OpenAPI. Where a tool's documented parameters match an
+  operation's parameters one-for-one the confidence is high; where the tool is an aggregate or a
+  composite over several operations it is recorded as such and the confidence is set honestly.
+  Once a tool is bound, it inherits that operation's parameters and requestBody as its real
+  input schema.
+
+surfaces:
+  openapi: openapi/_original/bitly-v4-openapi.json
+  openapi_public_url: https://dev.bitly.com/v4/v4.json
+  rest_base: https://api-ssl.bitly.com/v4
+  mcp: https://api-ssl.bitly.com/v4/mcp
+  mcp_gated: true
+  graphql: null
+
+coverage:
+  mcp_tools: 25
+  rest_operations: 94
+  tools_bound_to_rest: 23
+  tools_mcp_only: 2
+  rest_operations_covered: 54
+  rest_operations_uncovered: 40
+  rest_coverage_pct: 57
+
+crosswalk:
+- tool: create_short_link
+  category: Link Management
+  rest: [createFullBitlink]
+  binding: direct
+  confidence: high
+  note: >-
+    POST /bitlinks. Bound to createFullBitlink rather than createBitlink (POST /shorten) because
+    the tool exposes title, tags, keyword and deeplinks, which only the full endpoint accepts.
+- tool: create_short_link_with_qr
+  category: Link Management
+  rest: [createFullBitlink, createQRCodePublic]
+  binding: composite
+  confidence: medium
+  note: >-
+    No single REST operation creates a link and a QR Code together; the MCP changelog dates this
+    tool to March 2026 as a convenience wrapper. Parameter split matches the two operations
+    (long_url/domain/keyword/tags to the Bitlink, qr_title/render_customizations to the QR Code).
+- tool: get_short_link_details
+  category: Link Management
+  rest: [getBitlink]
+  binding: direct
+  confidence: high
+- tool: update_short_link
+  category: Link Management
+  rest: [updateBitlink]
+  binding: direct
+  confidence: high
+- tool: delete_short_link
+  category: Link Management
+  rest: [deleteBitlink]
+  binding: direct
+  confidence: high
+- tool: expand
+  category: Link Management
+  rest: [expandBitlink]
+  binding: direct
+  confidence: high
+- tool: get_link_analytics
+  category: Analytics
+  rest: [getClicksForBitlink, getClicksSummaryForBitlink, getEngagements, getEngagementsSummary,
+    getMetricsForBitlinkByCountries, getMetricsForBitlinkByCities, getMetricsForBitlinkByDevices,
+    getMetricsForBitlinkByReferrers, getMetricsForBitlinkByReferrerName,
+    getMetricsForBitlinkByReferrersByDomains, getMetricsForBitlinkByReferringDomains]
+  binding: aggregate
+  confidence: high
+  note: >-
+    The `dimension` parameter selects which underlying per-metric REST operation runs. The MCP
+    changelog for August 2026 records this consolidation explicitly as a breaking change:
+    "Consolidated the 32 per-endpoint analytics tools into three."
+- tool: get_group_analytics
+  category: Analytics
+  rest: [getGroupClicks, getGroupMetricsByCountries, getGroupMetricsByCities, getGroupMetricsByDevices,
+    GetGroupMetricsByReferrer, GetGroupMetricsByReferringNetworks, getGroupMetricsOverTime,
+    getGroupTopMetrics, getGroupLinkClicksByCity, getGroupLinkClicksByCountry,
+    getGroupLinkClicksByDevice, getGroupLinkClicksOverTime, getGroupLinkClicksByReferrer,
+    getGroupTopLinkClicks, getGroupCodeScansByCity, getGroupCodeScansByCountry,
+    getGroupCodeScansOverTime, getGroupTopCodeScans]
+  binding: aggregate
+  confidence: high
+  note: The `dataset` and `dimension` parameters select links-vs-QR-scans and the breakdown axis.
+- tool: get_qr_code_analytics
+  category: Analytics
+  rest: [getScanMetricsForQRCode, getScanMetricsSummaryForQRCode, getScanMetricsForQRCodeByBrowser,
+    getScanMetricsForQRCodeByCities, getScanMetricsForQRCodeByCountries,
+    getScanMetricsForQRCodeByDevicesOS]
+  binding: aggregate
+  confidence: high
+- tool: create_qr_code
+  category: QR Codes
+  rest: [createQRCodePublic]
+  binding: direct
+  confidence: high
+- tool: get_qr_code
+  category: QR Codes
+  rest: [getQRCodeByIdPublic]
+  binding: direct
+  confidence: high
+- tool: get_qr_code_image
+  category: QR Codes
+  rest: [getQRCodeImagePublic]
+  binding: direct
+  confidence: high
+- tool: update_qr_code
+  category: QR Codes
+  rest: [updateQRCodePublic]
+  binding: direct
+  confidence: high
+- tool: get_group_qr_codes
+  category: QR Codes
+  rest: [listQRMinimal]
+  binding: direct
+  confidence: high
+  note: >-
+    GET /groups/{group_guid}/qr-codes. The tool documents a `page` parameter; the REST operation
+    paginates with `search_after` + `size`, so the wrapper is doing its own cursor bookkeeping.
+- tool: get_user
+  category: User & Organization
+  rest: [getUser]
+  binding: direct
+  confidence: high
+- tool: get_organizations
+  category: User & Organization
+  rest: [getOrganizations]
+  binding: direct
+  confidence: high
+- tool: get_groups
+  category: User & Organization
+  rest: [getGroups]
+  binding: direct
+  confidence: high
+- tool: get_group_details
+  category: User & Organization
+  rest: [getGroup]
+  binding: direct
+  confidence: high
+- tool: get_group_preferences
+  category: User & Organization
+  rest: [getGroupPreferences]
+  binding: direct
+  confidence: high
+  note: Added June 2026 per the MCP changelog, to expose the default domain used for link creation.
+- tool: get_group_short_links
+  category: User & Organization
+  rest: [getBitlinksByGroup]
+  binding: direct
+  confidence: high
+- tool: get_group_short_links_sorted
+  category: User & Organization
+  rest: [getSortedBitlinks]
+  binding: direct
+  confidence: high
+  note: GET /groups/{group_guid}/bitlinks/{sort} — the tool's `sort` argument is the path parameter.
+- tool: get_custom_domains
+  category: Custom Domains
+  rest: [getBSDs]
+  binding: direct
+  confidence: medium
+  note: >-
+    GET /bsds is the only operation that lists branded short domains, and Bitly's docs use
+    "custom domain" and "branded short domain (BSD)" interchangeably. Marked medium rather than
+    high because the tool name does not literally match the operation and the gated schema could
+    not be compared.
+- tool: get_custom_link_details
+  category: Custom Domains
+  rest: [getCustomBitlink]
+  binding: direct
+  confidence: high
+  note: '"Override history" corresponds to the custom bitlink''s destination history.'
+
+mcp_only:
+- tool: bulk_upload_validate
+  reason: >-
+    Bitly's OpenAPI declares a "Bulk Shorten" tag but publishes no operation under it. The signed
+    upload URL flow exists only on the MCP surface and in the web app.
+- tool: bulk_upload_file
+  reason: >-
+    Uploads to the signed URL returned by bulk_upload_validate — an S3-style PUT to a
+    Bitly-issued URL, not a Bitly REST operation.
+
+rest_only:
+- operations: [createBitlink]
+  reason: >-
+    POST /shorten. Superseded for agent use by create_short_link, which binds the richer
+    POST /bitlinks.
+- operations: [addCustomBitlink, updateCustomBitlink, getClicksForCustomBitlink,
+    getCustomBitlinkMetricsByDestination]
+  reason: The MCP server reads custom bitlinks but cannot create, update or measure them.
+- operations: [getCampaigns, getCampaign, createCampaign, updateCampaign, getChannels, getChannel,
+    createChannel, updateChannel]
+  reason: The entire Campaigns and Channels surface is absent from the MCP server.
+- operations: [createWebhook, getWebhook, getWebhooks, updateWebhook, deleteWebhook, verifyWebhook]
+  reason: >-
+    The entire Webhooks surface is absent from the MCP server — an agent can read Bitly data but
+    cannot subscribe to Bitly events.
+- operations: [updateUser, getPlatformLimits, getPlanLimits, getOrganization,
+    getOrganizationShortenCounts, getOrganizationShortenCountsByGroup]
+  reason: >-
+    Account administration and quota introspection are read-only or absent on MCP. Notably
+    getPlatformLimits and getPlanLimits are the two operations that would let an agent check its
+    own remaining quota before hitting a 429.
+- operations: [updateGroup, updateGroupPreferences, getGroupTags, getGroupShortenCounts,
+    getGroupFeatureUsage, getGroupHistoricalUsage, postCreateGroupExport, updateBitlinksByGroup,
+    updateQRCodesByGroup, getTopLinksAndQRCodesByEngagements]
+  reason: Group mutation, tagging, usage reporting and bulk group edits are REST-only.
+- operations: [createStaticQRCodePublic, deleteQRCode, redirectQRCodeDestination,
+    upgradeQRCodeToBitlink]
+  reason: Static QR creation, QR deletion, redirect override and QR-to-Bitlink upgrade are REST-only.
+- operations: [getOAuthApp]
+  reason: OAuth application metadata lookup is a developer-tooling operation, not an agent action.

@@ -1,72 +1,2646 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
-  title: Bitly API v4 Bitlinks QR Codes API
-  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
-
-    organizations, campaigns, channels, QR codes, and click analytics.
-
-
-    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
-
-    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
-
-    spec at https://dev.bitly.com/v4/v4.json.
-
-    '
+  title: Bitly QR Codes API
+  description: The QR Codes surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
+    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
+    parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  termsOfService: https://bitly.com/pages/terms-of-service
   contact:
-    name: Bitly API
-    url: https://dev.bitly.com/api-reference
+    url: https://bitly.is/API-support
   license:
-    name: Proprietary
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
 - url: https://api-ssl.bitly.com/v4
-  description: Bitly v4 REST API
 security:
 - bearerAuth: []
 tags:
 - name: QR Codes
+  description: 'QR codes can be created and customized with different dot patterns, corner shapes, colors,
+    and more. They can contain bitlinks, links to microsites, or several kinds of static data.
+
+    '
 paths:
   /qr-codes:
     post:
-      tags:
-      - QR Codes
-      summary: Generate a QR code
-      operationId: createQrCode
+      summary: Create a QR Code
+      description: Create a new QR Code and return its metadata
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required:
-              - destination
-              properties:
-                destination:
-                  type: object
-                  properties:
-                    long_url:
-                      type: string
-                      format: uri
-                    bitlink_id:
-                      type: string
-                group_guid:
-                  type: string
-                title:
-                  type: string
-                render_customizations:
-                  type: object
-                  additionalProperties: true
+              $ref: '#/components/schemas/PublicCreateQRCodeRequest'
+            examples:
+              Minimal:
+                value:
+                  title: Minimal QR Code
+                  group_guid: Ba1bc23dE4F
+                  destination:
+                    bitlink_id: bit.ly/abc123
+                  tags:
+                  - tag1
+                  - tag2
+              Link in Bio:
+                value:
+                  title: Link-in-Bio QR Code
+                  group_guid: Ba1bc23dE4F
+                  destination:
+                    site_id: Mabc123
+              Complex:
+                value:
+                  title: Complex QR Code
+                  group_guid: Ba1bc23dE4F
+                  destination:
+                    bitlink_id: bit.ly/abc123
+                  archived: false
+                  render_customizations:
+                    background_color: '#ffffff'
+                    dot_pattern_color: '#EF8000'
+                    dot_pattern_type: rounded
+                    corners:
+                      corner_1:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: concave
+                      corner_2:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: leaf
+                      corner_3:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: target
+                    logo:
+                      image_guid: bitlylogo
+                    frame:
+                      id: text_top_and_bottom
+                      colors:
+                        primary: '#F55656'
+                        background: '#FFFFFF'
+                      text:
+                        primary:
+                          content: QR Frame
+                        secondary:
+                          content: Frame Text
+                    branding:
+                      bitly_brand: true
+              Gradients:
+                value:
+                  title: Gradient QR Code
+                  group_guid: Ba1bc23dE4F
+                  destination:
+                    bitlink_id: bit.ly/abc123
+                  archived: false
+                  render_customizations:
+                    dot_pattern_type: rounded
+                    corners:
+                      corner_1:
+                        shape: leaf
+                      corner_2:
+                        shape: leaf
+                      corner_3:
+                        shape: leaf
+                    gradient:
+                      style: linear
+                      angle: 45
+                      colors:
+                      - color: '#C80404'
+                        offset: 10
+                      - color: '#042F86'
+                        offset: 90
+                      exclude_corners: false
+                    background_gradient:
+                      style: radial
+                      colors:
+                      - color: '#C696EE'
+                        offset: 25
+                      - color: '#D4E1A8'
+                        offset: 50
+              Framed:
+                value:
+                  title: Framed QR Code
+                  group_guid: Ba1bc23dE4F
+                  destination:
+                    bitlink_id: bit.ly/abc123
+                  archived: false
+                  render_customizations:
+                    frame:
+                      id: arrow
+                      colors:
+                        primary: '#F55656'
+                        background: '#FFFFFF'
+                      text:
+                        primary:
+                          content: Scan Here
+                    background_color: '#ffffff'
+                    dot_pattern_color: '#EF8000'
+                    dot_pattern_type: rounded
+                    corners:
+                      corner_1:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: concave
+                      corner_2:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: leaf
+                      corner_3:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: target
+                    logo:
+                      image_guid: bitlylogo
+              Lowest Error Correction:
+                value:
+                  title: Lowest Error Correction QR Code
+                  group_guid: Ba1bc23dE4F
+                  destination:
+                    bitlink_id: bit.ly/abc123
+                  render_customizations:
+                    spec_settings:
+                      error_correction: 1
+              GS1:
+                value:
+                  title: GS1 QR Code
+                  group_guid: Ba1bc23dE4F
+                  destination:
+                    bitlink_id: bit.ly/abc123
+                  gs1:
+                    values:
+                    - key: '01'
+                      value: '12345670'
+              With Expiration:
+                value:
+                  group_guid: Ba1bc23dE4F
+                  destination:
+                    bitlink_id: bit.ly/abc123
+                  expiration_at: 2025-07-28T14:30:00+0000
+              Stand Alone QR Code:
+                value:
+                  title: Stand Alone QR Code
+                  group_guid: Ba1bc23dE4F
+                  destination:
+                    long_url: https://example.com/page
+      operationId: createQRCodePublic
+      tags:
+      - QR Codes
+      responses:
+        '201':
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QRCodeMinimal'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+  /qr-codes/static:
+    post:
+      summary: Generate a static QR Code image
+      description: 'Generate a static QR code image without creating or saving a QR code resource. SVG
+        and PNG output are supported via the Accept header
+
+        Contact your Account Manager to discuss enabling this feature for your account.
+
+
+        The `render_customizations` field supports basic appearance options. Customizations that require
+        the rasterize API are not supported: `gradient`, `background_gradient`, `frame`, `text`, and `logo`.
+
+
+        The Accept header controls the response format:
+
+        - `application/json` (default): Returns a JSON object with the image as a base64-encoded byte
+        string.
+
+        - `image/svg+xml`: Returns the raw SVG image.
+
+        - `image/png`: Returns the raw PNG image.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicCreateStaticQRCodeRequest'
+            examples:
+              Minimal:
+                value:
+                  content: https://bitly.com
+                  group_guid: Ba1bc23dE4F
+              With Customizations:
+                value:
+                  content: https://bitly.com
+                  group_guid: Ba1bc23dE4F
+                  render_customizations:
+                    background_color: '#ffffff'
+                    dot_pattern_color: '#EF8000'
+                    dot_pattern_type: rounded
+                    corners:
+                      corner_1:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: leaf
+                      corner_2:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: leaf
+                      corner_3:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: leaf
+      operationId: createStaticQRCodePublic
+      tags:
+      - QR Codes
+      parameters:
+      - in: header
+        name: Accept
+        description: Controls the response format. Use `application/json` (default) to receive a JSON-wrapped
+          base64 image, `image/svg+xml` to receive the raw SVG, or `image/png` to receive the raw PNG.
+        schema:
+          type: string
+          enum:
+          - application/json
+          - image/svg+xml
+          - image/png
+        required: false
+        example: image/svg+xml
+      - in: query
+        name: format
+        description: The image format. Supports `svg` and `png`. Ignored if the Accept header specifies
+          an image type.
+        schema:
+          type: string
+          enum:
+          - svg
+          - png
+          default: svg
+        required: false
       responses:
         '200':
-          description: QR code.
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicStaticQRCodeResponse'
+            image/svg+xml:
+              schema:
+                type: string
+              example: <svg>QR code svg</svg>
+            image/png:
+              schema:
+                type: string
+                format: binary
+              example: '...png bytes...'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '406':
+          description: NOT_ACCEPTABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+  /qr-codes/{qrcode_id}/image:
+    get:
+      summary: Retrieve a QR Code image
+      description: 'Get the image of a given QR Code. The Accept header controls how this is returned
+        (options are "application/json", "image/svg+xml", and "image/png").
+
+        If the Accept header is "application/json" the format query parameter will determine the image
+        format inside of the json (which will be base64 encoded and prefixed with its mime type as would
+        be suitable for a HTML image src tag).
+
+        To Return the QR Code image itself, set the Accept header to "image/svg+xml" or "image/png", or
+        remove the Accept header and set the format query parameter to “svg” or “png” (if no format is
+        specified the default will be “svg”).
+
+        '
+      operationId: getQRCodeImagePublic
+      tags:
+      - QR Codes
+      parameters:
+      - in: header
+        name: Accept
+        description: The file format for the QR code's image. If the accept header is application/json
+          the image data will be wrapped in a json object, base64 encoded and prefixed with its mime type
+          as would be suitable for a HTML image src tag.
+        schema:
+          type: string
+        required: false
+        example: image/svg+xml
+      - $ref: '#/components/parameters/QRCodeID'
+      - in: query
+        name: format
+        description: The format type of the image. If there is an image format in the header it takes
+          precedence.
+        schema:
+          type: string
+          enum:
+          - svg
+          - png
+          default: svg
+          example: svg
+        required: false
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicQRCodeImageResponse'
+            image/svg+xml:
+              schema:
+                type: string
+              example: <svg>QR code svg</svg>
+            image/png:
+              schema:
+                type: string
+              example: '...png bytes...'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+  /qr-codes/{qrcode_id}:
+    patch:
+      summary: Update a QR Code
+      description: Updates the QR code with a matching id and returns it.
+      operationId: updateQRCodePublic
+      tags:
+      - QR Codes
+      parameters:
+      - in: path
+        name: qrcode_id
+        description: The QR code ID
+        schema:
+          type: string
+        required: true
+        example: Qabc123
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicUpdateQRCodeRequest'
+            examples:
+              Minimal:
+                value:
+                  title: Minimal QR Code Updated
+                  tags:
+                  - tag1
+                  - tag2
+              Complex:
+                value:
+                  title: Complex QR Code Updated
+                  archived: false
+                  render_customizations:
+                    background_color: '#ffffff'
+                    dot_pattern_color: '#EF8000'
+                    dot_pattern_type: rounded
+                    corners:
+                      corner_1:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: concave
+                      corner_2:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: leaf
+                      corner_3:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: target
+                    logo:
+                      image_guid: bitlylogo
+                    frame:
+                      id: text_top_and_bottom
+                      colors:
+                        primary: '#F55656'
+                        background: '#FFFFFF'
+                      text:
+                        primary:
+                          content: QR Frame
+                        secondary:
+                          content: Frame Text
+                    branding:
+                      bitly_brand: true
+              Gradients:
+                value:
+                  title: Gradient QR Code Updated
+                  archived: false
+                  render_customizations:
+                    dot_pattern_type: rounded
+                    corners:
+                      corner_1:
+                        shape: leaf
+                      corner_2:
+                        shape: leaf
+                      corner_3:
+                        shape: leaf
+                    gradient:
+                      style: linear
+                      angle: 45
+                      colors:
+                      - color: '#C80404'
+                        offset: 10
+                      - color: '#042F86'
+                        offset: 90
+                      exclude_corners: false
+                    background_gradient:
+                      style: radial
+                      colors:
+                      - color: '#C696EE'
+                        offset: 25
+                      - color: '#D4E1A8'
+                        offset: 50
+              Framed:
+                value:
+                  title: Framed QR Code Updated
+                  archived: false
+                  render_customizations:
+                    frame:
+                      id: arrow
+                      colors:
+                        primary: '#F55656'
+                        background: '#FFFFFF'
+                      text:
+                        primary:
+                          content: Scan Here
+                    background_color: '#ffffff'
+                    dot_pattern_color: '#EF8000'
+                    dot_pattern_type: rounded
+                    corners:
+                      corner_1:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: concave
+                      corner_2:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: leaf
+                      corner_3:
+                        inner_color: '#EF8000'
+                        outer_color: '#EF8000'
+                        shape: target
+                    logo:
+                      image_guid: bitlylogo
+              Lowest Error Correction:
+                value:
+                  title: Lowest Error Correction QR Code Updated
+                  render_customizations:
+                    spec_settings:
+                      error_correction: 1
+              With Expiration:
+                value:
+                  expiration_at: 2025-07-28T14:30:00+0000
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QRCodeMinimal'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+    get:
+      summary: Retrieve a QR Code
+      description: Gets the QR code with a matching id.
+      operationId: getQRCodeByIdPublic
+      tags:
+      - QR Codes
+      parameters:
+      - $ref: '#/components/parameters/QRCodeID'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QRCodeDetails'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+    delete:
+      summary: Delete a QR Code
+      description: Delete a QR Code that has not been redirected and is not for a custom link. Also deletes
+        the associated link (if applicable).
+      operationId: deleteQRCode
+      tags:
+      - QR Codes
+      parameters:
+      - $ref: '#/components/parameters/QRCodeID'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDeleteQRCodeResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+  /groups/{group_guid}/qr-codes:
+    get:
+      summary: Retrieve QR Codes by Group
+      description: 'Retrieves a list of QR codes matching the filter settings. Values are in reverse chronological
+        order.
+
+        The pagination occurs by calling the next link in the pagination response object.
+
+        '
+      operationId: listQRMinimal
+      tags:
+      - QR Codes
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/FilterHasRenderCustomizations'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/SearchAfterQR'
+      - $ref: '#/components/parameters/Query'
+      - $ref: '#/components/parameters/HostnamePathQuery'
+      - $ref: '#/components/parameters/CreatedBefore'
+      - $ref: '#/components/parameters/CreatedAfter'
+      - $ref: '#/components/parameters/Archived'
+      - $ref: '#/components/parameters/CreatingLogin'
+      - $ref: '#/components/parameters/FilterQRCodeType'
+      - $ref: '#/components/parameters/FilterIsGS1'
+      - $ref: '#/components/parameters/FilterIsExpired'
+      - $ref: '#/components/parameters/FilterHasExpiration'
+      - $ref: '#/components/parameters/FilterHasDynamicRouting'
+      - $ref: '#/components/parameters/Tags'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QRCodesMinimal'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+    patch:
+      summary: Bulk update QR codes
+      description: 'Bulk update can add or remove tags, or archive/un-archive, up to 100 QR codes at a
+        time.
+
+        Pages QR codes cannot be updated with this endpoint.
+
+        The response includes a list of QR code ids that were updated.
+
+        '
+      tags:
+      - QR Codes
+      operationId: updateQRCodesByGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QRCBulkUpdateRequest'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QRCBulkUpdate'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /qr-codes/{qrcode_id}/scans:
+    get:
+      summary: Get Scans for a QR Code
+      description: Returns an array of scan counts for the specified QR code. The array is comprised of
+        scan counts for each time window, where the window is based on the provided unit.
+      operationId: getScanMetricsForQRCode
+      tags:
+      - QR Codes
+      parameters:
+      - $ref: '#/components/parameters/QRCodeID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BitlinkScans'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /qr-codes/{qrcode_id}/scans/summary:
+    get:
+      summary: Get Scans Summary for a QR Code
+      description: Returns the scan counts for a QR Code rolled up into a single field for a specified
+        time window, where the window is based on the provided unit.
+      operationId: getScanMetricsSummaryForQRCode
+      tags:
+      - QR Codes
+      parameters:
+      - $ref: '#/components/parameters/QRCodeID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BitlinkScansSummary'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /qr-codes/{qrcode_id}/scans/countries:
+    get:
+      summary: Get Scans for a QR Code by Country
+      description: Returns the country origins of scan traffic for the specified QR Code.
+      tags:
+      - QR Codes
+      operationId: getScanMetricsForQRCodeByCountries
+      parameters:
+      - $ref: '#/components/parameters/QRCodeID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Country, Scans
+
+                US, 5
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /qr-codes/{qrcode_id}/scans/cities:
+    get:
+      summary: Get Metrics for a QR Code by City
+      description: Returns the city origins of scan traffic for the specified QR Code.
+      tags:
+      - QR Codes
+      operationId: getScanMetricsForQRCodeByCities
+      parameters:
+      - $ref: '#/components/parameters/QRCodeID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityScanMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'City, Subregion, Region, Country, Scans
+
+                New York, , NY, US, 5
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /qr-codes/{qrcode_id}/scans/device_os:
+    get:
+      summary: Get Scans for a QR Code by Device OS
+      description: Returns the device os generating scan traffic for the specified QR Code.
+      tags:
+      - QR Codes
+      operationId: getScanMetricsForQRCodeByDevicesOS
+      parameters:
+      - $ref: '#/components/parameters/QRCodeID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Device OS, Scans
+
+                Apple, 5
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /qr-codes/{qrcode_id}/scans/browsers:
+    get:
+      summary: Get Scans for a QR Code by Browser
+      description: Returns the browsers generating scan traffic to the specified QR Code.
+      tags:
+      - QR Codes
+      operationId: getScanMetricsForQRCodeByBrowser
+      parameters:
+      - $ref: '#/components/parameters/QRCodeID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Browser, Scans
+
+                Google Chrome, 5
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /qr-codes/{qrcode_id}/to-bitlink:
+    put:
+      summary: Upgrade a QR Code to a bitlink
+      description: Upgrades a stand alone (decoupled) QR Code to a coupled QR Code by associating it with
+        its underlying Bitly short link. This operation consumes one encode from the organization's monthly
+        Link limit. If the QR Code is already coupled, no encode is consumed.
+      operationId: upgradeQRCodeToBitlink
+      tags:
+      - QR Codes
+      parameters:
+      - in: path
+        name: qrcode_id
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BitlinkBody'
+              examples:
+                Upgraded QR Code:
+                  value:
+                    link: https://bit.ly/abc123
+                    id: bit.ly/abc123
+                    long_url: https://example.com/page
+                    title: My Stand Alone QR Code
+                    archived: false
+                    created_at: 2024-01-15T10:00:00+0000
+                    created_by: jane
+                    custom_bitlinks: []
+                    tags: []
+                    qr_code_ids:
+                    - Ab1Cd2Ef3G4
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+  /qr-codes/{qrcode_id}/redirect:
+    patch:
+      summary: Redirect a QR Code
+      description: Changes the destination URL that a stand alone QR Code redirects to. This only works
+        for stand alone QR Codes; a QR Code already associated with a bitlink must be updated via the
+        Bitlinks API.
+      operationId: redirectQRCodeDestination
+      tags:
+      - QR Codes
+      parameters:
+      - in: path
+        name: qrcode_id
+        schema:
+          type: string
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedirectQRCodeRequest'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QRCodeMinimal'
+              examples:
+                Redirected QR Code:
+                  value:
+                    qrcode_id: Ab1Cd2Ef3G4
+                    group_guid: Ba1bc23dE4F
+                    title: My Stand Alone QR Code
+                    is_customized: false
+                    qr_code_type: long_url
+                    long_urls:
+                    - https://example.com/new-page
+                    is_gs1: false
+                    tags: []
+                    archived: false
+                    created: 2024-01-15T10:00:00+0000
+                    updated: 2024-01-16T09:30:00+0000
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
 components:
+  parameters:
+    Archived:
+      name: archived
+      description: Whether or not to include archived resources
+      in: query
+      schema:
+        type: string
+        default: 'off'
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    CreatedAfter:
+      name: created_after
+      description: Timestamp as an integer unix epoch (seconds only)
+      in: query
+      schema:
+        type: integer
+      example: 1694529902
+    CreatedBefore:
+      name: created_before
+      description: Timestamp as an integer unix epoch (seconds only)
+      in: query
+      schema:
+        type: integer
+      example: 1694529902
+    CreatingLogin:
+      name: creating_login
+      description: Filter by the login of the authenticated user that created the QR Code
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+      example:
+      - chauncey
+    FilterHasDynamicRouting:
+      name: has_dynamic_routing
+      description: filter bitlinks by presence of dynamic routing rules
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+    FilterHasExpiration:
+      name: has_expiration
+      description: filter bitlinks by presence of expiration
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+    FilterHasRenderCustomizations:
+      name: has_render_customizations
+      description: Whether or not QRCode has any render customizations (like color or shape changes)
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    FilterIsExpired:
+      name: is_expired
+      description: filter bitlinks by expiration status
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+    FilterIsGS1:
+      name: is_gs1
+      description: a filter value if the resource is a GS1 QR code
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    FilterQRCodeType:
+      name: qrc_type
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - bitlink
+          - long_url
+        example:
+        - bitlink
+        default:
+        - bitlink
+        - long_url
+    GroupGUID:
+      name: group_guid
+      description: A GUID for a Bitly group
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Ba1bc23dE4F
+    HostnamePathQuery:
+      name: hostname_path_query
+      description: The hostname and/or path you would like to search (case-insensitive). Subdomains included;
+        query params and fragment ignored.
+      in: query
+      schema:
+        type: string
+      example: dev.bitly.com/api-reference
+    QRCodeID:
+      name: qrcode_id
+      in: path
+      description: The QR Code ID
+      required: true
+      schema:
+        type: string
+      example: Qabcde12345
+    Query:
+      name: query
+      description: The value that you would like to search
+      in: query
+      schema:
+        type: string
+      example: api
+    SearchAfterQR:
+      name: search_after
+      description: Token used to search next batch of qr codes, only use response from API as input value.
+      in: query
+      schema:
+        type: string
+    Size:
+      name: size
+      description: The quantity of items to be be returned
+      in: query
+      schema:
+        type: integer
+        default: 50
+      example: 10
+    Tags:
+      name: tags
+      description: Filter by given tags
+      in: query
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+      example:
+      - bitly
+      - api
+    TimeUnit:
+      name: unit
+      description: A unit of time
+      schema:
+        $ref: '#/components/schemas/TimeUnit'
+      required: true
+      in: query
+      example: month
+    UnitAmount:
+      name: units
+      description: An integer representing the time units to query data for. pass -1 to return all units
+        of time
+      schema:
+        type: integer
+        default: -1
+      required: true
+      in: query
+      example: 1
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will
+        default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and
+        ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
+  schemas:
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BaseScanMetrics:
+      type: object
+      properties:
+        unit:
+          type: string
+        units:
+          type: integer
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - device_os
+          - browsers
+          - destinations
+        unit_reference:
+          type: string
+    BitlinkBody:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - $ref: '#/components/schemas/BitlinkUpdate'
+    BitlinkScans:
+      type: object
+      properties:
+        scans:
+          type: array
+          items:
+            $ref: '#/components/schemas/QRScans'
+        units:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
+    BitlinkScansSummary:
+      type: object
+      properties:
+        total_scans:
+          type: integer
+        units:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
+    BitlinkUpdate:
+      type: object
+      properties:
+        link:
+          type: string
+        id:
+          type: string
+        long_url:
+          type: string
+        title:
+          type: string
+        archived:
+          type: boolean
+        created_at:
+          type: string
+        created_by:
+          type: string
+        client_id:
+          type: string
+        custom_bitlinks:
+          type: array
+          items:
+            type: string
+          description: list of previously edited backhalfs for the bitlink - these are in reverse chronological
+            order, with the most recently edited backhalf first
+        tags:
+          type: array
+          items:
+            type: string
+        launchpad_ids:
+          type: array
+          items:
+            type: string
+        qr_code_ids:
+          type: array
+          items:
+            type: string
+          description: a list of qr code ids that are associated with this bitlink
+        deeplinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeeplinkRule'
+        is_deleted:
+          type: boolean
+        campaign_ids:
+          type: array
+          items:
+            type: string
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the bitlink (e.g., 2025-01-28T14:30:00+0000)
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this bitlink. Only present when at least one rule is
+            configured.
+    CityScanMetric:
+      type: object
+      properties:
+        scans:
+          type: integer
+        city:
+          type: string
+        subregion:
+          type: string
+        region:
+          type: string
+        country:
+          type: string
+    CityScanMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseScanMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/CityScanMetric'
+          other_metrics:
+            $ref: '#/components/schemas/OtherScanMetrics'
+    DeeplinkRule:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitlink:
+          type: string
+        app_uri_path:
+          type: string
+        install_url:
+          type: string
+        app_guid:
+          type: string
+        os:
+          $ref: '#/components/schemas/MobileOS'
+        install_type:
+          $ref: '#/components/schemas/InstallPreference'
+        created:
+          type: string
+          description: ISO timestamp
+        modified:
+          type: string
+          description: ISO timestamp
+        brand_guid:
+          type: string
+    DeletedLink:
+      type: object
+      properties:
+        id:
+          type: string
+    DeletedQRCode:
+      type: object
+      properties:
+        id:
+          type: string
+    DynamicRoutingDeviceEnum:
+      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+      type: string
+      enum:
+      - mobile
+      - tablet
+      - desktop
+    DynamicRoutingPlatformEnum:
+      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
+      type: string
+      enum:
+      - ios
+      - android
+    DynamicRoutingRule:
+      type: object
+      description: A dynamic routing rule that redirects traffic to a different destination based on user
+        attributes.
+      properties:
+        long_url:
+          type: string
+          description: The destination URL for requests matching this rule.
+        country_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
+        country_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
+        region_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
+        region_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA",
+            "CA-ON"]).
+        device_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
+        device_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that must NOT match for this rule to apply.
+        os_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
+        os_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that must NOT match for this rule to apply.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    GS1Metadata:
+      description: Contains GS1 related metadata
+      type: object
+      properties:
+        values:
+          description: A list of GS1 application identifiers and their values
+          type: array
+          items:
+            $ref: '#/components/schemas/GS1Value'
+    GS1Value:
+      type: object
+      properties:
+        key:
+          type: string
+          description: A valid GS1 application identifier, qualifier, attribute, etc.
+        value:
+          type: string
+          description: A syntactically correct value associated with the application identifier in the
+            key field.
+    Gone:
+      description: GONE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    GradientColor:
+      type: object
+      properties:
+        color:
+          description: A color in hexadecimal format to be used in one of the gradient's <stop> elements
+          type: string
+          example: '#ff0098'
+        offset:
+          description: A number between 0-100 denoting the offset of the gradient color, interpreted as
+            a percentage
+          type: integer
+          default: 0
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    InstallPreference:
+      type: string
+      enum:
+      - no_install
+      - auto_install
+      - promote_install
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    MobileOS:
+      type: string
+      enum:
+      - ios
+      - android
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    OtherScanMetrics:
+      type: object
+      properties:
+        other_city_scans:
+          type: integer
+        no_city_scans:
+          type: integer
+    PublicCreateQRCodeRequest:
+      description: Customization and content values for a QR code created through the public API
+      type: object
+      required:
+      - group_guid
+      - destination
+      properties:
+        title:
+          type: string
+          description: The title of the QR Code
+        group_guid:
+          type: string
+          description: Identify which group to place the QR Code.
+        render_customizations:
+          $ref: '#/components/schemas/QRCodeCustomizationsPublic'
+        archived:
+          description: A boolean representing if the QR code should be archived (hidden from the UI) upon
+            creation
+          type: boolean
+        destination:
+          $ref: '#/components/schemas/QRCodeDestination'
+        gs1:
+          $ref: '#/components/schemas/GS1Metadata'
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000).
+            Minimum expiration time is 5 minutes from now and maximum is 1 year.
+        tags:
+          description: A list of tags to add to the QR code
+          type: array
+          items:
+            type: string
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Optional dynamic routing rules for this decoupled QR code. Only supported for long_url
+            destinations. Providing this field replaces all existing rules. Send an empty array to clear
+            all rules.
+        domain:
+          type: string
+          default: bit.ly
+      example:
+        title: A QR Code
+        group_guid: Ba1bc23dE4F
+        destination:
+          bitlink_id: bit.ly/abc123
+        archived: false
+        tags:
+        - tag1
+        - tag2
+        render_customizations:
+          background_color: '#ffffff'
+          dot_pattern_color: '#EF8000'
+          dot_pattern_type: rounded
+          corners:
+            corner_1:
+              inner_color: '#EF8000'
+              outer_color: '#EF8000'
+              shape: leaf
+            corner_2:
+              inner_color: '#EF8000'
+              outer_color: '#EF8000'
+              shape: leaf
+            corner_3:
+              inner_color: '#EF8000'
+              outer_color: '#EF8000'
+              shape: leaf
+          gradient:
+            style: linear
+            angle: 45
+            colors:
+            - color: '#c80404'
+              offset: 10
+            - color: '#042f86'
+              offset: 90
+            exclude_corners: false
+          background_gradient:
+            style: radial
+            colors:
+            - color: '#c696ee'
+              offset: 25
+            - color: '#d4e1a8'
+              offset: 50
+          logo:
+            image_guid: bitlylogo
+          frame:
+            id: text_bottom
+            colors:
+              primary: '#f55656'
+              background: '#ffffff'
+            text:
+              primary:
+                content: QR Frame
+              secondary:
+                content: Frame Text
+          branding:
+            bitly_brand: true
+          spec_settings:
+            error_correction: 4
+    PublicCreateStaticQRCodeRequest:
+      description: Request body for generating a static QR code image. Customizations such as gradient,
+        background_gradient, frame, text and logo are not supported.
+      type: object
+      required:
+      - content
+      - group_guid
+      properties:
+        content:
+          type: string
+          description: The raw content to encode in the QR code (e.g. a URL).
+          example: https://bitly.com
+        group_guid:
+          type: string
+          description: The group (brand) GUID used for access control and analytics.
+          example: Ba1bc23dE4F
+        render_customizations:
+          $ref: '#/components/schemas/QRCodeCustomizationsStaticPublic'
+      example:
+        content: https://bitly.com
+        group_guid: Ba1bc23dE4F
+        render_customizations:
+          background_color: '#ffffff'
+          dot_pattern_color: '#EF8000'
+          dot_pattern_type: rounded
+    PublicDeleteQRCodeResponse:
+      description: QR Code delete response
+      type: object
+      properties:
+        qrcodes_deleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeletedQRCode'
+        links_deleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeletedLink'
+    PublicQRCodeImageResponse:
+      description: Wraps the image data for a QR code.
+      type: object
+      properties:
+        qr_code_image:
+          description: The stringified data for the QR code's image
+          type: string
+    PublicStaticQRCodeResponse:
+      description: Response containing a generated static QR code image.
+      type: object
+      properties:
+        image:
+          type: string
+          format: byte
+          description: The image data, base64-encoded. Format is SVG or PNG depending on the requested
+            format.
+    PublicUpdateQRCodeRequest:
+      description: Customization and content values for a QR code created through the public API
+      type: object
+      properties:
+        title:
+          type: string
+        render_customizations:
+          $ref: '#/components/schemas/QRCodeCustomizationsPublic'
+        archived:
+          description: A boolean representing if the QR code has been archived
+          type: boolean
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000).
+            Minimum expiration time is 5 minutes from now and maximum is 1 year.
+        tags:
+          description: A list of tags to add to the QR code
+          type: array
+          items:
+            type: string
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this QR code. Providing this field replaces all existing
+            rules. Send an empty array to clear all rules.
+      example:
+        title: Updated Title
+        archived: true
+        tags:
+        - tag1
+        - tag2
+        render_customizations:
+          background_color: '#ffffff'
+          dot_pattern_color: '#EF8000'
+          dot_pattern_type: rounded
+          corners:
+            corner_1:
+              inner_color: '#EF8000'
+              outer_color: '#EF8000'
+              shape: leaf
+            corner_2:
+              inner_color: '#EF8000'
+              outer_color: '#EF8000'
+              shape: leaf
+            corner_3:
+              inner_color: '#EF8000'
+              outer_color: '#EF8000'
+              shape: leaf
+          gradient:
+            style: linear
+            angle: 45
+            colors:
+            - color: '#c80404'
+              offset: 10
+            - color: '#042f86'
+              offset: 90
+            exclude_corners: false
+          background_gradient:
+            style: radial
+            colors:
+            - color: '#c696ee'
+              offset: 25
+            - color: '#d4e1a8'
+              offset: 50
+          logo:
+            image_guid: bitlylogo
+          frame:
+            id: text_bottom
+            colors:
+              primary: '#f55656'
+              background: '#ffffff'
+            text:
+              primary:
+                content: QR Frame
+              secondary:
+                content: Frame Text
+          branding:
+            bitly_brand: true
+          spec_settings:
+            error_correction: 4
+    QRCBulkUpdate:
+      type: object
+      properties:
+        qr_code_ids:
+          type: array
+          items:
+            type: string
+    QRCBulkUpdateRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          enum:
+          - archive
+          - edit_tags
+          description: archive or edit_tags
+        archive:
+          type: boolean
+        add_tags:
+          type: array
+          items:
+            type: string
+        remove_tags:
+          type: array
+          items:
+            type: string
+        qr_code_ids:
+          type: array
+          items:
+            type: string
+          description: this is limited to 100 QR code ids; Pages QR codes are not supported
+      example:
+        action: edit_tags
+        add_tags:
+        - tag1
+        - tag2
+        qr_code_ids:
+        - Qo9id25UxtOcnns
+        - Qb1a2c3d4e5f6g7
+    QRCodeBranding:
+      type: object
+      properties:
+        bitly_brand:
+          description: A boolean that determines if the QR code should have the bitly brand in its bottom
+            right corner
+          type: boolean
+    QRCodeCorner:
+      description: Represents one corner, both inner and outer, of a QR code, with color and shape values
+      type: object
+      properties:
+        inner_color:
+          description: The inner color of a corner of the QR code in hex code format
+          type: string
+        outer_color:
+          description: The outer color of a corner of the QR code in hex code format
+          type: string
+        shape:
+          description: The shape one of the QR code's corners should take
+          type: string
+          enum:
+          - standard
+          - slightly_round
+          - rounded
+          - extra_round
+          - leaf
+          - leaf_inner
+          - leaf_outer
+          - target
+          - concave
+          default: standard
+    QRCodeCorners:
+      description: 'An object representing all three corners of the QR code. The corners corresponding
+        to each property are: corner_1 = top left, corner_2 = top right, and corner_3 = bottom right'
+      type: object
+      properties:
+        corner_1:
+          $ref: '#/components/schemas/QRCodeCorner'
+        corner_2:
+          $ref: '#/components/schemas/QRCodeCorner'
+        corner_3:
+          $ref: '#/components/schemas/QRCodeCorner'
+    QRCodeCustomizationsPublic:
+      description: Options for customizing a QR Code's appearance
+      type: object
+      properties:
+        background_color:
+          description: The QR code's background color in hex code format with values for alpha channel
+          type: string
+          example: '#ff07d280'
+        dot_pattern_color:
+          description: The QR code's dot pattern color in hex code format
+          type: string
+          example: '#ff07d2'
+        dot_pattern_type:
+          $ref: '#/components/schemas/QRCodeDotPatternType'
+        corners:
+          $ref: '#/components/schemas/QRCodeCorners'
+        gradient:
+          $ref: '#/components/schemas/QRCodeGradient'
+        background_gradient:
+          $ref: '#/components/schemas/QRCodeGradient'
+        logo:
+          $ref: '#/components/schemas/QRCodeLogoPublic'
+        frame:
+          $ref: '#/components/schemas/QRCodeFrameRequest'
+        text:
+          $ref: '#/components/schemas/QRCodeText'
+        branding:
+          $ref: '#/components/schemas/QRCodeBranding'
+        spec_settings:
+          $ref: '#/components/schemas/QRCodeSpecSettingsPublic'
+    QRCodeCustomizationsStaticPublic:
+      description: Appearance options for a static QR code. gradient, background_gradient, frame, text,
+        and logo are not supported.
+      type: object
+      properties:
+        background_color:
+          description: The QR code's background color in hex code format with values for alpha channel
+          type: string
+          example: '#ff07d280'
+        dot_pattern_color:
+          description: The QR code's dot pattern color in hex code format
+          type: string
+          example: '#ff07d2'
+        dot_pattern_type:
+          $ref: '#/components/schemas/QRCodeDotPatternType'
+        corners:
+          $ref: '#/components/schemas/QRCodeCorners'
+        branding:
+          $ref: '#/components/schemas/QRCodeBranding'
+        spec_settings:
+          $ref: '#/components/schemas/QRCodeSpecSettingsPublic'
+    QRCodeDestination:
+      type: object
+      properties:
+        bitlink_id:
+          type: string
+        long_url:
+          type: string
+        site_id:
+          type: string
+    QRCodeDetails:
+      type: object
+      properties:
+        qrcode_id:
+          type: string
+        group_guid:
+          type: string
+        title:
+          type: string
+        gs1:
+          $ref: '#/components/schemas/GS1Metadata'
+        render_customizations:
+          $ref: '#/components/schemas/QRCodeCustomizationsPublic'
+        qr_code_type:
+          $ref: '#/components/schemas/QRCodeTypeEnum'
+        bitlink_id:
+          description: The bitlink associated with the qr code. Not all qr codes are associated with one.
+          type: string
+        long_urls:
+          description: A list of destination URLs that the qr code leads to.
+          type: array
+          items:
+            type: string
+        serialized_content:
+          description: The serialized string of the QR code's content
+          type: string
+        archived:
+          type: boolean
+        created:
+          type: string
+        modified:
+          type: string
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000)
+        tags:
+          description: A list of tags associated with QR code
+          type: array
+          items:
+            type: string
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this QR code. Only present when at least one rule is
+            configured.
+    QRCodeDotPatternType:
+      type: string
+      enum:
+      - standard
+      - circle
+      - block
+      - blob
+      - rounded
+      - vertical
+      - horizontal
+      - triangle
+      - heart
+      - star
+      - diamond
+      default: standard
+    QRCodeFrameRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          description: The unique id of the selected frame
+          $ref: '#/components/schemas/QRCodeFrameType'
+        colors:
+          description: An object of named colors denoting which color should go to which area of the frame
+          type: object
+          properties:
+            primary:
+              description: The primary color of the frame in hex code format
+              type: string
+            secondary:
+              description: The secondary color of the frame in hex code format
+              type: string
+            background:
+              description: The background color of the frame in hex code format
+              type: string
+        text:
+          description: The text to be inserted into the QR code's frame
+          type: object
+          properties:
+            primary:
+              $ref: '#/components/schemas/Text'
+            secondary:
+              $ref: '#/components/schemas/Text'
+    QRCodeFrameType:
+      type: string
+      enum:
+      - none
+      - border_only
+      - text_bottom
+      - tooltip_bottom
+      - arrow
+      - text_top
+      - text_bottom_in_frame
+      - script
+      - text_top_and_bottom
+      - url
+      - instagram
+      default: none
+    QRCodeGradient:
+      type: object
+      properties:
+        style:
+          description: The style of the gradient. Can be either linear or radial.
+          type: string
+          enum:
+          - no_gradient
+          - linear
+          - radial
+          default: no_gradient
+        angle:
+          description: The angle by which the gradient will be rotated. Only applies to linear gradients.
+          type: number
+        colors:
+          description: The list of hex colors and their offsets to be used in the gradient.
+          type: array
+          items:
+            $ref: '#/components/schemas/GradientColor'
+        exclude_corners:
+          description: Ignore gradient mask on corners
+          type: boolean
+    QRCodeLogoPublic:
+      type: object
+      properties:
+        image_guid:
+          type: string
+          description: A GUID for an image uploaded to Bitly
+    QRCodeMinimal:
+      type: object
+      properties:
+        qrcode_id:
+          type: string
+        group_guid:
+          type: string
+        title:
+          type: string
+        is_customized:
+          description: Set to true if the QR code's customization values have been changed from their
+            default setting
+          type: boolean
+        serialized_content:
+          description: A serialized string of the QR code's content
+          type: string
+        qr_code_type:
+          $ref: '#/components/schemas/QRCodeTypeEnum'
+        long_urls:
+          description: A list of destination URLs that the qr code leads to.
+          type: array
+          items:
+            type: string
+        bitlink_id:
+          description: The bitlink ID associated with the qr code. Not all qr codes are associated with
+            one.
+          type: string
+        is_gs1:
+          description: Set to true if QR code has GS1 values.
+          type: boolean
+        created_by:
+          description: User that created the code.
+          type: string
+        tags:
+          description: A list of tags associated with QR code
+          type: array
+          items:
+            type: string
+        archived:
+          type: boolean
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000)
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this QR code. Only present when at least one rule is
+            configured.
+        created:
+          type: string
+        modified:
+          type: string
+    QRCodeSpecSettingsPublic:
+      description: The QR code's editable spec settings, which for now is just the error correction
+      type: object
+      properties:
+        error_correction:
+          description: The amount of error correction that the QR code was generated with
+          type: integer
+    QRCodeText:
+      description: Contains the center, top, and bottom text to be used in the QR code
+      type: object
+      properties:
+        center:
+          $ref: '#/components/schemas/Text'
+        top:
+          $ref: '#/components/schemas/Text'
+        bottom:
+          $ref: '#/components/schemas/Text'
+      example:
+        center:
+          content: Some example center text!
+          color: '#ff0098'
+          font: Helvetica
+        top:
+          content: Some example bottom text!
+          color: '#00ff00'
+          font: Helvetica
+        bottom:
+          content: Some example bottom text!
+          color: '#000000'
+          font: Helvetica
+    QRCodeTypeEnum:
+      description: The type of dynamic/static content the QR serves, e.g. Link In Bio page, micro site,
+        bitlink, email, text, Wifi, etc.
+      type: string
+      enum:
+      - bitlink
+      - long_url
+      - link_in_bio
+      - v_card
+      - wifi
+      - email
+      - phone
+      - text
+    QRCodesMinimal:
+      description: QR code paginated list Response
+      type: object
+      properties:
+        qr_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/QRCodeMinimal'
+        pagination:
+          $ref: '#/components/schemas/QRPagination'
+    QRPagination:
+      type: object
+      description: This object specifies how to query the next set of results.
+      properties:
+        next:
+          type: string
+          description: a hyperlink to the next set of results.
+        search_after:
+          type: string
+          description: the identifier of where to begin searching for the next set of results.
+          example: Qn8sfFRC2tm
+        size:
+          type: integer
+          description: the number of results returned from this query.
+          example: 50
+    QRScans:
+      type: object
+      properties:
+        scans:
+          type: integer
+        date:
+          type: string
+    RedirectQRCodeRequest:
+      description: Request to redirect a QRCode
+      type: object
+      required:
+      - long_url
+      properties:
+        long_url:
+          type: string
+          example: https://www.google.com
+    ScanMetric:
+      type: object
+      properties:
+        scans:
+          type: integer
+        value:
+          type: string
+    ScanMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseScanMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/ScanMetric'
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Text:
+      description: An object describing text with color
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          description: The text to be used
+          type: string
+        color:
+          description: The color of the text in hex code format
+          type: string
+          default: '#ffffff'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
-
-        Send as `Authorization: Bearer {token}`.
-
-        '

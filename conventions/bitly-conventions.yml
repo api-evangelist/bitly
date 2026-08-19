@@ -1,0 +1,114 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://dev.bitly.com/docs/getting-started/authentication,
+  https://dev.bitly.com/docs/getting-started/rate-limits,
+  https://dev.bitly.com/docs/getting-started/troubleshooting-tips/, derived from
+  openapi/_original/bitly-v4-openapi.json
+api: Bitly API v4
+base_url: https://api-ssl.bitly.com/v4
+media_type: application/json
+
+authentication:
+  style: bearer token
+  header: 'Authorization: Bearer {token}'
+  alternative: OAuth 2.0 authorization code with PKCE (S256)
+  scopes: none published
+  detail: authentication/bitly-authentication.yml
+
+idempotency:
+  supported: false
+  header: null
+  detail: >-
+    Bitly publishes no idempotency mechanism. There is no Idempotency-Key header, no client-token
+    field, and no mention of idempotency anywhere in its OpenAPI or its documentation. This is a
+    real gap for agents: POST /v4/shorten and POST /v4/bitlinks are the two most-called write
+    operations on the platform, they consume a metered monthly quota, and a retried request after
+    a timeout will create a SECOND Bitlink rather than returning the first.
+  mitigation: >-
+    Bitly's shortening is naturally near-idempotent in one narrow case — shortening the same
+    long_url into the same group generally returns the existing Bitlink rather than a duplicate.
+    That is behavioural, not contractual, and it does not hold when a custom back-half (keyword)
+    is supplied, since a taken back-half returns 409 CONFLICT. Callers that need exactly-once
+    semantics must dedupe on their own side.
+
+pagination:
+  style: cursor
+  request_params:
+  - name: search_after
+    in: query
+    type: string
+    description: Token used to search next batch; only ever pass a value returned by the API.
+  - name: size
+    in: query
+    type: integer
+    default: 50
+    description: The quantity of items to be returned.
+  response_fields: [pagination]
+  note: >-
+    Cursor pagination via an opaque search_after token, not page numbers. Bitly's OpenAPI declares
+    no `page` parameter at all — the MCP tools expose `page`, which means the MCP wrapper is doing
+    its own cursor bookkeeping on top of search_after.
+
+filtering:
+  supported: true
+  note: >-
+    The group Bitlinks listing is the richest filter surface on the API — created_before,
+    created_after, archived, deeplinks, domain_deeplinks, campaign_guid, channel_guid,
+    custom_bitlink, tags, encoding_login, creating_login, keyword, query, has_dynamic_routing,
+    has_expiration, has_qr_codes, is_expired.
+  date_format: integer unix epoch (seconds) for created_before/created_after; ISO-8601 for unit_reference
+
+time_series:
+  params: [unit, units, unit_reference]
+  units: [minute, hour, day, week, month]
+  note: >-
+    Every analytics operation shares the same three-parameter time-window idiom: `unit` picks the
+    bucket, `units` picks how many buckets back, `unit_reference` is an ISO-8601 timestamp for the
+    most recent bucket. Learn it once and it applies across the whole metrics surface.
+
+field_expansion:
+  supported: false
+sparse_fields:
+  supported: false
+metadata:
+  supported: partial
+  note: >-
+    Bitly has no free-form metadata bag. Arbitrary caller data is carried in `tags` (string array
+    on Bitlinks) and in campaign/channel GUIDs for attribution.
+
+request_id_tracing:
+  supported: false
+  note: >-
+    Bitly declares no request-id or correlation-id response header. When escalating a failure to
+    support there is no server-side identifier to quote — only the Bitlink and a timestamp.
+
+versioning:
+  scheme: url-path
+  current: v4
+  path_prefix: /v4
+  breaking_change_policy: not published
+  note: >-
+    The major version is pinned in the base URL. Bitly publishes no written versioning or
+    deprecation policy, no Sunset/Deprecation headers, and marks no operation `deprecated: true`
+    in its own OpenAPI. See lifecycle/bitly-lifecycle.yml.
+
+errors:
+  format: vendor-json
+  rfc9457: false
+  envelope_fields: [message, description, resource, errors]
+  code_location: message
+  detail: errors/bitly-problem-types.yml
+
+rate_limiting:
+  budget_headers: none
+  only_header: X-Ratelimit-Reason (403 only)
+  retry_after: not published
+  exhaustion_status: 429
+  introspection: [GET /v4/user/platform_limits, 'GET /v4/organizations/{organization_guid}/plan_limits']
+  detail: rate-limits/bitly-rate-limits.yml
+
+webhooks:
+  supported: true
+  event_types: [engagement]
+  detail: asyncapi/bitly-engagement-webhooks.yml

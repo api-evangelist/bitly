@@ -1,0 +1,190 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/_original/bitly-v4-openapi.json — component schemas, $ref graph and id-reference
+  fields across 146 schemas; path-parameter names cross-checked against the 94 operations
+api: Bitly API v4
+identifiers:
+  guid:
+    description: >-
+      Bitly's opaque identifier for containers — organizations, groups, campaigns, channels and
+      webhooks all key on a `*_guid` string. GUIDs are not prefixed by type, so a group_guid and
+      an organization_guid are indistinguishable by inspection; the field name is the only type
+      signal.
+    fields: [organization_guid, group_guid, campaign_guid, channel_guid, webhook_guid, guid]
+  bitlink:
+    description: >-
+      A Bitlink is addressed by its own short form — domain plus hash, e.g. bit.ly/3AbCdEf — not
+      by a surrogate id. The path parameter is literally `{bitlink}` and its description is
+      "A Bitlink made of the domain and hash". This makes the identifier human-readable and
+      guessable, and it is why deleting an edited link is forbidden.
+  custom_bitlink:
+    description: Domain plus keyword (the custom back-half), e.g. bit.ly/spring-sale.
+  qrcode_id:
+    description: Opaque QR Code identifier, distinct from the Bitlink it encodes.
+  login:
+    description: >-
+      The User entity has no guid. Its primary key is `login`, and related fields elsewhere are
+      named encoding_login / creating_login.
+
+hierarchy: >-
+  Organization -> Group (workspace) -> Bitlink / QR Code. Every content object is owned by a
+  group, and every group belongs to exactly one organization. Billing, plan limits and SSO
+  attach at the organization; domain preferences, tags and analytics attach at the group. An
+  agent that does not resolve the correct group_guid first will create links in the user's
+  default group, which is the single most common integration mistake Bitly documents.
+
+entities:
+- name: Organization
+  schema: Organization
+  key: guid
+  fields: [name, guid, is_active, tier, tier_family, tier_display_name, role, created, modified,
+    bsds, require_sso, require_2fa]
+  note: Carries the billing tier and the security posture flags (require_sso, require_2fa).
+- name: Group
+  schema: Group
+  key: guid
+  fields: [name, guid, created, modified, is_active, role, organization_guid, bsds]
+  aka: workspace
+- name: GroupPreferences
+  schema: GroupPreferences
+  key: group_guid
+  fields: [group_guid, domain_preference]
+  note: >-
+    Holds the default branded domain used when a link is created without an explicit `domain`.
+    Exposed to agents as the MCP get_group_preferences tool.
+- name: User
+  schema: User
+  key: login
+  fields: [login, name, is_active, created, modified, is_sso_user, emails, is_2fa_enabled,
+    default_group_guid]
+- name: Bitlink
+  schema: BitlinkBody
+  key: bitlink (domain + hash)
+  fields: [id, link, long_url, title, archived, created_at, created_by, custom_bitlinks, tags,
+    deeplinks, references]
+- name: CustomBitlink
+  schema: CustomBitlink
+  key: custom_bitlink (domain + keyword)
+  fields: [custom_bitlink, bitlink, bitlink_history]
+  note: >-
+    A custom back-half is a separate entity that POINTS AT a Bitlink and keeps a history of
+    previous targets (CustomBitlinkHistory). This is what makes a back-half re-pointable without
+    changing the printed URL.
+- name: QRCode
+  schema: QRCodeDetails
+  key: qrcode_id
+  note: >-
+    QR Codes are first-class, not a rendering of a Bitlink. A dynamic QR Code references a
+    Bitlink and can be re-pointed; a static one (POST /qr-codes/static) does not. The
+    customization graph is deep — QRCodeCustomizationsPublic composes QRCodeCorners,
+    QRCodeGradient, QRCodeLogoPublic, QRCodeBranding, QRCodeFrameRequest and QRCodeText.
+- name: Campaign
+  schema: Campaign
+  key: guid
+  fields: [guid, group_guid, created_by, name, description, created, modified]
+- name: Channel
+  schema: Channel
+  key: guid
+  note: A channel sits inside a campaign and groups the Bitlinks attributed to one medium.
+- name: BSD
+  schema: BSDsResponse
+  key: domain
+  aka: branded short domain / custom domain
+  note: >-
+    Not a standalone resource with its own CRUD — BSDs are read-only via GET /bsds and appear as
+    a `bsds` array on both Organization and Group.
+- name: Webhook
+  schema: Webhook
+  key: guid
+  fields: [guid, created, modified, modified_by, alerted, deactivated, is_active, is_alert,
+    organization_guid, group_guid, name, event, url, status, oauth_url, client_id, client_secret,
+    fetch_tags]
+  note: >-
+    A webhook is scoped to BOTH an organization_guid and a group_guid, and carries the outbound
+    credentials Bitly uses to authenticate to the consumer endpoint.
+- name: Deeplink
+  schema: Deeplink
+  key: null
+  fields: [app_id, app_uri_path, install_url, install_type]
+  note: An embedded value object on a Bitlink, not independently addressable.
+
+relationships:
+- from: Group
+  to: Organization
+  type: belongs_to
+  via: organization_guid
+- from: Organization
+  to: Group
+  type: has_many
+  via: organization_guid
+- from: Organization
+  to: BSD
+  type: has_many
+  via: bsds
+- from: Group
+  to: BSD
+  type: has_many
+  via: bsds
+- from: Group
+  to: GroupPreferences
+  type: has_one
+  via: group_guid
+- from: Group
+  to: Bitlink
+  type: has_many
+  via: group_guid
+- from: Group
+  to: QRCode
+  type: has_many
+  via: group_guid
+- from: Group
+  to: Campaign
+  type: has_many
+  via: group_guid
+- from: Campaign
+  to: Group
+  type: belongs_to
+  via: group_guid
+- from: Campaign
+  to: Channel
+  type: has_many
+  via: campaign_guid
+- from: Channel
+  to: Bitlink
+  type: has_many
+  via: channel_guid
+- from: Bitlink
+  to: CustomBitlink
+  type: has_many
+  via: custom_bitlinks
+- from: CustomBitlink
+  to: Bitlink
+  type: belongs_to
+  via: bitlink
+- from: CustomBitlink
+  to: CustomBitlinkHistory
+  type: has_many
+  via: bitlink_history
+- from: Bitlink
+  to: Deeplink
+  type: has_many
+  via: deeplinks
+- from: QRCode
+  to: Bitlink
+  type: belongs_to
+  via: bitlink
+  note: Dynamic QR Codes only; static QR Codes have no Bitlink.
+- from: Webhook
+  to: Organization
+  type: belongs_to
+  via: organization_guid
+- from: Webhook
+  to: Group
+  type: belongs_to
+  via: group_guid
+- from: User
+  to: Group
+  type: has_one
+  via: default_group_guid
+  note: The fallback group used when a write omits group_guid.

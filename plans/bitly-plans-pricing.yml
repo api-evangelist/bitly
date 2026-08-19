@@ -1,0 +1,87 @@
+generated: '2026-08-13'
+method: searched
+source: https://bitly.com/pages/pricing
+docs: https://bitly.com/pages/pricing
+currency: USD
+plan_count: 5
+note: >-
+  Bitly publishes list pricing publicly for four self-serve tiers and gates the fifth behind
+  sales. The API request quota is a first-class, published line item on every tier, which is
+  unusual and useful — most link-management vendors do not publish an API number at all. Quotas
+  are monthly and reset on the first of the month.
+plans:
+- name: Free
+  price: 0
+  currency: USD
+  period: month
+  included:
+    links: 5/month
+    qr_codes: 2/month
+    custom_back_halves: 3/month
+    custom_landing_pages: 2
+    api_requests: 1000/month
+    custom_domains: 0
+    click_and_scan_data: unlimited views
+  limits:
+    api_requests_month: 1000
+- name: Core
+  price: 10
+  currency: USD
+  period: month
+  billing: annual only ($120/year)
+  included:
+    links: 100/month
+    qr_codes: 5/month
+    custom_landing_pages: 5
+    api_requests: 5000/month
+    custom_domains: 0
+    click_and_scan_data: 30 days retained
+  limits:
+    api_requests_month: 5000
+- name: Growth
+  price: 29
+  currency: USD
+  period: month
+  billing: $29/mo billed annually ($348/year) or $35/mo billed monthly
+  included:
+    links: 500/month
+    qr_codes: 10/month
+    custom_landing_pages: 10
+    api_requests: 25000/month
+    custom_domains: 1 complimentary
+    click_and_scan_data: 4 months retained
+  limits:
+    api_requests_month: 25000
+- name: Premium
+  price: 199
+  currency: USD
+  period: month
+  billing: $199/mo billed annually ($2,388/year) or $300/mo billed monthly
+  included:
+    links: 3000/month
+    qr_codes: 200/month
+    custom_landing_pages: 20
+    api_requests: 50000/month
+    custom_domains: 1
+    click_and_scan_data: 1 year retained
+  limits:
+    api_requests_month: 50000
+- name: Enterprise
+  price: null
+  currency: USD
+  period: custom
+  billing: contact sales
+  included:
+    links: custom volume
+    qr_codes: custom volume
+    custom_landing_pages: custom
+    api_requests: custom
+    custom_domains: multiple
+    click_and_scan_data: 2 years retained
+    webhooks: included
+    users: multiple, with group permissions
+  limits:
+    api_requests_month: null
+  note: >-
+    Webhooks are called out as an Enterprise inclusion, so the /v4/webhooks operations in Bitly's
+    OpenAPI are not reachable on the self-serve tiers.

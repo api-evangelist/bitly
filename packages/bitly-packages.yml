@@ -1,0 +1,102 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://dev.bitly.com/docs/sdks/npm-package/, https://dev.bitly.com/docs/sdks/ios-sdk/,
+  https://dev.bitly.com/docs/sdks/android-sdk/, https://github.com/orgs/bitly/repositories,
+  registry.npmjs.org, pypi.org, rubygems.org, search.maven.org
+note: >-
+  Bitly's current first-party client library is @bitly/api-client, published to npm from
+  github.com/bitly/bitlyapi.js and listed on Bitly's own SDK docs page. It is young: v0.1.1,
+  first released 2026-06-24. The older first-party Python library (bitly_api / bitly-api-python)
+  is ARCHIVED on GitHub and its last PyPI release was 0.3 on 2013-08-01 — it targets the retired
+  v3 API and should not be used against v4. The iOS and Android SDKs are first-party and
+  documented, but are distributed as GitHub release repositories rather than through CocoaPods,
+  SwiftPM or Maven Central, so no registry answers for them.
+summary:
+  total: 7
+  official: 5
+  languages: [JavaScript/TypeScript, Swift/iOS, Kotlin/Android, Python, Ruby, Java]
+packages:
+- name: '@bitly/api-client'
+  language: JavaScript/TypeScript
+  registry: npm
+  url: https://www.npmjs.com/package/@bitly/api-client
+  repository: https://github.com/bitly/bitlyapi.js
+  docs: https://dev.bitly.com/docs/sdks/npm-package/
+  official: true
+  version: 0.1.1
+  published: '2026-06-25'
+  license: MIT
+  install: npm install @bitly/api-client
+  note: >-
+    First-party. "The batteries-included Bitly SDK Node". Repository last pushed 2026-08-10,
+    so it is actively maintained, but the published package still sits at a 0.x pre-1.0 version.
+- name: Bitly SDK for iOS
+  language: Swift/iOS
+  registry: github-release
+  url: https://github.com/bitly/bitly_ios_sdk_release
+  repository: https://github.com/bitly/bitly_ios_sdk_release
+  docs: https://dev.bitly.com/docs/sdks/ios-sdk/
+  official: true
+  version: null
+  published: null
+  note: >-
+    First-party, documented on Bitly's own SDK page, but distributed as a binary release
+    repository with no CocoaPods/SwiftPM/registry entry to query, so there is no registry
+    metadata endpoint that can date it. Repository last pushed 2022-09-27 — checked, nothing
+    to record, and the four-year gap is itself the finding.
+- name: Bitly SDK for Android
+  language: Kotlin/Android
+  registry: github-release
+  url: https://github.com/bitly/bitly_android_sdk_release
+  repository: https://github.com/bitly/bitly_android_sdk_release
+  docs: https://dev.bitly.com/docs/sdks/android-sdk/
+  official: true
+  version: null
+  published: null
+  note: >-
+    First-party and documented, distributed as a binary release repository with no Maven
+    Central coordinates, so no registry metadata endpoint answers. Repository last pushed
+    2021-09-30 — checked, nothing to record.
+- name: bitly_api
+  language: Python
+  registry: pypi
+  url: https://pypi.org/project/bitly_api/
+  repository: https://github.com/bitly/bitly-api-python
+  official: true
+  deprecated: true
+  version: '0.3'
+  published: '2013-08-01'
+  note: >-
+    First-party but ABANDONED. GitHub repository is archived (last push 2021-04-09) and the
+    last PyPI release predates the v4 API by nine years. Bitly ships no current first-party
+    Python client.
+- name: mcp-remote
+  language: JavaScript/TypeScript
+  registry: npm
+  url: https://www.npmjs.com/package/mcp-remote
+  official: false
+  version: null
+  published: null
+  note: >-
+    Not a Bitly package. Named here only because Bitly's own MCP configuration docs instruct
+    stdio-only clients to run `npx mcp-remote https://api-ssl.bitly.com/v4/mcp` as a proxy to
+    the hosted server. Third-party; version deliberately not pinned by Bitly's docs.
+- name: bitly
+  language: Ruby
+  registry: rubygems
+  url: https://rubygems.org/gems/bitly
+  repository: https://github.com/philnash/bitly
+  official: false
+  version: 3.1.0
+  published: '2025-02-18'
+  note: Community gem maintained by Phil Nash; supports the v4 API. Not published by Bitly.
+- name: com.opsmatters:bitly-java-api
+  language: Java
+  registry: maven
+  url: https://search.maven.org/artifact/com.opsmatters/bitly-java-api
+  repository: https://github.com/opsmatters/bitly-java-api
+  official: false
+  version: 1.0.4
+  published: '2020-07-13'
+  note: Community Java client for the v4 API. Not published by Bitly.

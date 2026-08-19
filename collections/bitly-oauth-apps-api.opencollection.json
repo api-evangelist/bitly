@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly OAuth Apps API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Retrieve OAuth App",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api-ssl.bitly.com/v4/apps/:client_id",
+        "params": [
+          {
+            "name": "client_id",
+            "value": "1234a56b789cd0e123456fg7h8901j123km45n6p",
+            "type": "path",
+            "description": "The client ID of an OAuth app"
+          }
+        ]
+      },
+      "docs": "Retrieve the details for the provided OAuth App client ID"
+    }
+  ],
+  "bundled": true
+}

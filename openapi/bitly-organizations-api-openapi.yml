@@ -1,93 +1,462 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
-  title: Bitly API v4 Bitlinks Organizations API
-  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
-
-    organizations, campaigns, channels, QR codes, and click analytics.
-
-
-    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
-
-    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
-
-    spec at https://dev.bitly.com/v4/v4.json.
-
-    '
+  title: Bitly Organizations API
+  description: The Organizations surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
+    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
+    parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  termsOfService: https://bitly.com/pages/terms-of-service
   contact:
-    name: Bitly API
-    url: https://dev.bitly.com/api-reference
+    url: https://bitly.is/API-support
   license:
-    name: Proprietary
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
 - url: https://api-ssl.bitly.com/v4
-  description: Bitly v4 REST API
 security:
 - bearerAuth: []
 tags:
 - name: Organizations
+  description: 'Organizations are equivalent to a Bitly account. Every plan limit, group, and user is
+    tied to an organization.
+
+    '
 paths:
   /organizations:
     get:
+      summary: Retrieve Organizations
+      description: 'Retrieve a list of organizations for the authenticated user. By default, only organizations
+        permitted by the token''s allowed_orgs are returned. Use include_all=true to return all organizations
+        regardless of token restrictions. Each organization is annotated with its authentication requirements
+        (require_sso, require_2fa) when configured.
+
+        '
       tags:
       - Organizations
-      summary: List organizations for the authenticated user
-      operationId: listOrganizations
+      operationId: getOrganizations
+      parameters:
+      - name: include_all
+        in: query
+        required: false
+        description: 'When set to true, returns all of the user''s organizations regardless of the token''s
+          allowed_orgs restrictions.
+
+          '
+        schema:
+          type: boolean
       responses:
         '200':
-          description: Organizations.
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organizations'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
   /organizations/{organization_guid}:
-    parameters:
-    - name: organization_guid
-      in: path
-      required: true
-      schema:
-        type: string
     get:
+      summary: Retrieve an Organization
+      description: Retrive details for the specified organization.
       tags:
       - Organizations
-      summary: Retrieve an organization
       operationId: getOrganization
+      parameters:
+      - $ref: '#/components/parameters/OrganizationGUID'
       responses:
         '200':
-          description: Organization.
-  /organizations/{organization_guid}/plan_limits:
-    parameters:
-    - name: organization_guid
-      in: path
-      required: true
-      schema:
-        type: string
-    get:
-      tags:
-      - Organizations
-      summary: Get organization plan limits
-      operationId: getOrganizationPlanLimits
-      responses:
-        '200':
-          description: Plan limits.
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
   /organizations/{organization_guid}/shorten_counts:
-    parameters:
-    - name: organization_guid
+    get:
+      description: Returns the shorten counts for a specific organization over a specified time period.
+      summary: Get Shorten Counts for an Organization
+      operationId: getOrganizationShortenCounts
+      tags:
+      - Organizations
+      parameters:
+      - $ref: '#/components/parameters/OrganizationGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metrics'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /organizations/{organization_guid}/shorten_counts_by_group:
+    get:
+      description: Returns the shorten counts for a specific organization by group for the current month.
+      summary: Get Shorten Counts for an Organization by Group
+      operationId: getOrganizationShortenCountsByGroup
+      tags:
+      - Organizations
+      parameters:
+      - $ref: '#/components/parameters/OrganizationGUID'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metrics'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /organizations/{organization_guid}/plan_limits:
+    get:
+      summary: Get Plan Limits
+      description: Returns all plan limits and counts available for an organization.
+      operationId: getPlanLimits
+      parameters:
+      - $ref: '#/components/parameters/OrganizationGUID'
+      tags:
+      - Organizations
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanLimits'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+components:
+  parameters:
+    OrganizationGUID:
+      name: organization_guid
+      description: A GUID for a Bitly organization
       in: path
       required: true
       schema:
         type: string
-    get:
-      tags:
-      - Organizations
-      summary: Get organization shorten counts
-      operationId: getOrganizationShortenCounts
-      responses:
-        '200':
-          description: Shorten counts.
-components:
+      example: Oa1bcd234eF
+    TimeUnit:
+      name: unit
+      description: A unit of time
+      schema:
+        $ref: '#/components/schemas/TimeUnit'
+      required: true
+      in: query
+      example: month
+    UnitAmount:
+      name: units
+      description: An integer representing the time units to query data for. pass -1 to return all units
+        of time
+      schema:
+        type: integer
+        default: -1
+      required: true
+      in: query
+      example: 1
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will
+        default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and
+        ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
+  schemas:
+    BaseMetrics:
+      type: object
+      properties:
+        unit:
+          type: string
+          x-faker: internet.userName
+        units:
+          type: integer
+          x-faker:
+            datatype.number:
+              min: 1
+              max: 100
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - devices
+          - referrers
+          - referrers_by_domain
+          - referring_domains
+          - referring_networks
+          - shorten_counts
+          - destinations
+        unit_reference:
+          type: string
+          x-faker: date.past
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Metric:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: integer
+    Metrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/Metric'
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Organization:
+      type: object
+      required:
+      - guid
+      - name
+      - is_active
+      - tier
+      - tier_family
+      - tier_display_name
+      - role
+      - created
+      - modified
+      - bsds
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - properties:
+          name:
+            type: string
+          is_active:
+            type: boolean
+          guid:
+            type: string
+          tier:
+            type: string
+          tier_family:
+            type: string
+          tier_display_name:
+            type: string
+          role:
+            type: string
+          created:
+            type: string
+          modified:
+            type: string
+          bsds:
+            type: array
+            items:
+              type: string
+          require_sso:
+            type: string
+            description: 'SSO authentication requirement for this organization. Possible values: "none",
+              "any". Omitted when no auth requirements are configured.
+
+              '
+            enum:
+            - none
+            - any
+          require_2fa:
+            type: string
+            description: 'Two-factor authentication requirement for this organization. Possible values:
+              "none", "sms". Omitted when no auth requirements are configured.
+
+              '
+            enum:
+            - none
+            - sms
+    Organizations:
+      type: object
+      required:
+      - organizations
+      properties:
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+    PlanLimit:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        limit:
+          type: integer
+        count:
+          type: integer
+    PlanLimits:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - properties:
+          organization_guid:
+            type: string
+          plan_limits:
+            type: array
+            items:
+              $ref: '#/components/schemas/PlanLimit'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
-
-        Send as `Authorization: Bearer {token}`.
-
-        '

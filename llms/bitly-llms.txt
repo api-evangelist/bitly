@@ -1,0 +1,97 @@
+# Bitly
+
+> Link management platform for creating, branding, routing and measuring short links, QR Codes
+> and link-in-bio pages. The Bitly v4 REST API is a 94-operation, bearer-authenticated JSON API
+> at https://api-ssl.bitly.com/v4. Bitly publishes its own OpenAPI 3.0 definition and operates an
+> official remote Model Context Protocol server, so it is directly callable by AI agents.
+
+<!--
+generated: 2026-08-13
+method: generated
+source: apis.yml + repo artifacts. Bitly publishes no /llms.txt of its own — probed
+        https://bitly.com/llms.txt, https://dev.bitly.com/llms.txt and
+        https://dev.bitly.com/docs/llms.txt on 2026-08-13, all HTTP 404.
+-->
+
+## Start here
+
+- [Developer portal](https://dev.bitly.com): entry point for all Bitly API documentation.
+- [Introduction / getting started](https://dev.bitly.com/docs/getting-started/introduction): first call walkthrough.
+- [API reference](https://dev.bitly.com/api-reference): all 94 v4 operations.
+- [OpenAPI 3.0 definition](https://dev.bitly.com/v4/v4.json): Bitly's own machine-readable contract. This is the authoritative source — prefer it to scraping the reference.
+
+## Authentication
+
+- [Authentication guide](https://dev.bitly.com/docs/getting-started/authentication): bearer tokens and OAuth 2.0.
+- Send `Authorization: Bearer {token}`. Generic tokens come from https://bitly.com/settings/api.
+- OAuth 2.0 authorization code with S256 PKCE: authorize at https://bitly.com/oauth/authorize, exchange at https://api-ssl.bitly.com/oauth/access_token.
+- [OAuth server metadata](https://api-ssl.bitly.com/.well-known/oauth-authorization-server): RFC 8414 discovery, includes a dynamic client registration endpoint.
+- No scopes exist. A token carries the full permissions of the granting user. See scopes/bitly-scopes.yml.
+
+## MCP — the agent surface
+
+- [Bitly MCP server](https://dev.bitly.com/bitly-mcp/): official, hosted by Bitly.
+- Endpoint: `https://api-ssl.bitly.com/v4/mcp` (remote HTTP; authentication required).
+- [Quickstart](https://dev.bitly.com/bitly-mcp/overview/quickstart/) · [Configuration](https://dev.bitly.com/bitly-mcp/using-the-bitly-mcp-server/configuration-details/) · [Tools reference](https://dev.bitly.com/bitly-mcp/using-the-bitly-mcp-server/mcp-tools-reference/) · [Changelog](https://dev.bitly.com/bitly-mcp/overview/mcp-changelog/)
+- 25 tools across link management, analytics, QR Codes, groups, custom domains and bulk upload.
+- Tool-to-REST bindings: mcp/bitly-tool-crosswalk.yml. 23 of 25 tools map to real operationIds; bulk upload is MCP-only.
+- Not on MCP: campaigns, channels, webhooks, and all quota-introspection operations.
+
+## Core concepts
+
+- Hierarchy is Organization -> Group (workspace) -> Bitlink / QR Code. Resolve the right `group_guid` before writing; otherwise content lands in the user's default group.
+- A Bitlink is addressed by its own short form (domain + hash), not a surrogate id.
+- A custom back-half is a separate re-pointable entity that references a Bitlink and keeps a history.
+- QR Codes are first-class. Dynamic codes reference a Bitlink and can be re-pointed; static codes cannot.
+- Entity graph: data-model/bitly-data-model.yml
+
+## Conventions
+
+- Pagination is cursor-based: pass the opaque `search_after` token returned by the API, plus `size` (default 50). There is no page number.
+- Analytics share one time-window idiom: `unit` (minute/hour/day/week/month), `units`, `unit_reference` (ISO-8601).
+- Errors are a vendor JSON envelope, not RFC 9457: `{message, description, resource, errors[]}`. The machine-readable code is in `message` as a SCREAMING_SNAKE token.
+- There is NO idempotency key. A retried create makes a second live link and burns quota.
+- There is no request-id or correlation-id response header.
+- Full detail: conventions/bitly-conventions.yml · errors/bitly-problem-types.yml
+
+## Limits and cost
+
+- [Rate limits](https://dev.bitly.com/docs/getting-started/rate-limits): 5 concurrent connections per IP; per-minute allowance is one-tenth of the hourly allowance.
+- Monthly API request quota by plan: Free 1,000 · Core 5,000 · Growth 25,000 · Premium 50,000 · Enterprise custom. Resets on the 1st.
+- On exhaustion: HTTP 429 with `RATE_LIMIT_EXCEEDED` (hourly/minute) or `API_USAGE_LIMIT_EXCEEDED` (monthly).
+- Bitly returns NO remaining-quota headers and no Retry-After. Poll `GET /v4/user/platform_limits` or `GET /v4/organizations/{organization_guid}/plan_limits` instead.
+- HTTP 402 UPGRADE_REQUIRED is declared on 32 operations — a plan signal, not a bug.
+- [Pricing](https://bitly.com/pages/pricing) · rate-limits/bitly-rate-limits.yml · plans/bitly-plans-pricing.yml
+
+## Events
+
+- One webhook event type: `engagement` (link clicks, QR scans, link-in-bio button clicks).
+- Managed by six REST operations under `/v4/webhooks`; Enterprise plan only.
+- Five delivery attempts with exponential backoff, 10s timeout, deactivation after 24h in alert status.
+- No payload signature is published. No AsyncAPI document exists.
+- asyncapi/bitly-engagement-webhooks.yml
+
+## Testing
+
+- There is no sandbox and no test mode. Every call is production.
+- Bitly's guidance is a separate free account or a separate group. sandbox/bitly-sandbox.yml
+
+## SDKs
+
+- [npm package](https://dev.bitly.com/docs/sdks/npm-package/) — `@bitly/api-client`, first-party, v0.1.1 (2026-06-25).
+- [iOS SDK](https://dev.bitly.com/docs/sdks/ios-sdk/) · [Android SDK](https://dev.bitly.com/docs/sdks/android-sdk/) — first-party, GitHub release distribution.
+- The first-party Python library (`bitly_api`) is archived and targets the retired v3 API. Do not use it.
+- packages/bitly-packages.yml
+
+## Operations and trust
+
+- [Status page](https://status.bitly.com)
+- [Security & compliance center](https://security.bitly.com) — SOC 2 Type 2, GDPR, CCPA; reports on request.
+- [security.txt](https://bitly.com/.well-known/security.txt) — security@bitly.com
+- No published SLA, versioning policy or deprecation policy. lifecycle/bitly-lifecycle.yml
+
+## Optional
+
+- [Support](https://support.bitly.com) · [API support](https://bitly.is/API-support)
+- [Blog](https://bitly.com/blog/) · [Terms](https://bitly.com/pages/terms-of-service) · [Privacy](https://bitly.com/pages/privacy)
+- [GitHub organization](https://github.com/bitly)

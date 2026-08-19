@@ -1,0 +1,56 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://dev.bitly.com/ docs sitemap (all 28 pages reviewed),
+  https://dev.bitly.com/bitly-mcp/overview/mcp-changelog/,
+  https://dev.bitly.com/docs/tutorials/changes-to-engagement-metrics/,
+  https://status.bitly.com, derived from openapi/_original/bitly-v4-openapi.json
+api: Bitly API v4
+versioning:
+  scheme: url-path
+  current_version: v4
+  spec_version: 4.0.0
+  path_prefix: /v4
+  published_policy: false
+  note: >-
+    The major version is in the base URL and has been v4 since 2018. Bitly publishes no written
+    versioning policy — no statement of what constitutes a breaking change, no minimum notice
+    period, no version negotiation header.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: 0
+  note: >-
+    Checked directly and the absence is unambiguous: Bitly's own OpenAPI marks zero of its 94
+    operations `deprecated: true`, declares no Sunset or Deprecation response header on any
+    operation, and the docs carry no deprecation or end-of-life page. The v3 API was retired
+    years ago and the first-party Python client for it is archived, but no machine-readable
+    deprecation signal was ever emitted for it.
+change_communication:
+  rest_changelog: false
+  rest_changelog_note: >-
+    There is NO dated changelog for the REST API. The nearest thing is a single dated migration
+    notice — "Changes to engagement metrics", 2024-06-12 — which describes a backward-compatible
+    response change across 24 analytics endpoints and names no replacement or sunset.
+  mcp_changelog: https://dev.bitly.com/bitly-mcp/overview/mcp-changelog/
+  mcp_changelog_note: >-
+    The MCP server, by contrast, has a properly dated changelog that labels breaking changes
+    explicitly. See changelog/bitly-changelog.yml. The asymmetry is the finding: Bitly's newest
+    surface is better version-managed than its core REST API.
+status_page:
+  url: https://status.bitly.com
+  alternate: https://bitly.statuspage.io
+  provider: Atlassian Statuspage
+  http_status: 200
+  verified: '2026-08-13'
+sla:
+  published: false
+  note: >-
+    No public SLA or uptime commitment. Recovery objectives are published on the trust center
+    (RTO 5 minutes, RPO 4 hours) but those are disaster-recovery targets, not an availability SLA.
+support:
+  url: https://support.bitly.com
+  api_support: https://bitly.is/API-support
+  note: bitly.is/API-support is the contact URL declared in the OpenAPI info.contact block.

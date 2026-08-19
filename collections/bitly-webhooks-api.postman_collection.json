@@ -1,0 +1,2841 @@
+{
+  "item": [
+    {
+      "id": "c30586ee-cb99-4ad0-bee3-401fe75366c4",
+      "name": "Webhooks",
+      "description": {
+        "content": "Webhooks are a method of sending information from Bitly to an application outside of Bitly. It's a way to automate actions or updates between two different systems. These endpoints are for configuring your webhooks.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29bc1f30-7f6c-4628-9d3d-1e4dea554c92",
+          "name": "Get Webhooks",
+          "request": {
+            "name": "Get Webhooks",
+            "description": {
+              "content": "Fetch all webhooks available for an Organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_guid",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_guid",
+                  "description": "(Required) A GUID for a Bitly organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c21e516f-a1aa-47e0-b1ed-217e75748b78",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_guid",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_guid",
+                      "description": "(Required) A GUID for a Bitly organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhooks\": [\n    {\n      \"guid\": \"string\",\n      \"created\": \"string\",\n      \"modified\": \"string\",\n      \"modified_by\": \"string\",\n      \"alerted\": \"string\",\n      \"deactivated\": \"string\",\n      \"is_active\": false,\n      \"is_alert\": true,\n      \"organization_guid\": \"string\",\n      \"name\": \"string\",\n      \"event\": \"string\",\n      \"url\": \"string\",\n      \"references\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"group_guid\": \"string\",\n      \"status\": \"string\",\n      \"oauth_url\": \"string\",\n      \"client_id\": \"string\",\n      \"client_secret\": \"string\",\n      \"fetch_tags\": true\n    },\n    {\n      \"guid\": \"string\",\n      \"created\": \"string\",\n      \"modified\": \"string\",\n      \"modified_by\": \"string\",\n      \"alerted\": \"string\",\n      \"deactivated\": \"string\",\n      \"is_active\": true,\n      \"is_alert\": true,\n      \"organization_guid\": \"string\",\n      \"name\": \"string\",\n      \"event\": \"string\",\n      \"url\": \"string\",\n      \"references\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"group_guid\": \"string\",\n      \"status\": \"string\",\n      \"oauth_url\": \"string\",\n      \"client_id\": \"string\",\n      \"client_secret\": \"string\",\n      \"fetch_tags\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cd78c65-35b1-41e4-8e3f-16872b2c9a50",
+              "name": "UPGRADE_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_guid",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_guid",
+                      "description": "(Required) A GUID for a Bitly organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9d3cb86-791b-4dea-bd1f-7fea05e68fd7",
+              "name": "FORBIDDEN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_guid",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_guid",
+                      "description": "(Required) A GUID for a Bitly organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57ef60f7-908c-4860-9313-08c649f7c9e8",
+              "name": "NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_guid",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_guid",
+                      "description": "(Required) A GUID for a Bitly organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63347372-3229-4073-8298-9627615b13cf",
+              "name": "MONTHLY_LIMIT_EXCEEDED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_guid",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_guid",
+                      "description": "(Required) A GUID for a Bitly organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API_USAGE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "779d86fe-dd90-4c13-ba72-b455cda266ed",
+              "name": "INTERNAL_ERROR",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_guid",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_guid",
+                      "description": "(Required) A GUID for a Bitly organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c688762-0fab-4b48-a552-8b67a4177b30",
+              "name": "TEMPORARILY_UNAVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_guid",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_guid",
+                      "description": "(Required) A GUID for a Bitly organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bcfd20e4-dba5-4e0d-a40e-e466fc0d1044",
+          "name": "Create Webhook",
+          "request": {
+            "name": "Create Webhook",
+            "description": {
+              "content": "Creates a webhook.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"organization_guid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"event\": \"<string>\",\n  \"url\": \"<string>\",\n  \"is_active\": \"<boolean>\",\n  \"group_guid\": \"<string>\",\n  \"oauth_url\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"fetch_tags\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9cfc41d9-4641-40fe-b53e-2af1dff5a2fb",
+              "name": "CREATED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"guid\": \"string\",\n  \"created\": \"string\",\n  \"modified\": \"string\",\n  \"modified_by\": \"string\",\n  \"alerted\": \"string\",\n  \"deactivated\": \"string\",\n  \"is_active\": true,\n  \"is_alert\": true,\n  \"organization_guid\": \"string\",\n  \"name\": \"string\",\n  \"event\": \"string\",\n  \"url\": \"string\",\n  \"references\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"group_guid\": \"string\",\n  \"status\": \"string\",\n  \"oauth_url\": \"string\",\n  \"client_id\": \"string\",\n  \"client_secret\": \"string\",\n  \"fetch_tags\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f87c45d-f66a-42b7-908e-73228ce75794",
+              "name": "BAD_REQUEST",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f757b8cc-1afd-472b-9988-0d96e7d67468",
+              "name": "UPGRADE_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5664ec1b-64c1-4894-9461-3551d39599e6",
+              "name": "FORBIDDEN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9555044a-8de9-4d5c-b52b-038c9f8dd860",
+              "name": "NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed8720cc-7c88-480a-b9bd-97c6b58c3e69",
+              "name": "UNPROCESSABLE_ENTITY",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc130a9b-9141-4440-89d7-c2a1e8151274",
+              "name": "MONTHLY_LIMIT_EXCEEDED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API_USAGE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e67d1c5-e286-47a1-9420-b45b2d92d22f",
+              "name": "INTERNAL_ERROR",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a5ae4cb-c070-4398-ac09-c3ccafd05d9c",
+              "name": "TEMPORARILY_UNAVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e3b3fc8-213a-40cd-ac5f-a776ea89a89d",
+          "name": "Retrieve Webhook",
+          "request": {
+            "name": "Retrieve Webhook",
+            "description": {
+              "content": "Returns a webhook.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhooks",
+                ":webhook_guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_guid",
+                  "description": "(Required) A GUID for a Bitly webhook"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be988bcd-9610-4921-bea2-4a1044f9b57d",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"guid\": \"string\",\n  \"created\": \"string\",\n  \"modified\": \"string\",\n  \"modified_by\": \"string\",\n  \"alerted\": \"string\",\n  \"deactivated\": \"string\",\n  \"is_active\": true,\n  \"is_alert\": true,\n  \"organization_guid\": \"string\",\n  \"name\": \"string\",\n  \"event\": \"string\",\n  \"url\": \"string\",\n  \"references\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"group_guid\": \"string\",\n  \"status\": \"string\",\n  \"oauth_url\": \"string\",\n  \"client_id\": \"string\",\n  \"client_secret\": \"string\",\n  \"fetch_tags\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d93f0023-9e0b-4afe-a910-6cf997f5932a",
+              "name": "BAD_REQUEST",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d644e27-e63d-475b-9483-00bf050fa1d9",
+              "name": "UPGRADE_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0943784e-18fe-4712-9a4f-88edb43b6504",
+              "name": "FORBIDDEN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20aa7d94-bec1-4570-ac37-0fded0af7734",
+              "name": "NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1d93531-0449-4267-8e21-88aa8b0faddb",
+              "name": "MONTHLY_LIMIT_EXCEEDED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API_USAGE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf506087-0afd-4a6d-9dfd-a96a6a680cfa",
+              "name": "INTERNAL_ERROR",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51f84c31-e054-4253-937f-2fa9c191bb22",
+              "name": "TEMPORARILY_UNAVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ab382c2-12d2-45a1-a76f-f50004be7423",
+          "name": "Update Webhook",
+          "request": {
+            "name": "Update Webhook",
+            "description": {
+              "content": "Update a webhook",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhooks",
+                ":webhook_guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_guid",
+                  "description": "(Required) A GUID for a Bitly webhook"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"guid\": \"<string>\",\n  \"is_active\": \"<boolean>\",\n  \"organization_guid\": \"<string>\",\n  \"group_guid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"event\": \"<string>\",\n  \"url\": \"<string>\",\n  \"oauth_url\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"fetch_tags\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e19c2156-8916-41d1-9855-64fdeadccd1f",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"Wa1bcDefG23\",\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"guid\": \"string\",\n  \"created\": \"string\",\n  \"modified\": \"string\",\n  \"modified_by\": \"string\",\n  \"alerted\": \"string\",\n  \"deactivated\": \"string\",\n  \"is_active\": true,\n  \"is_alert\": true,\n  \"organization_guid\": \"string\",\n  \"name\": \"string\",\n  \"event\": \"string\",\n  \"url\": \"string\",\n  \"references\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"group_guid\": \"string\",\n  \"status\": \"string\",\n  \"oauth_url\": \"string\",\n  \"client_id\": \"string\",\n  \"client_secret\": \"string\",\n  \"fetch_tags\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fddf7833-6870-40c3-81db-e7b1ca7eb796",
+              "name": "BAD_REQUEST",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"Wa1bcDefG23\",\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78eb4779-906d-44d8-973e-1c91f725e5b6",
+              "name": "UPGRADE_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"Wa1bcDefG23\",\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07e122a9-4620-4540-b3fb-4a24a744e469",
+              "name": "FORBIDDEN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"Wa1bcDefG23\",\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98f6516c-f822-42d0-a2b0-e3a7bc4cea70",
+              "name": "NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"Wa1bcDefG23\",\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9baf0a2c-5ae6-4493-a5b1-7b30b40132f0",
+              "name": "UNPROCESSABLE_ENTITY",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"Wa1bcDefG23\",\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb3a259a-a18b-4f9e-98c8-363d191e9ac1",
+              "name": "MONTHLY_LIMIT_EXCEEDED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"Wa1bcDefG23\",\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API_USAGE_LIMIT_EXCEEDED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efbe23b8-a6b5-4867-9e59-bfe90216eecd",
+              "name": "INTERNAL_ERROR",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"Wa1bcDefG23\",\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbedc4e3-dec4-4e9a-be2d-7cccc25eb3f5",
+              "name": "TEMPORARILY_UNAVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"guid\": \"Wa1bcDefG23\",\n  \"is_active\": true,\n  \"organization_guid\": \"Oa1bcd234eF\",\n  \"group_guid\": \"Ba1bc23dE4F\",\n  \"name\": \"My Webhook\",\n  \"event\": \"decodes\",\n  \"url\": \"https://bitly.com/webhooks\",\n  \"oauth_url\": \"https://fake.com/oauth\",\n  \"client_id\": \"fakeclientid123\",\n  \"client_secret\": \"itsasecreticanttellyou\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8868f191-ae35-40c6-8aff-b11bb0267068",
+          "name": "Delete Webhook",
+          "request": {
+            "name": "Delete Webhook",
+            "description": {
+              "content": "Deletes a webhook.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhooks",
+                ":webhook_guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_guid",
+                  "description": "(Required) A GUID for a Bitly webhook"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7dbcfe2c-737c-4b9e-8b09-841673194f29",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9db1cf1a-970e-423a-b756-bcfc6a2978e4",
+              "name": "BAD_REQUEST",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "367b4c01-9640-42f5-a2e1-9c91b89d661b",
+              "name": "UPGRADE_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fe0248e-20f9-4075-bc0c-42967a3c3384",
+              "name": "FORBIDDEN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac8127bd-1dd7-4168-8097-7890175f362a",
+              "name": "NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69c6e7c3-d61d-4041-910c-5df2c7aee708",
+              "name": "INTERNAL_ERROR",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae823f12-9d4b-4702-a4b7-ff481a0a8fd9",
+              "name": "TEMPORARILY_UNAVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec4cffc7-a267-4f20-b9db-a99264b990de",
+          "name": "Verify Webhook",
+          "request": {
+            "name": "Verify Webhook",
+            "description": {
+              "content": "Sends ping event to test webhook configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhooks",
+                ":webhook_guid",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_guid",
+                  "description": "(Required) A GUID for a Bitly webhook"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf88fd63-645c-4992-acd5-7993be39a50c",
+              "name": "SUCCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"guid\": \"string\",\n  \"created\": \"string\",\n  \"modified\": \"string\",\n  \"modified_by\": \"string\",\n  \"alerted\": \"string\",\n  \"deactivated\": \"string\",\n  \"is_active\": true,\n  \"is_alert\": true,\n  \"organization_guid\": \"string\",\n  \"name\": \"string\",\n  \"event\": \"string\",\n  \"url\": \"string\",\n  \"references\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"group_guid\": \"string\",\n  \"status\": \"string\",\n  \"oauth_url\": \"string\",\n  \"client_id\": \"string\",\n  \"client_secret\": \"string\",\n  \"fetch_tags\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34905e2c-7f27-4705-a6b2-970f6b37ebfc",
+              "name": "BAD_REQUEST",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "febea0a3-a694-4486-b22c-62f37c88c8fd",
+              "name": "UPGRADE_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13a9aa40-5a82-44f4-b6be-41e4da3b0738",
+              "name": "FORBIDDEN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19cf22a1-08ea-45d9-9a22-d10c66e93971",
+              "name": "NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2eb5698a-9d57-44f6-95d1-e41323761cda",
+              "name": "INTERNAL_ERROR",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3485874-30ab-42ac-a37f-e099f8c231cd",
+              "name": "TEMPORARILY_UNAVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":webhook_guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_guid",
+                      "description": "(Required) A GUID for a Bitly webhook"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"description\": \"string\",\n  \"resource\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"error_code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-ssl.bitly.com/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a86b6726-92dc-4153-95e8-b7c0b2d24840",
+    "name": "Bitly Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Webhooks surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation, from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation, parameter or schema was authored by API Evangelist.",
+      "type": "text/plain"
+    }
+  }
+}

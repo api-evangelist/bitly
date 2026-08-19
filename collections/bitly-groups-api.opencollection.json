@@ -1,0 +1,1018 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly Groups API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "Oa1bcd234eF",
+                "type": "query",
+                "description": "A GUID for a Bitly organization"
+              }
+            ]
+          },
+          "docs": "Returns a list of groups in the organization."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              }
+            ]
+          },
+          "docs": "Returns details for a group."
+        },
+        {
+          "info": {
+            "name": "Update a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of a group."
+        },
+        {
+          "info": {
+            "name": "Retrieve Tags by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/tags",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Tag set to return; defaults to bitlink"
+              }
+            ]
+          },
+          "docs": "Returns the tags currently used in the specified group. Maximum 1000."
+        },
+        {
+          "info": {
+            "name": "Retrieve Group Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/preferences",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              }
+            ]
+          },
+          "docs": "Returns preferences for the specified group."
+        },
+        {
+          "info": {
+            "name": "Update Group Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/preferences",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates preferences for a group."
+        },
+        {
+          "info": {
+            "name": "Retrieve Group Shorten Counts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/shorten_counts",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns all the shorten counts for a group."
+        },
+        {
+          "info": {
+            "name": "Get Click Metrics for a Group by Country",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/countries",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the geographic origins of click traffic by country for the specified group."
+        },
+        {
+          "info": {
+            "name": "Get Click Metrics for a Group by City",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/cities",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the geographic origins of click traffic by city for the specified group."
+        },
+        {
+          "info": {
+            "name": "Get Click Metrics for a Group by Device Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/devices",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the device types generating click traffic to the specified group's links."
+        },
+        {
+          "info": {
+            "name": "Get Click Metrics for a Group by Referring Networks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/referring_networks",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns metrics by referring networks for the specified group's links."
+        },
+        {
+          "info": {
+            "name": "Get Click Metrics for a Group by Referrer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/referrers",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns metrics by referrer for the specified group's links."
+        },
+        {
+          "info": {
+            "name": "Get Group Top Performing Links by Engagement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/engagements/top",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get top performing links by engagement for all links in a group."
+        },
+        {
+          "info": {
+            "name": "Get Group Metrics Over Time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/engagements/over_time",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get group engagement metrics over time for all links in a group."
+        },
+        {
+          "info": {
+            "name": "Get clicks by group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/clicks",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "get number of clicks on bitlinks in a group"
+        },
+        {
+          "info": {
+            "name": "Create an inline CSV export for a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/exports",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Build a CSV export synchronously and return it inline as a base64 data URI plus metadata.\nThe export_type field selects the CSV shape: link_engagements_batch (engagement metrics for\nexplicit bitlinks or a filter), links_list (link metadata roster), or qr_codes_list (QR code\nmetadata roster). Row caps apply per request: 200 rows when metrics are included\n(link_engagements_batch, or include_metrics on a list export); 1000 rows for metadata-only\nlist exports. When the match set exceeds the cap, tru"
+        },
+        {
+          "info": {
+            "name": "Get limit usage for a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/feature_usage",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "name",
+                "value": "qr_codes",
+                "type": "query",
+                "description": "The limit name you would like usage for"
+              }
+            ]
+          },
+          "docs": "Get a group's current feature limit usage, optionally provide limit name(s) for usage on specific limit(s)"
+        },
+        {
+          "info": {
+            "name": "Get historical usage for a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/historical_usage",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "name",
+                "value": "qr_codes",
+                "type": "query",
+                "description": "The limit name you would like usage for"
+              },
+              {
+                "name": "start_date",
+                "value": "2022-02-02",
+                "type": "query",
+                "description": "The start date for the date range"
+              },
+              {
+                "name": "end_date",
+                "value": "2023-10-04",
+                "type": "query",
+                "description": "The end date for the date range"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time (day, week, or month)"
+              }
+            ]
+          },
+          "docs": "Get a group's historical usage for specific limit(s) and date range. Refer to GET /v4/groups/{group_guid}/feature_usage endpoint response for available limit names."
+        },
+        {
+          "info": {
+            "name": "Get Group Link Clicks Over Time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/links/clicks/over_time",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get link clicks over time for all links in a group."
+        },
+        {
+          "info": {
+            "name": "Get Group Link Clicks by Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/links/clicks/devices",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get link clicks by device for all links in a group."
+        },
+        {
+          "info": {
+            "name": "Get Group Link Clicks by Referrer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/links/clicks/referrers",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get link clicks by referrer for all links in a group."
+        },
+        {
+          "info": {
+            "name": "Get Group Link Clicks by Country",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/links/clicks/countries",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get link clicks by country for all links in a group."
+        },
+        {
+          "info": {
+            "name": "Get Group Link Clicks by City",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/links/clicks/cities",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get link clicks by city for all links in a group."
+        },
+        {
+          "info": {
+            "name": "Get Group Top Performing Links by Click",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/links/clicks/top",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get top performing links by click for all links in a group."
+        },
+        {
+          "info": {
+            "name": "Get Scan Metrics for a Group Over Time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/codes/scans/over_time",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get QR code scan metrics over time for a group."
+        },
+        {
+          "info": {
+            "name": "Get Scan Metrics for a Group by Country",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/codes/scans/countries",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get QR code scan metrics for a group broken down by country."
+        },
+        {
+          "info": {
+            "name": "Get Scan Metrics for a Group by City",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/codes/scans/cities",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Get QR code scan metrics for a group broken down by city."
+        },
+        {
+          "info": {
+            "name": "Get Top Performing QR Codes for a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/codes/scans/top",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              },
+              {
+                "name": "decoupled",
+                "value": "",
+                "type": "query",
+                "description": "When true, ranks results by decoupled QR scan count and returns a TopLinksAndQRCodes response with links and QR codes partitioned into separate lists and a unified sorted_engagements ordering.\n"
+              }
+            ]
+          },
+          "docs": "Get top performing QR codes by scan count for all codes in a group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

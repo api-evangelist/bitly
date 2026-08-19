@@ -1,240 +1,2327 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
-  title: Bitly API v4 Bitlinks Groups API
-  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
-
-    organizations, campaigns, channels, QR codes, and click analytics.
-
-
-    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
-
-    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
-
-    spec at https://dev.bitly.com/v4/v4.json.
-
-    '
+  title: Bitly Groups API
+  description: The Groups surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
+    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
+    parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  termsOfService: https://bitly.com/pages/terms-of-service
   contact:
-    name: Bitly API
-    url: https://dev.bitly.com/api-reference
+    url: https://bitly.is/API-support
   license:
-    name: Proprietary
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
 - url: https://api-ssl.bitly.com/v4
-  description: Bitly v4 REST API
 security:
 - bearerAuth: []
 tags:
 - name: Groups
+  description: 'Groups are subdivisions within organizations. Every user will be in at least one group,
+    and every shortened link will be in one group. Most actions on our API will be on behalf of a group.
+    For example, when you shorten a link, it will be on behalf of a user and a group.
+
+    '
 paths:
   /groups:
     get:
+      summary: Retrieve Groups
+      description: Returns a list of groups in the organization.
       tags:
       - Groups
-      summary: List groups for the authenticated user's organization
-      operationId: listGroups
+      operationId: getGroups
       parameters:
-      - name: organization_guid
-        in: query
-        schema:
-          type: string
+      - $ref: '#/components/parameters/OrganizationGUIDFilter'
       responses:
         '200':
-          description: Groups.
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Groups'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
   /groups/{group_guid}:
-    parameters:
-    - $ref: '#/components/parameters/GroupGuid'
-    get:
-      tags:
-      - Groups
-      summary: Retrieve a group
-      operationId: getGroup
-      responses:
-        '200':
-          description: Group.
     patch:
+      summary: Update a Group
+      description: Updates the details of a group.
       tags:
       - Groups
-      summary: Update a group
       operationId: updateGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                organization_guid:
-                  type: string
+              $ref: '#/components/schemas/GroupUpdate'
       responses:
         '200':
-          description: Updated.
-  /groups/{group_guid}/bitlinks:
-    parameters:
-    - $ref: '#/components/parameters/GroupGuid'
-    - $ref: '#/components/parameters/Size'
-    - name: page
-      in: query
-      schema:
-        type: integer
-    - name: keyword
-      in: query
-      schema:
-        type: string
-    - name: query
-      in: query
-      schema:
-        type: string
-    - name: created_before
-      in: query
-      schema:
-        type: integer
-    - name: created_after
-      in: query
-      schema:
-        type: integer
-    - name: modified_after
-      in: query
-      schema:
-        type: integer
-    - name: archived
-      in: query
-      schema:
-        type: string
-        enum:
-        - true
-        - false
-        - both
-    - name: deeplinks
-      in: query
-      schema:
-        type: string
-        enum:
-        - true
-        - false
-        - both
-    - name: domain_deeplinks
-      in: query
-      schema:
-        type: string
-        enum:
-        - true
-        - false
-        - both
-    - name: campaign_guid
-      in: query
-      schema:
-        type: string
-    - name: channel_guid
-      in: query
-      schema:
-        type: string
-    - name: custom_bitlink
-      in: query
-      schema:
-        type: string
-        enum:
-        - true
-        - false
-        - both
-    - name: tags
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-    - name: launchpad_ids
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-    - name: encoding_login
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
     get:
+      summary: Retrieve a Group
+      description: Returns details for a group.
       tags:
       - Groups
-      summary: List Bitlinks in a group
-      operationId: listGroupBitlinks
+      operationId: getGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
       responses:
         '200':
-          description: Paginated bitlinks.
-    patch:
-      tags:
-      - Groups
-      summary: Bulk update Bitlinks in a group (e.g. archive, tag)
-      operationId: bulkUpdateGroupBitlinks
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                action:
-                  type: string
-                  enum:
-                  - archive
-                  - tag
-                bitlink_ids:
-                  type: array
-                  items:
-                    type: string
-                tags:
-                  type: array
-                  items:
-                    type: string
-      responses:
-        '200':
-          description: Bulk update result.
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
   /groups/{group_guid}/tags:
-    parameters:
-    - $ref: '#/components/parameters/GroupGuid'
     get:
+      summary: Retrieve Tags by Group
+      description: Returns the tags currently used in the specified group. Maximum 1000.
       tags:
       - Groups
-      summary: List tags for a group
-      operationId: listGroupTags
+      operationId: getGroupTags
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TagType'
       responses:
         '200':
-          description: Tags.
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tags'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
   /groups/{group_guid}/preferences:
-    parameters:
-    - $ref: '#/components/parameters/GroupGuid'
     get:
+      summary: Retrieve Group Preferences
+      description: Returns preferences for the specified group.
+      operationId: getGroupPreferences
       tags:
       - Groups
-      summary: Get group preferences
-      operationId: getGroupPreferences
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
       responses:
         '200':
-          description: Preferences.
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupPreferences'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    patch:
+      summary: Update Group Preferences
+      description: Updates preferences for a group.
+      operationId: updateGroupPreferences
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupPreferences'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupPreferences'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/shorten_counts:
+    get:
+      summary: Retrieve Group Shorten Counts
+      description: Returns all the shorten counts for a group.
+      operationId: getGroupShortenCounts
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metrics'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/countries:
+    get:
+      summary: Get Click Metrics for a Group by Country
+      description: Returns the geographic origins of click traffic by country for the specified group.
+      operationId: getGroupMetricsByCountries
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Country, Clicks
+
+                US, 5
+
+                '
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/cities:
+    get:
+      summary: Get Click Metrics for a Group by City
+      description: Returns the geographic origins of click traffic by city for the specified group.
+      operationId: getGroupMetricsByCities
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'City, Subregion, Region, Country, Clicks
+
+                New York, , NY, US, 5
+
+                '
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/devices:
+    get:
+      summary: Get Click Metrics for a Group by Device Type
+      description: Returns the device types generating click traffic to the specified group's links.
+      operationId: getGroupMetricsByDevices
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Device Type, Clicks
+
+                Desktop, 5
+
+                '
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/referring_networks:
+    get:
+      summary: Get Click Metrics for a Group by Referring Networks
+      description: Returns metrics by referring networks for the specified group's links.
+      operationId: GetGroupMetricsByReferringNetworks
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/referrers:
+    get:
+      summary: Get Click Metrics for a Group by Referrer
+      description: Returns metrics by referrer for the specified group's links.
+      operationId: GetGroupMetricsByReferrer
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Referrer,Clicks
+
+                direct,25
+
+                '
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/engagements/top:
+    get:
+      operationId: getGroupTopMetrics
+      tags:
+      - Groups
+      description: Get top performing links by engagement for all links in a group.
+      summary: Get Group Top Performing Links by Engagement
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SortedLinks'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/engagements/over_time:
+    get:
+      operationId: getGroupMetricsOverTime
+      tags:
+      - Groups
+      description: Get group engagement metrics over time for all links in a group.
+      summary: Get Group Metrics Over Time
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupClicks'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/clicks:
+    get:
+      operationId: getGroupClicks
+      tags:
+      - Groups
+      description: get number of clicks on bitlinks in a group
+      summary: Get clicks by group
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupClicks'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/exports:
+    post:
+      operationId: postCreateGroupExport
+      tags:
+      - Groups
+      description: 'Build a CSV export synchronously and return it inline as a base64 data URI plus metadata.
+
+        The export_type field selects the CSV shape: link_engagements_batch (engagement metrics for
+
+        explicit bitlinks or a filter), links_list (link metadata roster), or qr_codes_list (QR code
+
+        metadata roster). Row caps apply per request: 200 rows when metrics are included
+
+        (link_engagements_batch, or include_metrics on a list export); 1000 rows for metadata-only
+
+        list exports. When the match set exceeds the cap, truncated is true and only the first
+
+        cap rows are returned; row_count reports how many data rows are in the CSV.
+
+        '
+      summary: Create an inline CSV export for a group
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupExportRequestBody'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupExportResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/feature_usage:
+    get:
+      summary: Get limit usage for a group
+      description: Get a group's current feature limit usage, optionally provide limit name(s) for usage
+        on specific limit(s)
+      operationId: getGroupFeatureUsage
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/Name'
+      tags:
+      - Groups
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupFeatureUsage'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+  /groups/{group_guid}/historical_usage:
+    get:
+      summary: Get historical usage for a group
+      description: Get a group's historical usage for specific limit(s) and date range. Refer to GET /v4/groups/{group_guid}/feature_usage
+        endpoint response for available limit names.
+      operationId: getGroupHistoricalUsage
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/Name'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      - $ref: '#/components/parameters/TimeUnitDWM'
+      tags:
+      - Groups
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupHistoricalUsage'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+  /groups/{group_guid}/links/clicks/over_time:
+    get:
+      operationId: getGroupLinkClicksOverTime
+      tags:
+      - Groups
+      description: Get link clicks over time for all links in a group.
+      summary: Get Group Link Clicks Over Time
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupClicks'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/links/clicks/devices:
+    get:
+      operationId: getGroupLinkClicksByDevice
+      tags:
+      - Groups
+      description: Get link clicks by device for all links in a group.
+      summary: Get Group Link Clicks by Device
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unit:
+                    type: string
+                    x-faker: internet.userName
+                  units:
+                    type: integer
+                    x-faker:
+                      datatype.number:
+                        min: 1
+                        max: 100
+                  facet:
+                    type: string
+                    enum:
+                    - countries
+                    - cities
+                    - devices
+                    - referrers
+                    - referrers_by_domain
+                    - referring_domains
+                    - referring_networks
+                    - shorten_counts
+                  unit_reference:
+                    type: string
+                    x-faker: date.past
+                  metrics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        clicks:
+                          type: integer
+                        value:
+                          type: string
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/links/clicks/referrers:
+    get:
+      operationId: getGroupLinkClicksByReferrer
+      tags:
+      - Groups
+      description: Get link clicks by referrer for all links in a group.
+      summary: Get Group Link Clicks by Referrer
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/links/clicks/countries:
+    get:
+      operationId: getGroupLinkClicksByCountry
+      tags:
+      - Groups
+      description: Get link clicks by country for all links in a group.
+      summary: Get Group Link Clicks by Country
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/links/clicks/cities:
+    get:
+      operationId: getGroupLinkClicksByCity
+      tags:
+      - Groups
+      description: Get link clicks by city for all links in a group.
+      summary: Get Group Link Clicks by City
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityMetrics'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/links/clicks/top:
+    get:
+      operationId: getGroupTopLinkClicks
+      tags:
+      - Groups
+      description: Get top performing links by click for all links in a group.
+      summary: Get Group Top Performing Links by Click
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SortedLinks'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/codes/scans/over_time:
+    get:
+      operationId: getGroupCodeScansOverTime
+      tags:
+      - Groups
+      description: Get QR code scan metrics over time for a group.
+      summary: Get Scan Metrics for a Group Over Time
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupClicks'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/codes/scans/countries:
+    get:
+      operationId: getGroupCodeScansByCountry
+      tags:
+      - Groups
+      description: Get QR code scan metrics for a group broken down by country.
+      summary: Get Scan Metrics for a Group by Country
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/codes/scans/cities:
+    get:
+      operationId: getGroupCodeScansByCity
+      tags:
+      - Groups
+      description: Get QR code scan metrics for a group broken down by city.
+      summary: Get Scan Metrics for a Group by City
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityMetrics'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/codes/scans/top:
+    get:
+      operationId: getGroupTopCodeScans
+      tags:
+      - Groups
+      description: Get top performing QR codes by scan count for all codes in a group.
+      summary: Get Top Performing QR Codes for a Group
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      - name: decoupled
+        in: query
+        required: false
+        description: 'When true, ranks results by decoupled QR scan count and returns a TopLinksAndQRCodes
+          response with links and QR codes partitioned into separate lists and a unified sorted_engagements
+          ordering.
+
+          '
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/SortedLinks'
+                - $ref: '#/components/schemas/TopLinksAndQRCodes'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   parameters:
-    Size:
-      name: size
+    EndDate:
+      name: end_date
+      description: The end date for the date range
       in: query
       schema:
-        type: integer
-        default: 50
-    GroupGuid:
+        type: string
+      example: '2023-10-04'
+    GroupGUID:
       name: group_guid
+      description: A GUID for a Bitly group
       in: path
       required: true
       schema:
         type: string
+      example: Ba1bc23dE4F
+    Name:
+      name: name
+      description: The limit name you would like usage for
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+      example:
+      - qr_codes
+    OrganizationGUIDFilter:
+      name: organization_guid
+      description: A GUID for a Bitly organization
+      in: query
+      schema:
+        type: string
+      example: Oa1bcd234eF
+    Size:
+      name: size
+      description: The quantity of items to be be returned
+      in: query
+      schema:
+        type: integer
+        default: 50
+      example: 10
+    StartDate:
+      name: start_date
+      description: The start date for the date range
+      in: query
+      schema:
+        type: string
+      example: '2022-02-02'
+    TagType:
+      name: type
+      description: Tag set to return; defaults to bitlink
+      in: query
+      required: false
+      schema:
+        type: string
+        default: bitlink
+        enum:
+        - bitlink
+        - qr_code
+    TimeUnit:
+      name: unit
+      description: A unit of time
+      schema:
+        $ref: '#/components/schemas/TimeUnit'
+      required: true
+      in: query
+      example: month
+    TimeUnitDWM:
+      name: unit
+      description: A unit of time (day, week, or month)
+      schema:
+        $ref: '#/components/schemas/TimeUnitDWM'
+      in: query
+      example: month
+    UnitAmount:
+      name: units
+      description: An integer representing the time units to query data for. pass -1 to return all units
+        of time
+      schema:
+        type: integer
+        default: -1
+      required: true
+      in: query
+      example: 1
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will
+        default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and
+        ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
+  schemas:
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BaseMetrics:
+      type: object
+      properties:
+        unit:
+          type: string
+          x-faker: internet.userName
+        units:
+          type: integer
+          x-faker:
+            datatype.number:
+              min: 1
+              max: 100
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - devices
+          - referrers
+          - referrers_by_domain
+          - referring_domains
+          - referring_networks
+          - shorten_counts
+          - destinations
+        unit_reference:
+          type: string
+          x-faker: date.past
+    BitlinkBody:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - $ref: '#/components/schemas/BitlinkUpdate'
+    BitlinkUpdate:
+      type: object
+      properties:
+        link:
+          type: string
+        id:
+          type: string
+        long_url:
+          type: string
+        title:
+          type: string
+        archived:
+          type: boolean
+        created_at:
+          type: string
+        created_by:
+          type: string
+        client_id:
+          type: string
+        custom_bitlinks:
+          type: array
+          items:
+            type: string
+          description: list of previously edited backhalfs for the bitlink - these are in reverse chronological
+            order, with the most recently edited backhalf first
+        tags:
+          type: array
+          items:
+            type: string
+        launchpad_ids:
+          type: array
+          items:
+            type: string
+        qr_code_ids:
+          type: array
+          items:
+            type: string
+          description: a list of qr code ids that are associated with this bitlink
+        deeplinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeeplinkRule'
+        is_deleted:
+          type: boolean
+        campaign_ids:
+          type: array
+          items:
+            type: string
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the bitlink (e.g., 2025-01-28T14:30:00+0000)
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this bitlink. Only present when at least one rule is
+            configured.
+    CityMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+          x-faker: random.number
+        city:
+          type: string
+          x-faker: address.city
+        subregion:
+          type: string
+          x-faker: address.state
+        region:
+          type: string
+          x-faker: address.state
+        country:
+          type: string
+          x-faker: address.country
+    CityMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/CityMetric'
+          other_metrics:
+            $ref: '#/components/schemas/OtherMetrics'
+    ClickLink:
+      type: object
+      properties:
+        clicks:
+          type: integer
+        id:
+          type: string
+    ClickMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+          example: 123
+          x-faker: random.number
+        value:
+          type: string
+          example: bit.ly
+          x-faker: internet.domainName
+    ClickMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/ClickMetric'
+    CountItem:
+      type: object
+      properties:
+        ts:
+          type: string
+        count:
+          type: integer
+    DeeplinkRule:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitlink:
+          type: string
+        app_uri_path:
+          type: string
+        install_url:
+          type: string
+        app_guid:
+          type: string
+        os:
+          $ref: '#/components/schemas/MobileOS'
+        install_type:
+          $ref: '#/components/schemas/InstallPreference'
+        created:
+          type: string
+          description: ISO timestamp
+        modified:
+          type: string
+          description: ISO timestamp
+        brand_guid:
+          type: string
+    DeviceMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+        device_type:
+          type: string
+    DeviceMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/DeviceMetric'
+    DynamicRoutingDeviceEnum:
+      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+      type: string
+      enum:
+      - mobile
+      - tablet
+      - desktop
+    DynamicRoutingPlatformEnum:
+      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
+      type: string
+      enum:
+      - ios
+      - android
+    DynamicRoutingRule:
+      type: object
+      description: A dynamic routing rule that redirects traffic to a different destination based on user
+        attributes.
+      properties:
+        long_url:
+          type: string
+          description: The destination URL for requests matching this rule.
+        country_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
+        country_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
+        region_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
+        region_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA",
+            "CA-ON"]).
+        device_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
+        device_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that must NOT match for this rule to apply.
+        os_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
+        os_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that must NOT match for this rule to apply.
+    EngagementSubtotal:
+      description: 'Engagement-count subtotal for a single bitlink or decoupled QR code. The `id` references
+        either a bitlink (`<domain>/<hash>`) or a QR code guid, and `engagements` is the combined count
+        of bitlink clicks or QR code scans for that entity.
+
+        '
+      type: object
+      properties:
+        engagements:
+          type: integer
+        id:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Group:
+      type: object
+      required:
+      - guid
+      - organization_guid
+      - name
+      - created
+      - modified
+      - is_active
+      - role
+      - bsds
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - properties:
+          name:
+            type: string
+          guid:
+            type: string
+          created:
+            type: string
+          modified:
+            type: string
+          is_active:
+            type: boolean
+          role:
+            type: string
+          organization_guid:
+            type: string
+          bsds:
+            type: array
+            items:
+              type: string
+    GroupClicks:
+      type: object
+      properties:
+        unit:
+          type: string
+        units:
+          type: integer
+        unit_reference:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountItem'
+    GroupConsumableFeatureUsage:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        count:
+          type: integer
+    GroupExportFilter:
+      type: object
+      description: Search constraints used to resolve links or QR codes for export. Required for links_list
+        and qr_codes_list.
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        domain:
+          type: string
+        archived:
+          type: string
+          description: Filter by archive state.
+          enum:
+          - 'on'
+          - 'off'
+          - both
+        query:
+          type: string
+          description: Free-text search query.
+        created_after:
+          type: integer
+          description: Include items created at or after this Unix timestamp (UTC).
+        created_before:
+          type: integer
+          description: Include items created before this Unix timestamp (UTC).
+        campaign_guid:
+          type: string
+          description: Filter links by campaign GUID. Ignored for qr_codes_list.
+    GroupExportRequestBody:
+      type: object
+      required:
+      - export_type
+      properties:
+        export_type:
+          type: string
+          description: Which export shape to produce.
+          enum:
+          - link_engagements_batch
+          - links_list
+          - qr_codes_list
+        bitlinks:
+          type: array
+          description: 'Fully qualified bitlinks (e.g. "bit.ly/abc"). Used by export_type link_engagements_batch
+            when
+
+            the caller already knows the exact links. Mutually exclusive with filter (provide one or the
+            other).
+
+            '
+          items:
+            type: string
+        unix_from:
+          type: integer
+          description: 'Start of the metrics date range (Unix seconds, UTC). Clamped to the caller''s
+            tier data window.
+
+            For link_engagements_batch, required together with unix_to unless the tier max-history default
+            applies.
+
+            For links_list or qr_codes_list, used when include_metrics is true.
+
+            '
+        unix_to:
+          type: integer
+          description: End of the metrics date range (Unix seconds, UTC). See unix_from.
+        filter:
+          $ref: '#/components/schemas/GroupExportFilter'
+        include_metrics:
+          type: boolean
+          description: 'When true on links_list or qr_codes_list, append clicks, scans, and button_clicks
+            columns and apply
+
+            the 200-row cap. Requires unix_from and unix_to (or tier-default window behavior where applicable).
+
+            '
+    GroupExportResponse:
+      type: object
+      properties:
+        export_type:
+          type: string
+          enum:
+          - link_engagements_batch
+          - links_list
+          - qr_codes_list
+        filename:
+          type: string
+          description: Suggested download filename for the CSV.
+        media_type:
+          type: string
+          example: text/csv
+        row_count:
+          type: integer
+          description: Number of data rows in the CSV (excluding the header row).
+        column_count:
+          type: integer
+        columns:
+          type: array
+          description: CSV column headers in order.
+          items:
+            type: string
+        size_bytes:
+          type: integer
+          description: Size of the raw CSV bytes before base64 encoding.
+        data_uri:
+          type: string
+          description: CSV file as a data:text/csv;base64,... URI.
+        unix_from:
+          type: integer
+          description: Metrics window start (Unix seconds) when metrics are included in the export.
+        unix_to:
+          type: integer
+          description: Metrics window end (Unix seconds) when metrics are included in the export.
+        truncated:
+          type: boolean
+          description: True when the match set exceeded the per-request row cap and only the first cap
+            rows were exported.
+    GroupFeatureUsage:
+      type: object
+      required:
+      - group_guid
+      - limit_usage
+      properties:
+        group_guid:
+          type: string
+          description: the group's guid
+        limit_usage:
+          type: array
+          description: an array of all of the group's consumable feature usage
+          items:
+            $ref: '#/components/schemas/GroupConsumableFeatureUsage'
+    GroupHistoricalUsage:
+      type: object
+      required:
+      - group_guid
+      - unit
+      - start_date
+      - end_date
+      - historical_limit_usage
+      properties:
+        group_guid:
+          type: string
+          description: the group's guid
+        unit:
+          type: string
+          description: A unit of time (day, week, or month)
+        start_date:
+          type: string
+          description: Start date (format "2006-01-02") of the historical usage
+        end_date:
+          type: string
+          description: End date (format "2006-01-02") of the historical usage
+        historical_limit_usage:
+          type: array
+          description: an array of all of the group's historical feature usage
+          items:
+            $ref: '#/components/schemas/HistoricalFeatureUsage'
+    GroupPreferences:
+      type: object
+      properties:
+        group_guid:
+          type: string
+        domain_preference:
+          type: string
+      example:
+        group_guid: Ba1bc23dE4F
+        domain_preference: chauncey.ly
+    GroupUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        organization_guid:
+          type: string
+        bsds:
+          type: array
+          items:
+            type: string
+      example:
+        name: My New Group
+        organization_guid: Oa1bcd234eF
+        bsds:
+        - chauncey.ly
+    Groups:
+      type: object
+      required:
+      - groups
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    HistoricalFeatureUsage:
+      type: object
+      properties:
+        name:
+          type: string
+          description: feature name
+        usage:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoricalUsage'
+    HistoricalUsage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: the usage count during the time period
+        unit_start:
+          type: string
+          description: ISO_TIMESTAMP of the beginning of the time period
+    InstallPreference:
+      type: string
+      enum:
+      - no_install
+      - auto_install
+      - promote_install
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Metric:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: integer
+    Metrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/Metric'
+    MobileOS:
+      type: string
+      enum:
+      - ios
+      - android
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    OtherMetrics:
+      type: object
+      properties:
+        other_city_clicks:
+          type: integer
+          x-faker: random.number
+        no_city_clicks:
+          type: integer
+          x-faker: random.number
+    QRCodeMinimal:
+      type: object
+      properties:
+        qrcode_id:
+          type: string
+        group_guid:
+          type: string
+        title:
+          type: string
+        is_customized:
+          description: Set to true if the QR code's customization values have been changed from their
+            default setting
+          type: boolean
+        serialized_content:
+          description: A serialized string of the QR code's content
+          type: string
+        qr_code_type:
+          $ref: '#/components/schemas/QRCodeTypeEnum'
+        long_urls:
+          description: A list of destination URLs that the qr code leads to.
+          type: array
+          items:
+            type: string
+        bitlink_id:
+          description: The bitlink ID associated with the qr code. Not all qr codes are associated with
+            one.
+          type: string
+        is_gs1:
+          description: Set to true if QR code has GS1 values.
+          type: boolean
+        created_by:
+          description: User that created the code.
+          type: string
+        tags:
+          description: A list of tags associated with QR code
+          type: array
+          items:
+            type: string
+        archived:
+          type: boolean
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000)
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this QR code. Only present when at least one rule is
+            configured.
+        created:
+          type: string
+        modified:
+          type: string
+    QRCodeTypeEnum:
+      description: The type of dynamic/static content the QR serves, e.g. Link In Bio page, micro site,
+        bitlink, email, text, Wifi, etc.
+      type: string
+      enum:
+      - bitlink
+      - long_url
+      - link_in_bio
+      - v_card
+      - wifi
+      - email
+      - phone
+      - text
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+    SortedLinks:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/BitlinkBody'
+        sorted_links:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClickLink'
+    Tags:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    TimeUnitDWM:
+      description: the unit of time queried for (day, week, month)
+      type: string
+      enum:
+      - day
+      - week
+      - month
+      default: month
+    TopLinksAndQRCodes:
+      description: 'Response shape for top bitlinks and decoupled QR codes in a group, ranked together
+        by engagement count. `links` and `qr_codes` are independent lists (a link and a decoupled QR code
+        are never the same entity); `sorted_engagements` is the unified descending-by-engagement ordering
+        across both, with each entry''s id referencing either a bitlink or a QR code guid. Coupled QRCs
+        are listed by their bitlink ID.
+
+        '
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/BitlinkBody'
+        qr_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/QRCodeMinimal'
+        sorted_engagements:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngagementSubtotal'
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
-
-        Send as `Authorization: Bearer {token}`.
-
-        '

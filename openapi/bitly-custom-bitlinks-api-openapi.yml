@@ -1,94 +1,769 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
-  title: Bitly API v4 Bitlinks Custom Bitlinks API
-  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
-
-    organizations, campaigns, channels, QR codes, and click analytics.
-
-
-    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
-
-    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
-
-    spec at https://dev.bitly.com/v4/v4.json.
-
-    '
+  title: Bitly Custom Bitlinks API
+  description: The Custom Bitlinks surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
+    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
+    parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  termsOfService: https://bitly.com/pages/terms-of-service
   contact:
-    name: Bitly API
-    url: https://dev.bitly.com/api-reference
+    url: https://bitly.is/API-support
   license:
-    name: Proprietary
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
 - url: https://api-ssl.bitly.com/v4
-  description: Bitly v4 REST API
 security:
 - bearerAuth: []
 tags:
 - name: Custom Bitlinks
+  description: 'These endpoints are for updating custom Bitlinks only. Custom Bitlinks have both a BSD
+    and a customized back-half (e.g., yourcompany.com/yourcampaign). If a link begins with the bit.ly
+    domain or ends with an auto-generated random string it is not a custom Bitlink.
+
+    '
 paths:
   /custom_bitlinks:
     post:
+      summary: Add Custom Bitlink
+      description: Add a keyword (or "custom back-half") to a Bitlink with a Custom Domain (domains must
+        match). This endpoint can also be used for initial redirects to a link.
       tags:
       - Custom Bitlinks
-      summary: Add a custom back-half
-      operationId: createCustomBitlink
+      operationId: addCustomBitlink
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required:
-              - custom_bitlink
-              - bitlink_id
-              properties:
-                custom_bitlink:
-                  type: string
-                bitlink_id:
-                  type: string
+              $ref: '#/components/schemas/AddCustomBitlink'
       responses:
         '200':
-          description: Created custom bitlink.
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBitlink'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
   /custom_bitlinks/{custom_bitlink}:
-    parameters:
-    - name: custom_bitlink
+    patch:
+      summary: Update Custom Bitlink
+      description: Move a keyword (or custom back-half) to a different Bitlink (domains must match).
+      tags:
+      - Custom Bitlinks
+      operationId: updateCustomBitlink
+      parameters:
+      - $ref: '#/components/parameters/CustomBitlink'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomBitlink'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBitlink'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    get:
+      summary: Retrieve Custom Bitlink
+      description: Returns the details and history of the specified link.
+      tags:
+      - Custom Bitlinks
+      operationId: getCustomBitlink
+      parameters:
+      - $ref: '#/components/parameters/CustomBitlink'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomBitlink'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /custom_bitlinks/{custom_bitlink}/clicks_by_destination:
+    get:
+      summary: Get Metrics for a Custom Bitlink by Destination
+      description: Returns click metrics for the specified link by its historical destinations.
+      operationId: getCustomBitlinkMetricsByDestination
+      tags:
+      - Custom Bitlinks
+      parameters:
+      - $ref: '#/components/parameters/CustomBitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /custom_bitlinks/{custom_bitlink}/clicks:
+    get:
+      summary: Get Clicks for a Custom Bitlink's Entire History
+      description: Returns the click counts for the specified link. This returns an array with clicks
+        based on a date.
+      tags:
+      - Custom Bitlinks
+      operationId: getClicksForCustomBitlink
+      parameters:
+      - $ref: '#/components/parameters/CustomBitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Clicks'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+components:
+  parameters:
+    CustomBitlink:
+      name: custom_bitlink
+      description: A Custom Bitlink made of the domain and keyword
       in: path
-      required: true
       schema:
         type: string
-    get:
-      tags:
-      - Custom Bitlinks
-      summary: Retrieve a custom Bitlink
-      operationId: getCustomBitlink
-      responses:
-        '200':
-          description: Custom bitlink.
-    patch:
-      tags:
-      - Custom Bitlinks
-      summary: Move a custom keyword to a different Bitlink
-      operationId: updateCustomBitlink
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                bitlink_id:
-                  type: string
-      responses:
-        '200':
-          description: Updated.
-components:
+      required: true
+      example: chauncey.ly/chauncey
+    TimeUnit:
+      name: unit
+      description: A unit of time
+      schema:
+        $ref: '#/components/schemas/TimeUnit'
+      required: true
+      in: query
+      example: month
+    UnitAmount:
+      name: units
+      description: An integer representing the time units to query data for. pass -1 to return all units
+        of time
+      schema:
+        type: integer
+        default: -1
+      required: true
+      in: query
+      example: 1
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will
+        default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and
+        ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
+  schemas:
+    AddCustomBitlink:
+      type: object
+      properties:
+        custom_bitlink:
+          type: string
+        bitlink_id:
+          type: string
+      example:
+        custom_bitlink: chauncey.ly/documentation
+        bitlink_id: chauncey.ly/1234abcd
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BaseMetrics:
+      type: object
+      properties:
+        unit:
+          type: string
+          x-faker: internet.userName
+        units:
+          type: integer
+          x-faker:
+            datatype.number:
+              min: 1
+              max: 100
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - devices
+          - referrers
+          - referrers_by_domain
+          - referring_domains
+          - referring_networks
+          - shorten_counts
+          - destinations
+        unit_reference:
+          type: string
+          x-faker: date.past
+    BitlinkBody:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - $ref: '#/components/schemas/BitlinkUpdate'
+    BitlinkUpdate:
+      type: object
+      properties:
+        link:
+          type: string
+        id:
+          type: string
+        long_url:
+          type: string
+        title:
+          type: string
+        archived:
+          type: boolean
+        created_at:
+          type: string
+        created_by:
+          type: string
+        client_id:
+          type: string
+        custom_bitlinks:
+          type: array
+          items:
+            type: string
+          description: list of previously edited backhalfs for the bitlink - these are in reverse chronological
+            order, with the most recently edited backhalf first
+        tags:
+          type: array
+          items:
+            type: string
+        launchpad_ids:
+          type: array
+          items:
+            type: string
+        qr_code_ids:
+          type: array
+          items:
+            type: string
+          description: a list of qr code ids that are associated with this bitlink
+        deeplinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeeplinkRule'
+        is_deleted:
+          type: boolean
+        campaign_ids:
+          type: array
+          items:
+            type: string
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the bitlink (e.g., 2025-01-28T14:30:00+0000)
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this bitlink. Only present when at least one rule is
+            configured.
+    ClickMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+          example: 123
+          x-faker: random.number
+        value:
+          type: string
+          example: bit.ly
+          x-faker: internet.domainName
+    ClickMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/ClickMetric'
+    Clicks:
+      type: object
+      properties:
+        link_clicks:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkClicks'
+        units:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
+    CustomBitlink:
+      type: object
+      properties:
+        custom_bitlink:
+          type: string
+        bitlink:
+          $ref: '#/components/schemas/BitlinkBody'
+        bitlink_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomBitlinkHistory'
+    CustomBitlinkHistory:
+      type: object
+      properties:
+        group_guid:
+          type: string
+        keyword:
+          type: string
+        bsd:
+          type: string
+        hash:
+          type: string
+        login:
+          type: string
+        long_url:
+          type: string
+        created:
+          type: string
+        first_created:
+          type: string
+        deactivated:
+          type: string
+        is_active:
+          type: boolean
+    DeeplinkRule:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitlink:
+          type: string
+        app_uri_path:
+          type: string
+        install_url:
+          type: string
+        app_guid:
+          type: string
+        os:
+          $ref: '#/components/schemas/MobileOS'
+        install_type:
+          $ref: '#/components/schemas/InstallPreference'
+        created:
+          type: string
+          description: ISO timestamp
+        modified:
+          type: string
+          description: ISO timestamp
+        brand_guid:
+          type: string
+    DynamicRoutingDeviceEnum:
+      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+      type: string
+      enum:
+      - mobile
+      - tablet
+      - desktop
+    DynamicRoutingPlatformEnum:
+      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
+      type: string
+      enum:
+      - ios
+      - android
+    DynamicRoutingRule:
+      type: object
+      description: A dynamic routing rule that redirects traffic to a different destination based on user
+        attributes.
+      properties:
+        long_url:
+          type: string
+          description: The destination URL for requests matching this rule.
+        country_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
+        country_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
+        region_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
+        region_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA",
+            "CA-ON"]).
+        device_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
+        device_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that must NOT match for this rule to apply.
+        os_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
+        os_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that must NOT match for this rule to apply.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Gone:
+      description: GONE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    InstallPreference:
+      type: string
+      enum:
+      - no_install
+      - auto_install
+      - promote_install
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    LinkClicks:
+      type: object
+      properties:
+        clicks:
+          type: integer
+        date:
+          type: string
+    MobileOS:
+      type: string
+      enum:
+      - ios
+      - android
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UpdateCustomBitlink:
+      type: object
+      properties:
+        bitlink_id:
+          type: string
+      example:
+        bitlink_id: chauncey.ly/1234abcd
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
-
-        Send as `Authorization: Bearer {token}`.
-
-        '

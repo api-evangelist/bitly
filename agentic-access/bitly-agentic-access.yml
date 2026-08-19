@@ -1,52 +1,23 @@
-generated: '2026-07-15'
+generated: '2026-08-13'
 method: generated
-source: openapi/bitly-openapi.yml
+source: openapi/bitly-bitlinks-api-openapi.yml, openapi/bitly-bsds-api-openapi.yml, openapi/bitly-campaigns-api-openapi.yml,
+  openapi/bitly-custom-bitlinks-api-openapi.yml, openapi/bitly-groups-api-openapi.yml, openapi/bitly-oauth-apps-api-openapi.yml,
+  openapi/bitly-organizations-api-openapi.yml, openapi/bitly-qr-codes-api-openapi.yml, openapi/bitly-user-api-openapi.yml,
+  openapi/bitly-webhooks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 42
+  operations: 94
   by_action_class:
-    acting: 14
-    connected: 28
+    acting: 27
+    connected: 67
   by_consequence:
-    write: 14
-    read: 28
+    write: 27
+    read: 67
   human_in_the_loop_required: 0
 operations:
 - path: /shorten
-  method: post
-  operationId: shorten
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /expand
-  method: post
-  operationId: expand
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /bitlinks
   method: post
   operationId: createBitlink
   x-agentic-access:
@@ -62,19 +33,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /bitlinks/{bitlink}
-  method: get
-  operationId: getBitlink
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /bitlinks/{bitlink}
-  method: patch
-  operationId: updateBitlink
+- path: /bitlinks
+  method: post
+  operationId: createFullBitlink
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -104,9 +65,51 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /bitlinks/{bitlink}
+  method: patch
+  operationId: updateBitlink
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bitlinks/{bitlink}
+  method: get
+  operationId: getBitlink
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /expand
+  method: post
+  operationId: expandBitlink
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /bitlinks/{bitlink}/clicks
   method: get
-  operationId: getBitlinkClicks
+  operationId: getClicksForBitlink
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -116,7 +119,7 @@ operations:
     audit: none
 - path: /bitlinks/{bitlink}/clicks/summary
   method: get
-  operationId: getBitlinkClicksSummary
+  operationId: getClicksSummaryForBitlink
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -126,7 +129,17 @@ operations:
     audit: none
 - path: /bitlinks/{bitlink}/engagements
   method: get
-  operationId: getBitlinkEngagements
+  operationId: getEngagements
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bitlinks/{bitlink}/engagements/summary
+  method: get
+  operationId: getEngagementsSummary
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -136,7 +149,7 @@ operations:
     audit: none
 - path: /bitlinks/{bitlink}/countries
   method: get
-  operationId: getBitlinkCountries
+  operationId: getMetricsForBitlinkByCountries
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -146,7 +159,7 @@ operations:
     audit: none
 - path: /bitlinks/{bitlink}/cities
   method: get
-  operationId: getBitlinkCities
+  operationId: getMetricsForBitlinkByCities
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -156,7 +169,7 @@ operations:
     audit: none
 - path: /bitlinks/{bitlink}/devices
   method: get
-  operationId: getBitlinkDevices
+  operationId: getMetricsForBitlinkByDevices
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -166,7 +179,17 @@ operations:
     audit: none
 - path: /bitlinks/{bitlink}/referrers
   method: get
-  operationId: getBitlinkReferrers
+  operationId: getMetricsForBitlinkByReferrers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bitlinks/{bitlink}/referrer_name
+  method: get
+  operationId: getMetricsForBitlinkByReferrerName
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -176,7 +199,7 @@ operations:
     audit: none
 - path: /bitlinks/{bitlink}/referring_domains
   method: get
-  operationId: getBitlinkReferringDomains
+  operationId: getMetricsForBitlinkByReferringDomains
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -184,25 +207,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /custom_bitlinks
-  method: post
-  operationId: createCustomBitlink
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom_bitlinks/{custom_bitlink}
+- path: /bitlinks/{bitlink}/referrers_by_domains
   method: get
-  operationId: getCustomBitlink
+  operationId: getMetricsForBitlinkByReferrersByDomains
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -210,61 +217,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /custom_bitlinks/{custom_bitlink}
-  method: patch
-  operationId: updateCustomBitlink
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /groups
-  method: get
-  operationId: listGroups
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /groups/{group_guid}
-  method: get
-  operationId: getGroup
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /groups/{group_guid}
-  method: patch
-  operationId: updateGroup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /groups/{group_guid}/bitlinks
   method: get
-  operationId: listGroupBitlinks
+  operationId: getBitlinksByGroup
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -274,7 +229,7 @@ operations:
     audit: none
 - path: /groups/{group_guid}/bitlinks
   method: patch
-  operationId: bulkUpdateGroupBitlinks
+  operationId: updateBitlinksByGroup
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -288,9 +243,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /groups/{group_guid}/tags
+- path: /groups/{group_guid}/engagements/sorted/top
   method: get
-  operationId: listGroupTags
+  operationId: getTopLinksAndQRCodesByEngagements
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -298,9 +253,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /groups/{group_guid}/preferences
+- path: /groups/{group_guid}/bitlinks/{sort}
   method: get
-  operationId: getGroupPreferences
+  operationId: getSortedBitlinks
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -308,109 +263,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /groups/{group_guid}/clicks
+- path: /bsds
   method: get
-  operationId: getGroupClicks
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /groups/{group_guid}/countries
-  method: get
-  operationId: getGroupCountries
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /groups/{group_guid}/cities
-  method: get
-  operationId: getGroupCities
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /groups/{group_guid}/devices
-  method: get
-  operationId: getGroupDevices
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /groups/{group_guid}/links/clicks/top
-  method: get
-  operationId: getGroupTopLinks
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /groups/{group_guid}/codes/scans/over_time
-  method: get
-  operationId: getGroupQrScansOverTime
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /groups/{group_guid}/feature_usage
-  method: get
-  operationId: getGroupFeatureUsage
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /organizations
-  method: get
-  operationId: listOrganizations
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /organizations/{organization_guid}
-  method: get
-  operationId: getOrganization
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /organizations/{organization_guid}/plan_limits
-  method: get
-  operationId: getOrganizationPlanLimits
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /organizations/{organization_guid}/shorten_counts
-  method: get
-  operationId: getOrganizationShortenCounts
+  operationId: getBSDs
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -420,7 +275,7 @@ operations:
     audit: none
 - path: /campaigns
   method: get
-  operationId: listCampaigns
+  operationId: getCampaigns
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -445,6 +300,16 @@ operations:
       - high-value
     audit: required
 - path: /campaigns/{campaign_guid}
+  method: get
+  operationId: getCampaign
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /campaigns/{campaign_guid}
   method: patch
   operationId: updateCampaign
   x-agentic-access:
@@ -460,6 +325,16 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /channels
+  method: get
+  operationId: getChannels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /channels
   method: post
   operationId: createChannel
@@ -477,6 +352,16 @@ operations:
       - high-value
     audit: required
 - path: /channels/{channel_guid}
+  method: get
+  operationId: getChannel
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /channels/{channel_guid}
   method: patch
   operationId: updateChannel
   x-agentic-access:
@@ -492,9 +377,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /qr-codes
+- path: /custom_bitlinks
   method: post
-  operationId: createQrCode
+  operationId: addCustomBitlink
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -508,9 +393,25 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /bsds
+- path: /custom_bitlinks/{custom_bitlink}
+  method: patch
+  operationId: updateCustomBitlink
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom_bitlinks/{custom_bitlink}
   method: get
-  operationId: listBsds
+  operationId: getCustomBitlink
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -518,3 +419,703 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /custom_bitlinks/{custom_bitlink}/clicks_by_destination
+  method: get
+  operationId: getCustomBitlinkMetricsByDestination
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom_bitlinks/{custom_bitlink}/clicks
+  method: get
+  operationId: getClicksForCustomBitlink
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups
+  method: get
+  operationId: getGroups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}
+  method: patch
+  operationId: updateGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /groups/{group_guid}
+  method: get
+  operationId: getGroup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/tags
+  method: get
+  operationId: getGroupTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/preferences
+  method: get
+  operationId: getGroupPreferences
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/preferences
+  method: patch
+  operationId: updateGroupPreferences
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /groups/{group_guid}/shorten_counts
+  method: get
+  operationId: getGroupShortenCounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/countries
+  method: get
+  operationId: getGroupMetricsByCountries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/cities
+  method: get
+  operationId: getGroupMetricsByCities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/devices
+  method: get
+  operationId: getGroupMetricsByDevices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/referring_networks
+  method: get
+  operationId: GetGroupMetricsByReferringNetworks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/referrers
+  method: get
+  operationId: GetGroupMetricsByReferrer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/engagements/top
+  method: get
+  operationId: getGroupTopMetrics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/engagements/over_time
+  method: get
+  operationId: getGroupMetricsOverTime
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/clicks
+  method: get
+  operationId: getGroupClicks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/exports
+  method: post
+  operationId: postCreateGroupExport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /groups/{group_guid}/feature_usage
+  method: get
+  operationId: getGroupFeatureUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/historical_usage
+  method: get
+  operationId: getGroupHistoricalUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/links/clicks/over_time
+  method: get
+  operationId: getGroupLinkClicksOverTime
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/links/clicks/devices
+  method: get
+  operationId: getGroupLinkClicksByDevice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/links/clicks/referrers
+  method: get
+  operationId: getGroupLinkClicksByReferrer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/links/clicks/countries
+  method: get
+  operationId: getGroupLinkClicksByCountry
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/links/clicks/cities
+  method: get
+  operationId: getGroupLinkClicksByCity
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/links/clicks/top
+  method: get
+  operationId: getGroupTopLinkClicks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/codes/scans/over_time
+  method: get
+  operationId: getGroupCodeScansOverTime
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/codes/scans/countries
+  method: get
+  operationId: getGroupCodeScansByCountry
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/codes/scans/cities
+  method: get
+  operationId: getGroupCodeScansByCity
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/codes/scans/top
+  method: get
+  operationId: getGroupTopCodeScans
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /apps/{client_id}
+  method: get
+  operationId: getOAuthApp
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations
+  method: get
+  operationId: getOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{organization_guid}
+  method: get
+  operationId: getOrganization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{organization_guid}/shorten_counts
+  method: get
+  operationId: getOrganizationShortenCounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{organization_guid}/shorten_counts_by_group
+  method: get
+  operationId: getOrganizationShortenCountsByGroup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{organization_guid}/plan_limits
+  method: get
+  operationId: getPlanLimits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /qr-codes
+  method: post
+  operationId: createQRCodePublic
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /qr-codes/static
+  method: post
+  operationId: createStaticQRCodePublic
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /qr-codes/{qrcode_id}/image
+  method: get
+  operationId: getQRCodeImagePublic
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /qr-codes/{qrcode_id}
+  method: patch
+  operationId: updateQRCodePublic
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /qr-codes/{qrcode_id}
+  method: get
+  operationId: getQRCodeByIdPublic
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /qr-codes/{qrcode_id}
+  method: delete
+  operationId: deleteQRCode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /groups/{group_guid}/qr-codes
+  method: get
+  operationId: listQRMinimal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /groups/{group_guid}/qr-codes
+  method: patch
+  operationId: updateQRCodesByGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /qr-codes/{qrcode_id}/scans
+  method: get
+  operationId: getScanMetricsForQRCode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /qr-codes/{qrcode_id}/scans/summary
+  method: get
+  operationId: getScanMetricsSummaryForQRCode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /qr-codes/{qrcode_id}/scans/countries
+  method: get
+  operationId: getScanMetricsForQRCodeByCountries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /qr-codes/{qrcode_id}/scans/cities
+  method: get
+  operationId: getScanMetricsForQRCodeByCities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /qr-codes/{qrcode_id}/scans/device_os
+  method: get
+  operationId: getScanMetricsForQRCodeByDevicesOS
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /qr-codes/{qrcode_id}/scans/browsers
+  method: get
+  operationId: getScanMetricsForQRCodeByBrowser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /qr-codes/{qrcode_id}/to-bitlink
+  method: put
+  operationId: upgradeQRCodeToBitlink
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /qr-codes/{qrcode_id}/redirect
+  method: patch
+  operationId: redirectQRCodeDestination
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /user
+  method: patch
+  operationId: updateUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /user
+  method: get
+  operationId: getUser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /user/platform_limits
+  method: get
+  operationId: getPlatformLimits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{organization_guid}/webhooks
+  method: get
+  operationId: getWebhooks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /webhooks
+  method: post
+  operationId: createWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /webhooks/{webhook_guid}
+  method: get
+  operationId: getWebhook
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /webhooks/{webhook_guid}
+  method: patch
+  operationId: updateWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /webhooks/{webhook_guid}
+  method: delete
+  operationId: deleteWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /webhooks/{webhook_guid}/verify
+  method: post
+  operationId: verifyWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

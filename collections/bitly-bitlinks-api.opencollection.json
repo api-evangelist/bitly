@@ -1,0 +1,826 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly Bitlinks API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bitlinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Shorten a Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/shorten",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Converts a long url to a Bitlink. You may see errors returned from this endpoint - \"BRANDED_LINK_MONTHLY_LIMIT_EXCEEDED\" occurs if you have shortened more links than your account is configured for for the month, and \"DNS_CONFIGURATION_ERROR\" occurs if you are attempting to shorten links against a custom domain which doesn't have DNS properly configured."
+        },
+        {
+          "info": {
+            "name": "Create a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Converts a long url to a Bitlink and sets additional parameters. You may see errors returned from this endpoint - \"BRANDED_LINK_MONTHLY_LIMIT_EXCEEDED\" occurs if you have shortened more links than your account is configured for for the month, and \"DNS_CONFIGURATION_ERROR\" occurs if you are attempting to shorten links against a custom domain which doesn't have DNS properly configured."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              }
+            ]
+          },
+          "docs": "Returns information for the specified link."
+        },
+        {
+          "info": {
+            "name": "Update a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates fields in the specified link. To redirect the link (i.e. to update the Long URL), use the long_url parameter. This will always charge an encode limit."
+        },
+        {
+          "info": {
+            "name": "Delete a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              }
+            ]
+          },
+          "docs": "Delete an unedited hash Bitlink."
+        },
+        {
+          "info": {
+            "name": "Expand a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/expand",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the short link and long URL for the specified link."
+        },
+        {
+          "info": {
+            "name": "Get Clicks for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/clicks",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the click counts for the specified link in an array based on a date."
+        },
+        {
+          "info": {
+            "name": "Get a Clicks Summary for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/clicks/summary",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the click counts for the specified link rolled up into a single field."
+        },
+        {
+          "info": {
+            "name": "Get Engagement Counts for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/engagements",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns an array of engagement counts for the specified link. The array is comprised of button click, click and scan counts for each time window, where the window is based on the provided unit."
+        },
+        {
+          "info": {
+            "name": "Get an Engagement Count Summary for a Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/engagements/summary",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the engagement counts for the specified link rolled up into a single field."
+        },
+        {
+          "info": {
+            "name": "Get Metrics for a Bitlink by Country",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/countries",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the country origins of click traffic for the specified link."
+        },
+        {
+          "info": {
+            "name": "Get Metrics for a Bitlink by City",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/cities",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the city origins of click traffic for the specified link."
+        },
+        {
+          "info": {
+            "name": "Get Metrics for a Bitlink by Device Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/devices",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the device types generating click traffic to the specified link."
+        },
+        {
+          "info": {
+            "name": "Get Metrics for a Bitlink by Referrers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/referrers",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns referrer click counts for the specified link."
+        },
+        {
+          "info": {
+            "name": "Get Metrics for a Bitlink by Referrer Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/referrer_name",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns referrer click counts for the specified link."
+        },
+        {
+          "info": {
+            "name": "Get Metrics for a Bitlink by Referring Domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/referring_domains",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the referring domain click counts for the specified link."
+        },
+        {
+          "info": {
+            "name": "Get Metrics for a Bitlink by Referrers by Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/referrers_by_domains",
+            "params": [
+              {
+                "name": "bitlink",
+                "value": "bit.ly/12a4b6c",
+                "type": "path",
+                "description": "A Bitlink made of the domain and hash"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns click metrics grouped by referrers for the specified link."
+        },
+        {
+          "info": {
+            "name": "Retrieve Bitlinks by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/bitlinks",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "search_after",
+                "value": "",
+                "type": "query",
+                "description": "Token used to search next batch, only use response from API as input value."
+              },
+              {
+                "name": "query",
+                "value": "api",
+                "type": "query",
+                "description": "The value that you would like to search"
+              },
+              {
+                "name": "hostname_path_query",
+                "value": "dev.bitly.com/api-reference",
+                "type": "query",
+                "description": "The hostname and/or path you would like to search (case-insensitive). Subdomains included; query params and fragment ignored."
+              },
+              {
+                "name": "created_before",
+                "value": "1694529902",
+                "type": "query",
+                "description": "Timestamp as an integer unix epoch (seconds only)"
+              },
+              {
+                "name": "created_after",
+                "value": "1694529902",
+                "type": "query",
+                "description": "Timestamp as an integer unix epoch (seconds only)"
+              },
+              {
+                "name": "archived",
+                "value": "both",
+                "type": "query",
+                "description": "Whether or not to include archived resources"
+              },
+              {
+                "name": "deeplinks",
+                "value": "both",
+                "type": "query",
+                "description": "Filter to only Bitlinks that contain deeplinks"
+              },
+              {
+                "name": "domain_deeplinks",
+                "value": "both",
+                "type": "query",
+                "description": "Filter to only Bitlinks that contain deeplinks configured with a custom domain"
+              },
+              {
+                "name": "campaign_guid",
+                "value": "Ca1bcd2EFGh",
+                "type": "query",
+                "description": "Filter to return only links for the given campaign GUID, can be provided"
+              },
+              {
+                "name": "channel_guid",
+                "value": "Ha1bc2DefGh",
+                "type": "query",
+                "description": "Filter to return only links for the given channel GUID, can be provided, overrides all other parameters"
+              },
+              {
+                "name": "custom_bitlink",
+                "value": "both",
+                "type": "query"
+              },
+              {
+                "name": "has_qr_codes",
+                "value": "both",
+                "type": "query",
+                "description": "a filter value if the resource has any QR codes"
+              },
+              {
+                "name": "is_expired",
+                "value": "",
+                "type": "query",
+                "description": "filter bitlinks by expiration status"
+              },
+              {
+                "name": "has_expiration",
+                "value": "",
+                "type": "query",
+                "description": "filter bitlinks by presence of expiration"
+              },
+              {
+                "name": "has_dynamic_routing",
+                "value": "",
+                "type": "query",
+                "description": "filter bitlinks by presence of dynamic routing rules"
+              },
+              {
+                "name": "tags",
+                "value": "bitly,api",
+                "type": "query",
+                "description": "Filter by given tags"
+              },
+              {
+                "name": "launchpad_ids",
+                "value": "M1234567890",
+                "type": "query",
+                "description": "Filter by launchpad id"
+              },
+              {
+                "name": "encoding_login",
+                "value": "chauncey",
+                "type": "query",
+                "description": "Filter by the login of the authenticated user that created the Bitlink"
+              }
+            ]
+          },
+          "docs": "Returns a paginated collection of Bitlinks for a group. The list of custom bitlinks has newest entries first."
+        },
+        {
+          "info": {
+            "name": "Bulk update bitlinks",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/bitlinks",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk update can add or remove tags or archive up to 100 links at a time; The response includes a list of bitlink ids that were updated."
+        },
+        {
+          "info": {
+            "name": "Retrieve Top Links and Decoupled QR Codes by Engagements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/engagements/sorted/top",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time."
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              }
+            ]
+          },
+          "docs": "Returns the bitlinks and decoupled QR codes in a group with the most engagements over the requested time window, ranked together in descending order by engagement count. Bitlinks and decoupled QR codes are returned in separate lists; `sorted_links` preserves the unified descending-by-count ordering across both, with each entry's id referencing either a bitlink or a QR code guid.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve Sorted Bitlinks for Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/bitlinks/:sort",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "sort",
+                "value": "clicks",
+                "type": "path",
+                "description": "The type of sorting that you would like to do"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time."
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              }
+            ]
+          },
+          "docs": "Returns a list of Bitlinks sorted by group. The list of custom bitlinks has newest entries first."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

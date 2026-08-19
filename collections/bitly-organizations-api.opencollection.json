@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly Organizations API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations",
+            "params": [
+              {
+                "name": "include_all",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, returns all of the user's organizations regardless of the token's allowed_orgs restrictions.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of organizations for the authenticated user. By default, only organizations permitted by the token's allowed_orgs are returned. Use include_all=true to return all organizations regardless of token restrictions. Each organization is annotated with its authentication requirements (require_sso, require_2fa) when configured.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "Oa1bcd234eF",
+                "type": "path",
+                "description": "A GUID for a Bitly organization"
+              }
+            ]
+          },
+          "docs": "Retrive details for the specified organization."
+        },
+        {
+          "info": {
+            "name": "Get Shorten Counts for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid/shorten_counts",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "Oa1bcd234eF",
+                "type": "path",
+                "description": "A GUID for a Bitly organization"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the shorten counts for a specific organization over a specified time period."
+        },
+        {
+          "info": {
+            "name": "Get Shorten Counts for an Organization by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid/shorten_counts_by_group",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "Oa1bcd234eF",
+                "type": "path",
+                "description": "A GUID for a Bitly organization"
+              }
+            ]
+          },
+          "docs": "Returns the shorten counts for a specific organization by group for the current month."
+        },
+        {
+          "info": {
+            "name": "Get Plan Limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid/plan_limits",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "Oa1bcd234eF",
+                "type": "path",
+                "description": "A GUID for a Bitly organization"
+              }
+            ]
+          },
+          "docs": "Returns all plan limits and counts available for an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

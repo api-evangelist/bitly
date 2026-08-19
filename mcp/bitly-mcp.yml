@@ -1,0 +1,168 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://dev.bitly.com/bitly-mcp/ (overview, quickstart, configuration-details,
+  mcp-tools-reference, mcp-changelog), plus a live probe of the endpoint itself.
+name: Bitly MCP Server
+status: official
+vendor: Bitly
+docs: https://dev.bitly.com/bitly-mcp/
+quickstart: https://dev.bitly.com/bitly-mcp/overview/quickstart/
+changelog: https://dev.bitly.com/bitly-mcp/overview/mcp-changelog/
+
+deployment:
+  mode: remote
+  endpoint: https://api-ssl.bitly.com/v4/mcp
+  transport: http
+  auth: oauth
+  verified: probed
+  note: >-
+    Bitly hosts the server; there is no first-party stdio package. Authentication accepts
+    either a bearer access token from bitly.com/settings/api or OAuth 2.1 with Dynamic Client
+    Registration (the /.well-known/oauth-authorization-server document on the same host
+    advertises a registration_endpoint, code + S256 PKCE). Bitly's configuration docs tell
+    stdio-only clients to proxy the SAME hosted URL with `npx mcp-remote
+    https://api-ssl.bitly.com/v4/mcp` — that is a third-party proxy around a remote server,
+    not a Bitly-published local server, so mode stays `remote`.
+
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://api-ssl.bitly.com/v4/mcp
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 401
+  www_authenticate: >-
+    Bearer as_uri="https://api-ssl.bitly.com/.well-known/oauth-protected-resource",
+    error="invalid_token"
+  response_body: '{"message":"UNAUTHORIZED","resource":"mcp","description":"..."}'
+  interpretation: >-
+    The endpoint is live and is a real MCP server — it answers the JSON-RPC POST with an
+    RFC 9728 challenge naming its protected-resource document, which in turn declares
+    resource https://api-ssl.bitly.com/v4/mcp. The live tool schemas are auth-gated, so the
+    tools below are transcribed from Bitly's published MCP tools reference (names and
+    descriptions verbatim, parameter names as documented). Full JSON Schema shapes require
+    an authenticated tools/list.
+
+configuration:
+  http:
+    type: http
+    url: https://api-ssl.bitly.com/v4/mcp
+    headers:
+      Authorization: Bearer YOUR_BITLY_AUTH_TOKEN
+  stdio_proxy:
+    command: npx
+    args:
+    - mcp-remote
+    - https://api-ssl.bitly.com/v4/mcp
+    - --header
+    - 'Authorization: Bearer ${AUTH_TOKEN}'
+  token_source: https://bitly.com/settings/api
+
+summary:
+  tool_count: 25
+  categories: [Link Management, Analytics, QR Codes, User & Organization, Custom Domains, Bulk Uploads]
+
+tools:
+- name: create_short_link
+  category: Link Management
+  description: Create a compact, shareable link with advanced customization options
+  parameters: [long_url, bitlink_id, title, tags, domain, group_guid, keyword, deeplinks]
+- name: create_short_link_with_qr
+  category: Link Management
+  description: Create a short link and a QR Code that encodes it in a single step
+  parameters: [group_guid, bitlink_id, long_url, domain, title, tags, keyword, qr_title, archived, render_customizations]
+- name: get_short_link_details
+  category: Link Management
+  description: Get complete short link details (title, destination, created, creator, tags, custom domains)
+  parameters: [bitlink]
+- name: update_short_link
+  category: Link Management
+  description: Update destination URL, title, archive state, tags, or deeplinks
+  parameters: [bitlink, long_url, title, archived, tags, deeplinks]
+- name: delete_short_link
+  category: Link Management
+  description: Permanently delete a short link (unedited links only)
+  parameters: [bitlink]
+- name: expand
+  category: Link Management
+  description: Retrieve the original long URL and basic metadata for a short link
+  parameters: [bitlink]
+- name: get_link_analytics
+  category: Analytics
+  description: Analytics for a single short link, with click counts and engagement breakdowns
+  parameters: [bitlink_id, dimension, unit, units, unit_reference, size]
+- name: get_group_analytics
+  category: Analytics
+  description: Analytics across all links in a group (workspace)
+  parameters: [group_guid, dataset, dimension, unit, units, unit_reference, size]
+- name: get_qr_code_analytics
+  category: Analytics
+  description: Scan analytics for a single QR Code
+  parameters: [qrcode_id, dimension, unit, units, unit_reference, size]
+- name: create_qr_code
+  category: QR Codes
+  description: Create a new QR Code for a link
+  parameters: [bitlink, title, group_guid, render_customizations]
+- name: get_qr_code
+  category: QR Codes
+  description: Get QR Code metadata
+  parameters: [qr_code_id]
+- name: get_qr_code_image
+  category: QR Codes
+  description: Get a URL to download the QR Code image
+  parameters: [qr_code_id]
+- name: update_qr_code
+  category: QR Codes
+  description: Update a QR Code's title, customizations, or archived status
+  parameters: [qr_code_id, title, archived, render_customizations]
+- name: get_group_qr_codes
+  category: QR Codes
+  description: List QR Codes in a group with filtering and pagination
+  parameters: [group_guid, query, size, page]
+- name: get_user
+  category: User & Organization
+  description: Get the authenticated user's profile
+  parameters: []
+- name: get_organizations
+  category: User & Organization
+  description: List organizations the user can access
+  parameters: []
+- name: get_groups
+  category: User & Organization
+  description: List groups (workspaces); optionally filter by organization
+  parameters: [organization_guid]
+- name: get_group_details
+  category: User & Organization
+  description: Get a group's details
+  parameters: [group_guid]
+- name: get_group_preferences
+  category: User & Organization
+  description: Get a group's preferences, including the default domain used when creating links
+  parameters: [group_guid]
+- name: get_group_short_links
+  category: User & Organization
+  description: List links in a group with rich filtering
+  parameters: [group_guid, size, page, keyword, query, created_before, created_after, modified_after,
+    archived, deeplinks, domain_deeplinks, campaign_guid, channel_guid, custom_bitlink, tags, encoding_user]
+- name: get_group_short_links_sorted
+  category: User & Organization
+  description: List group links sorted by performance
+  parameters: [group_guid, sort, unit, units, unit_reference, size]
+- name: get_custom_domains
+  category: Custom Domains
+  description: List custom domains available to the user
+  parameters: []
+- name: get_custom_link_details
+  category: Custom Domains
+  description: Get custom link metadata and override history
+  parameters: [custom_bitlink]
+- name: bulk_upload_validate
+  category: Bulk Uploads
+  description: Validate a bulk upload request and obtain a signed URL for uploading a .CSV or .XLSX file
+  parameters: [filename, upload_type, group_guid, domain, template_id]
+- name: bulk_upload_file
+  category: Bulk Uploads
+  description: Upload a file to the signed URL returned by bulk_upload_validate
+  parameters: [upload_url, headers, file_content, content_type]
+
+crosswalk: mcp/bitly-tool-crosswalk.yml

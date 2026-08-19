@@ -1,0 +1,577 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly QR Codes API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "QR Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a QR Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new QR Code and return its metadata"
+        },
+        {
+          "info": {
+            "name": "Generate a static QR Code image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/static",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "image/svg+xml"
+              }
+            ],
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "The image format. Supports `svg` and `png`. Ignored if the Accept header specifies an image type."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a static QR code image without creating or saving a QR code resource. SVG and PNG output are supported via the Accept header\nContact your Account Manager to discuss enabling this feature for your account.\n\nThe `render_customizations` field supports basic appearance options. Customizations that require the rasterize API are not supported: `gradient`, `background_gradient`, `frame`, `text`, and `logo`.\n\nThe Accept header controls the response format:\n- `application/json` (default): Return"
+        },
+        {
+          "info": {
+            "name": "Retrieve a QR Code image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id/image",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "image/svg+xml"
+              }
+            ],
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabcde12345",
+                "type": "path",
+                "description": "The QR Code ID"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "The format type of the image. If there is an image format in the header it takes precedence."
+              }
+            ]
+          },
+          "docs": "Get the image of a given QR Code. The Accept header controls how this is returned (options are \"application/json\", \"image/svg+xml\", and \"image/png\").\nIf the Accept header is \"application/json\" the format query parameter will determine the image format inside of the json (which will be base64 encoded and prefixed with its mime type as would be suitable for a HTML image src tag).\nTo Return the QR Code image itself, set the Accept header to \"image/svg+xml\" or \"image/png\", or remove the Accept heade"
+        },
+        {
+          "info": {
+            "name": "Retrieve a QR Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabcde12345",
+                "type": "path",
+                "description": "The QR Code ID"
+              }
+            ]
+          },
+          "docs": "Gets the QR code with a matching id."
+        },
+        {
+          "info": {
+            "name": "Update a QR Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabc123",
+                "type": "path",
+                "description": "The QR code ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the QR code with a matching id and returns it."
+        },
+        {
+          "info": {
+            "name": "Delete a QR Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabcde12345",
+                "type": "path",
+                "description": "The QR Code ID"
+              }
+            ]
+          },
+          "docs": "Delete a QR Code that has not been redirected and is not for a custom link. Also deletes the associated link (if applicable)."
+        },
+        {
+          "info": {
+            "name": "Retrieve QR Codes by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/qr-codes",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "has_render_customizations",
+                "value": "both",
+                "type": "query",
+                "description": "Whether or not QRCode has any render customizations (like color or shape changes)"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "search_after",
+                "value": "",
+                "type": "query",
+                "description": "Token used to search next batch of qr codes, only use response from API as input value."
+              },
+              {
+                "name": "query",
+                "value": "api",
+                "type": "query",
+                "description": "The value that you would like to search"
+              },
+              {
+                "name": "hostname_path_query",
+                "value": "dev.bitly.com/api-reference",
+                "type": "query",
+                "description": "The hostname and/or path you would like to search (case-insensitive). Subdomains included; query params and fragment ignored."
+              },
+              {
+                "name": "created_before",
+                "value": "1694529902",
+                "type": "query",
+                "description": "Timestamp as an integer unix epoch (seconds only)"
+              },
+              {
+                "name": "created_after",
+                "value": "1694529902",
+                "type": "query",
+                "description": "Timestamp as an integer unix epoch (seconds only)"
+              },
+              {
+                "name": "archived",
+                "value": "both",
+                "type": "query",
+                "description": "Whether or not to include archived resources"
+              },
+              {
+                "name": "creating_login",
+                "value": "chauncey",
+                "type": "query",
+                "description": "Filter by the login of the authenticated user that created the QR Code"
+              },
+              {
+                "name": "qrc_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "is_gs1",
+                "value": "both",
+                "type": "query",
+                "description": "a filter value if the resource is a GS1 QR code"
+              },
+              {
+                "name": "is_expired",
+                "value": "",
+                "type": "query",
+                "description": "filter bitlinks by expiration status"
+              },
+              {
+                "name": "has_expiration",
+                "value": "",
+                "type": "query",
+                "description": "filter bitlinks by presence of expiration"
+              },
+              {
+                "name": "has_dynamic_routing",
+                "value": "",
+                "type": "query",
+                "description": "filter bitlinks by presence of dynamic routing rules"
+              },
+              {
+                "name": "tags",
+                "value": "bitly,api",
+                "type": "query",
+                "description": "Filter by given tags"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of QR codes matching the filter settings. Values are in reverse chronological order.\nThe pagination occurs by calling the next link in the pagination response object.\n"
+        },
+        {
+          "info": {
+            "name": "Bulk update QR codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/qr-codes",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "path",
+                "description": "A GUID for a Bitly group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk update can add or remove tags, or archive/un-archive, up to 100 QR codes at a time.\nPages QR codes cannot be updated with this endpoint.\nThe response includes a list of QR code ids that were updated.\n"
+        },
+        {
+          "info": {
+            "name": "Get Scans for a QR Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id/scans",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabcde12345",
+                "type": "path",
+                "description": "The QR Code ID"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns an array of scan counts for the specified QR code. The array is comprised of scan counts for each time window, where the window is based on the provided unit."
+        },
+        {
+          "info": {
+            "name": "Get Scans Summary for a QR Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id/scans/summary",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabcde12345",
+                "type": "path",
+                "description": "The QR Code ID"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the scan counts for a QR Code rolled up into a single field for a specified time window, where the window is based on the provided unit."
+        },
+        {
+          "info": {
+            "name": "Get Scans for a QR Code by Country",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id/scans/countries",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabcde12345",
+                "type": "path",
+                "description": "The QR Code ID"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the country origins of scan traffic for the specified QR Code."
+        },
+        {
+          "info": {
+            "name": "Get Metrics for a QR Code by City",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id/scans/cities",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabcde12345",
+                "type": "path",
+                "description": "The QR Code ID"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the city origins of scan traffic for the specified QR Code."
+        },
+        {
+          "info": {
+            "name": "Get Scans for a QR Code by Device OS",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id/scans/device_os",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabcde12345",
+                "type": "path",
+                "description": "The QR Code ID"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the device os generating scan traffic for the specified QR Code."
+        },
+        {
+          "info": {
+            "name": "Get Scans for a QR Code by Browser",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id/scans/browsers",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "Qabcde12345",
+                "type": "path",
+                "description": "The QR Code ID"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "The quantity of items to be be returned"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the browsers generating scan traffic to the specified QR Code."
+        },
+        {
+          "info": {
+            "name": "Upgrade a QR Code to a bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id/to-bitlink",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upgrades a stand alone (decoupled) QR Code to a coupled QR Code by associating it with its underlying Bitly short link. This operation consumes one encode from the organization's monthly Link limit. If the QR Code is already coupled, no encode is consumed."
+        },
+        {
+          "info": {
+            "name": "Redirect a QR Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/qr-codes/:qrcode_id/redirect",
+            "params": [
+              {
+                "name": "qrcode_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the destination URL that a stand alone QR Code redirects to. This only works for stand alone QR Codes; a QR Code already associated with a bitlink must be updated via the Bitlinks API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

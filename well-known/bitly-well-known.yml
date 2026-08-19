@@ -1,0 +1,86 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes of every host named in apis.yml and the OpenAPI servers[] block
+note: >-
+  Three of the probed paths returned a real document. bitly.com serves an RFC 9116
+  security.txt, and the API host api-ssl.bitly.com serves both RFC 8414 OAuth
+  authorization-server metadata and RFC 9728 protected-resource metadata — the latter
+  is what Bitly's MCP server advertises in its 401 WWW-Authenticate challenge. Every
+  other path 404d. dev.bitly.com and bitly.com answer unknown /.well-known/* paths with
+  an HTML 404 (correct status, HTML body), so no soft-200 false positives were possible.
+hosts:
+- bitly.com
+- dev.bitly.com
+- api-ssl.bitly.com
+probes:
+- host: bitly.com
+  path: /.well-known/security.txt
+  status: 200
+  content_type: text/plain; charset=utf-8
+  file: well-known/bitly-security.txt
+  document: true
+- host: api-ssl.bitly.com
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  file: well-known/bitly-oauth-authorization-server.json
+  document: true
+- host: api-ssl.bitly.com
+  path: /.well-known/oauth-protected-resource
+  status: 200
+  content_type: application/json
+  file: well-known/bitly-oauth-protected-resource.json
+  document: true
+  note: >-
+    Declares resource https://api-ssl.bitly.com/v4/mcp — the MCP server — and lists
+    api-ssl.bitly.com as its authorization server.
+- host: dev.bitly.com
+  path: /.well-known/security.txt
+  status: 404
+  document: false
+- host: api-ssl.bitly.com
+  path: /.well-known/security.txt
+  status: 404
+  document: false
+- host: bitly.com
+  path: /.well-known/openid-configuration
+  status: 404
+  document: false
+- host: api-ssl.bitly.com
+  path: /.well-known/openid-configuration
+  status: 404
+  document: false
+- host: bitly.com
+  path: /.well-known/api-catalog
+  status: 404
+  document: false
+- host: bitly.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+  document: false
+- host: bitly.com
+  path: /.well-known/agent-card.json
+  status: 404
+  document: false
+- host: dev.bitly.com
+  path: /.well-known/agent-card.json
+  status: 404
+  document: false
+- host: api-ssl.bitly.com
+  path: /.well-known/agent-card.json
+  status: 404
+  document: false
+- host: bitly.com
+  path: /.well-known/agent.json
+  status: 404
+  document: false
+- host: api-ssl.bitly.com
+  path: /.well-known/agent.json
+  status: 404
+  document: false
+summary:
+  probed: 14
+  documents: 3
+  security_txt: true
+  oauth_metadata: true
+  agent_card: false

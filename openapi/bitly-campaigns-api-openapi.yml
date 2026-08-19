@@ -1,98 +1,715 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
-  title: Bitly API v4 Bitlinks Campaigns API
-  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
-
-    organizations, campaigns, channels, QR codes, and click analytics.
-
-
-    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
-
-    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
-
-    spec at https://dev.bitly.com/v4/v4.json.
-
-    '
+  title: Bitly Campaigns API
+  description: The Campaigns surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
+    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
+    parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  termsOfService: https://bitly.com/pages/terms-of-service
   contact:
-    name: Bitly API
-    url: https://dev.bitly.com/api-reference
+    url: https://bitly.is/API-support
   license:
-    name: Proprietary
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
 - url: https://api-ssl.bitly.com/v4
-  description: Bitly v4 REST API
 security:
 - bearerAuth: []
 tags:
 - name: Campaigns
+  description: 'Bitly Campaigns are used to build and organize links and metrics for marketing campaigns.
+
+    '
 paths:
   /campaigns:
     get:
+      summary: Retrieve Campaigns
+      description: Returns the campaigns for the current authenticated user.
+      operationId: getCampaigns
       tags:
       - Campaigns
-      summary: List campaigns
-      operationId: listCampaigns
+      parameters:
+      - $ref: '#/components/parameters/GroupGUIDFilter'
       responses:
         '200':
-          description: Campaigns.
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaigns'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '502':
+          description: BAD_GATEWAY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGateway'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
     post:
+      summary: Create Campaign
+      description: Creates a new campaign.
+      operationId: createCampaign
       tags:
       - Campaigns
-      summary: Create a campaign
-      operationId: createCampaign
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required:
-              - name
-              - group_guid
-              properties:
-                name:
-                  type: string
-                description:
-                  type: string
-                group_guid:
-                  type: string
+              $ref: '#/components/schemas/CampaignModify'
       responses:
-        '201':
-          description: Created campaign.
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
   /campaigns/{campaign_guid}:
-    parameters:
-    - name: campaign_guid
+    get:
+      summary: Retrieve a Campaign
+      description: Returns details for a campaign.
+      operationId: getCampaign
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/CampaignGUID'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    patch:
+      summary: Update Campaign
+      description: Updates a campaign's details.
+      operationId: updateCampaign
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/CampaignGUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CampaignModify'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /channels:
+    get:
+      summary: Retrieve Channels
+      description: Returns the channels available to a user.
+      operationId: getChannels
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/GroupGUIDFilter'
+      - $ref: '#/components/parameters/CampaignGUIDFilter'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channels'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    post:
+      summary: Create Channel
+      description: Creates a new channel.
+      operationId: createChannel
+      tags:
+      - Campaigns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelModify'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /channels/{channel_guid}:
+    get:
+      summary: Get a Channel
+      description: Returns a channel's details.
+      operationId: getChannel
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/ChannelGUID'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    patch:
+      summary: Update a Channel
+      description: Updates an existing channel.
+      operationId: updateChannel
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/ChannelGUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelModify'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+components:
+  parameters:
+    CampaignGUID:
+      name: campaign_guid
+      description: A GUID for a Bitly campaign
       in: path
       required: true
       schema:
         type: string
-    patch:
-      tags:
-      - Campaigns
-      summary: Update a campaign
-      operationId: updateCampaign
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                description:
-                  type: string
-      responses:
-        '200':
-          description: Updated.
-components:
+      example: Ca1bcd2EFGh
+    CampaignGUIDFilter:
+      name: campaign_guid
+      description: A GUID for a Bitly campaign
+      in: query
+      schema:
+        type: string
+      example: Ca1bcd2EFGh
+    ChannelGUID:
+      name: channel_guid
+      description: A GUID for a Bitly Channel
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Ha1bc2DefGh
+    GroupGUIDFilter:
+      name: group_guid
+      description: A GUID for a Bitly group
+      in: query
+      schema:
+        type: string
+      example: Ba1bc23dE4F
+  schemas:
+    BadGateway:
+      description: BAD_GATEWAY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BaseChannel:
+      type: object
+      properties:
+        name:
+          type: string
+        guid:
+          type: string
+        created:
+          type: string
+          description: ISO TIMESTAMP
+        modified:
+          type: string
+          description: ISO_TIMESTAMP
+        group_guid:
+          type: string
+    BaseChannelBitlink:
+      type: object
+      properties:
+        campaign_guid:
+          type: string
+        bitlink_id:
+          type: string
+    Campaign:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - properties:
+          guid:
+            type: string
+          group_guid:
+            type: string
+          created_by:
+            type: string
+          name:
+            type: string
+          description:
+            type: string
+          created:
+            type: string
+            description: ISO timestamp
+          modified:
+            type: string
+            description: ISO timestamp
+    CampaignModify:
+      type: object
+      properties:
+        group_guid:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        channel_guids:
+          type: array
+          items:
+            type: string
+      example:
+        group_guid: Ba1bc23dE4F
+        name: My Campaign
+        description: my new campaign
+        channel_guids:
+        - Ha1bc2DefGj
+        - Ha1bc2DefGk
+    Campaigns:
+      type: object
+      properties:
+        campaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Campaign'
+    Channel:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseChannel'
+      - $ref: '#/components/schemas/HasReferences'
+    ChannelModify:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseChannel'
+      - properties:
+          bitlinks:
+            type: array
+            items:
+              $ref: '#/components/schemas/BaseChannelBitlink'
+      example:
+        name: My Channel
+        guid: Ha1bc2DefGh
+        group_guid: Ba1bc23dE4F
+        bitlinks:
+        - campaign_guid: Ca1bcd2EFGh
+          bitlink_id: bit.ly/1234abcd
+    Channels:
+      type: object
+      properties:
+        channels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Channel'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
-
-        Send as `Authorization: Bearer {token}`.
-
-        '

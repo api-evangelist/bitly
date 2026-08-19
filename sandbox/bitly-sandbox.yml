@@ -1,0 +1,55 @@
+generated: '2026-08-13'
+method: searched
+source: https://dev.bitly.com/docs/tutorials/create-a-test-account/
+docs: https://dev.bitly.com/docs/tutorials/create-a-test-account/
+sandbox_published: false
+summary: >-
+  Bitly ships NO sandbox and no test mode. There is no test host, no test-vs-live key prefix, no
+  test fixtures and no time simulation. Bitly's own guidance is to test against production with
+  isolation achieved organizationally rather than technically — either a separate free account or
+  a separate group inside the real account.
+test_environment:
+  base_url: https://api-ssl.bitly.com/v4
+  note: The same production host used for live traffic.
+key_prefixes:
+  test: null
+  live: null
+  note: >-
+    Bitly access tokens carry no mode prefix. A token cannot be inspected to tell whether it
+    points at test or production data, because there is no such distinction — every call mutates
+    real Bitlinks on real domains that will resolve for anyone who visits them.
+approaches:
+- name: Separate free test account
+  isolation: account
+  quota_impact: none on the main account
+  limitations:
+  - Reduced rate limits (the Free tier allows 1,000 API requests/month).
+  - Custom domains cannot be tested — the Free tier includes no custom domain.
+  source_quote: >-
+    "By going to bitly.com and signing up for an account, any tests from the new group will not
+    appear in your main account and will not impact your rate limits."
+- name: Separate group inside the existing account
+  isolation: group
+  quota_impact: >-
+    Counts against the account's rate limits and monthly API quota — real cost, real metered usage.
+  limitations:
+  - Test traffic consumes the same paid quota as production.
+  advantages:
+  - Custom domains can be exercised, because the group inherits the account's BSDs.
+setup:
+  requires: [access token, group_id]
+  group_id_discovery: >-
+    The group id is visible in the Bitly dashboard URL: https://app.bitly.com/[group_id]/bitlinks
+  api_alternative: >-
+    GET /v4/groups returns every group the token can reach, which is the programmatic equivalent
+    and the route an agent should take.
+test_values:
+  published: false
+  note: >-
+    No test URLs, test domains, fixture Bitlinks or trigger values are published. Nothing was
+    invented here.
+implications_for_agents: >-
+  Every agent-run Bitly write is production. There is no dry-run, and combined with the absence of
+  any idempotency key (see conventions/bitly-conventions.yml) a retried create produces a second
+  live short link that consumes quota and resolves publicly. Agents should be given a dedicated
+  group_guid and a low-quota account rather than relying on a test mode that does not exist.

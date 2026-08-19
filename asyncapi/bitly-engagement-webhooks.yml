@@ -1,0 +1,85 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://dev.bitly.com/docs/tutorials/create-a-webhook/ and the Webhooks operations in
+  openapi/_original/bitly-v4-openapi.json
+type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Bitly publishes NO AsyncAPI document. Probes of dev.bitly.com/asyncapi.yaml and the docs
+  sitemap found none. It does ship a real, managed webhook surface with six REST operations and
+  documented retry semantics, so the event surface is captured here as a webhook catalog rather
+  than fabricated as an AsyncAPI.
+docs: https://dev.bitly.com/docs/tutorials/create-a-webhook/
+management:
+  style: rest
+  operations:
+  - operationId: createWebhook
+    path: POST /v4/webhooks
+  - operationId: getWebhook
+    path: GET /v4/webhooks/{webhook_guid}
+  - operationId: getWebhooks
+    path: GET /v4/organizations/{organization_guid}/webhooks
+  - operationId: updateWebhook
+    path: PATCH /v4/webhooks/{webhook_guid}
+  - operationId: deleteWebhook
+    path: DELETE /v4/webhooks/{webhook_guid}
+  - operationId: verifyWebhook
+    path: POST /v4/webhooks/{webhook_guid}/verify
+  ui: https://app.bitly.com
+availability: >-
+  Webhooks are listed as an Enterprise plan inclusion on https://bitly.com/pages/pricing, so the
+  six operations above are not reachable from the self-serve tiers.
+transport:
+  protocol: https
+  method: POST
+  content_type: application/json
+  timeout_seconds: 10
+events:
+- name: engagement
+  former_name: click
+  description: >-
+    A single engagement with a Bitly-managed destination — a link click, a QR Code scan, or a
+    Link-in-bio button click. This is the ONLY event type Bitly publishes; the surface is one
+    event, not a catalog.
+  payload_fields:
+  - event_id
+  - event_type
+  - timestamp
+  - timezone
+  - long_url
+  - bitlink
+  - country
+  - referrer
+  - device_type
+  - account_guid
+  - group_guid
+  - webhook_guid
+  - tags
+  - references
+  payload_notes: >-
+    `event_type` is the literal string "engagement". `tags` is only populated when the webhook was
+    created with fetch_tags: true. `references` carries API links back to the related resources.
+delivery:
+  retries: 5
+  backoff: exponential
+  failure_definition: client timeout or a 5xx response
+  escalation: >-
+    The first failure is requeued. A second failure moves the webhook into alert status and
+    notifies the account administrator. After 24 hours in alert status the webhook either clears
+    (on a 2xx) or is deactivated.
+  ordering: not published
+consumer_authentication:
+  note: >-
+    Bitly authenticates ITSELF to the consumer's endpoint — the consumer chooses the scheme when
+    registering the webhook.
+  methods:
+  - api key (query parameter)
+  - http basic
+  - oauth 2.0 client credentials
+signature_verification:
+  supported: false
+  note: >-
+    Bitly documents no payload signature (no HMAC header, no signing secret). Consumers cannot
+    cryptographically verify that a delivery originated from Bitly; the documented controls are
+    the outbound auth scheme above and transport TLS.

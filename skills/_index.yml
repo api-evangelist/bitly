@@ -1,0 +1,54 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  openapi/ (Bitly's own OpenAPI, split by tag), conventions/bitly-conventions.yml,
+  errors/bitly-problem-types.yml, rate-limits/bitly-rate-limits.yml,
+  asyncapi/bitly-engagement-webhooks.yml
+note: >-
+  Packaged Agent Skills for the Bitly v4 API. Every operationId referenced in these skills was
+  grepped out of Bitly's published OpenAPI (https://dev.bitly.com/v4/v4.json) — none were
+  invented. Bitly publishes no AGENTS.md or first-party skills; probed dev.bitly.com and the
+  GitHub organization on 2026-08-13 and found none.
+api: Bitly API v4
+base_url: https://api-ssl.bitly.com/v4
+skill_count: 4
+cross_cutting:
+  authentication: authentication/bitly-authentication.yml
+  conventions: conventions/bitly-conventions.yml
+  errors: errors/bitly-problem-types.yml
+  rate_limits: rate-limits/bitly-rate-limits.yml
+  data_model: data-model/bitly-data-model.yml
+  mcp: mcp/bitly-mcp.yml
+skills:
+- name: bitly-shorten-and-brand-a-link
+  file: skills/bitly-shorten-and-brand-a-link.md
+  description: >-
+    Resolve the right workspace and branded domain, create a short link with a custom back-half,
+    and confirm it — including the retry discipline required by the absence of an idempotency key.
+  operations: [getGroups, getGroupPreferences, getBSDs, createFullBitlink, getBitlink]
+- name: bitly-report-link-performance
+  file: skills/bitly-report-link-performance.md
+  description: >-
+    Pull click and engagement analytics for one link or a whole workspace across the time,
+    country, city, device and referrer dimensions, using Bitly's shared time-window idiom.
+  operations: [getClicksSummaryForBitlink, getClicksForBitlink, getEngagements, getEngagementsSummary,
+    getMetricsForBitlinkByCountries, getMetricsForBitlinkByCities, getMetricsForBitlinkByDevices,
+    getMetricsForBitlinkByReferrers, getMetricsForBitlinkByReferringDomains, getGroupClicks,
+    getGroupMetricsOverTime, getGroupTopMetrics, getGroupTopLinkClicks, getBitlinksByGroup]
+- name: bitly-create-and-measure-a-qr-code
+  file: skills/bitly-create-and-measure-a-qr-code.md
+  description: >-
+    Choose dynamic over static, create a branded re-pointable QR Code, fetch its image, re-point
+    it without reprinting, and read scan analytics by country, city, browser and device OS.
+  operations: [createFullBitlink, createQRCodePublic, createStaticQRCodePublic, getQRCodeByIdPublic,
+    getQRCodeImagePublic, updateQRCodePublic, redirectQRCodeDestination,
+    getScanMetricsSummaryForQRCode, getScanMetricsForQRCode, getScanMetricsForQRCodeByCountries,
+    getScanMetricsForQRCodeByCities, getScanMetricsForQRCodeByBrowser,
+    getScanMetricsForQRCodeByDevicesOS, listQRMinimal]
+- name: bitly-subscribe-to-engagement-events
+  file: skills/bitly-subscribe-to-engagement-events.md
+  description: >-
+    Register, verify and operate an Enterprise-only Bitly webhook for engagement events, including
+    the alert/deactivation lifecycle and the consequences of there being no payload signature.
+  operations: [getOrganizations, getGroups, createWebhook, verifyWebhook, getWebhook, getWebhooks,
+    updateWebhook, deleteWebhook]

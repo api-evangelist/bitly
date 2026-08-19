@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly Campaigns API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Campaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Campaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/campaigns",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "query",
+                "description": "A GUID for a Bitly group"
+              }
+            ]
+          },
+          "docs": "Returns the campaigns for the current authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/campaigns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new campaign."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/campaigns/:campaign_guid",
+            "params": [
+              {
+                "name": "campaign_guid",
+                "value": "Ca1bcd2EFGh",
+                "type": "path",
+                "description": "A GUID for a Bitly campaign"
+              }
+            ]
+          },
+          "docs": "Returns details for a campaign."
+        },
+        {
+          "info": {
+            "name": "Update Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/campaigns/:campaign_guid",
+            "params": [
+              {
+                "name": "campaign_guid",
+                "value": "Ca1bcd2EFGh",
+                "type": "path",
+                "description": "A GUID for a Bitly campaign"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a campaign's details."
+        },
+        {
+          "info": {
+            "name": "Retrieve Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/channels",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "Ba1bc23dE4F",
+                "type": "query",
+                "description": "A GUID for a Bitly group"
+              },
+              {
+                "name": "campaign_guid",
+                "value": "Ca1bcd2EFGh",
+                "type": "query",
+                "description": "A GUID for a Bitly campaign"
+              }
+            ]
+          },
+          "docs": "Returns the channels available to a user."
+        },
+        {
+          "info": {
+            "name": "Create Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/channels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new channel."
+        },
+        {
+          "info": {
+            "name": "Get a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/channels/:channel_guid",
+            "params": [
+              {
+                "name": "channel_guid",
+                "value": "Ha1bc2DefGh",
+                "type": "path",
+                "description": "A GUID for a Bitly Channel"
+              }
+            ]
+          },
+          "docs": "Returns a channel's details."
+        },
+        {
+          "info": {
+            "name": "Update a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/channels/:channel_guid",
+            "params": [
+              {
+                "name": "channel_guid",
+                "value": "Ha1bc2DefGh",
+                "type": "path",
+                "description": "A GUID for a Bitly Channel"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing channel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

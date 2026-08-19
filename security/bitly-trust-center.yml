@@ -1,15 +1,48 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: searched
-probe: true
-source: https://bitly.com/pages/landing/branded-short-domains-powered-by-bitly?bsd=trust.bitly.com
-url: https://bitly.com/pages/landing/branded-short-domains-powered-by-bitly?bsd=trust.bitly.com
+source: https://security.bitly.com/
+url: https://security.bitly.com/
+name: Bitly Security & Compliance Center
+platform: SafeBase (Drata)
+access: gated
+access_note: >-
+  The portal is public, but individual audit artifacts (SOC 2 report, pentest report, network
+  and data-flow diagrams, SIG self-assessment) are released on request through an approval flow
+  with delivery by secure email. The certification list itself is published without a gate.
 certifications:
-- SOC 2
+- SOC 2 Type 2
 - GDPR
+- CCPA
+documents_available_on_request:
+- SOC 2 Report
+- Certificate of Engagement
+- Penetration Test Report
+- Network Diagram
+- Data Flow Diagram (DFD)
+- Information Security Policy
+- SIG Self-Assessment
+- Data Processing Agreement
+- Cyber Insurance certificate
+resilience:
+  rto: 5 minutes
+  rpo: 4 hours
 evidence:
-- source: https://bitly.com/pages/landing/branded-short-domains-powered-by-bitly?bsd=trust.bitly.com
-  keywords:
-  - soc 2
-  - soc2
-  - trust center
-  - gdpr
+- source: https://security.bitly.com/
+  http_status: 200
+  kind: trust center (SafeBase-hosted, live fetch)
+  keywords: [soc 2 type 2, gdpr, ccpa, pentest report, information security policy]
+- source: https://bitly.com/blog/bitly-soc-2-compliance/
+  kind: provider blog post announcing SOC 2 compliance
+corrections:
+- date: '2026-08-13'
+  was: https://bitly.com/pages/landing/branded-short-domains-powered-by-bitly?bsd=trust.bitly.com
+  problem: >-
+    Prior rounds recorded trust.bitly.com as Bitly's trust center. It is not one. trust.bitly.com
+    is a registered Bitly branded short domain with no link behind it, so it 302s to the generic
+    "Custom Domain by Bitly" marketing landing page. That page happens to contain the string
+    "SOC 2" in Bitly's own marketing copy, which is what tripped the keyword probe — a soft-404
+    scored as evidence. The real trust center is the SafeBase portal at security.bitly.com,
+    which the automated probe never reaches because it is on a different subdomain.
+  resolution: >-
+    Repointed to https://security.bitly.com/ and upgraded the certification list from
+    "SOC 2, GDPR" to the published SOC 2 Type 2, GDPR and CCPA.

@@ -1,286 +1,2527 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
-  title: Bitly API v4 Bitlinks API
-  description: 'REST API for creating and managing Bitlinks, custom domains, groups,
-
-    organizations, campaigns, channels, QR codes, and click analytics.
-
-
-    Best-effort OpenAPI reconstruction from Bitly''s public API reference at
-
-    https://dev.bitly.com/api-reference. Bitly also publishes an authoritative
-
-    spec at https://dev.bitly.com/v4/v4.json.
-
-    '
+  title: Bitly Bitlinks API
+  description: The Bitlinks surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
+    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
+    parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  termsOfService: https://bitly.com/pages/terms-of-service
   contact:
-    name: Bitly API
-    url: https://dev.bitly.com/api-reference
+    url: https://bitly.is/API-support
   license:
-    name: Proprietary
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
 - url: https://api-ssl.bitly.com/v4
-  description: Bitly v4 REST API
 security:
 - bearerAuth: []
 tags:
 - name: Bitlinks
+  description: 'Bitlinks are shortened links. They could begin with the bit.ly domain or your own custom
+    branded short domain (BSD).
+
+
+    **Related Operations:**
+
+    - [POST /bitlinks](#createFullBitlink) - Create a new bitlink or add a custom keyword to an existing
+    bitlink
+
+    - [PATCH /bitlinks/{bitlink}](#updateBitlink) - Redirect an existing bitlink
+
+    '
 paths:
   /shorten:
     post:
+      summary: Shorten a Link
+      description: Converts a long url to a Bitlink. You may see errors returned from this endpoint -
+        "BRANDED_LINK_MONTHLY_LIMIT_EXCEEDED" occurs if you have shortened more links than your account
+        is configured for for the month, and "DNS_CONFIGURATION_ERROR" occurs if you are attempting to
+        shorten links against a custom domain which doesn't have DNS properly configured.
       tags:
       - Bitlinks
-      summary: Shorten a long URL
-      operationId: shorten
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-              - long_url
-              properties:
-                long_url:
-                  type: string
-                  format: uri
-                domain:
-                  type: string
-                group_guid:
-                  type: string
-      responses:
-        '200':
-          description: Shortened bitlink.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Bitlink'
-  /expand:
-    post:
-      tags:
-      - Bitlinks
-      summary: Expand a Bitlink to its long URL
-      operationId: expand
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-              - bitlink_id
-              properties:
-                bitlink_id:
-                  type: string
-      responses:
-        '200':
-          description: Expanded link.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  bitlink_id:
-                    type: string
-                  long_url:
-                    type: string
-                    format: uri
-                  created_at:
-                    type: string
-                    format: date-time
-                  link:
-                    type: string
-                    format: uri
-                  id:
-                    type: string
-  /bitlinks:
-    post:
-      tags:
-      - Bitlinks
-      summary: Create a Bitlink with metadata
       operationId: createBitlink
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BitlinkCreate'
+              $ref: '#/components/schemas/Shorten'
       responses:
         '200':
-          description: Created bitlink.
+          description: SUCCESS
+          headers:
+            X-Bsd-Error:
+              schema:
+                type: string
+              description: An explanation of the DNS error received
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bitlink'
-  /bitlinks/{bitlink}:
-    parameters:
-    - $ref: '#/components/parameters/Bitlink'
-    get:
-      tags:
-      - Bitlinks
-      summary: Retrieve a Bitlink
-      operationId: getBitlink
-      responses:
-        '200':
-          description: The bitlink.
+                $ref: '#/components/schemas/ShortenBitlinkBody'
+        '201':
+          description: CREATED
+          headers:
+            X-Bsd-Error:
+              schema:
+                type: string
+              description: An explanation of the DNS error received
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bitlink'
-    patch:
+                $ref: '#/components/schemas/ShortenBitlinkBody'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          headers:
+            X-Ratelimit-Reason:
+              schema:
+                type: string
+              description: An explanation of the ratelimit received.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '417':
+          description: EXPECTATION_FAILED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpectationFailed'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks:
+    post:
+      summary: Create a Bitlink
+      description: Converts a long url to a Bitlink and sets additional parameters. You may see errors
+        returned from this endpoint - "BRANDED_LINK_MONTHLY_LIMIT_EXCEEDED" occurs if you have shortened
+        more links than your account is configured for for the month, and "DNS_CONFIGURATION_ERROR" occurs
+        if you are attempting to shorten links against a custom domain which doesn't have DNS properly
+        configured.
       tags:
       - Bitlinks
-      summary: Update a Bitlink
-      operationId: updateBitlink
+      operationId: createFullBitlink
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BitlinkUpdate'
+              $ref: '#/components/schemas/FullShorten'
+            examples:
+              Customized Keyword:
+                value:
+                  long_url: https://dev.bitly.com
+                  domain: yourdomain.co
+                  group_guid: Ba1bc23dE4F
+                  keyword: new-link
+              Add Keyword to Existing Bitlink:
+                value:
+                  bitlink_id: yourdomain.co/1234567890
+                  keyword: new-link-edited
+              With Expiration:
+                value:
+                  long_url: https://dev.bitly.com
+                  expiration_at: 2025-07-28T14:30:00+0000
       responses:
         '200':
-          description: Updated bitlink.
+          description: SUCCESS
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bitlink'
+                $ref: '#/components/schemas/BitlinkBody'
+        '201':
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BitlinkBody'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '417':
+          description: EXPECTATION_FAILED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpectationFailed'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}:
     delete:
+      summary: Delete a Bitlink
+      description: Delete an unedited hash Bitlink.
       tags:
       - Bitlinks
-      summary: Delete a Bitlink
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
       operationId: deleteBitlink
       responses:
-        '204':
-          description: Deleted.
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkDeletionResponse'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    patch:
+      summary: Update a Bitlink
+      description: Updates fields in the specified link. To redirect the link (i.e. to update the Long
+        URL), use the long_url parameter. This will always charge an encode limit.
+      tags:
+      - Bitlinks
+      operationId: updateBitlink
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BitlinkUpdateBody'
+            examples:
+              Redirect Bitlink Destination:
+                value:
+                  long_url: https://www.newdestination.com
+              With Expiration:
+                value:
+                  expiration_at: 2025-07-28T14:30:00+0000
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BitlinkBody'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '409':
+          description: CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    get:
+      summary: Retrieve a Bitlink
+      description: Returns information for the specified link.
+      tags:
+      - Bitlinks
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      operationId: getBitlink
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BitlinkBody'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /expand:
+    post:
+      summary: Expand a Bitlink
+      description: Returns the short link and long URL for the specified link.
+      tags:
+      - Bitlinks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpandBitlink'
+      operationId: expandBitlink
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpandedBitlink'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/clicks:
+    get:
+      summary: Get Clicks for a Bitlink
+      description: Returns the click counts for the specified link in an array based on a date.
+      tags:
+      - Bitlinks
+      operationId: getClicksForBitlink
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Clicks'
+            text/csv:
+              schema:
+                type: string
+              example: 'Date, Clicks
+
+                2023-07-10T00:00:00+0000, 15
+
+                '
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/clicks/summary:
+    get:
+      summary: Get a Clicks Summary for a Bitlink
+      description: Returns the click counts for the specified link rolled up into a single field.
+      tags:
+      - Bitlinks
+      operationId: getClicksSummaryForBitlink
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClicksSummary'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/engagements:
+    get:
+      summary: Get Engagement Counts for a Bitlink
+      description: Returns an array of engagement counts for the specified link. The array is comprised
+        of button click, click and scan counts for each time window, where the window is based on the
+        provided unit.
+      tags:
+      - Bitlinks
+      operationId: getEngagements
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotalEngagements'
+            text/csv:
+              schema:
+                type: string
+              example: 'Date, Engagements
+
+                2006-01-02T15:04:05, 5
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/engagements/summary:
+    get:
+      summary: Get an Engagement Count Summary for a Bitlink
+      description: Returns the engagement counts for the specified link rolled up into a single field.
+      tags:
+      - Bitlinks
+      operationId: getEngagementsSummary
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotalEngagementsSummary'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/countries:
+    get:
+      summary: Get Metrics for a Bitlink by Country
+      description: Returns the country origins of click traffic for the specified link.
+      tags:
+      - Bitlinks
+      operationId: getMetricsForBitlinkByCountries
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Country, Clicks
+
+                US, 5
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/cities:
+    get:
+      summary: Get Metrics for a Bitlink by City
+      description: Returns the city origins of click traffic for the specified link.
+      tags:
+      - Bitlinks
+      operationId: getMetricsForBitlinkByCities
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'City, Subregion, Region, Country, Clicks
+
+                New York, , NY, US, 5
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/devices:
+    get:
+      summary: Get Metrics for a Bitlink by Device Type
+      description: Returns the device types generating click traffic to the specified link.
+      tags:
+      - Bitlinks
+      operationId: getMetricsForBitlinkByDevices
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Device Type, Clicks
+
+                Desktop, 5
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/referrers:
+    get:
+      summary: Get Metrics for a Bitlink by Referrers
+      description: Returns referrer click counts for the specified link.
+      tags:
+      - Bitlinks
+      operationId: getMetricsForBitlinkByReferrers
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Referrers, Domain/Sub-Domain, Clicks
+
+                Other Sites, direct, 5
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/referrer_name:
+    get:
+      summary: Get Metrics for a Bitlink by Referrer Name
+      description: Returns referrer click counts for the specified link.
+      tags:
+      - Bitlinks
+      operationId: getMetricsForBitlinkByReferrerName
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+            text/csv:
+              schema:
+                type: string
+              example: 'Referrer-Name,Clicks
+
+                direct,4
+
+                '
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/referring_domains:
+    get:
+      summary: Get Metrics for a Bitlink by Referring Domains
+      description: Returns the referring domain click counts for the specified link.
+      tags:
+      - Bitlinks
+      operationId: getMetricsForBitlinkByReferringDomains
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickMetrics'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /bitlinks/{bitlink}/referrers_by_domains:
+    get:
+      summary: Get Metrics for a Bitlink by Referrers by Domain
+      description: Returns click metrics grouped by referrers for the specified link.
+      tags:
+      - Bitlinks
+      operationId: getMetricsForBitlinkByReferrersByDomains
+      parameters:
+      - $ref: '#/components/parameters/Bitlink'
+      - $ref: '#/components/parameters/TimeUnit'
+      - $ref: '#/components/parameters/UnitAmount'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferrersByDomains'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '410':
+          description: GONE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gone'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/bitlinks:
+    get:
+      summary: Retrieve Bitlinks by Group
+      description: Returns a paginated collection of Bitlinks for a group. The list of custom bitlinks
+        has newest entries first.
+      tags:
+      - Bitlinks
+      operationId: getBitlinksByGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/SearchAfter'
+      - $ref: '#/components/parameters/Query'
+      - $ref: '#/components/parameters/HostnamePathQuery'
+      - $ref: '#/components/parameters/CreatedBefore'
+      - $ref: '#/components/parameters/CreatedAfter'
+      - $ref: '#/components/parameters/Archived'
+      - $ref: '#/components/parameters/Deeplinks'
+      - $ref: '#/components/parameters/DomainDeeplinks'
+      - $ref: '#/components/parameters/FilterCampaignGUID'
+      - $ref: '#/components/parameters/FilterChannelGUID'
+      - $ref: '#/components/parameters/FilterCustomBitlink'
+      - $ref: '#/components/parameters/FilterHasQRCodes'
+      - $ref: '#/components/parameters/FilterIsExpired'
+      - $ref: '#/components/parameters/FilterHasExpiration'
+      - $ref: '#/components/parameters/FilterHasDynamicRouting'
+      - $ref: '#/components/parameters/Tags'
+      - $ref: '#/components/parameters/LaunchpadIDs'
+      - $ref: '#/components/parameters/EncodingLogin'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bitlinks'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    patch:
+      summary: Bulk update bitlinks
+      description: Bulk update can add or remove tags or archive up to 100 links at a time; The response
+        includes a list of bitlink ids that were updated.
+      tags:
+      - Bitlinks
+      operationId: updateBitlinksByGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateRequest'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdate'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/engagements/sorted/top:
+    get:
+      summary: Retrieve Top Links and Decoupled QR Codes by Engagements
+      description: 'Returns the bitlinks and decoupled QR codes in a group with the most engagements over
+        the requested time window, ranked together in descending order by engagement count. Bitlinks and
+        decoupled QR codes are returned in separate lists; `sorted_links` preserves the unified descending-by-count
+        ordering across both, with each entry''s id referencing either a bitlink or a QR code guid.
+
+        '
+      operationId: getTopLinksAndQRCodesByEngagements
+      tags:
+      - Bitlinks
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/TimeUnitOptional'
+      - $ref: '#/components/parameters/UnitAmountOptional'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      - $ref: '#/components/parameters/SortedSize'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopLinksAndQRCodes'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /groups/{group_guid}/bitlinks/{sort}:
+    get:
+      summary: Retrieve Sorted Bitlinks for Group
+      description: Returns a list of Bitlinks sorted by group. The list of custom bitlinks has newest
+        entries first.
+      operationId: getSortedBitlinks
+      tags:
+      - Bitlinks
+      parameters:
+      - $ref: '#/components/parameters/GroupGUID'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/TimeUnitOptional'
+      - $ref: '#/components/parameters/UnitAmountOptional'
+      - $ref: '#/components/parameters/UnitReferenceTimeStamp'
+      - $ref: '#/components/parameters/SortedSize'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SortedLinks'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
+  parameters:
+    Archived:
+      name: archived
+      description: Whether or not to include archived resources
+      in: query
+      schema:
+        type: string
+        default: 'off'
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    Bitlink:
+      name: bitlink
+      description: A Bitlink made of the domain and hash
+      in: path
+      required: true
+      schema:
+        type: string
+      example: bit.ly/12a4b6c
+    CreatedAfter:
+      name: created_after
+      description: Timestamp as an integer unix epoch (seconds only)
+      in: query
+      schema:
+        type: integer
+      example: 1694529902
+    CreatedBefore:
+      name: created_before
+      description: Timestamp as an integer unix epoch (seconds only)
+      in: query
+      schema:
+        type: integer
+      example: 1694529902
+    Deeplinks:
+      name: deeplinks
+      description: Filter to only Bitlinks that contain deeplinks
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    DomainDeeplinks:
+      name: domain_deeplinks
+      description: Filter to only Bitlinks that contain deeplinks configured with a custom domain
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    EncodingLogin:
+      name: encoding_login
+      description: Filter by the login of the authenticated user that created the Bitlink
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+      example:
+      - chauncey
+    FilterCampaignGUID:
+      name: campaign_guid
+      description: Filter to return only links for the given campaign GUID, can be provided
+      schema:
+        type: string
+      in: query
+      example: Ca1bcd2EFGh
+    FilterChannelGUID:
+      name: channel_guid
+      description: Filter to return only links for the given channel GUID, can be provided, overrides
+        all other parameters
+      schema:
+        type: string
+      in: query
+      example: Ha1bc2DefGh
+    FilterCustomBitlink:
+      name: custom_bitlink
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    FilterHasDynamicRouting:
+      name: has_dynamic_routing
+      description: filter bitlinks by presence of dynamic routing rules
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+    FilterHasExpiration:
+      name: has_expiration
+      description: filter bitlinks by presence of expiration
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+    FilterHasQRCodes:
+      name: has_qr_codes
+      description: a filter value if the resource has any QR codes
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    FilterIsExpired:
+      name: is_expired
+      description: filter bitlinks by expiration status
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+    GroupGUID:
+      name: group_guid
+      description: A GUID for a Bitly group
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Ba1bc23dE4F
+    HostnamePathQuery:
+      name: hostname_path_query
+      description: The hostname and/or path you would like to search (case-insensitive). Subdomains included;
+        query params and fragment ignored.
+      in: query
+      schema:
+        type: string
+      example: dev.bitly.com/api-reference
+    LaunchpadIDs:
+      name: launchpad_ids
+      description: Filter by launchpad id
+      in: query
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+      example:
+      - M1234567890
+    Query:
+      name: query
+      description: The value that you would like to search
+      in: query
+      schema:
+        type: string
+      example: api
+    SearchAfter:
+      name: search_after
+      description: Token used to search next batch, only use response from API as input value.
+      in: query
+      schema:
+        type: string
+    Size:
+      name: size
+      description: The quantity of items to be be returned
+      in: query
+      schema:
+        type: integer
+        default: 50
+      example: 10
+    Sort:
+      name: sort
+      description: The type of sorting that you would like to do
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - clicks
+      example: clicks
+    SortedSize:
+      name: size
+      description: The quantity of items to be be returned
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 100
+      example: 10
+    Tags:
+      name: tags
+      description: Filter by given tags
+      in: query
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+      example:
+      - bitly
+      - api
+    TimeUnit:
+      name: unit
+      description: A unit of time
+      schema:
+        $ref: '#/components/schemas/TimeUnit'
+      required: true
+      in: query
+      example: month
+    TimeUnitOptional:
+      name: unit
+      description: A unit of time
+      schema:
+        $ref: '#/components/schemas/TimeUnit'
+      in: query
+      example: month
+    UnitAmount:
+      name: units
+      description: An integer representing the time units to query data for. pass -1 to return all units
+        of time
+      schema:
+        type: integer
+        default: -1
+      required: true
+      in: query
+      example: 1
+    UnitAmountOptional:
+      name: units
+      description: An integer representing the time units to query data for. pass -1 to return all units
+        of time.
+      schema:
+        type: integer
+        default: -1
+      in: query
+      example: 1
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will
+        default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and
+        ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
   schemas:
-    BitlinkCreate:
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BaseMetrics:
+      type: object
+      properties:
+        unit:
+          type: string
+          x-faker: internet.userName
+        units:
+          type: integer
+          x-faker:
+            datatype.number:
+              min: 1
+              max: 100
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - devices
+          - referrers
+          - referrers_by_domain
+          - referring_domains
+          - referring_networks
+          - shorten_counts
+          - destinations
+        unit_reference:
+          type: string
+          x-faker: date.past
+    BitlinkBody:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - $ref: '#/components/schemas/BitlinkUpdate'
+    BitlinkUpdate:
+      type: object
+      properties:
+        link:
+          type: string
+        id:
+          type: string
+        long_url:
+          type: string
+        title:
+          type: string
+        archived:
+          type: boolean
+        created_at:
+          type: string
+        created_by:
+          type: string
+        client_id:
+          type: string
+        custom_bitlinks:
+          type: array
+          items:
+            type: string
+          description: list of previously edited backhalfs for the bitlink - these are in reverse chronological
+            order, with the most recently edited backhalf first
+        tags:
+          type: array
+          items:
+            type: string
+        launchpad_ids:
+          type: array
+          items:
+            type: string
+        qr_code_ids:
+          type: array
+          items:
+            type: string
+          description: a list of qr code ids that are associated with this bitlink
+        deeplinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeeplinkRule'
+        is_deleted:
+          type: boolean
+        campaign_ids:
+          type: array
+          items:
+            type: string
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the bitlink (e.g., 2025-01-28T14:30:00+0000)
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this bitlink. Only present when at least one rule is
+            configured.
+    BitlinkUpdateBody:
+      type: object
+      properties:
+        title:
+          type: string
+        archived:
+          type: boolean
+        tags:
+          type: array
+          items:
+            type: string
+        deeplinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeeplinkRule'
+        long_url:
+          type: string
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the bitlink (e.g., 2025-01-28T14:30:00+0000).
+            Minimum expiration time is 5 minutes from now and maximum is 1 year.
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this bitlink. Providing this field replaces all existing
+            rules. Send an empty array to clear all rules.
+      example:
+        title: Bitly API Documentation
+        archived: false
+        tags:
+        - bitly
+        - api
+        deeplinks:
+        - guid: Ra1bcD2eF3h
+          bitlink: bit.ly/documentation
+          app_uri_path: /store?id=123456
+          install_url: https://play.google.com/store/apps/details?id=com.bitly.app&hl=en_US
+          app_guid: Ab1cdE2fG3h
+          os: android
+          install_type: promote_install
+          brand_guid: Ba1bc23dE4F
+    Bitlinks:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/BitlinkBody'
+        pagination:
+          $ref: '#/components/schemas/BitlinksPagination'
+    BitlinksPagination:
+      type: object
+      properties:
+        next:
+          type: string
+        search_after:
+          type: string
+        size:
+          type: integer
+    BulkUpdate:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            type: string
+    BulkUpdateRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          enum:
+          - archive
+          - edit_tags
+          description: archive or edit_tags
+        archive:
+          type: boolean
+        add_tags:
+          type: array
+          items:
+            type: string
+        remove_tags:
+          type: array
+          items:
+            type: string
+        links:
+          type: array
+          items:
+            type: string
+          description: this is limited to 100 bitlink ids
+      example:
+        action: edit_tags
+        add_tags:
+        - tag1
+        - tag2
+        links:
+        - bit.ly/1234abcd
+        - bit.ly/5678efgh
+    CityMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+          x-faker: random.number
+        city:
+          type: string
+          x-faker: address.city
+        subregion:
+          type: string
+          x-faker: address.state
+        region:
+          type: string
+          x-faker: address.state
+        country:
+          type: string
+          x-faker: address.country
+    CityMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/CityMetric'
+          other_metrics:
+            $ref: '#/components/schemas/OtherMetrics'
+    ClickLink:
+      type: object
+      properties:
+        clicks:
+          type: integer
+        id:
+          type: string
+    ClickMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+          example: 123
+          x-faker: random.number
+        value:
+          type: string
+          example: bit.ly
+          x-faker: internet.domainName
+    ClickMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/ClickMetric'
+    Clicks:
+      type: object
+      properties:
+        link_clicks:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkClicks'
+        units:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
+    ClicksSummary:
+      type: object
+      properties:
+        total_clicks:
+          type: integer
+        units:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
+    Conflict:
+      description: CONFLICT
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Deeplink:
+      type: object
+      properties:
+        app_id:
+          type: string
+        app_uri_path:
+          type: string
+        install_url:
+          type: string
+        install_type:
+          $ref: '#/components/schemas/InstallPreference'
+    DeeplinkRule:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitlink:
+          type: string
+        app_uri_path:
+          type: string
+        install_url:
+          type: string
+        app_guid:
+          type: string
+        os:
+          $ref: '#/components/schemas/MobileOS'
+        install_type:
+          $ref: '#/components/schemas/InstallPreference'
+        created:
+          type: string
+          description: ISO timestamp
+        modified:
+          type: string
+          description: ISO timestamp
+        brand_guid:
+          type: string
+    DeletedLink:
+      type: object
+      properties:
+        id:
+          type: string
+    DeviceMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+        device_type:
+          type: string
+    DeviceMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/DeviceMetric'
+    DynamicRoutingDeviceEnum:
+      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+      type: string
+      enum:
+      - mobile
+      - tablet
+      - desktop
+    DynamicRoutingPlatformEnum:
+      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
+      type: string
+      enum:
+      - ios
+      - android
+    DynamicRoutingRule:
+      type: object
+      description: A dynamic routing rule that redirects traffic to a different destination based on user
+        attributes.
+      properties:
+        long_url:
+          type: string
+          description: The destination URL for requests matching this rule.
+        country_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
+        country_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
+        region_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
+        region_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA",
+            "CA-ON"]).
+        device_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
+        device_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that must NOT match for this rule to apply.
+        os_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
+        os_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that must NOT match for this rule to apply.
+    Engagement:
+      type: object
+      properties:
+        lib_button_clicks:
+          type: integer
+        clicks:
+          type: integer
+        scans:
+          type: integer
+    EngagementSubtotal:
+      description: 'Engagement-count subtotal for a single bitlink or decoupled QR code. The `id` references
+        either a bitlink (`<domain>/<hash>`) or a QR code guid, and `engagements` is the combined count
+        of bitlink clicks or QR code scans for that entity.
+
+        '
+      type: object
+      properties:
+        engagements:
+          type: integer
+        id:
+          type: string
+    Engagements:
+      type: object
+      properties:
+        engagement_count:
+          type: integer
+        engagements:
+          $ref: '#/components/schemas/Engagement'
+        date:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    ExpandBitlink:
+      type: object
+      properties:
+        bitlink_id:
+          type: string
+      example:
+        bitlink_id: bit.ly/12a4b6c
+    ExpandedBitlink:
+      type: object
+      properties:
+        link:
+          type: string
+        id:
+          type: string
+        long_url:
+          type: string
+        long_urls:
+          type: array
+          description: 'The list of destination URLs for this bitlink, including the default long URL
+            and any dynamically routed destination URLs.
+
+            '
+          items:
+            type: string
+        created_at:
+          type: string
+    ExpectationFailed:
+      description: EXPECTATION_FAILED
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      example:
+        code: DNS_CONFIGURATION_ERROR
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    FullShorten:
+      type: object
+      description: Either long_url (for new bitlinks) or bitlink_id (for adding keywords to existing bitlinks)
+        must be provided, but not both.
+      properties:
+        long_url:
+          type: string
+          description: URL to be shortened. Required when creating new bitlinks. Cannot be used with bitlink_id.
+        domain:
+          type: string
+          default: bit.ly
+        group_guid:
+          type: string
+          description: Always include a specific group and custom domain in your shorten calls.
+        title:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        deeplinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deeplink'
+        force_new_link:
+          type: boolean
+        keyword:
+          type: string
+          description: Custom keyword for creating keyword overrides. If provided, creates an override
+            at domain/keyword
+        bitlink_id:
+          type: string
+          description: 'Existing bitlink ID to add a keyword override to. Format: domain/hash. Cannot
+            be used with long_url'
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the bitlink (e.g., 2025-01-28T14:30:00+0000).
+            Minimum expiration time is 5 minutes from now and maximum is 1 year.
+        dynamic_routing:
+          type: array
+          description: dynamic routing rules for this bitlink.
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+      example:
+        long_url: https://dev.bitly.com
+        domain: bit.ly
+        group_guid: Ba1bc23dE4F
+        title: Bitly API Documentation
+        tags:
+        - bitly
+        - api
+    Gone:
+      description: GONE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    InstallPreference:
+      type: string
+      enum:
+      - no_install
+      - auto_install
+      - promote_install
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    LinkClicks:
+      type: object
+      properties:
+        clicks:
+          type: integer
+        date:
+          type: string
+    LinkDeletionResponse:
+      type: object
+      properties:
+        links_deleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeletedLink'
+          example:
+          - id: bit.ly/12a4b6c
+          - id: chauncey.ly/documentation
+    Metric:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: integer
+    MobileOS:
+      type: string
+      enum:
+      - ios
+      - android
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    OtherMetrics:
+      type: object
+      properties:
+        other_city_clicks:
+          type: integer
+          x-faker: random.number
+        no_city_clicks:
+          type: integer
+          x-faker: random.number
+    QRCodeMinimal:
+      type: object
+      properties:
+        qrcode_id:
+          type: string
+        group_guid:
+          type: string
+        title:
+          type: string
+        is_customized:
+          description: Set to true if the QR code's customization values have been changed from their
+            default setting
+          type: boolean
+        serialized_content:
+          description: A serialized string of the QR code's content
+          type: string
+        qr_code_type:
+          $ref: '#/components/schemas/QRCodeTypeEnum'
+        long_urls:
+          description: A list of destination URLs that the qr code leads to.
+          type: array
+          items:
+            type: string
+        bitlink_id:
+          description: The bitlink ID associated with the qr code. Not all qr codes are associated with
+            one.
+          type: string
+        is_gs1:
+          description: Set to true if QR code has GS1 values.
+          type: boolean
+        created_by:
+          description: User that created the code.
+          type: string
+        tags:
+          description: A list of tags associated with QR code
+          type: array
+          items:
+            type: string
+        archived:
+          type: boolean
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000)
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this QR code. Only present when at least one rule is
+            configured.
+        created:
+          type: string
+        modified:
+          type: string
+    QRCodeTypeEnum:
+      description: The type of dynamic/static content the QR serves, e.g. Link In Bio page, micro site,
+        bitlink, email, text, Wifi, etc.
+      type: string
+      enum:
+      - bitlink
+      - long_url
+      - link_in_bio
+      - v_card
+      - wifi
+      - email
+      - phone
+      - text
+    ReferrersByDomain:
+      type: object
+      properties:
+        network:
+          type: string
+        referrers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Metric'
+    ReferrersByDomains:
+      type: object
+      properties:
+        unit:
+          type: string
+        units:
+          type: integer
+        facet:
+          type: string
+          enum:
+          - referrers_by_domains
+        unit_reference:
+          type: string
+        referrers_by_domain:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReferrersByDomain'
+    Shorten:
       type: object
       required:
       - long_url
       properties:
         long_url:
           type: string
-          format: uri
         domain:
           type: string
+          default: bit.ly
         group_guid:
           type: string
-        title:
-          type: string
-        tags:
-          type: array
-          items:
+        force_new_link:
+          type: boolean
+      example:
+        long_url: https://dev.bitly.com
+        domain: bit.ly
+        group_guid: Ba1bc23dE4F
+    ShortenBitlinkBody:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - properties:
+          link:
             type: string
-        deeplinks:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-    Bitlink:
+          id:
+            type: string
+          long_url:
+            type: string
+          archived:
+            type: boolean
+          created_at:
+            type: string
+          custom_bitlinks:
+            type: array
+            items:
+              type: string
+            description: list of previously edited backhalfs for the bitlink - these are in reverse chronological
+              order, with the most recently edited backhalf first
+          tags:
+            type: array
+            items:
+              type: string
+          deeplinks:
+            type: array
+            items:
+              $ref: '#/components/schemas/DeeplinkRule'
+    SimplifiedError:
       type: object
       properties:
-        created_at:
+        message:
           type: string
-          format: date-time
-        id:
+        description:
           type: string
-        link:
+        resource:
           type: string
-          format: uri
-        custom_bitlinks:
-          type: array
-          items:
-            type: string
-        long_url:
-          type: string
-          format: uri
-        archived:
-          type: boolean
-        tags:
-          type: array
-          items:
-            type: string
-        deeplinks:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        references:
-          type: object
-          additionalProperties:
-            type: string
-        title:
-          type: string
-        created_by:
-          type: string
-        client_id:
-          type: string
-        is_deleted:
-          type: boolean
-        launchpad_ids:
-          type: array
-          items:
-            type: string
-        campaign_ids:
-          type: array
-          items:
-            type: string
-    BitlinkUpdate:
+    SortedLinks:
       type: object
       properties:
-        title:
-          type: string
-        archived:
-          type: boolean
-        tags:
+        links:
           type: array
           items:
-            type: string
-        deeplinks:
+            $ref: '#/components/schemas/BitlinkBody'
+        sorted_links:
           type: array
           items:
-            type: object
-            additionalProperties: true
-        created_at:
-          type: string
-          format: date-time
-        created_by:
-          type: string
-        long_url:
-          type: string
-          format: uri
-        client_id:
-          type: string
-        custom_bitlinks:
+            $ref: '#/components/schemas/ClickLink'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    TopLinksAndQRCodes:
+      description: 'Response shape for top bitlinks and decoupled QR codes in a group, ranked together
+        by engagement count. `links` and `qr_codes` are independent lists (a link and a decoupled QR code
+        are never the same entity); `sorted_engagements` is the unified descending-by-engagement ordering
+        across both, with each entry''s id referencing either a bitlink or a QR code guid. Coupled QRCs
+        are listed by their bitlink ID.
+
+        '
+      type: object
+      properties:
+        links:
           type: array
           items:
-            type: string
-        link:
+            $ref: '#/components/schemas/BitlinkBody'
+        qr_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/QRCodeMinimal'
+        sorted_engagements:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngagementSubtotal'
+    TotalEngagements:
+      type: object
+      properties:
+        engagements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Engagements'
+        units:
+          type: integer
+        unit:
           type: string
-          format: uri
-        id:
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
           type: string
-        references:
-          type: object
-          additionalProperties:
-            type: string
-  parameters:
-    Bitlink:
-      name: bitlink
-      in: path
-      required: true
-      description: A Bitlink (e.g. `bit.ly/abc123`).
-      schema:
-        type: string
+    TotalEngagementsSummary:
+      type: object
+      properties:
+        total_engagements:
+          type: integer
+        engagements:
+          $ref: '#/components/schemas/Engagement'
+        units:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: 'Bearer token issued from Bitly account settings, or obtained via OAuth 2.0.
-
-        Send as `Authorization: Bearer {token}`.
-
-        '

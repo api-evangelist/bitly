@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly Webhooks API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid/webhooks",
+            "params": [
+              {
+                "name": "organization_guid",
+                "value": "Oa1bcd234eF",
+                "type": "path",
+                "description": "A GUID for a Bitly organization"
+              }
+            ]
+          },
+          "docs": "Fetch all webhooks available for an Organization"
+        },
+        {
+          "info": {
+            "name": "Create Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a webhook."
+        },
+        {
+          "info": {
+            "name": "Retrieve Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/webhooks/:webhook_guid",
+            "params": [
+              {
+                "name": "webhook_guid",
+                "value": "Wa1bcDefG23",
+                "type": "path",
+                "description": "A GUID for a Bitly webhook"
+              }
+            ]
+          },
+          "docs": "Returns a webhook."
+        },
+        {
+          "info": {
+            "name": "Update Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/webhooks/:webhook_guid",
+            "params": [
+              {
+                "name": "webhook_guid",
+                "value": "Wa1bcDefG23",
+                "type": "path",
+                "description": "A GUID for a Bitly webhook"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a webhook"
+        },
+        {
+          "info": {
+            "name": "Delete Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-ssl.bitly.com/v4/webhooks/:webhook_guid",
+            "params": [
+              {
+                "name": "webhook_guid",
+                "value": "Wa1bcDefG23",
+                "type": "path",
+                "description": "A GUID for a Bitly webhook"
+              }
+            ]
+          },
+          "docs": "Deletes a webhook."
+        },
+        {
+          "info": {
+            "name": "Verify Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/webhooks/:webhook_guid/verify",
+            "params": [
+              {
+                "name": "webhook_guid",
+                "value": "Wa1bcDefG23",
+                "type": "path",
+                "description": "A GUID for a Bitly webhook"
+              }
+            ]
+          },
+          "docs": "Sends ping event to test webhook configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

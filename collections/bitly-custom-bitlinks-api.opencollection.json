@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly Custom Bitlinks API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Bitlinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add Custom Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a keyword (or \"custom back-half\") to a Bitlink with a Custom Domain (domains must match). This endpoint can also be used for initial redirects to a link."
+        },
+        {
+          "info": {
+            "name": "Retrieve Custom Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/:custom_bitlink",
+            "params": [
+              {
+                "name": "custom_bitlink",
+                "value": "chauncey.ly/chauncey",
+                "type": "path",
+                "description": "A Custom Bitlink made of the domain and keyword"
+              }
+            ]
+          },
+          "docs": "Returns the details and history of the specified link."
+        },
+        {
+          "info": {
+            "name": "Update Custom Bitlink",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/:custom_bitlink",
+            "params": [
+              {
+                "name": "custom_bitlink",
+                "value": "chauncey.ly/chauncey",
+                "type": "path",
+                "description": "A Custom Bitlink made of the domain and keyword"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Move a keyword (or custom back-half) to a different Bitlink (domains must match)."
+        },
+        {
+          "info": {
+            "name": "Get Metrics for a Custom Bitlink by Destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/:custom_bitlink/clicks_by_destination",
+            "params": [
+              {
+                "name": "custom_bitlink",
+                "value": "chauncey.ly/chauncey",
+                "type": "path",
+                "description": "A Custom Bitlink made of the domain and keyword"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns click metrics for the specified link by its historical destinations."
+        },
+        {
+          "info": {
+            "name": "Get Clicks for a Custom Bitlink's Entire History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/:custom_bitlink/clicks",
+            "params": [
+              {
+                "name": "custom_bitlink",
+                "value": "chauncey.ly/chauncey",
+                "type": "path",
+                "description": "A Custom Bitlink made of the domain and keyword"
+              },
+              {
+                "name": "unit",
+                "value": "month",
+                "type": "query",
+                "description": "A unit of time"
+              },
+              {
+                "name": "units",
+                "value": "1",
+                "type": "query",
+                "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+              },
+              {
+                "name": "unit_reference",
+                "value": "2006-01-02T15:04:05-0700",
+                "type": "query",
+                "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+              }
+            ]
+          },
+          "docs": "Returns the click counts for the specified link. This returns an array with clicks based on a date."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,1090 +1,3034 @@
 {
-  "opencollection": "1.0.0",
-  "info": {
-    "name": "Bitly API v4",
-    "version": "4.0.0"
-  },
-  "request": {
-    "auth": {
-      "type": "bearer",
-      "token": "{{bearerToken}}"
+ "opencollection": "1.0.0",
+ "info": {
+  "name": "Bitly API v4",
+  "version": "4.0.0"
+ },
+ "items": [
+  {
+   "info": {
+    "name": "Bitlinks",
+    "type": "folder"
+   },
+   "items": [
+    {
+     "info": {
+      "name": "Create a Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks",
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Converts a long url to a Bitlink and sets additional parameters. You may see errors returned from this endpoint - \"BRANDED_LINK_MONTHLY_LIMIT_EXCEEDED\" occurs if you have shortened more links than your account is configured for for the month, and \"DNS_CONFIGURATION_ERROR\" occurs if you are attempting to shorten links against a custom domain which doesn't have DNS properly configured."
+    },
+    {
+     "info": {
+      "name": "Delete a Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "DELETE",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       }
+      ]
+     },
+     "docs": "Delete an unedited hash Bitlink."
+    },
+    {
+     "info": {
+      "name": "Update a Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Updates fields in the specified link. To redirect the link (i.e. to update the Long URL), use the long_url parameter. This will always charge an encode limit."
+    },
+    {
+     "info": {
+      "name": "Retrieve a Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       }
+      ]
+     },
+     "docs": "Returns information for the specified link."
+    },
+    {
+     "info": {
+      "name": "Get Metrics for a Bitlink by City",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/cities",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the city origins of click traffic for the specified link."
+    },
+    {
+     "info": {
+      "name": "Get Clicks for a Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/clicks",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the click counts for the specified link in an array based on a date."
+    },
+    {
+     "info": {
+      "name": "Get a Clicks Summary for a Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/clicks/summary",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the click counts for the specified link rolled up into a single field."
+    },
+    {
+     "info": {
+      "name": "Get Metrics for a Bitlink by Country",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/countries",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the country origins of click traffic for the specified link."
+    },
+    {
+     "info": {
+      "name": "Get Metrics for a Bitlink by Device Type",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/devices",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the device types generating click traffic to the specified link."
+    },
+    {
+     "info": {
+      "name": "Get Engagement Counts for a Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/engagements",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns an array of engagement counts for the specified link. The array is comprised of button click, click and scan counts for each time window, where the window is based on the provided unit."
+    },
+    {
+     "info": {
+      "name": "Get an Engagement Count Summary for a Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/engagements/summary",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the engagement counts for the specified link rolled up into a single field."
+    },
+    {
+     "info": {
+      "name": "Get Metrics for a Bitlink by Referrer Name",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/referrer_name",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns referrer click counts for the specified link."
+    },
+    {
+     "info": {
+      "name": "Get Metrics for a Bitlink by Referrers",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/referrers",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns referrer click counts for the specified link."
+    },
+    {
+     "info": {
+      "name": "Get Metrics for a Bitlink by Referrers by Domain",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/referrers_by_domains",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns click metrics grouped by referrers for the specified link."
+    },
+    {
+     "info": {
+      "name": "Get Metrics for a Bitlink by Referring Domains",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/referring_domains",
+      "params": [
+       {
+        "name": "bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Bitlink made of the domain and hash"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the referring domain click counts for the specified link."
+    },
+    {
+     "info": {
+      "name": "Expand a Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/expand",
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Returns the short link and long URL for the specified link."
+    },
+    {
+     "info": {
+      "name": "Retrieve Bitlinks by Group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/bitlinks",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "search_after",
+        "value": "",
+        "type": "query",
+        "description": "Token used to search next batch, only use response from API as input value."
+       },
+       {
+        "name": "query",
+        "value": "",
+        "type": "query",
+        "description": "The value that you would like to search"
+       },
+       {
+        "name": "hostname_path_query",
+        "value": "",
+        "type": "query",
+        "description": "The hostname and/or path you would like to search (case-insensitive). Subdomains included; query params and fragment ignored."
+       },
+       {
+        "name": "created_before",
+        "value": "",
+        "type": "query",
+        "description": "Timestamp as an integer unix epoch (seconds only)"
+       },
+       {
+        "name": "created_after",
+        "value": "",
+        "type": "query",
+        "description": "Timestamp as an integer unix epoch (seconds only)"
+       },
+       {
+        "name": "archived",
+        "value": "",
+        "type": "query",
+        "description": "Whether or not to include archived resources"
+       },
+       {
+        "name": "deeplinks",
+        "value": "",
+        "type": "query",
+        "description": "Filter to only Bitlinks that contain deeplinks"
+       },
+       {
+        "name": "domain_deeplinks",
+        "value": "",
+        "type": "query",
+        "description": "Filter to only Bitlinks that contain deeplinks configured with a custom domain"
+       },
+       {
+        "name": "campaign_guid",
+        "value": "",
+        "type": "query",
+        "description": "Filter to return only links for the given campaign GUID, can be provided"
+       },
+       {
+        "name": "channel_guid",
+        "value": "",
+        "type": "query",
+        "description": "Filter to return only links for the given channel GUID, can be provided, overrides all other parameters"
+       },
+       {
+        "name": "custom_bitlink",
+        "value": "",
+        "type": "query",
+        "description": ""
+       },
+       {
+        "name": "has_qr_codes",
+        "value": "",
+        "type": "query",
+        "description": "a filter value if the resource has any QR codes"
+       },
+       {
+        "name": "is_expired",
+        "value": "",
+        "type": "query",
+        "description": "filter bitlinks by expiration status"
+       },
+       {
+        "name": "has_expiration",
+        "value": "",
+        "type": "query",
+        "description": "filter bitlinks by presence of expiration"
+       },
+       {
+        "name": "has_dynamic_routing",
+        "value": "",
+        "type": "query",
+        "description": "filter bitlinks by presence of dynamic routing rules"
+       },
+       {
+        "name": "tags",
+        "value": "",
+        "type": "query",
+        "description": "Filter by given tags"
+       },
+       {
+        "name": "launchpad_ids",
+        "value": "",
+        "type": "query",
+        "description": "Filter by launchpad id"
+       },
+       {
+        "name": "encoding_login",
+        "value": "",
+        "type": "query",
+        "description": "Filter by the login of the authenticated user that created the Bitlink"
+       }
+      ]
+     },
+     "docs": "Returns a paginated collection of Bitlinks for a group. The list of custom bitlinks has newest entries first."
+    },
+    {
+     "info": {
+      "name": "Bulk update bitlinks",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/bitlinks",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Bulk update can add or remove tags or archive up to 100 links at a time; The response includes a list of bitlink ids that were updated."
+    },
+    {
+     "info": {
+      "name": "Retrieve Sorted Bitlinks for Group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/bitlinks/{sort}",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "sort",
+        "value": "",
+        "type": "path",
+        "description": "The type of sorting that you would like to do"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time."
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       }
+      ]
+     },
+     "docs": "Returns a list of Bitlinks sorted by group. The list of custom bitlinks has newest entries first."
+    },
+    {
+     "info": {
+      "name": "Retrieve Top Links and Decoupled QR Codes by Engagements",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/engagements/sorted/top",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time."
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       }
+      ]
+     },
+     "docs": "Returns the bitlinks and decoupled QR codes in a group with the most engagements over the requested time window, ranked together in descending order by engagement count. Bitlinks and decoupled QR codes are returned in separate lists; `sorted_links` preserves the unified descending-by-count ordering across both, with each entry's id referencing either a bitlink or a QR code guid.\n"
+    },
+    {
+     "info": {
+      "name": "Shorten a Link",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/shorten",
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Converts a long url to a Bitlink. You may see errors returned from this endpoint - \"BRANDED_LINK_MONTHLY_LIMIT_EXCEEDED\" occurs if you have shortened more links than your account is configured for for the month, and \"DNS_CONFIGURATION_ERROR\" occurs if you are attempting to shorten links against a custom domain which doesn't have DNS properly configured."
     }
+   ]
   },
-  "items": [
+  {
+   "info": {
+    "name": "BSDs",
+    "type": "folder"
+   },
+   "items": [
     {
-      "info": {
-        "name": "Bitlinks",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "Shorten a long URL",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api-ssl.bitly.com/v4/shorten",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Shorten a long URL"
-        },
-        {
-          "info": {
-            "name": "Expand a Bitlink to its long URL",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api-ssl.bitly.com/v4/expand",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Expand a Bitlink to its long URL"
-        },
-        {
-          "info": {
-            "name": "Create a Bitlink with metadata",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Create a Bitlink with metadata"
-        },
-        {
-          "info": {
-            "name": "Retrieve a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              }
-            ]
-          },
-          "docs": "Retrieve a Bitlink"
-        },
-        {
-          "info": {
-            "name": "Update a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "PATCH",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              }
-            ],
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Update a Bitlink"
-        },
-        {
-          "info": {
-            "name": "Delete a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "DELETE",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              }
-            ]
-          },
-          "docs": "Delete a Bitlink"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Metrics",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "Get clicks for a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/clicks",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              },
-              {
-                "name": "unit",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "units",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "size",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "unit_reference",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "Get clicks for a Bitlink"
-        },
-        {
-          "info": {
-            "name": "Get summary of clicks for a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/clicks/summary",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              },
-              {
-                "name": "unit",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "units",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "unit_reference",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "Get summary of clicks for a Bitlink"
-        },
-        {
-          "info": {
-            "name": "Get engagements (clicks and scans) for a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/engagements",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              }
-            ]
-          },
-          "docs": "Get engagements (clicks and scans) for a Bitlink"
-        },
-        {
-          "info": {
-            "name": "Get countries by clicks for a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/countries",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              },
-              {
-                "name": "unit",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "units",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "Get countries by clicks for a Bitlink"
-        },
-        {
-          "info": {
-            "name": "Get cities by clicks for a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/cities",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              },
-              {
-                "name": "unit",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "units",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "Get cities by clicks for a Bitlink"
-        },
-        {
-          "info": {
-            "name": "Get device type breakdown",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/devices",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              }
-            ]
-          },
-          "docs": "Get device type breakdown"
-        },
-        {
-          "info": {
-            "name": "Get referrers for a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/referrers",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              },
-              {
-                "name": "unit",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "units",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "Get referrers for a Bitlink"
-        },
-        {
-          "info": {
-            "name": "Get referring domains for a Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bitlinks/:bitlink/referring_domains",
-            "params": [
-              {
-                "name": "bitlink",
-                "value": "",
-                "type": "path",
-                "description": "A Bitlink (e.g. `bit.ly/abc123`)."
-              },
-              {
-                "name": "unit",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "units",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "Get referring domains for a Bitlink"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Custom Bitlinks",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "Add a custom back-half",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Add a custom back-half"
-        },
-        {
-          "info": {
-            "name": "Retrieve a custom Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/:custom_bitlink",
-            "params": [
-              {
-                "name": "custom_bitlink",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Retrieve a custom Bitlink"
-        },
-        {
-          "info": {
-            "name": "Move a custom keyword to a different Bitlink",
-            "type": "http"
-          },
-          "http": {
-            "method": "PATCH",
-            "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/:custom_bitlink",
-            "params": [
-              {
-                "name": "custom_bitlink",
-                "value": "",
-                "type": "path"
-              }
-            ],
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Move a custom keyword to a different Bitlink"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Groups",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "List groups for the authenticated user's organization",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups",
-            "params": [
-              {
-                "name": "organization_guid",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "List groups for the authenticated user's organization"
-        },
-        {
-          "info": {
-            "name": "Retrieve a group",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Retrieve a group"
-        },
-        {
-          "info": {
-            "name": "Update a group",
-            "type": "http"
-          },
-          "http": {
-            "method": "PATCH",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ],
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Update a group"
-        },
-        {
-          "info": {
-            "name": "List Bitlinks in a group",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/bitlinks",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              },
-              {
-                "name": "size",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "page",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "keyword",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "query",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "created_before",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "created_after",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "modified_after",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "archived",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "deeplinks",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "domain_deeplinks",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "campaign_guid",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "channel_guid",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "custom_bitlink",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "tags",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "launchpad_ids",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "encoding_login",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "List Bitlinks in a group"
-        },
-        {
-          "info": {
-            "name": "Bulk update Bitlinks in a group (e.g. archive, tag)",
-            "type": "http"
-          },
-          "http": {
-            "method": "PATCH",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/bitlinks",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              },
-              {
-                "name": "size",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "page",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "keyword",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "query",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "created_before",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "created_after",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "modified_after",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "archived",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "deeplinks",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "domain_deeplinks",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "campaign_guid",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "channel_guid",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "custom_bitlink",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "tags",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "launchpad_ids",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "encoding_login",
-                "value": "",
-                "type": "query"
-              }
-            ],
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Bulk update Bitlinks in a group (e.g. archive, tag)"
-        },
-        {
-          "info": {
-            "name": "List tags for a group",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/tags",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "List tags for a group"
-        },
-        {
-          "info": {
-            "name": "Get group preferences",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/preferences",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Get group preferences"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Group Metrics",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "Get clicks for the group",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/clicks",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              },
-              {
-                "name": "unit",
-                "value": "",
-                "type": "query"
-              },
-              {
-                "name": "units",
-                "value": "",
-                "type": "query"
-              }
-            ]
-          },
-          "docs": "Get clicks for the group"
-        },
-        {
-          "info": {
-            "name": "Get countries by group clicks",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/countries",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Get countries by group clicks"
-        },
-        {
-          "info": {
-            "name": "Get cities by group clicks",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/cities",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Get cities by group clicks"
-        },
-        {
-          "info": {
-            "name": "Get devices breakdown for group",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/devices",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Get devices breakdown for group"
-        },
-        {
-          "info": {
-            "name": "Top performing links for group",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/links/clicks/top",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Top performing links for group"
-        },
-        {
-          "info": {
-            "name": "QR scan trends over time for group",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/codes/scans/over_time",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "QR scan trends over time for group"
-        },
-        {
-          "info": {
-            "name": "Feature usage and limit consumption",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/groups/:group_guid/feature_usage",
-            "params": [
-              {
-                "name": "group_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Feature usage and limit consumption"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Organizations",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "List organizations for the authenticated user",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/organizations"
-          },
-          "docs": "List organizations for the authenticated user"
-        },
-        {
-          "info": {
-            "name": "Retrieve an organization",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid",
-            "params": [
-              {
-                "name": "organization_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Retrieve an organization"
-        },
-        {
-          "info": {
-            "name": "Get organization plan limits",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid/plan_limits",
-            "params": [
-              {
-                "name": "organization_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Get organization plan limits"
-        },
-        {
-          "info": {
-            "name": "Get organization shorten counts",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/organizations/:organization_guid/shorten_counts",
-            "params": [
-              {
-                "name": "organization_guid",
-                "value": "",
-                "type": "path"
-              }
-            ]
-          },
-          "docs": "Get organization shorten counts"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Campaigns",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "List campaigns",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/campaigns"
-          },
-          "docs": "List campaigns"
-        },
-        {
-          "info": {
-            "name": "Create a campaign",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api-ssl.bitly.com/v4/campaigns",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Create a campaign"
-        },
-        {
-          "info": {
-            "name": "Update a campaign",
-            "type": "http"
-          },
-          "http": {
-            "method": "PATCH",
-            "url": "https://api-ssl.bitly.com/v4/campaigns/:campaign_guid",
-            "params": [
-              {
-                "name": "campaign_guid",
-                "value": "",
-                "type": "path"
-              }
-            ],
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Update a campaign"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Channels",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "Create a channel",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api-ssl.bitly.com/v4/channels",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Create a channel"
-        },
-        {
-          "info": {
-            "name": "Update a channel",
-            "type": "http"
-          },
-          "http": {
-            "method": "PATCH",
-            "url": "https://api-ssl.bitly.com/v4/channels/:channel_guid",
-            "params": [
-              {
-                "name": "channel_guid",
-                "value": "",
-                "type": "path"
-              }
-            ],
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Update a channel"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "QR Codes",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "Generate a QR code",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api-ssl.bitly.com/v4/qr-codes",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Generate a QR code"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "BSDs",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "List branded short domains",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://api-ssl.bitly.com/v4/bsds"
-          },
-          "docs": "List branded short domains"
-        }
-      ]
+     "info": {
+      "name": "Get BSDs",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/bsds"
+     },
+     "docs": "Fetch all Branded Short Domains"
     }
-  ],
-  "bundled": true
+   ]
+  },
+  {
+   "info": {
+    "name": "Campaigns",
+    "type": "folder"
+   },
+   "items": [
+    {
+     "info": {
+      "name": "Retrieve Campaigns",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/campaigns",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "query",
+        "description": "A GUID for a Bitly group"
+       }
+      ]
+     },
+     "docs": "Returns the campaigns for the current authenticated user."
+    },
+    {
+     "info": {
+      "name": "Create Campaign",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/campaigns",
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Creates a new campaign."
+    },
+    {
+     "info": {
+      "name": "Retrieve a Campaign",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/campaigns/{campaign_guid}",
+      "params": [
+       {
+        "name": "campaign_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly campaign"
+       }
+      ]
+     },
+     "docs": "Returns details for a campaign."
+    },
+    {
+     "info": {
+      "name": "Update Campaign",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/campaigns/{campaign_guid}",
+      "params": [
+       {
+        "name": "campaign_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly campaign"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Updates a campaign's details."
+    },
+    {
+     "info": {
+      "name": "Retrieve Channels",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/channels",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "query",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "campaign_guid",
+        "value": "",
+        "type": "query",
+        "description": "A GUID for a Bitly campaign"
+       }
+      ]
+     },
+     "docs": "Returns the channels available to a user."
+    },
+    {
+     "info": {
+      "name": "Create Channel",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/channels",
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Creates a new channel."
+    },
+    {
+     "info": {
+      "name": "Get a Channel",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/channels/{channel_guid}",
+      "params": [
+       {
+        "name": "channel_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly Channel"
+       }
+      ]
+     },
+     "docs": "Returns a channel's details."
+    },
+    {
+     "info": {
+      "name": "Update a Channel",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/channels/{channel_guid}",
+      "params": [
+       {
+        "name": "channel_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly Channel"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Updates an existing channel."
+    }
+   ]
+  },
+  {
+   "info": {
+    "name": "Custom Bitlinks",
+    "type": "folder"
+   },
+   "items": [
+    {
+     "info": {
+      "name": "Add Custom Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/custom_bitlinks",
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Add a keyword (or \"custom back-half\") to a Bitlink with a Custom Domain (domains must match). This endpoint can also be used for initial redirects to a link."
+    },
+    {
+     "info": {
+      "name": "Update Custom Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/{custom_bitlink}",
+      "params": [
+       {
+        "name": "custom_bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Custom Bitlink made of the domain and keyword"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Move a keyword (or custom back-half) to a different Bitlink (domains must match)."
+    },
+    {
+     "info": {
+      "name": "Retrieve Custom Bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/{custom_bitlink}",
+      "params": [
+       {
+        "name": "custom_bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Custom Bitlink made of the domain and keyword"
+       }
+      ]
+     },
+     "docs": "Returns the details and history of the specified link."
+    },
+    {
+     "info": {
+      "name": "Get Clicks for a Custom Bitlink's Entire History",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/{custom_bitlink}/clicks",
+      "params": [
+       {
+        "name": "custom_bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Custom Bitlink made of the domain and keyword"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the click counts for the specified link. This returns an array with clicks based on a date."
+    },
+    {
+     "info": {
+      "name": "Get Metrics for a Custom Bitlink by Destination",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/custom_bitlinks/{custom_bitlink}/clicks_by_destination",
+      "params": [
+       {
+        "name": "custom_bitlink",
+        "value": "",
+        "type": "path",
+        "description": "A Custom Bitlink made of the domain and keyword"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns click metrics for the specified link by its historical destinations."
+    }
+   ]
+  },
+  {
+   "info": {
+    "name": "Groups",
+    "type": "folder"
+   },
+   "items": [
+    {
+     "info": {
+      "name": "Retrieve Groups",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups",
+      "params": [
+       {
+        "name": "organization_guid",
+        "value": "",
+        "type": "query",
+        "description": "A GUID for a Bitly organization"
+       }
+      ]
+     },
+     "docs": "Returns a list of groups in the organization."
+    },
+    {
+     "info": {
+      "name": "Update a Group",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Updates the details of a group."
+    },
+    {
+     "info": {
+      "name": "Retrieve a Group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       }
+      ]
+     },
+     "docs": "Returns details for a group."
+    },
+    {
+     "info": {
+      "name": "Get Click Metrics for a Group by City",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/cities",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the geographic origins of click traffic by city for the specified group."
+    },
+    {
+     "info": {
+      "name": "Get clicks by group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/clicks",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "get number of clicks on bitlinks in a group"
+    },
+    {
+     "info": {
+      "name": "Get Scan Metrics for a Group by City",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/codes/scans/cities",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get QR code scan metrics for a group broken down by city."
+    },
+    {
+     "info": {
+      "name": "Get Scan Metrics for a Group by Country",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/codes/scans/countries",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get QR code scan metrics for a group broken down by country."
+    },
+    {
+     "info": {
+      "name": "Get Scan Metrics for a Group Over Time",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/codes/scans/over_time",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get QR code scan metrics over time for a group."
+    },
+    {
+     "info": {
+      "name": "Get Top Performing QR Codes for a Group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/codes/scans/top",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       },
+       {
+        "name": "decoupled",
+        "value": "",
+        "type": "query",
+        "description": "When true, ranks results by decoupled QR scan count and returns a TopLinksAndQRCodes response with links and QR codes partitioned into separate lists and a unified sorted_engagements ordering.\n"
+       }
+      ]
+     },
+     "docs": "Get top performing QR codes by scan count for all codes in a group."
+    },
+    {
+     "info": {
+      "name": "Get Click Metrics for a Group by Country",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/countries",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the geographic origins of click traffic by country for the specified group."
+    },
+    {
+     "info": {
+      "name": "Get Click Metrics for a Group by Device Type",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/devices",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the device types generating click traffic to the specified group's links."
+    },
+    {
+     "info": {
+      "name": "Get Group Metrics Over Time",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/engagements/over_time",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get group engagement metrics over time for all links in a group."
+    },
+    {
+     "info": {
+      "name": "Get Group Top Performing Links by Engagement",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/engagements/top",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get top performing links by engagement for all links in a group."
+    },
+    {
+     "info": {
+      "name": "Create an inline CSV export for a group",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/exports",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Build a CSV export synchronously and return it inline as a base64 data URI plus metadata.\nThe export_type field selects the CSV shape: link_engagements_batch (engagement metrics for\nexplicit bitlinks or a filter), links_list (link metadata roster), or qr_codes_list (QR code\nmetadata roster). Row caps apply per request: 200 rows when metrics are included\n(link_engagements_batch, or include_metrics on a list export); 1000 rows for metadata-only\nlist exports. When the match set exceeds the cap, truncated is true and only the first\ncap rows are returned; row_count reports how many data rows are in the CSV.\n"
+    },
+    {
+     "info": {
+      "name": "Get limit usage for a group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/feature_usage",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "name",
+        "value": "",
+        "type": "query",
+        "description": "The limit name you would like usage for"
+       }
+      ]
+     },
+     "docs": "Get a group's current feature limit usage, optionally provide limit name(s) for usage on specific limit(s)"
+    },
+    {
+     "info": {
+      "name": "Get historical usage for a group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/historical_usage",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "name",
+        "value": "",
+        "type": "query",
+        "description": "The limit name you would like usage for"
+       },
+       {
+        "name": "start_date",
+        "value": "",
+        "type": "query",
+        "description": "The start date for the date range"
+       },
+       {
+        "name": "end_date",
+        "value": "",
+        "type": "query",
+        "description": "The end date for the date range"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time (day, week, or month)"
+       }
+      ]
+     },
+     "docs": "Get a group's historical usage for specific limit(s) and date range. Refer to GET /v4/groups/{group_guid}/feature_usage endpoint response for available limit names."
+    },
+    {
+     "info": {
+      "name": "Get Group Link Clicks by City",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/links/clicks/cities",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get link clicks by city for all links in a group."
+    },
+    {
+     "info": {
+      "name": "Get Group Link Clicks by Country",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/links/clicks/countries",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get link clicks by country for all links in a group."
+    },
+    {
+     "info": {
+      "name": "Get Group Link Clicks by Device",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/links/clicks/devices",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get link clicks by device for all links in a group."
+    },
+    {
+     "info": {
+      "name": "Get Group Link Clicks Over Time",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/links/clicks/over_time",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get link clicks over time for all links in a group."
+    },
+    {
+     "info": {
+      "name": "Get Group Link Clicks by Referrer",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/links/clicks/referrers",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get link clicks by referrer for all links in a group."
+    },
+    {
+     "info": {
+      "name": "Get Group Top Performing Links by Click",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/links/clicks/top",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Get top performing links by click for all links in a group."
+    },
+    {
+     "info": {
+      "name": "Retrieve Group Preferences",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/preferences",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       }
+      ]
+     },
+     "docs": "Returns preferences for the specified group."
+    },
+    {
+     "info": {
+      "name": "Update Group Preferences",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/preferences",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Updates preferences for a group."
+    },
+    {
+     "info": {
+      "name": "Get Click Metrics for a Group by Referrer",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/referrers",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns metrics by referrer for the specified group's links."
+    },
+    {
+     "info": {
+      "name": "Get Click Metrics for a Group by Referring Networks",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/referring_networks",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns metrics by referring networks for the specified group's links."
+    },
+    {
+     "info": {
+      "name": "Retrieve Group Shorten Counts",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/shorten_counts",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns all the shorten counts for a group."
+    },
+    {
+     "info": {
+      "name": "Retrieve Tags by Group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/tags",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "type",
+        "value": "",
+        "type": "query",
+        "description": "Tag set to return; defaults to bitlink"
+       }
+      ]
+     },
+     "docs": "Returns the tags currently used in the specified group. Maximum 1000."
+    }
+   ]
+  },
+  {
+   "info": {
+    "name": "OAuth Apps",
+    "type": "folder"
+   },
+   "items": [
+    {
+     "info": {
+      "name": "Retrieve OAuth App",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/apps/{client_id}",
+      "params": [
+       {
+        "name": "client_id",
+        "value": "",
+        "type": "path",
+        "description": "The client ID of an OAuth app"
+       }
+      ]
+     },
+     "docs": "Retrieve the details for the provided OAuth App client ID"
+    }
+   ]
+  },
+  {
+   "info": {
+    "name": "Organizations",
+    "type": "folder"
+   },
+   "items": [
+    {
+     "info": {
+      "name": "Retrieve Organizations",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/organizations",
+      "params": [
+       {
+        "name": "include_all",
+        "value": "",
+        "type": "query",
+        "description": "When set to true, returns all of the user's organizations regardless of the token's allowed_orgs restrictions.\n"
+       }
+      ]
+     },
+     "docs": "Retrieve a list of organizations for the authenticated user. By default, only organizations permitted by the token's allowed_orgs are returned. Use include_all=true to return all organizations regardless of token restrictions. Each organization is annotated with its authentication requirements (require_sso, require_2fa) when configured.\n"
+    },
+    {
+     "info": {
+      "name": "Retrieve an Organization",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/organizations/{organization_guid}",
+      "params": [
+       {
+        "name": "organization_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly organization"
+       }
+      ]
+     },
+     "docs": "Retrive details for the specified organization."
+    },
+    {
+     "info": {
+      "name": "Get Plan Limits",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/organizations/{organization_guid}/plan_limits",
+      "params": [
+       {
+        "name": "organization_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly organization"
+       }
+      ]
+     },
+     "docs": "Returns all plan limits and counts available for an organization."
+    },
+    {
+     "info": {
+      "name": "Get Shorten Counts for an Organization",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/organizations/{organization_guid}/shorten_counts",
+      "params": [
+       {
+        "name": "organization_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly organization"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the shorten counts for a specific organization over a specified time period."
+    },
+    {
+     "info": {
+      "name": "Get Shorten Counts for an Organization by Group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/organizations/{organization_guid}/shorten_counts_by_group",
+      "params": [
+       {
+        "name": "organization_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly organization"
+       }
+      ]
+     },
+     "docs": "Returns the shorten counts for a specific organization by group for the current month."
+    }
+   ]
+  },
+  {
+   "info": {
+    "name": "QR Codes",
+    "type": "folder"
+   },
+   "items": [
+    {
+     "info": {
+      "name": "Retrieve QR Codes by Group",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/qr-codes",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       },
+       {
+        "name": "has_render_customizations",
+        "value": "",
+        "type": "query",
+        "description": "Whether or not QRCode has any render customizations (like color or shape changes)"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "search_after",
+        "value": "",
+        "type": "query",
+        "description": "Token used to search next batch of qr codes, only use response from API as input value."
+       },
+       {
+        "name": "query",
+        "value": "",
+        "type": "query",
+        "description": "The value that you would like to search"
+       },
+       {
+        "name": "hostname_path_query",
+        "value": "",
+        "type": "query",
+        "description": "The hostname and/or path you would like to search (case-insensitive). Subdomains included; query params and fragment ignored."
+       },
+       {
+        "name": "created_before",
+        "value": "",
+        "type": "query",
+        "description": "Timestamp as an integer unix epoch (seconds only)"
+       },
+       {
+        "name": "created_after",
+        "value": "",
+        "type": "query",
+        "description": "Timestamp as an integer unix epoch (seconds only)"
+       },
+       {
+        "name": "archived",
+        "value": "",
+        "type": "query",
+        "description": "Whether or not to include archived resources"
+       },
+       {
+        "name": "creating_login",
+        "value": "",
+        "type": "query",
+        "description": "Filter by the login of the authenticated user that created the QR Code"
+       },
+       {
+        "name": "qrc_type",
+        "value": "",
+        "type": "query",
+        "description": ""
+       },
+       {
+        "name": "is_gs1",
+        "value": "",
+        "type": "query",
+        "description": "a filter value if the resource is a GS1 QR code"
+       },
+       {
+        "name": "is_expired",
+        "value": "",
+        "type": "query",
+        "description": "filter bitlinks by expiration status"
+       },
+       {
+        "name": "has_expiration",
+        "value": "",
+        "type": "query",
+        "description": "filter bitlinks by presence of expiration"
+       },
+       {
+        "name": "has_dynamic_routing",
+        "value": "",
+        "type": "query",
+        "description": "filter bitlinks by presence of dynamic routing rules"
+       },
+       {
+        "name": "tags",
+        "value": "",
+        "type": "query",
+        "description": "Filter by given tags"
+       }
+      ]
+     },
+     "docs": "Retrieves a list of QR codes matching the filter settings. Values are in reverse chronological order.\nThe pagination occurs by calling the next link in the pagination response object.\n"
+    },
+    {
+     "info": {
+      "name": "Bulk update QR codes",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/groups/{group_guid}/qr-codes",
+      "params": [
+       {
+        "name": "group_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly group"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Bulk update can add or remove tags, or archive/un-archive, up to 100 QR codes at a time.\nPages QR codes cannot be updated with this endpoint.\nThe response includes a list of QR code ids that were updated.\n"
+    },
+    {
+     "info": {
+      "name": "Create a QR Code",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes",
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Create a new QR Code and return its metadata"
+    },
+    {
+     "info": {
+      "name": "Generate a static QR Code image",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/static",
+      "params": [
+       {
+        "name": "Accept",
+        "value": "",
+        "type": "header",
+        "description": "Controls the response format. Use `application/json` (default) to receive a JSON-wrapped base64 image, `image/svg+xml` to receive the raw SVG, or `image/png` to receive the raw PNG."
+       },
+       {
+        "name": "format",
+        "value": "",
+        "type": "query",
+        "description": "The image format. Supports `svg` and `png`. Ignored if the Accept header specifies an image type."
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Generate a static QR code image without creating or saving a QR code resource. SVG and PNG output are supported via the Accept header\nContact your Account Manager to discuss enabling this feature for your account.\n\nThe `render_customizations` field supports basic appearance options. Customizations that require the rasterize API are not supported: `gradient`, `background_gradient`, `frame`, `text`, and `logo`.\n\nThe Accept header controls the response format:\n- `application/json` (default): Returns a JSON object with the image as a base64-encoded byte string.\n- `image/svg+xml`: Returns the raw SVG image.\n- `image/png`: Returns the raw PNG image.\n"
+    },
+    {
+     "info": {
+      "name": "Update a QR Code",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR code ID"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Updates the QR code with a matching id and returns it."
+    },
+    {
+     "info": {
+      "name": "Retrieve a QR Code",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR Code ID"
+       }
+      ]
+     },
+     "docs": "Gets the QR code with a matching id."
+    },
+    {
+     "info": {
+      "name": "Delete a QR Code",
+      "type": "http"
+     },
+     "http": {
+      "method": "DELETE",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR Code ID"
+       }
+      ]
+     },
+     "docs": "Delete a QR Code that has not been redirected and is not for a custom link. Also deletes the associated link (if applicable)."
+    },
+    {
+     "info": {
+      "name": "Retrieve a QR Code image",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}/image",
+      "params": [
+       {
+        "name": "Accept",
+        "value": "",
+        "type": "header",
+        "description": "The file format for the QR code's image. If the accept header is application/json the image data will be wrapped in a json object, base64 encoded and prefixed with its mime type as would be suitable for a HTML image src tag."
+       },
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR Code ID"
+       },
+       {
+        "name": "format",
+        "value": "",
+        "type": "query",
+        "description": "The format type of the image. If there is an image format in the header it takes precedence."
+       }
+      ]
+     },
+     "docs": "Get the image of a given QR Code. The Accept header controls how this is returned (options are \"application/json\", \"image/svg+xml\", and \"image/png\").\nIf the Accept header is \"application/json\" the format query parameter will determine the image format inside of the json (which will be base64 encoded and prefixed with its mime type as would be suitable for a HTML image src tag).\nTo Return the QR Code image itself, set the Accept header to \"image/svg+xml\" or \"image/png\", or remove the Accept header and set the format query parameter to \u201csvg\u201d or \u201cpng\u201d (if no format is specified the default will be \u201csvg\u201d).\n"
+    },
+    {
+     "info": {
+      "name": "Redirect a QR Code",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}/redirect",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": ""
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Changes the destination URL that a stand alone QR Code redirects to. This only works for stand alone QR Codes; a QR Code already associated with a bitlink must be updated via the Bitlinks API."
+    },
+    {
+     "info": {
+      "name": "Get Scans for a QR Code",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}/scans",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR Code ID"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns an array of scan counts for the specified QR code. The array is comprised of scan counts for each time window, where the window is based on the provided unit."
+    },
+    {
+     "info": {
+      "name": "Get Scans for a QR Code by Browser",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}/scans/browsers",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR Code ID"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the browsers generating scan traffic to the specified QR Code."
+    },
+    {
+     "info": {
+      "name": "Get Metrics for a QR Code by City",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}/scans/cities",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR Code ID"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the city origins of scan traffic for the specified QR Code."
+    },
+    {
+     "info": {
+      "name": "Get Scans for a QR Code by Country",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}/scans/countries",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR Code ID"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the country origins of scan traffic for the specified QR Code."
+    },
+    {
+     "info": {
+      "name": "Get Scans for a QR Code by Device OS",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}/scans/device_os",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR Code ID"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "size",
+        "value": "",
+        "type": "query",
+        "description": "The quantity of items to be be returned"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the device os generating scan traffic for the specified QR Code."
+    },
+    {
+     "info": {
+      "name": "Get Scans Summary for a QR Code",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}/scans/summary",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": "The QR Code ID"
+       },
+       {
+        "name": "unit",
+        "value": "",
+        "type": "query",
+        "description": "A unit of time"
+       },
+       {
+        "name": "units",
+        "value": "",
+        "type": "query",
+        "description": "An integer representing the time units to query data for. pass -1 to return all units of time"
+       },
+       {
+        "name": "unit_reference",
+        "value": "",
+        "type": "query",
+        "description": "An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)"
+       }
+      ]
+     },
+     "docs": "Returns the scan counts for a QR Code rolled up into a single field for a specified time window, where the window is based on the provided unit."
+    },
+    {
+     "info": {
+      "name": "Upgrade a QR Code to a bitlink",
+      "type": "http"
+     },
+     "http": {
+      "method": "PUT",
+      "url": "https://api-ssl.bitly.com/v4/qr-codes/{qrcode_id}/to-bitlink",
+      "params": [
+       {
+        "name": "qrcode_id",
+        "value": "",
+        "type": "path",
+        "description": ""
+       }
+      ]
+     },
+     "docs": "Upgrades a stand alone (decoupled) QR Code to a coupled QR Code by associating it with its underlying Bitly short link. This operation consumes one encode from the organization's monthly Link limit. If the QR Code is already coupled, no encode is consumed."
+    }
+   ]
+  },
+  {
+   "info": {
+    "name": "User",
+    "type": "folder"
+   },
+   "items": [
+    {
+     "info": {
+      "name": "Update a User",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/user",
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Update fields in the user"
+    },
+    {
+     "info": {
+      "name": "Retrieve a User",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/user"
+     },
+     "docs": "Returns information for the current authenticated user."
+    },
+    {
+     "info": {
+      "name": "Get Platform Limits",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/user/platform_limits",
+      "params": [
+       {
+        "name": "path",
+        "value": "",
+        "type": "query",
+        "description": "The specific path for which information is requested"
+       }
+      ]
+     },
+     "docs": "Fetch all platform limits and counts available for an organization"
+    }
+   ]
+  },
+  {
+   "info": {
+    "name": "Webhooks",
+    "type": "folder"
+   },
+   "items": [
+    {
+     "info": {
+      "name": "Get Webhooks",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/organizations/{organization_guid}/webhooks",
+      "params": [
+       {
+        "name": "organization_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly organization"
+       }
+      ]
+     },
+     "docs": "Fetch all webhooks available for an Organization"
+    },
+    {
+     "info": {
+      "name": "Create Webhook",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/webhooks",
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Creates a webhook."
+    },
+    {
+     "info": {
+      "name": "Retrieve Webhook",
+      "type": "http"
+     },
+     "http": {
+      "method": "GET",
+      "url": "https://api-ssl.bitly.com/v4/webhooks/{webhook_guid}",
+      "params": [
+       {
+        "name": "webhook_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly webhook"
+       }
+      ]
+     },
+     "docs": "Returns a webhook."
+    },
+    {
+     "info": {
+      "name": "Update Webhook",
+      "type": "http"
+     },
+     "http": {
+      "method": "PATCH",
+      "url": "https://api-ssl.bitly.com/v4/webhooks/{webhook_guid}",
+      "params": [
+       {
+        "name": "webhook_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly webhook"
+       }
+      ],
+      "body": {
+       "type": "json",
+       "data": {}
+      }
+     },
+     "docs": "Update a webhook"
+    },
+    {
+     "info": {
+      "name": "Delete Webhook",
+      "type": "http"
+     },
+     "http": {
+      "method": "DELETE",
+      "url": "https://api-ssl.bitly.com/v4/webhooks/{webhook_guid}",
+      "params": [
+       {
+        "name": "webhook_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly webhook"
+       }
+      ]
+     },
+     "docs": "Deletes a webhook."
+    },
+    {
+     "info": {
+      "name": "Verify Webhook",
+      "type": "http"
+     },
+     "http": {
+      "method": "POST",
+      "url": "https://api-ssl.bitly.com/v4/webhooks/{webhook_guid}/verify",
+      "params": [
+       {
+        "name": "webhook_guid",
+        "value": "",
+        "type": "path",
+        "description": "A GUID for a Bitly webhook"
+       }
+      ]
+     },
+     "docs": "Sends ping event to test webhook configuration."
+    }
+   ]
+  }
+ ],
+ "bundled": true
 }

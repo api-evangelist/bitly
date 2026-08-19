@@ -1,0 +1,134 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/_original/bitly-v4-openapi.json, well-known/bitly-oauth-authorization-server.json,
+  well-known/bitly-oauth-protected-resource.json, security/bitly-trust-center.yml,
+  https://dev.bitly.com/docs/getting-started/authentication, live probe of
+  https://api-ssl.bitly.com/v4/mcp
+note: >-
+  Cross-cutting standards assertions. Each entry is judged against evidence actually in this
+  repo or a URL probed on 2026-08-13; `conforms: false` means checked and absent, not unknown.
+standards:
+- id: openapi
+  conforms: true
+  version: 3.0.0
+  evidence: >-
+    Bitly publishes its own OpenAPI at https://dev.bitly.com/v4/v4.json (HTTP 200,
+    openapi 3.0.0, 78 paths, 94 operations, 146 component schemas). Saved verbatim to
+    openapi/_original/bitly-v4-openapi.json. First-party — servers[] is
+    https://api-ssl.bitly.com/v4, termsOfService is bitly.com, contact is bitly.is.
+- id: oauth2
+  conforms: true
+  evidence: >-
+    Authorization-code grant with S256 PKCE. Authorization endpoint https://bitly.com/oauth/authorize,
+    token endpoint https://api-ssl.bitly.com/oauth/access_token, documented at
+    https://dev.bitly.com/docs/getting-started/authentication.
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: >-
+    https://api-ssl.bitly.com/.well-known/oauth-authorization-server returns 200 application/json
+    with issuer, authorization_endpoint, token_endpoint, registration_endpoint, jwks_uri,
+    grant_types_supported, code_challenge_methods_supported.
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: >-
+    https://api-ssl.bitly.com/.well-known/oauth-protected-resource returns 200 declaring
+    resource https://api-ssl.bitly.com/v4/mcp, and the MCP 401 challenge names that document in
+    its WWW-Authenticate header.
+- id: rfc7591
+  name: OAuth 2.0 Dynamic Client Registration
+  conforms: true
+  evidence: >-
+    registration_endpoint https://api-ssl.bitly.com/oauth/register is advertised in the RFC 8414
+    metadata, and the MCP changelog dates DCR support to December 2025.
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: >-
+    Official remote server at https://api-ssl.bitly.com/v4/mcp. Probed 2026-08-13: a JSON-RPC
+    tools/list POST returns 401 with an RFC 9728 Bearer challenge, which is correct MCP
+    authorization behaviour. 25 documented tools; see mcp/bitly-mcp.yml.
+- id: oidc
+  conforms: false
+  evidence: >-
+    No /.well-known/openid-configuration on bitly.com or api-ssl.bitly.com (both 404). The
+    OAuth metadata does advertise id_token_signing_alg_values_supported RS256 and
+    subject_types_supported public, but without a discovery document and without an
+    openIdConnect securityScheme this is not OIDC conformance.
+- id: rfc9116
+  name: security.txt
+  conforms: true
+  evidence: >-
+    https://bitly.com/.well-known/security.txt returns 200 text/plain with Contact, Encryption
+    and Disclosure fields. Saved to well-known/bitly-security.txt.
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: >-
+    No application/problem+json anywhere in the OpenAPI. Bitly uses a consistent vendor envelope
+    (message/description/resource/errors[]) instead. See errors/bitly-problem-types.yml.
+- id: rfc8594
+  name: Sunset header
+  conforms: false
+  evidence: >-
+    No Sunset or Deprecation response header on any of the 94 operations, and no operation is
+    marked deprecated. No published deprecation policy.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    Zero occurrences of "idempoten" in Bitly's OpenAPI or documentation. No Idempotency-Key
+    header, no client-token field. See conventions/bitly-conventions.yml.
+- id: pagination
+  conforms: true
+  style: cursor
+  evidence: >-
+    Opaque `search_after` token plus `size` (default 50), declared as reusable components
+    parameters and applied consistently to the list operations.
+- id: ratelimit-headers
+  name: RFC 9331 / draft-ietf-httpapi-ratelimit-headers
+  conforms: false
+  evidence: >-
+    No RateLimit-* or X-RateLimit-* budget headers and no Retry-After. The only rate-limit header
+    declared is X-Ratelimit-Reason, on 403 responses only.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    No AsyncAPI document published; dev.bitly.com/asyncapi.yaml returns 404 and the docs sitemap
+    contains none. A real webhook surface exists and is captured in
+    asyncapi/bitly-engagement-webhooks.yml.
+- id: webhook-signatures
+  conforms: false
+  evidence: >-
+    No HMAC signature header or signing secret documented for webhook deliveries. Bitly
+    authenticates outbound to the consumer instead (api key / basic / client credentials).
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and the legacy /.well-known/agent.json return 404 on bitly.com,
+    dev.bitly.com and api-ssl.bitly.com. No agent card is published.
+- id: soc2
+  conforms: true
+  evidence: >-
+    SOC 2 Type 2 published on the SafeBase trust center at https://security.bitly.com, with the
+    report available on request. See security/bitly-trust-center.yml.
+- id: gdpr
+  conforms: true
+  evidence: Published on https://security.bitly.com alongside a Data Processing Agreement.
+- id: ccpa
+  conforms: true
+  evidence: Published on https://security.bitly.com.
+- id: iso27001
+  conforms: false
+  evidence: Not named on the trust center. SOC 2 Type 2 is the certification Bitly holds.
+- id: hipaa
+  conforms: false
+  evidence: Not claimed. Not applicable to link management.
+- id: pci-dss
+  conforms: false
+  evidence: Not claimed; Bitly does not process cardholder data through this API.
+- id: fedramp
+  conforms: false
+  evidence: Not claimed.

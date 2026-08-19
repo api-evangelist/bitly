@@ -1,0 +1,37 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://dev.bitly.com/docs/getting-started/authentication,
+  well-known/bitly-oauth-authorization-server.json (live fetch 2026-08-13),
+  openapi/_original/bitly-v4-openapi.json
+docs: https://dev.bitly.com/docs/getting-started/authentication
+scope_count: 0
+scopes: []
+finding: >-
+  Bitly runs a real OAuth 2.0 authorization server but publishes NO scopes. This file records
+  that as a measured absence, because a reader would otherwise assume the check was never run.
+evidence:
+- source: well-known/bitly-oauth-authorization-server.json
+  url: https://api-ssl.bitly.com/.well-known/oauth-authorization-server
+  http_status: 200
+  detail: >-
+    RFC 8414 metadata is served and complete on every other axis — issuer, authorization_endpoint,
+    token_endpoint, registration_endpoint, jwks_uri, grant_types_supported,
+    code_challenge_methods_supported — but it omits `scopes_supported` entirely.
+- source: https://dev.bitly.com/docs/getting-started/authentication
+  http_status: 200
+  detail: >-
+    The authentication guide walks through the web flow, the resource-owner credentials grant and
+    HTTP Basic, and never mentions a `scope` parameter or a permissions reference page. There is
+    no scopes page in the dev.bitly.com sitemap.
+- source: openapi/_original/bitly-v4-openapi.json
+  detail: >-
+    The only securityScheme declared is `bearerAuth` (type http, scheme bearer). No oauth2 scheme,
+    therefore no flows.scopes to derive from. The derive-oauth-scopes pass found 0 oauth2 schemes.
+implications: >-
+  A Bitly access token is all-or-nothing: it carries the full permissions of the granting user
+  across every group that user can reach, and there is no way to mint a read-only token, a
+  QR-only token, or a token scoped to a single group. That matters most on the MCP surface, where
+  the same undifferentiated bearer token grants an agent delete_short_link alongside get_user —
+  destructive and read operations are indistinguishable to the authorization layer. Least-privilege
+  has to be enforced by provisioning a dedicated Bitly user restricted to one group, not by scopes.

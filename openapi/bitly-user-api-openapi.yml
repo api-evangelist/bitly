@@ -1,0 +1,293 @@
+openapi: 3.0.0
+info:
+  title: Bitly User API
+  description: The User surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
+    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
+    parameter or schema was authored by API Evangelist.
+  version: 4.0.0
+  termsOfService: https://bitly.com/pages/terms-of-service
+  contact:
+    url: https://bitly.is/API-support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://api-ssl.bitly.com/v4
+security:
+- bearerAuth: []
+tags:
+- name: User
+  description: 'Some subscription plans allow multiple users. Only one user is used for authenticating
+    a call, and these operations apply only to the authenticated user.
+
+    '
+paths:
+  /user:
+    patch:
+      summary: Update a User
+      description: Update fields in the user
+      tags:
+      - User
+      operationId: updateUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    get:
+      summary: Retrieve a User
+      description: Returns information for the current authenticated user.
+      tags:
+      - User
+      operationId: getUser
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /user/platform_limits:
+    get:
+      summary: Get Platform Limits
+      description: Fetch all platform limits and counts available for an organization
+      operationId: getPlatformLimits
+      parameters:
+      - $ref: '#/components/parameters/Path'
+      tags:
+      - User
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformLimits'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+components:
+  parameters:
+    Path:
+      name: path
+      description: The specific path for which information is requested
+      in: query
+      schema:
+        type: string
+      example: /organizations/{organization_guid}
+  schemas:
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Email:
+      type: object
+      properties:
+        email:
+          type: string
+        is_primary:
+          type: boolean
+        is_verified:
+          type: boolean
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    MethodLimit:
+      type: object
+      properties:
+        name:
+          type: string
+        limit:
+          type: integer
+        count:
+          type: integer
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    PlatformLimit:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/MethodLimit'
+    PlatformLimits:
+      type: object
+      properties:
+        platform_limits:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlatformLimit'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    User:
+      type: object
+      required:
+      - login
+      - is_active
+      - created
+      - modified
+      - is_2fa_enabled
+      - name
+      - emails
+      - is_sso_user
+      properties:
+        login:
+          type: string
+        name:
+          type: string
+        is_active:
+          type: boolean
+        created:
+          type: string
+        modified:
+          type: string
+        is_sso_user:
+          type: boolean
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+        is_2fa_enabled:
+          type: boolean
+        default_group_guid:
+          type: string
+    UserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        default_group_guid:
+          type: string
+      example:
+        name: Chauncey McPufferson
+        default_group_guid: Ba1bc23dE4F
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

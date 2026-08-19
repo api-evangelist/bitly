@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitly User API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/user"
+          },
+          "docs": "Returns information for the current authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-ssl.bitly.com/v4/user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update fields in the user"
+        },
+        {
+          "info": {
+            "name": "Get Platform Limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-ssl.bitly.com/v4/user/platform_limits",
+            "params": [
+              {
+                "name": "path",
+                "value": "/organizations/{organization_guid}",
+                "type": "query",
+                "description": "The specific path for which information is requested"
+              }
+            ]
+          },
+          "docs": "Fetch all platform limits and counts available for an organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,603 @@
+openapi: 3.0.0
+info:
+  title: Bitly Webhooks API
+  description: The Webhooks surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
+    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
+    parameter or schema was authored by API Evangelist.
+  version: 4.0.0
+  termsOfService: https://bitly.com/pages/terms-of-service
+  contact:
+    url: https://bitly.is/API-support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://api-ssl.bitly.com/v4
+security:
+- bearerAuth: []
+tags:
+- name: Webhooks
+  description: 'Webhooks are a method of sending information from Bitly to an application outside of Bitly.
+    It''s a way to automate actions or updates between two different systems. These endpoints are for
+    configuring your webhooks.
+
+    '
+paths:
+  /organizations/{organization_guid}/webhooks:
+    get:
+      summary: Get Webhooks
+      description: Fetch all webhooks available for an Organization
+      operationId: getWebhooks
+      parameters:
+      - $ref: '#/components/parameters/OrganizationGUID'
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhooks'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /webhooks:
+    post:
+      summary: Create Webhook
+      description: Creates a webhook.
+      operationId: createWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+      tags:
+      - Webhooks
+      responses:
+        '201':
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /webhooks/{webhook_guid}:
+    get:
+      summary: Retrieve Webhook
+      description: Returns a webhook.
+      operationId: getWebhook
+      parameters:
+      - $ref: '#/components/parameters/WebhookGUID'
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    patch:
+      summary: Update Webhook
+      description: Update a webhook
+      operationId: updateWebhook
+      parameters:
+      - $ref: '#/components/parameters/WebhookGUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookUpdate'
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '422':
+          description: UNPROCESSABLE_ENTITY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+        '429':
+          description: MONTHLY_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyLimitExceeded'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+    delete:
+      summary: Delete Webhook
+      description: Deletes a webhook.
+      operationId: deleteWebhook
+      parameters:
+      - $ref: '#/components/parameters/WebhookGUID'
+      tags:
+      - Webhooks
+      responses:
+        '204':
+          description: SUCCESS
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+  /webhooks/{webhook_guid}/verify:
+    post:
+      summary: Verify Webhook
+      description: Sends ping event to test webhook configuration.
+      operationId: verifyWebhook
+      parameters:
+      - $ref: '#/components/parameters/WebhookGUID'
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '402':
+          description: UPGRADE_REQUIRED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeRequired'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+components:
+  parameters:
+    OrganizationGUID:
+      name: organization_guid
+      description: A GUID for a Bitly organization
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Oa1bcd234eF
+    WebhookGUID:
+      name: webhook_guid
+      description: A GUID for a Bitly webhook
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Wa1bcDefG23
+  schemas:
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Webhook:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - properties:
+          guid:
+            type: string
+          created:
+            type: string
+          modified:
+            type: string
+          modified_by:
+            type: string
+          alerted:
+            type: string
+          deactivated:
+            type: string
+          is_active:
+            type: boolean
+          is_alert:
+            type: boolean
+          organization_guid:
+            type: string
+          group_guid:
+            type: string
+          name:
+            type: string
+          event:
+            type: string
+          url:
+            type: string
+          status:
+            type: string
+          oauth_url:
+            type: string
+          client_id:
+            type: string
+          client_secret:
+            type: string
+          fetch_tags:
+            type: boolean
+      required:
+      - guid
+      - created
+      - modified
+      - modified_by
+      - alerted
+      - deactivated
+      - is_active
+      - is_alert
+      - organization_guid
+      - name
+      - event
+      - url
+    WebhookCreate:
+      type: object
+      required:
+      - organization_guid
+      - name
+      - event
+      - url
+      properties:
+        is_active:
+          type: boolean
+        organization_guid:
+          type: string
+        group_guid:
+          type: string
+        name:
+          type: string
+        event:
+          type: string
+        url:
+          type: string
+        oauth_url:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        fetch_tags:
+          type: boolean
+      example:
+        is_active: true
+        organization_guid: Oa1bcd234eF
+        group_guid: Ba1bc23dE4F
+        name: My Webhook
+        event: decodes
+        url: https://bitly.com/webhooks
+        oauth_url: https://fake.com/oauth
+        client_id: fakeclientid123
+        client_secret: itsasecreticanttellyou
+    WebhookUpdate:
+      type: object
+      required:
+      - guid
+      properties:
+        guid:
+          type: string
+        is_active:
+          type: boolean
+        organization_guid:
+          type: string
+        group_guid:
+          type: string
+        name:
+          type: string
+        event:
+          type: string
+        url:
+          type: string
+        oauth_url:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        fetch_tags:
+          type: boolean
+      example:
+        guid: Wa1bcDefG23
+        is_active: true
+        organization_guid: Oa1bcd234eF
+        group_guid: Ba1bc23dE4F
+        name: My Webhook
+        event: decodes
+        url: https://bitly.com/webhooks
+        oauth_url: https://fake.com/oauth
+        client_id: fakeclientid123
+        client_secret: itsasecreticanttellyou
+    Webhooks:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

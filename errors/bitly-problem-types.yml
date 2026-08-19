@@ -1,0 +1,182 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/_original/bitly-v4-openapi.json (every 4xx/5xx response across 94 operations),
+  enriched from https://dev.bitly.com/docs/getting-started/troubleshooting-tips/ and
+  https://dev.bitly.com/docs/getting-started/rate-limits
+docs: https://dev.bitly.com/docs/getting-started/troubleshooting-tips/
+format: vendor-json
+rfc9457: false
+content_type: application/json
+note: >-
+  Bitly does NOT use RFC 9457 problem+json. It ships a consistent vendor envelope instead, which
+  it applies uniformly — every one of the 94 operations declares 500 and 83 declare 503, so error
+  modelling is unusually complete for a spec of this age. The machine-actionable value is in
+  `message`, which carries a SCREAMING_SNAKE error code, and in `errors[]`, which carries
+  per-field validation failures.
+envelope:
+  schema: Error
+  fields:
+    message:
+      type: string
+      role: error code
+      note: A SCREAMING_SNAKE token such as INVALID_ARG_DOMAIN or API_USAGE_LIMIT_EXCEEDED.
+    description:
+      type: string
+      role: human-readable explanation
+    resource:
+      type: string
+      role: the resource the failure applies to (e.g. "mcp", "bitlink")
+    errors:
+      type: array
+      role: per-field validation failures
+      items:
+        schema: FieldError
+        fields: [field, error_code, message]
+  simplified_variant:
+    schema: SimplifiedError
+    fields: [message, description, resource]
+    used_by: [429]
+status_summary:
+  '400': 65
+  '402': 32
+  '403': 93
+  '404': 73
+  '406': 1
+  '409': 2
+  '410': 28
+  '417': 2
+  '422': 21
+  '429': 49
+  '500': 94
+  '502': 1
+  '503': 83
+problem_types:
+- status: 400
+  title: BAD_REQUEST
+  schema: BadRequest
+  operations: 65
+  remediation: >-
+    Malformed request. Read errors[] for the offending field and error_code before retrying.
+  retryable: false
+- status: 402
+  title: UPGRADE_REQUIRED
+  schema: UpgradeRequired
+  operations: 32
+  remediation: >-
+    The operation is not included in the account's billing tier. Check the plan against
+    plans/bitly-plans-pricing.yml — webhooks, for example, are Enterprise-only.
+  retryable: false
+  note: >-
+    Worth flagging for agents: 402 is a commercial signal, not a bug. A third of Bitly's surface
+    can return it, so an integration built on a Free account will fail on operations that are
+    perfectly well-formed.
+- status: 403
+  title: FORBIDDEN
+  schema: Forbidden
+  operations: 93
+  headers:
+    X-Ratelimit-Reason: An explanation of the ratelimit received.
+  remediation: >-
+    Token lacks permission for this group/organization, or a rate-limit reason applies. Read the
+    X-Ratelimit-Reason header — it is the only rate-limit header Bitly declares anywhere.
+  retryable: false
+- status: 404
+  title: NOT_FOUND
+  schema: NotFound
+  operations: 73
+  remediation: The Bitlink, group, organization, campaign, QR Code or webhook GUID does not exist.
+  retryable: false
+- status: 406
+  title: NOT_ACCEPTABLE
+  schema: BadRequest
+  operations: 1
+  remediation: Requested representation is unavailable; check the Accept header.
+  retryable: false
+- status: 409
+  title: CONFLICT
+  schema: Conflict
+  operations: 2
+  remediation: >-
+    The resource already exists or is in a state that forbids the change — typically a custom
+    back-half that is already taken.
+  retryable: false
+- status: 410
+  title: GONE
+  schema: Gone
+  operations: 28
+  remediation: >-
+    The resource has been deleted. Distinct from 404: Bitly is telling you it existed. Do not
+    retry; re-create or drop the reference.
+  retryable: false
+- status: 417
+  title: EXPECTATION_FAILED
+  schema: ExpectationFailed
+  operations: 2
+  example_code: DNS_CONFIGURATION_ERROR
+  remediation: >-
+    Branded short domain misconfiguration — the domain's DNS is not pointing at Bitly. Fix DNS,
+    then retry.
+  retryable: false
+- status: 422
+  title: UNPROCESSABLE_ENTITY
+  schema: UnprocessableEntity
+  operations: 21
+  remediation: >-
+    Syntactically valid but semantically rejected. errors[] carries field-level error_codes.
+  retryable: false
+- status: 429
+  title: MONTHLY_LIMIT_EXCEEDED
+  schema: MonthlyLimitExceeded
+  operations: 49
+  example: '{"message": "API_USAGE_LIMIT_EXCEEDED"}'
+  error_codes:
+  - code: RATE_LIMIT_EXCEEDED
+    meaning: per-hour or per-minute platform limit exceeded
+    retry: back off; the per-minute allowance is one-tenth of the hourly allowance
+  - code: API_USAGE_LIMIT_EXCEEDED
+    meaning: monthly API request quota exhausted
+    retry: >-
+      Do NOT retry. The quota resets on the first of the month; the only remedies are a plan
+      upgrade or waiting.
+  - code: MONTHLY_BSD_ENCODE_LIMIT_REACHED
+    alias: BRANDED_LINK_MONTHLY_LIMIT_EXCEEDED
+    meaning: monthly branded-short-domain encode limit reached for that custom domain
+    retry: Do NOT retry with the same domain; shorten on bit.ly or wait for the monthly reset.
+  remediation: >-
+    Bitly returns no Retry-After and no remaining-quota headers. Poll
+    GET /v4/user/platform_limits or GET /v4/organizations/{organization_guid}/plan_limits to find
+    out where you stand.
+  retryable: conditional
+- status: 500
+  title: INTERNAL_ERROR
+  schema: InternalError
+  operations: 94
+  remediation: Retry with exponential backoff.
+  retryable: true
+- status: 502
+  title: BAD_GATEWAY
+  schema: BadGateway
+  operations: 1
+  remediation: Retry with exponential backoff.
+  retryable: true
+- status: 503
+  title: TEMPORARILY_UNAVAILABLE
+  schema: TemporarilyUnavailable
+  operations: 83
+  remediation: Retry with exponential backoff; check https://status.bitly.com if it persists.
+  retryable: true
+documented_only:
+- code: INVALID_ARG_DOMAIN
+  status: 400
+  meaning: >-
+    The call is shortening with a group that does not have access to the specified custom domain.
+  remediation: >-
+    Pass group_guid in the body of /v4/shorten, or change the authorizing user's default group in
+    Bitly Settings > Integrations to one that includes the custom domain.
+  source: https://dev.bitly.com/docs/getting-started/troubleshooting-tips/
+- code: 2FA_CODE_REQUESTED
+  meaning: >-
+    An account with two-factor authentication attempted the HTTP Basic token flow.
+  remediation: Re-request the token with the SMS code parameter, or use the OAuth web flow instead.
+  source: https://dev.bitly.com/docs/getting-started/authentication

@@ -1,32 +1,28 @@
 {
-  "provider": "bitly",
-  "sources": [
-    "bitly-bitlinks-api-openapi.yml",
-    "bitly-bsds-api-openapi.yml",
-    "bitly-campaigns-api-openapi.yml",
-    "bitly-channels-api-openapi.yml",
-    "bitly-custom-bitlinks-api-openapi.yml",
-    "bitly-group-metrics-api-openapi.yml",
-    "bitly-groups-api-openapi.yml",
-    "bitly-metrics-api-openapi.yml",
-    "bitly-organizations-api-openapi.yml",
-    "bitly-qr-codes-api-openapi.yml"
-  ],
-  "outputs": [
-    "bitly-bitlinks-api-openapi.yml",
-    "bitly-bsds-api-openapi.yml",
-    "bitly-campaigns-api-openapi.yml",
-    "bitly-channels-api-openapi.yml",
-    "bitly-custom-bitlinks-api-openapi.yml",
-    "bitly-group-metrics-api-openapi.yml",
-    "bitly-groups-api-openapi.yml",
-    "bitly-metrics-api-openapi.yml",
-    "bitly-organizations-api-openapi.yml",
-    "bitly-qr-codes-api-openapi.yml"
-  ],
-  "archived": [],
-  "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+ "provider": "bitly",
+ "generated": "2026-08-13",
+ "method": "derived",
+ "source": "openapi/_original/bitly-v4-openapi.json (fetched from https://dev.bitly.com/v4/v4.json)",
+ "note": "Split one-per-tag from Bitly's own authoritative OpenAPI. The previous outputs were derived from a best-effort reconstruction that has been removed; the tags bitly-channels-api, bitly-metrics-api and bitly-group-metrics-api did not exist in Bitly's real spec and are gone. bitly-user-api, bitly-webhooks-api and bitly-oauth-apps-api are new.",
+ "sources": [
+  "_original/bitly-v4-openapi.json"
+ ],
+ "outputs": [
+  "bitly-bitlinks-api-openapi.yml",
+  "bitly-bsds-api-openapi.yml",
+  "bitly-campaigns-api-openapi.yml",
+  "bitly-custom-bitlinks-api-openapi.yml",
+  "bitly-groups-api-openapi.yml",
+  "bitly-oauth-apps-api-openapi.yml",
+  "bitly-organizations-api-openapi.yml",
+  "bitly-qr-codes-api-openapi.yml",
+  "bitly-user-api-openapi.yml",
+  "bitly-webhooks-api-openapi.yml"
+ ],
+ "operations": 94,
+ "archived": [],
+ "errors": [],
+ "warnings": [],
+ "notes": [],
+ "skipped": []
 }

@@ -1,0 +1,65 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Bitly BSDs API
+  version: 1.0.0
+extends: openapi/bitly-bsds-api-openapi.yml
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: openapi/bitly-bsds-api-openapi.yml + repo artifacts
+  note: Captures API Evangelist annotations only. The underlying OpenAPI is Bitly's own and is never mutated.
+actions:
+- target: $.info
+  description: Record API Evangelist provenance and the artifacts derived from this contract.
+  update:
+    x-apievangelist:
+      source: https://dev.bitly.com/v4/v4.json
+      harvested: '2026-08-13'
+      surface: BSDs
+      operations: 1
+      artifacts:
+        conventions: conventions/bitly-conventions.yml
+        errors: errors/bitly-problem-types.yml
+        authentication: authentication/bitly-authentication.yml
+        rate_limits: rate-limits/bitly-rate-limits.yml
+        data_model: data-model/bitly-data-model.yml
+        lifecycle: lifecycle/bitly-lifecycle.yml
+- target: $.info
+  description: Bitly publishes no idempotency mechanism; flag it on the contract so agents see it.
+  update:
+    x-idempotency:
+      supported: false
+      note: No Idempotency-Key header and no client token. A retried write creates a duplicate Bitlink
+        and consumes metered monthly quota.
+- target: $.info
+  description: 'Rate-limit posture: no budget headers are returned; quota must be polled.'
+  update:
+    x-rate-limit-signalling:
+      budget_headers: false
+      retry_after: false
+      only_header: X-Ratelimit-Reason (403 only)
+      exhaustion_status: 429
+      introspection:
+      - GET /v4/user/platform_limits
+      - GET /v4/organizations/{organization_guid}/plan_limits
+- target: $.components.securitySchemes.bearerAuth
+  description: Document how the bearer token is obtained and that no scopes exist.
+  update:
+    description: 'Bitly access token. Send as `Authorization: Bearer {token}`. Generic tokens are issued
+      at https://bitly.com/settings/api; user-delegated tokens come from the OAuth 2.0 authorization-code
+      flow at https://bitly.com/oauth/authorize. Bitly publishes no OAuth scopes, so a token carries the
+      full permissions of the granting user.'
+    x-token-source: https://bitly.com/settings/api
+    x-scopes-published: false
+- target: $.paths.*.*
+  description: Mark every operation with the surface it belongs to for catalog routing.
+  update:
+    x-bitly-surface: BSDs
+- target: $.info
+  description: Note which MCP tools front this surface.
+  update:
+    x-mcp:
+      server: https://api-ssl.bitly.com/v4/mcp
+      tools:
+      - get_custom_domains
+      crosswalk: mcp/bitly-tool-crosswalk.yml

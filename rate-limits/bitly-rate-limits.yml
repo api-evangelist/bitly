@@ -1,0 +1,105 @@
+generated: '2026-08-13'
+method: searched
+source: https://dev.bitly.com/docs/getting-started/rate-limits
+docs: https://dev.bitly.com/docs/getting-started/rate-limits
+supplementary_source:
+- https://bitly.com/pages/pricing
+- https://dev.bitly.com/docs/getting-started/troubleshooting-tips/
+- openapi/_original/bitly-v4-openapi.json
+limit_count: 7
+summary: >-
+  Bitly rate-limits on three independent axes: concurrent connections per IP, a rolling
+  hourly/per-minute platform limit, and a monthly API-request quota that comes from the billing
+  plan. The monthly quota is the one that actually bites integrators, and it is published on the
+  pricing page rather than the rate-limit page.
+headers:
+  published: partial
+  note: >-
+    This is the notable gap. Bitly documents NO X-RateLimit-*/RateLimit-* budget headers and no
+    Retry-After. The only rate-limit-related response header declared anywhere in Bitly's own
+    OpenAPI is X-Ratelimit-Reason, and only on 403 responses — a human-readable explanation, not
+    a remaining-quota counter. An agent therefore cannot see how close it is to a limit from
+    response headers; it must poll GET /v4/user/platform_limits or
+    GET /v4/organizations/{organization_guid}/plan_limits.
+  observed:
+  - name: X-Ratelimit-Reason
+    on_status: 403
+    type: string
+    description: An explanation of the ratelimit received.
+    source: openapi/_original/bitly-v4-openapi.json
+  absent: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, RateLimit, RateLimit-Policy,
+    Retry-After]
+introspection_endpoints:
+- operationId: getPlatformLimits
+  path: GET /v4/user/platform_limits
+  returns: per-endpoint platform limits and remaining count for the authenticated user
+- operationId: getPlanLimits
+  path: GET /v4/organizations/{organization_guid}/plan_limits
+  returns: monthly plan limits and consumption for the organization
+exhaustion:
+  status: 429
+  error_codes:
+  - code: RATE_LIMIT_EXCEEDED
+    meaning: the per-hour or per-minute platform limit was exceeded
+  - code: API_USAGE_LIMIT_EXCEEDED
+    meaning: the account's monthly API request quota was exhausted
+  - code: MONTHLY_BSD_ENCODE_LIMIT_REACHED
+    alias: BRANDED_LINK_MONTHLY_LIMIT_EXCEEDED
+    meaning: the monthly branded-short-domain encode limit for that custom domain was reached
+limits:
+- scope: per-ip
+  dimension: concurrent connections
+  limit: 5
+  window: concurrent
+  source: https://dev.bitly.com/docs/getting-started/rate-limits
+  note: '"API users are limited to a maximum of five concurrent connections from a single IP address."'
+- scope: per-account
+  dimension: api requests
+  window: minute
+  limit: null
+  formula: one-tenth of the account's hourly limit
+  source: https://dev.bitly.com/docs/getting-started/rate-limits
+  note: >-
+    Bitly's worked example is 1,000 calls/hour corresponding to 100 calls/minute. The absolute
+    hourly figure is not published; it is plan-dependent and must be read from
+    GET /v4/user/platform_limits.
+- scope: per-account
+  dimension: api requests
+  window: hour
+  limit: null
+  note: Not published. Plan-dependent; retrievable only from the platform_limits endpoint.
+- scope: per-account
+  plan: Free
+  dimension: api requests
+  window: month
+  limit: 1000
+  reset: first of the month
+  source: https://bitly.com/pages/pricing
+- scope: per-account
+  plan: Core
+  dimension: api requests
+  window: month
+  limit: 5000
+  reset: first of the month
+  source: https://bitly.com/pages/pricing
+- scope: per-account
+  plan: Growth
+  dimension: api requests
+  window: month
+  limit: 25000
+  reset: first of the month
+  source: https://bitly.com/pages/pricing
+- scope: per-account
+  plan: Premium
+  dimension: api requests
+  window: month
+  limit: 50000
+  reset: first of the month
+  source: https://bitly.com/pages/pricing
+- scope: per-account
+  plan: Enterprise
+  dimension: api requests
+  window: month
+  limit: null
+  note: Custom, negotiated with an account manager.
+  source: https://bitly.com/pages/pricing
