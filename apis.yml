@@ -35,7 +35,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/bitly/refs/heads/main/apis.yml
 created: '2026-05-11'
 modified: '2026-08-13'
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 apis:
 - aid: bitly:bitly-bsds-api
   name: Bitly BSDs API
