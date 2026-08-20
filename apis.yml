@@ -28,6 +28,17 @@ tags:
 - Analytics
 - Marketing
 - Link Management
+- Webhook
+- Attribution
+- Agents
+- MCP
+tags_raw:
+- Links
+- URL Shortener
+- QR Codes
+- Analytics
+- Marketing
+- Link Management
 - Webhooks
 - Attribution
 - Agents
@@ -138,6 +149,8 @@ apis:
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -184,6 +197,8 @@ apis:
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -254,6 +269,8 @@ apis:
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
