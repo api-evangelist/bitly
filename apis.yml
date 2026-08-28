@@ -8,6 +8,18 @@ description: Bitly is a link management platform for creating, branding, routing
   city, device, OS, browser and referrer. Bitly publishes its own OpenAPI 3.0 definition and operates
   an official remote Model Context Protocol server, making it directly callable by AI agents.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
