@@ -315,6 +315,8 @@ apis:
   humanURL: https://dev.bitly.com/api-reference
   baseURL: https://api-ssl.bitly.com/v4
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI
