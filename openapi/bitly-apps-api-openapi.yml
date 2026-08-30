@@ -1,0 +1,133 @@
+openapi: 3.2.0
+info:
+  title: Bitly OAuth Apps API
+  description: The OAuth Apps surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation, from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation, parameter or schema was authored by API Evangelist.
+  version: 4.0.0
+  termsOfService: https://bitly.com/pages/terms-of-service
+  contact:
+    url: https://bitly.is/API-support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://api-ssl.bitly.com/v4
+security:
+- bearerAuth: []
+tags:
+- name: Apps
+paths:
+  /apps/{client_id}:
+    get:
+      summary: Retrieve OAuth App
+      description: Retrieve the details for the provided OAuth App client ID
+      operationId: getOAuthApp
+      parameters:
+      - $ref: '#/components/parameters/ClientID'
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthApp'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: INTERNAL_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalError'
+        '503':
+          description: TEMPORARILY_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporarilyUnavailable'
+      tags:
+      - Apps
+components:
+  parameters:
+    ClientID:
+      name: client_id
+      description: The client ID of an OAuth app
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 1234a56b789cd0e123456fg7h8901j123km45n6p
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    OAuthApp:
+      type: object
+      required:
+      - name
+      - client_id
+      - link
+      - description
+      - require_oauth_pkce
+      properties:
+        name:
+          type: string
+        client_id:
+          type: string
+        description:
+          type: string
+        link:
+          type: string
+        require_oauth_pkce:
+          type: boolean
+        internal_app:
+          type: boolean
+          description: True for Bitly's own first-party apps (dashboard, mobile apps), as opposed to third-party integrations.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
