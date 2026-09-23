@@ -1,0 +1,1 @@
+{"resource":"https://api-ssl.bitly.com/v4/mcp","authorization_servers":["https://api-ssl.bitly.com","https://api-ssl.bitly.com/.well-known/oauth-authorization-server","https://api-ssl.bitly.com/v4/mcp/.well-known/oauth-authorization-server"]}

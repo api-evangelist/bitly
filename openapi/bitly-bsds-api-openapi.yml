@@ -1,27 +1,23 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bitly BSDs API
-  description: The BSDs surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
-    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
-    parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  title: Bitly BS Ds API
   termsOfService: https://bitly.com/pages/terms-of-service
   contact:
     url: https://bitly.is/API-support
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: /v4/header-logo.png
+  description: Branded short domains (BSDs) are the custom domains used to brand your links. A BSD can be added to a Bitly organization and may be assigned to one or more groups. They can contain up to 32 characters.
 servers:
 - url: https://api-ssl.bitly.com/v4
 security:
 - bearerAuth: []
 tags:
 - name: BSDs
-  description: 'Branded short domains (BSDs) are the custom domains used to brand your links. A BSD can
-    be added to a Bitly organization and may be assigned to one or more groups. They can contain up to
-    32 characters.
-
-    '
+  description: Branded short domains (BSDs) are the custom domains used to brand your links. A BSD can be added to a Bitly organization and may be assigned to one or more groups. They can contain up to 32 characters.
 paths:
   /bsds:
     get:
@@ -68,17 +64,23 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
-    BSDsResponse:
-      type: object
-      properties:
-        bsds:
-          type: array
-          items:
-            type: string
     BadRequest:
       description: BAD_REQUEST
       allOf:
       - $ref: '#/components/schemas/Error'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
     Error:
       type: object
       properties:
@@ -92,25 +94,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldError'
-    FieldError:
+    BSDsResponse:
       type: object
       properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
+        bsds:
+          type: array
+          items:
+            type: string
     Forbidden:
       description: FORBIDDEN
       allOf:
       - $ref: '#/components/schemas/Error'
     InternalError:
       description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
   securitySchemes:

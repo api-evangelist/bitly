@@ -1,36 +1,28 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bitly Organizations API
-  description: The Organizations surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
-    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
-    parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  title: Bitly Organizations API
   termsOfService: https://bitly.com/pages/terms-of-service
   contact:
     url: https://bitly.is/API-support
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: /v4/header-logo.png
+  description: Organizations are equivalent to a Bitly account. Every plan limit, group, and user is tied to an organization.
 servers:
 - url: https://api-ssl.bitly.com/v4
 security:
 - bearerAuth: []
 tags:
 - name: Organizations
-  description: 'Organizations are equivalent to a Bitly account. Every plan limit, group, and user is
-    tied to an organization.
-
-    '
+  description: Organizations are equivalent to a Bitly account. Every plan limit, group, and user is tied to an organization.
 paths:
   /organizations:
     get:
       summary: Retrieve Organizations
-      description: 'Retrieve a list of organizations for the authenticated user. By default, only organizations
-        permitted by the token''s allowed_orgs are returned. Use include_all=true to return all organizations
-        regardless of token restrictions. Each organization is annotated with its authentication requirements
-        (require_sso, require_2fa) when configured.
-
-        '
+      description: Retrieve a list of organizations for the authenticated user. By default, only organizations permitted by the token's allowed_orgs are returned. Use include_all=true to return all organizations regardless of token restrictions. Each organization is annotated with its authentication requirements (require_sso, require_2fa) when configured.
       tags:
       - Organizations
       operationId: getOrganizations
@@ -38,8 +30,7 @@ paths:
       - name: include_all
         in: query
         required: false
-        description: 'When set to true, returns all of the user''s organizations regardless of the token''s
-          allowed_orgs restrictions.
+        description: 'When set to true, returns all of the user''s organizations regardless of the token''s allowed_orgs restrictions.
 
           '
         schema:
@@ -233,97 +224,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
-  parameters:
-    OrganizationGUID:
-      name: organization_guid
-      description: A GUID for a Bitly organization
-      in: path
-      required: true
-      schema:
-        type: string
-      example: Oa1bcd234eF
-    TimeUnit:
-      name: unit
-      description: A unit of time
-      schema:
-        $ref: '#/components/schemas/TimeUnit'
-      required: true
-      in: query
-      example: month
-    UnitAmount:
-      name: units
-      description: An integer representing the time units to query data for. pass -1 to return all units
-        of time
-      schema:
-        type: integer
-        default: -1
-      required: true
-      in: query
-      example: 1
-    UnitReferenceTimeStamp:
-      name: unit_reference
-      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will
-        default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and
-        ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
-      schema:
-        type: string
-      required: false
-      in: query
-      example: 2006-01-02T15:04:05-0700
   schemas:
-    BaseMetrics:
-      type: object
-      properties:
-        unit:
-          type: string
-          x-faker: internet.userName
-        units:
-          type: integer
-          x-faker:
-            datatype.number:
-              min: 1
-              max: 100
-        facet:
-          type: string
-          enum:
-          - countries
-          - cities
-          - devices
-          - referrers
-          - referrers_by_domain
-          - referring_domains
-          - referring_networks
-          - shorten_counts
-          - destinations
-        unit_reference:
-          type: string
-          x-faker: date.past
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
     HasReferences:
       type: object
       properties:
@@ -331,28 +232,42 @@ components:
           type: object
           additionalProperties:
             type: string
-    InternalError:
-      description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Metric:
+    Organizations:
       type: object
+      required:
+      - organizations
       properties:
-        key:
-          type: string
-        value:
-          type: integer
-    Metrics:
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    PlanLimits:
       type: object
       allOf:
-      - $ref: '#/components/schemas/BaseMetrics'
+      - $ref: '#/components/schemas/HasReferences'
       - properties:
-          metrics:
+          organization_guid:
+            type: string
+          plan_limits:
             type: array
             items:
-              $ref: '#/components/schemas/Metric'
+              $ref: '#/components/schemas/PlanLimit'
     NotFound:
       description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
     Organization:
@@ -395,8 +310,7 @@ components:
               type: string
           require_sso:
             type: string
-            description: 'SSO authentication requirement for this organization. Possible values: "none",
-              "any". Omitted when no auth requirements are configured.
+            description: 'SSO authentication requirement for this organization. Possible values: "none", "any". Omitted when no auth requirements are configured.
 
               '
             enum:
@@ -404,22 +318,61 @@ components:
             - any
           require_2fa:
             type: string
-            description: 'Two-factor authentication requirement for this organization. Possible values:
-              "none", "sms". Omitted when no auth requirements are configured.
+            description: 'Two-factor authentication requirement for this organization. Possible values: "none", "sms". Omitted when no auth requirements are configured.
 
               '
             enum:
             - none
             - sms
-    Organizations:
+    BaseMetrics:
       type: object
-      required:
-      - organizations
       properties:
-        organizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Organization'
+        unit:
+          type: string
+          x-faker: internet.userName
+        units:
+          type: integer
+          x-faker:
+            datatype.number:
+              min: 1
+              max: 100
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - devices
+          - referrers
+          - referrers_by_domain
+          - referring_domains
+          - referring_networks
+          - shorten_counts
+          - destinations
+        unit_reference:
+          type: string
+          x-faker: date.past
+    Metrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/Metric'
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
     PlanLimit:
       type: object
       properties:
@@ -431,31 +384,64 @@ components:
           type: integer
         count:
           type: integer
-    PlanLimits:
+    Error:
       type: object
-      allOf:
-      - $ref: '#/components/schemas/HasReferences'
-      - properties:
-          organization_guid:
-            type: string
-          plan_limits:
-            type: array
-            items:
-              $ref: '#/components/schemas/PlanLimit'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    Metric:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: integer
+    InternalError:
+      description: INTERNAL_ERROR
       allOf:
       - $ref: '#/components/schemas/Error'
+  parameters:
+    OrganizationGUID:
+      name: organization_guid
+      description: A GUID for a Bitly organization
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Oa1bcd234eF
+    UnitAmount:
+      name: units
+      description: An integer representing the time units to query data for. pass -1 to return all units of time
+      schema:
+        type: integer
+        default: -1
+      required: true
+      in: query
+      example: 1
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
     TimeUnit:
-      description: the unit of time queried for (minute, hour, day, week, month)
-      type: string
-      enum:
-      - minute
-      - hour
-      - day
-      - week
-      - month
-      default: day
+      name: unit
+      description: A unit of time
+      schema:
+        $ref: '#/components/schemas/TimeUnit'
+      required: true
+      in: query
+      example: month
   securitySchemes:
     bearerAuth:
       type: http

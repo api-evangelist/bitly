@@ -1,27 +1,23 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bitly Groups API
-  description: The Groups surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation,
-    from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation,
-    parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  title: Bitly Groups API
   termsOfService: https://bitly.com/pages/terms-of-service
   contact:
     url: https://bitly.is/API-support
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: /v4/header-logo.png
+  description: Groups are subdivisions within organizations. Every user will be in at least one group, and every shortened link will be in one group. Most actions on our API will be on behalf of a group. For example, when you shorten a link, it will be on behalf of a user and a group.
 servers:
 - url: https://api-ssl.bitly.com/v4
 security:
 - bearerAuth: []
 tags:
 - name: Groups
-  description: 'Groups are subdivisions within organizations. Every user will be in at least one group,
-    and every shortened link will be in one group. Most actions on our API will be on behalf of a group.
-    For example, when you shorten a link, it will be on behalf of a user and a group.
-
-    '
+  description: Groups are subdivisions within organizations. Every user will be in at least one group, and every shortened link will be in one group. Most actions on our API will be on behalf of a group. For example, when you shorten a link, it will be on behalf of a user and a group.
 paths:
   /groups:
     get:
@@ -836,9 +832,7 @@ paths:
 
         list exports. When the match set exceeds the cap, truncated is true and only the first
 
-        cap rows are returned; row_count reports how many data rows are in the CSV.
-
-        '
+        cap rows are returned; row_count reports how many data rows are in the CSV.'
       summary: Create an inline CSV export for a group
       parameters:
       - $ref: '#/components/parameters/GroupGUID'
@@ -894,8 +888,7 @@ paths:
   /groups/{group_guid}/feature_usage:
     get:
       summary: Get limit usage for a group
-      description: Get a group's current feature limit usage, optionally provide limit name(s) for usage
-        on specific limit(s)
+      description: Get a group's current feature limit usage, optionally provide limit name(s) for usage on specific limit(s)
       operationId: getGroupFeatureUsage
       parameters:
       - $ref: '#/components/parameters/GroupGUID'
@@ -936,8 +929,7 @@ paths:
   /groups/{group_guid}/historical_usage:
     get:
       summary: Get historical usage for a group
-      description: Get a group's historical usage for specific limit(s) and date range. Refer to GET /v4/groups/{group_guid}/feature_usage
-        endpoint response for available limit names.
+      description: Get a group's historical usage for specific limit(s) and date range. Refer to GET /v4/groups/{group_guid}/feature_usage endpoint response for available limit names.
       operationId: getGroupHistoricalUsage
       parameters:
       - $ref: '#/components/parameters/GroupGUID'
@@ -1418,9 +1410,7 @@ paths:
       - name: decoupled
         in: query
         required: false
-        description: 'When true, ranks results by decoupled QR scan count and returns a TopLinksAndQRCodes
-          response with links and QR codes partitioned into separate lists and a unified sorted_engagements
-          ordering.
+        description: 'When true, ranks results by decoupled QR scan count and returns a TopLinksAndQRCodes response with links and QR codes partitioned into separate lists and a unified sorted_engagements ordering.
 
           '
         schema:
@@ -1459,458 +1449,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
-  parameters:
-    EndDate:
-      name: end_date
-      description: The end date for the date range
-      in: query
-      schema:
-        type: string
-      example: '2023-10-04'
-    GroupGUID:
-      name: group_guid
-      description: A GUID for a Bitly group
-      in: path
-      required: true
-      schema:
-        type: string
-      example: Ba1bc23dE4F
-    Name:
-      name: name
-      description: The limit name you would like usage for
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      style: form
-      explode: true
-      example:
-      - qr_codes
-    OrganizationGUIDFilter:
-      name: organization_guid
-      description: A GUID for a Bitly organization
-      in: query
-      schema:
-        type: string
-      example: Oa1bcd234eF
-    Size:
-      name: size
-      description: The quantity of items to be be returned
-      in: query
-      schema:
-        type: integer
-        default: 50
-      example: 10
-    StartDate:
-      name: start_date
-      description: The start date for the date range
-      in: query
-      schema:
-        type: string
-      example: '2022-02-02'
-    TagType:
-      name: type
-      description: Tag set to return; defaults to bitlink
-      in: query
-      required: false
-      schema:
-        type: string
-        default: bitlink
-        enum:
-        - bitlink
-        - qr_code
-    TimeUnit:
-      name: unit
-      description: A unit of time
-      schema:
-        $ref: '#/components/schemas/TimeUnit'
-      required: true
-      in: query
-      example: month
-    TimeUnitDWM:
-      name: unit
-      description: A unit of time (day, week, or month)
-      schema:
-        $ref: '#/components/schemas/TimeUnitDWM'
-      in: query
-      example: month
-    UnitAmount:
-      name: units
-      description: An integer representing the time units to query data for. pass -1 to return all units
-        of time
-      schema:
-        type: integer
-        default: -1
-      required: true
-      in: query
-      example: 1
-    UnitReferenceTimeStamp:
-      name: unit_reference
-      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will
-        default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and
-        ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
-      schema:
-        type: string
-      required: false
-      in: query
-      example: 2006-01-02T15:04:05-0700
   schemas:
-    BadRequest:
-      description: BAD_REQUEST
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    BaseMetrics:
+    HasReferences:
       type: object
       properties:
-        unit:
-          type: string
-          x-faker: internet.userName
-        units:
-          type: integer
-          x-faker:
-            datatype.number:
-              min: 1
-              max: 100
-        facet:
-          type: string
-          enum:
-          - countries
-          - cities
-          - devices
-          - referrers
-          - referrers_by_domain
-          - referring_domains
-          - referring_networks
-          - shorten_counts
-          - destinations
-        unit_reference:
-          type: string
-          x-faker: date.past
-    BitlinkBody:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/HasReferences'
-      - $ref: '#/components/schemas/BitlinkUpdate'
-    BitlinkUpdate:
-      type: object
-      properties:
-        link:
-          type: string
-        id:
-          type: string
-        long_url:
-          type: string
-        title:
-          type: string
-        archived:
-          type: boolean
-        created_at:
-          type: string
-        created_by:
-          type: string
-        client_id:
-          type: string
-        custom_bitlinks:
-          type: array
-          items:
+        references:
+          type: object
+          additionalProperties:
             type: string
-          description: list of previously edited backhalfs for the bitlink - these are in reverse chronological
-            order, with the most recently edited backhalf first
-        tags:
-          type: array
-          items:
-            type: string
-        launchpad_ids:
-          type: array
-          items:
-            type: string
-        qr_code_ids:
-          type: array
-          items:
-            type: string
-          description: a list of qr code ids that are associated with this bitlink
-        deeplinks:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeeplinkRule'
-        is_deleted:
-          type: boolean
-        campaign_ids:
-          type: array
-          items:
-            type: string
-        expiration_at:
-          type: string
-          description: Optional expiration timestamp for the bitlink (e.g., 2025-01-28T14:30:00+0000)
-        dynamic_routing:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingRule'
-          description: Dynamic routing rules for this bitlink. Only present when at least one rule is
-            configured.
-    CityMetric:
-      type: object
-      properties:
-        clicks:
-          type: integer
-          x-faker: random.number
-        city:
-          type: string
-          x-faker: address.city
-        subregion:
-          type: string
-          x-faker: address.state
-        region:
-          type: string
-          x-faker: address.state
-        country:
-          type: string
-          x-faker: address.country
-    CityMetrics:
-      type: object
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
       allOf:
-      - $ref: '#/components/schemas/BaseMetrics'
-      - properties:
-          metrics:
-            type: array
-            items:
-              $ref: '#/components/schemas/CityMetric'
-          other_metrics:
-            $ref: '#/components/schemas/OtherMetrics'
-    ClickLink:
-      type: object
-      properties:
-        clicks:
-          type: integer
-        id:
-          type: string
-    ClickMetric:
-      type: object
-      properties:
-        clicks:
-          type: integer
-          example: 123
-          x-faker: random.number
-        value:
-          type: string
-          example: bit.ly
-          x-faker: internet.domainName
-    ClickMetrics:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseMetrics'
-      - properties:
-          metrics:
-            type: array
-            items:
-              $ref: '#/components/schemas/ClickMetric'
-    CountItem:
-      type: object
-      properties:
-        ts:
-          type: string
-        count:
-          type: integer
-    DeeplinkRule:
-      type: object
-      properties:
-        guid:
-          type: string
-        bitlink:
-          type: string
-        app_uri_path:
-          type: string
-        install_url:
-          type: string
-        app_guid:
-          type: string
-        os:
-          $ref: '#/components/schemas/MobileOS'
-        install_type:
-          $ref: '#/components/schemas/InstallPreference'
-        created:
-          type: string
-          description: ISO timestamp
-        modified:
-          type: string
-          description: ISO timestamp
-        brand_guid:
-          type: string
-    DeviceMetric:
-      type: object
-      properties:
-        clicks:
-          type: integer
-        device_type:
-          type: string
-    DeviceMetrics:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseMetrics'
-      - properties:
-          metrics:
-            type: array
-            items:
-              $ref: '#/components/schemas/DeviceMetric'
-    DynamicRoutingDeviceEnum:
-      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    TimeUnitDWM:
+      description: the unit of time queried for (day, week, month)
       type: string
       enum:
-      - mobile
-      - tablet
-      - desktop
-    DynamicRoutingPlatformEnum:
-      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
-      type: string
-      enum:
-      - ios
-      - android
-    DynamicRoutingRule:
-      type: object
-      description: A dynamic routing rule that redirects traffic to a different destination based on user
-        attributes.
-      properties:
-        long_url:
-          type: string
-          description: The destination URL for requests matching this rule.
-        country_match:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
-        country_exclude:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
-        region_match:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
-        region_exclude:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA",
-            "CA-ON"]).
-        device_match:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
-          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
-        device_exclude:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
-          description: Device types that must NOT match for this rule to apply.
-        os_match:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
-          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
-        os_exclude:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
-          description: Operating systems that must NOT match for this rule to apply.
-    EngagementSubtotal:
-      description: 'Engagement-count subtotal for a single bitlink or decoupled QR code. The `id` references
-        either a bitlink (`<domain>/<hash>`) or a QR code guid, and `engagements` is the combined count
-        of bitlink clicks or QR code scans for that entity.
-
-        '
-      type: object
-      properties:
-        engagements:
-          type: integer
-        id:
-          type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Group:
-      type: object
-      required:
-      - guid
-      - organization_guid
-      - name
-      - created
-      - modified
-      - is_active
-      - role
-      - bsds
-      allOf:
-      - $ref: '#/components/schemas/HasReferences'
-      - properties:
-          name:
-            type: string
-          guid:
-            type: string
-          created:
-            type: string
-          modified:
-            type: string
-          is_active:
-            type: boolean
-          role:
-            type: string
-          organization_guid:
-            type: string
-          bsds:
-            type: array
-            items:
-              type: string
-    GroupClicks:
-      type: object
-      properties:
-        unit:
-          type: string
-        units:
-          type: integer
-        unit_reference:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CountItem'
-    GroupConsumableFeatureUsage:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        count:
-          type: integer
+      - day
+      - week
+      - month
+      default: month
     GroupExportFilter:
       type: object
-      description: Search constraints used to resolve links or QR codes for export. Required for links_list
-        and qr_codes_list.
+      description: Search constraints used to resolve links or QR codes for export. Required for links_list and qr_codes_list.
       properties:
         tags:
           type: array
@@ -1937,53 +1500,23 @@ components:
         campaign_guid:
           type: string
           description: Filter links by campaign GUID. Ignored for qr_codes_list.
-    GroupExportRequestBody:
+    EngagementSubtotal:
+      description: 'Engagement-count subtotal for a single bitlink or decoupled QR code. The `id` references either a bitlink (`<domain>/<hash>`) or a QR code guid, and `engagements` is the combined count of bitlink clicks or QR code scans for that entity.
+
+        '
       type: object
-      required:
-      - export_type
       properties:
-        export_type:
+        engagements:
+          type: integer
+        id:
           type: string
-          description: Which export shape to produce.
-          enum:
-          - link_engagements_batch
-          - links_list
-          - qr_codes_list
-        bitlinks:
-          type: array
-          description: 'Fully qualified bitlinks (e.g. "bit.ly/abc"). Used by export_type link_engagements_batch
-            when
-
-            the caller already knows the exact links. Mutually exclusive with filter (provide one or the
-            other).
-
-            '
-          items:
-            type: string
-        unix_from:
-          type: integer
-          description: 'Start of the metrics date range (Unix seconds, UTC). Clamped to the caller''s
-            tier data window.
-
-            For link_engagements_batch, required together with unix_to unless the tier max-history default
-            applies.
-
-            For links_list or qr_codes_list, used when include_metrics is true.
-
-            '
-        unix_to:
-          type: integer
-          description: End of the metrics date range (Unix seconds, UTC). See unix_from.
-        filter:
-          $ref: '#/components/schemas/GroupExportFilter'
-        include_metrics:
-          type: boolean
-          description: 'When true on links_list or qr_codes_list, append clicks, scans, and button_clicks
-            columns and apply
-
-            the 200-row cap. Requires unix_from and unix_to (or tier-default window behavior where applicable).
-
-            '
+    DynamicRoutingDeviceEnum:
+      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+      type: string
+      enum:
+      - mobile
+      - tablet
+      - desktop
     GroupExportResponse:
       type: object
       properties:
@@ -2023,8 +1556,68 @@ components:
           description: Metrics window end (Unix seconds) when metrics are included in the export.
         truncated:
           type: boolean
-          description: True when the match set exceeded the per-request row cap and only the first cap
-            rows were exported.
+          description: True when the match set exceeded the per-request row cap and only the first cap rows were exported.
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+    Tags:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+    HistoricalFeatureUsage:
+      type: object
+      properties:
+        name:
+          type: string
+          description: feature name
+        usage:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoricalUsage'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    CountItem:
+      type: object
+      properties:
+        ts:
+          type: string
+        count:
+          type: integer
+    GroupPreferences:
+      type: object
+      properties:
+        group_guid:
+          type: string
+        domain_preference:
+          type: string
+      example:
+        group_guid: Ba1bc23dE4F
+        domain_preference: chauncey.ly
     GroupFeatureUsage:
       type: object
       required:
@@ -2039,6 +1632,151 @@ components:
           description: an array of all of the group's consumable feature usage
           items:
             $ref: '#/components/schemas/GroupConsumableFeatureUsage'
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BaseMetrics:
+      type: object
+      properties:
+        unit:
+          type: string
+          x-faker: internet.userName
+        units:
+          type: integer
+          x-faker:
+            datatype.number:
+              min: 1
+              max: 100
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - devices
+          - referrers
+          - referrers_by_domain
+          - referring_domains
+          - referring_networks
+          - shorten_counts
+          - destinations
+        unit_reference:
+          type: string
+          x-faker: date.past
+    InstallPreference:
+      type: string
+      enum:
+      - no_install
+      - auto_install
+      - promote_install
+    DeviceMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+        device_type:
+          type: string
+    BitlinkBody:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - $ref: '#/components/schemas/BitlinkUpdate'
+    Metrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/Metric'
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    DynamicRoutingRule:
+      type: object
+      description: A dynamic routing rule that redirects traffic to a different destination based on user attributes.
+      properties:
+        long_url:
+          type: string
+          description: The destination URL for requests matching this rule.
+        country_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
+        country_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
+        region_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
+        region_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA", "CA-ON"]).
+        device_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
+        device_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that must NOT match for this rule to apply.
+        os_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
+        os_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that must NOT match for this rule to apply.
+    Group:
+      type: object
+      required:
+      - guid
+      - organization_guid
+      - name
+      - created
+      - modified
+      - is_active
+      - role
+      - bsds
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - properties:
+          name:
+            type: string
+          guid:
+            type: string
+          created:
+            type: string
+          modified:
+            type: string
+          is_active:
+            type: boolean
+          role:
+            type: string
+          organization_guid:
+            type: string
+          bsds:
+            type: array
+            items:
+              type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
     GroupHistoricalUsage:
       type: object
       required:
@@ -2065,85 +1803,7 @@ components:
           description: an array of all of the group's historical feature usage
           items:
             $ref: '#/components/schemas/HistoricalFeatureUsage'
-    GroupPreferences:
-      type: object
-      properties:
-        group_guid:
-          type: string
-        domain_preference:
-          type: string
-      example:
-        group_guid: Ba1bc23dE4F
-        domain_preference: chauncey.ly
-    GroupUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-        organization_guid:
-          type: string
-        bsds:
-          type: array
-          items:
-            type: string
-      example:
-        name: My New Group
-        organization_guid: Oa1bcd234eF
-        bsds:
-        - chauncey.ly
-    Groups:
-      type: object
-      required:
-      - groups
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-    HasReferences:
-      type: object
-      properties:
-        references:
-          type: object
-          additionalProperties:
-            type: string
-    HistoricalFeatureUsage:
-      type: object
-      properties:
-        name:
-          type: string
-          description: feature name
-        usage:
-          type: array
-          items:
-            $ref: '#/components/schemas/HistoricalUsage'
-    HistoricalUsage:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: the usage count during the time period
-        unit_start:
-          type: string
-          description: ISO_TIMESTAMP of the beginning of the time period
-    InstallPreference:
-      type: string
-      enum:
-      - no_install
-      - auto_install
-      - promote_install
-    InternalError:
-      description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Metric:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: integer
-    Metrics:
+    CityMetrics:
       type: object
       allOf:
       - $ref: '#/components/schemas/BaseMetrics'
@@ -2151,22 +1811,76 @@ components:
           metrics:
             type: array
             items:
-              $ref: '#/components/schemas/Metric'
-    MobileOS:
-      type: string
-      enum:
-      - ios
-      - android
-    MonthlyLimitExceeded:
-      description: MONTHLY_LIMIT_EXCEEDED
-      allOf:
-      - $ref: '#/components/schemas/SimplifiedError'
-      example:
-        message: API_USAGE_LIMIT_EXCEEDED
-    NotFound:
-      description: NOT_FOUND
-      allOf:
-      - $ref: '#/components/schemas/Error'
+              $ref: '#/components/schemas/CityMetric'
+          other_metrics:
+            $ref: '#/components/schemas/OtherMetrics'
+    TopLinksAndQRCodes:
+      description: 'Response shape for top bitlinks and decoupled QR codes in a group, ranked together by engagement count. `links` and `qr_codes` are independent lists (a link and a decoupled QR code are never the same entity); `sorted_engagements` is the unified descending-by-engagement ordering across both, with each entry''s id referencing either a bitlink or a QR code guid. Coupled QRCs are listed by their bitlink ID.
+
+        '
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/BitlinkBody'
+        qr_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/QRCodeMinimal'
+        sorted_engagements:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngagementSubtotal'
+    GroupClicks:
+      type: object
+      properties:
+        unit:
+          type: string
+        units:
+          type: integer
+        unit_reference:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountItem'
+    CityMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+          x-faker: random.number
+        city:
+          type: string
+          x-faker: address.city
+        subregion:
+          type: string
+          x-faker: address.state
+        region:
+          type: string
+          x-faker: address.state
+        country:
+          type: string
+          x-faker: address.country
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    GroupConsumableFeatureUsage:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        count:
+          type: integer
     OtherMetrics:
       type: object
       properties:
@@ -2176,6 +1890,133 @@ components:
         no_city_clicks:
           type: integer
           x-faker: random.number
+    DynamicRoutingPlatformEnum:
+      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
+      type: string
+      enum:
+      - ios
+      - android
+    SortedLinks:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/BitlinkBody'
+        sorted_links:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClickLink'
+    ClickLink:
+      type: object
+      properties:
+        clicks:
+          type: integer
+        id:
+          type: string
+    Groups:
+      type: object
+      required:
+      - groups
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+    BitlinkUpdate:
+      type: object
+      properties:
+        link:
+          type: string
+        id:
+          type: string
+        long_url:
+          type: string
+        title:
+          type: string
+        archived:
+          type: boolean
+        created_at:
+          type: string
+        created_by:
+          type: string
+        client_id:
+          type: string
+        custom_bitlinks:
+          type: array
+          items:
+            type: string
+          description: list of previously edited backhalfs for the bitlink - these are in reverse chronological order, with the most recently edited backhalf first
+        tags:
+          type: array
+          items:
+            type: string
+        launchpad_ids:
+          type: array
+          items:
+            type: string
+        qr_code_ids:
+          type: array
+          items:
+            type: string
+          description: a list of qr code ids that are associated with this bitlink
+        deeplinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeeplinkRule'
+        is_deleted:
+          type: boolean
+        campaign_ids:
+          type: array
+          items:
+            type: string
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the bitlink (e.g., 2025-01-28T14:30:00+0000)
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this bitlink. Only present when at least one rule is configured.
+    HistoricalUsage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: the usage count during the time period
+        unit_start:
+          type: string
+          description: ISO_TIMESTAMP of the beginning of the time period
+    QRCodeTypeEnum:
+      description: The type of dynamic/static content the QR serves, e.g. Link In Bio page, micro site, bitlink, email, text, Wifi, etc.
+      type: string
+      enum:
+      - bitlink
+      - long_url
+      - link_in_bio
+      - v_card
+      - wifi
+      - email
+      - phone
+      - text
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    DeviceMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/DeviceMetric'
+    MobileOS:
+      type: string
+      enum:
+      - ios
+      - android
     QRCodeMinimal:
       type: object
       properties:
@@ -2186,8 +2027,7 @@ components:
         title:
           type: string
         is_customized:
-          description: Set to true if the QR code's customization values have been changed from their
-            default setting
+          description: Set to true if the QR code's customization values have been changed from their default setting
           type: boolean
         serialized_content:
           description: A serialized string of the QR code's content
@@ -2200,8 +2040,7 @@ components:
           items:
             type: string
         bitlink_id:
-          description: The bitlink ID associated with the qr code. Not all qr codes are associated with
-            one.
+          description: The bitlink ID associated with the qr code. Not all qr codes are associated with one.
           type: string
         is_gs1:
           description: Set to true if QR code has GS1 values.
@@ -2223,26 +2062,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DynamicRoutingRule'
-          description: Dynamic routing rules for this QR code. Only present when at least one rule is
-            configured.
+          description: Dynamic routing rules for this QR code. Only present when at least one rule is configured.
         created:
           type: string
         modified:
           type: string
-    QRCodeTypeEnum:
-      description: The type of dynamic/static content the QR serves, e.g. Link In Bio page, micro site,
-        bitlink, email, text, Wifi, etc.
-      type: string
-      enum:
-      - bitlink
-      - long_url
-      - link_in_bio
-      - v_card
-      - wifi
-      - email
-      - phone
-      - text
-    SimplifiedError:
+    Error:
       type: object
       properties:
         message:
@@ -2251,76 +2076,217 @@ components:
           type: string
         resource:
           type: string
-    SortedLinks:
-      type: object
-      properties:
-        links:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/BitlinkBody'
-        sorted_links:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClickLink'
-    Tags:
+            $ref: '#/components/schemas/FieldError'
+    Metric:
       type: object
       properties:
-        tags:
+        key:
+          type: string
+        value:
+          type: integer
+    GroupUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        organization_guid:
+          type: string
+        bsds:
           type: array
           items:
             type: string
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    TimeUnit:
-      description: the unit of time queried for (minute, hour, day, week, month)
-      type: string
-      enum:
-      - minute
-      - hour
-      - day
-      - week
-      - month
-      default: day
-    TimeUnitDWM:
-      description: the unit of time queried for (day, week, month)
-      type: string
-      enum:
-      - day
-      - week
-      - month
-      default: month
-    TopLinksAndQRCodes:
-      description: 'Response shape for top bitlinks and decoupled QR codes in a group, ranked together
-        by engagement count. `links` and `qr_codes` are independent lists (a link and a decoupled QR code
-        are never the same entity); `sorted_engagements` is the unified descending-by-engagement ordering
-        across both, with each entry''s id referencing either a bitlink or a QR code guid. Coupled QRCs
-        are listed by their bitlink ID.
-
-        '
+      example:
+        name: My New Group
+        organization_guid: Oa1bcd234eF
+        bsds:
+        - chauncey.ly
+    ClickMetric:
       type: object
       properties:
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/BitlinkBody'
-        qr_codes:
-          type: array
-          items:
-            $ref: '#/components/schemas/QRCodeMinimal'
-        sorted_engagements:
-          type: array
-          items:
-            $ref: '#/components/schemas/EngagementSubtotal'
-    UnprocessableEntity:
-      description: UNPROCESSABLE_ENTITY
+        clicks:
+          type: integer
+          example: 123
+          x-faker: random.number
+        value:
+          type: string
+          example: bit.ly
+          x-faker: internet.domainName
+    DeeplinkRule:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitlink:
+          type: string
+        app_uri_path:
+          type: string
+        install_url:
+          type: string
+        app_guid:
+          type: string
+        os:
+          $ref: '#/components/schemas/MobileOS'
+        install_type:
+          $ref: '#/components/schemas/InstallPreference'
+        created:
+          type: string
+          description: ISO timestamp
+        modified:
+          type: string
+          description: ISO timestamp
+        brand_guid:
+          type: string
+    ClickMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/ClickMetric'
+    InternalError:
+      description: INTERNAL_ERROR
       allOf:
       - $ref: '#/components/schemas/Error'
-    UpgradeRequired:
-      description: UPGRADE_REQUIRED
-      allOf:
-      - $ref: '#/components/schemas/Error'
+    GroupExportRequestBody:
+      type: object
+      required:
+      - export_type
+      properties:
+        export_type:
+          type: string
+          description: Which export shape to produce.
+          enum:
+          - link_engagements_batch
+          - links_list
+          - qr_codes_list
+        bitlinks:
+          type: array
+          description: 'Fully qualified bitlinks (e.g. "bit.ly/abc"). Used by export_type link_engagements_batch when
+
+            the caller already knows the exact links. Mutually exclusive with filter (provide one or the other).
+
+            '
+          items:
+            type: string
+        unix_from:
+          type: integer
+          description: 'Start of the metrics date range (Unix seconds, UTC). Clamped to the caller''s tier data window.
+
+            For link_engagements_batch, required together with unix_to unless the tier max-history default applies.
+
+            For links_list or qr_codes_list, used when include_metrics is true.
+
+            '
+        unix_to:
+          type: integer
+          description: End of the metrics date range (Unix seconds, UTC). See unix_from.
+        filter:
+          $ref: '#/components/schemas/GroupExportFilter'
+        include_metrics:
+          type: boolean
+          description: 'When true on links_list or qr_codes_list, append clicks, scans, and button_clicks columns and apply
+
+            the 200-row cap. Requires unix_from and unix_to (or tier-default window behavior where applicable).
+
+            '
+  parameters:
+    StartDate:
+      name: start_date
+      description: The start date for the date range
+      in: query
+      schema:
+        type: string
+      example: '2022-02-02'
+    Size:
+      name: size
+      description: The quantity of items to be be returned
+      in: query
+      schema:
+        type: integer
+        default: 50
+      example: 10
+    EndDate:
+      name: end_date
+      description: The end date for the date range
+      in: query
+      schema:
+        type: string
+      example: '2023-10-04'
+    GroupGUID:
+      name: group_guid
+      description: A GUID for a Bitly group
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Ba1bc23dE4F
+    UnitAmount:
+      name: units
+      description: An integer representing the time units to query data for. pass -1 to return all units of time
+      schema:
+        type: integer
+        default: -1
+      required: true
+      in: query
+      example: 1
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
+    OrganizationGUIDFilter:
+      name: organization_guid
+      description: A GUID for a Bitly organization
+      in: query
+      schema:
+        type: string
+      example: Oa1bcd234eF
+    Name:
+      name: name
+      description: The limit name you would like usage for
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+      example:
+      - qr_codes
+    TimeUnitDWM:
+      name: unit
+      description: A unit of time (day, week, or month)
+      schema:
+        $ref: '#/components/schemas/TimeUnitDWM'
+      in: query
+      example: month
+    TagType:
+      name: type
+      description: Tag set to return; defaults to bitlink
+      in: query
+      required: false
+      schema:
+        type: string
+        default: bitlink
+        enum:
+        - bitlink
+        - qr_code
+    TimeUnit:
+      name: unit
+      description: A unit of time
+      schema:
+        $ref: '#/components/schemas/TimeUnit'
+      required: true
+      in: query
+      example: month
   securitySchemes:
     bearerAuth:
       type: http

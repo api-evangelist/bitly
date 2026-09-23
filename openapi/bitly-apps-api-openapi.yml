@@ -1,14 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Bitly OAuth Apps API
-  description: The OAuth Apps surface of the Bitly v4 REST API. Extracted verbatim, operation-for-operation, from the authoritative OpenAPI Bitly publishes at https://dev.bitly.com/v4/v4.json — no operation, parameter or schema was authored by API Evangelist.
   version: 4.0.0
+  title: Bitly Apps API
   termsOfService: https://bitly.com/pages/terms-of-service
   contact:
     url: https://bitly.is/API-support
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: /v4/header-logo.png
 servers:
 - url: https://api-ssl.bitly.com/v4
 security:
@@ -57,16 +58,24 @@ paths:
       tags:
       - Apps
 components:
-  parameters:
-    ClientID:
-      name: client_id
-      description: The client ID of an OAuth app
-      in: path
-      required: true
-      schema:
-        type: string
-      example: 1234a56b789cd0e123456fg7h8901j123km45n6p
   schemas:
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
     Error:
       type: object
       properties:
@@ -80,31 +89,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldError'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
     InternalError:
       description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    NotFound:
-      description: NOT_FOUND
       allOf:
       - $ref: '#/components/schemas/Error'
     Forbidden:
       description: FORBIDDEN
       allOf:
       - $ref: '#/components/schemas/Error'
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
     OAuthApp:
       type: object
       required:
@@ -127,6 +119,15 @@ components:
         internal_app:
           type: boolean
           description: True for Bitly's own first-party apps (dashboard, mobile apps), as opposed to third-party integrations.
+  parameters:
+    ClientID:
+      name: client_id
+      description: The client ID of an OAuth app
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 1234a56b789cd0e123456fg7h8901j123km45n6p
   securitySchemes:
     bearerAuth:
       type: http
