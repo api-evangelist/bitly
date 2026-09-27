@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   version: 4.0.0
-  title: Bitly BS Ds API
+  title: Bitly BSDs API
   termsOfService: https://bitly.com/pages/terms-of-service
   contact:
     url: https://bitly.is/API-support
@@ -68,19 +68,17 @@ components:
       description: BAD_REQUEST
       allOf:
       - $ref: '#/components/schemas/Error'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
+    Forbidden:
+      description: FORBIDDEN
       allOf:
       - $ref: '#/components/schemas/Error'
-    FieldError:
+    BSDsResponse:
       type: object
       properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
+        bsds:
+          type: array
+          items:
+            type: string
     Error:
       type: object
       properties:
@@ -94,21 +92,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldError'
-    BSDsResponse:
-      type: object
-      properties:
-        bsds:
-          type: array
-          items:
-            type: string
-    Forbidden:
-      description: FORBIDDEN
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
     InternalError:
       description: INTERNAL_ERROR
       allOf:
       - $ref: '#/components/schemas/Error'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

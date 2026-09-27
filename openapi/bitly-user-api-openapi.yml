@@ -186,8 +186,19 @@ components:
           type: boolean
         default_group_guid:
           type: string
-    NotFound:
-      description: NOT_FOUND
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    PlatformLimits:
+      type: object
+      properties:
+        platform_limits:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlatformLimit'
+    Forbidden:
+      description: FORBIDDEN
       allOf:
       - $ref: '#/components/schemas/Error'
     UserUpdate:
@@ -200,52 +211,10 @@ components:
       example:
         name: Chauncey McPufferson
         default_group_guid: Ba1bc23dE4F
-    BadRequest:
-      description: BAD_REQUEST
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
-    MethodLimit:
-      type: object
-      properties:
-        name:
-          type: string
-        limit:
-          type: integer
-        count:
-          type: integer
-    Email:
-      type: object
-      properties:
-        email:
-          type: string
-        is_primary:
-          type: boolean
-        is_verified:
-          type: boolean
     UnprocessableEntity:
       description: UNPROCESSABLE_ENTITY
       allOf:
       - $ref: '#/components/schemas/Error'
-    PlatformLimits:
-      type: object
-      properties:
-        platform_limits:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlatformLimit'
     Error:
       type: object
       properties:
@@ -259,6 +228,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldError'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
     PlatformLimit:
       type: object
       properties:
@@ -268,14 +245,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MethodLimit'
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
     InternalError:
       description: INTERNAL_ERROR
       allOf:
       - $ref: '#/components/schemas/Error'
+    Email:
+      type: object
+      properties:
+        email:
+          type: string
+        is_primary:
+          type: boolean
+        is_verified:
+          type: boolean
+    MethodLimit:
+      type: object
+      properties:
+        name:
+          type: string
+        limit:
+          type: integer
+        count:
+          type: integer
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
   parameters:
     Path:
       name: path

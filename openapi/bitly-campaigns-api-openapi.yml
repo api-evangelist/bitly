@@ -502,6 +502,72 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
+    BaseChannel:
+      type: object
+      properties:
+        name:
+          type: string
+        guid:
+          type: string
+        created:
+          type: string
+          description: ISO TIMESTAMP
+        modified:
+          type: string
+          description: ISO_TIMESTAMP
+        group_guid:
+          type: string
+    Channels:
+      type: object
+      properties:
+        channels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Channel'
+    BaseChannelBitlink:
+      type: object
+      properties:
+        campaign_guid:
+          type: string
+        bitlink_id:
+          type: string
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    ChannelModify:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseChannel'
+      - properties:
+          bitlinks:
+            type: array
+            items:
+              $ref: '#/components/schemas/BaseChannelBitlink'
+      example:
+        name: My Channel
+        guid: Ha1bc2DefGh
+        group_guid: Ba1bc23dE4F
+        bitlinks:
+        - campaign_guid: Ca1bcd2EFGh
+          bitlink_id: bit.ly/1234abcd
     HasReferences:
       type: object
       properties:
@@ -535,6 +601,45 @@ components:
         channel_guids:
         - Ha1bc2DefGj
         - Ha1bc2DefGk
+    BadGateway:
+      description: BAD_GATEWAY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Channel:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseChannel'
+      - $ref: '#/components/schemas/HasReferences'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
     Campaign:
       type: object
       allOf:
@@ -556,22 +661,6 @@ components:
           modified:
             type: string
             description: ISO timestamp
-    BaseChannelBitlink:
-      type: object
-      properties:
-        campaign_guid:
-          type: string
-        bitlink_id:
-          type: string
-    SimplifiedError:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
     Campaigns:
       type: object
       properties:
@@ -583,100 +672,19 @@ components:
       description: NOT_FOUND
       allOf:
       - $ref: '#/components/schemas/Error'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: UNPROCESSABLE_ENTITY
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    UpgradeRequired:
-      description: UPGRADE_REQUIRED
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    BaseChannel:
-      type: object
-      properties:
-        name:
-          type: string
-        guid:
-          type: string
-        created:
-          type: string
-          description: ISO TIMESTAMP
-        modified:
-          type: string
-          description: ISO_TIMESTAMP
-        group_guid:
-          type: string
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Channels:
-      type: object
-      properties:
-        channels:
-          type: array
-          items:
-            $ref: '#/components/schemas/Channel'
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
-    Channel:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseChannel'
-      - $ref: '#/components/schemas/HasReferences'
-    BadRequest:
-      description: BAD_REQUEST
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    ChannelModify:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseChannel'
-      - properties:
-          bitlinks:
-            type: array
-            items:
-              $ref: '#/components/schemas/BaseChannelBitlink'
-      example:
-        name: My Channel
-        guid: Ha1bc2DefGh
-        group_guid: Ba1bc23dE4F
-        bitlinks:
-        - campaign_guid: Ca1bcd2EFGh
-          bitlink_id: bit.ly/1234abcd
     InternalError:
       description: INTERNAL_ERROR
       allOf:
       - $ref: '#/components/schemas/Error'
-    BadGateway:
-      description: BAD_GATEWAY
-      allOf:
-      - $ref: '#/components/schemas/Error'
   parameters:
+    CampaignGUID:
+      name: campaign_guid
+      description: A GUID for a Bitly campaign
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Ca1bcd2EFGh
     GroupGUIDFilter:
       name: group_guid
       description: A GUID for a Bitly group
@@ -684,11 +692,10 @@ components:
       schema:
         type: string
       example: Ba1bc23dE4F
-    CampaignGUID:
+    CampaignGUIDFilter:
       name: campaign_guid
       description: A GUID for a Bitly campaign
-      in: path
-      required: true
+      in: query
       schema:
         type: string
       example: Ca1bcd2EFGh
@@ -700,13 +707,6 @@ components:
       schema:
         type: string
       example: Ha1bc2DefGh
-    CampaignGUIDFilter:
-      name: campaign_guid
-      description: A GUID for a Bitly campaign
-      in: query
-      schema:
-        type: string
-      example: Ca1bcd2EFGh
   securitySchemes:
     bearerAuth:
       type: http

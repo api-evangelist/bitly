@@ -350,133 +350,6 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
-    HasReferences:
-      type: object
-      properties:
-        references:
-          type: object
-          additionalProperties:
-            type: string
-    Gone:
-      description: GONE
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    MonthlyLimitExceeded:
-      description: MONTHLY_LIMIT_EXCEEDED
-      allOf:
-      - $ref: '#/components/schemas/SimplifiedError'
-      example:
-        message: API_USAGE_LIMIT_EXCEEDED
-    DynamicRoutingDeviceEnum:
-      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
-      type: string
-      enum:
-      - mobile
-      - tablet
-      - desktop
-    SimplifiedError:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-    UpdateCustomBitlink:
-      type: object
-      properties:
-        bitlink_id:
-          type: string
-      example:
-        bitlink_id: chauncey.ly/1234abcd
-    TimeUnit:
-      description: the unit of time queried for (minute, hour, day, week, month)
-      type: string
-      enum:
-      - minute
-      - hour
-      - day
-      - week
-      - month
-      default: day
-    NotFound:
-      description: NOT_FOUND
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: UNPROCESSABLE_ENTITY
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    CustomBitlinkHistory:
-      type: object
-      properties:
-        group_guid:
-          type: string
-        keyword:
-          type: string
-        bsd:
-          type: string
-        hash:
-          type: string
-        login:
-          type: string
-        long_url:
-          type: string
-        created:
-          type: string
-        first_created:
-          type: string
-        deactivated:
-          type: string
-        is_active:
-          type: boolean
-    BaseMetrics:
-      type: object
-      properties:
-        unit:
-          type: string
-          x-faker: internet.userName
-        units:
-          type: integer
-          x-faker:
-            datatype.number:
-              min: 1
-              max: 100
-        facet:
-          type: string
-          enum:
-          - countries
-          - cities
-          - devices
-          - referrers
-          - referrers_by_domain
-          - referring_domains
-          - referring_networks
-          - shorten_counts
-          - destinations
-        unit_reference:
-          type: string
-          x-faker: date.past
-    InstallPreference:
-      type: string
-      enum:
-      - no_install
-      - auto_install
-      - promote_install
-    BitlinkBody:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/HasReferences'
-      - $ref: '#/components/schemas/BitlinkUpdate'
-    UpgradeRequired:
-      description: UPGRADE_REQUIRED
-      allOf:
-      - $ref: '#/components/schemas/Error'
     DynamicRoutingRule:
       type: object
       description: A dynamic routing rule that redirects traffic to a different destination based on user attributes.
@@ -524,25 +397,213 @@ components:
           items:
             $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
           description: Operating systems that must NOT match for this rule to apply.
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
     DynamicRoutingPlatformEnum:
       description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
       type: string
       enum:
       - ios
       - android
+    BitlinkBody:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - $ref: '#/components/schemas/BitlinkUpdate'
+    DynamicRoutingDeviceEnum:
+      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+      type: string
+      enum:
+      - mobile
+      - tablet
+      - desktop
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    CustomBitlinkHistory:
+      type: object
+      properties:
+        group_guid:
+          type: string
+        keyword:
+          type: string
+        bsd:
+          type: string
+        hash:
+          type: string
+        login:
+          type: string
+        long_url:
+          type: string
+        created:
+          type: string
+        first_created:
+          type: string
+        deactivated:
+          type: string
+        is_active:
+          type: boolean
+    CustomBitlink:
+      type: object
+      properties:
+        custom_bitlink:
+          type: string
+        bitlink:
+          $ref: '#/components/schemas/BitlinkBody'
+        bitlink_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomBitlinkHistory'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    DeeplinkRule:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitlink:
+          type: string
+        app_uri_path:
+          type: string
+        install_url:
+          type: string
+        app_guid:
+          type: string
+        os:
+          $ref: '#/components/schemas/MobileOS'
+        install_type:
+          $ref: '#/components/schemas/InstallPreference'
+        created:
+          type: string
+          description: ISO timestamp
+        modified:
+          type: string
+          description: ISO timestamp
+        brand_guid:
+          type: string
+    ClickMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/ClickMetric'
+    LinkClicks:
+      type: object
+      properties:
+        clicks:
+          type: integer
+        date:
+          type: string
+    BaseMetrics:
+      type: object
+      properties:
+        unit:
+          type: string
+          x-faker: internet.userName
+        units:
+          type: integer
+          x-faker:
+            datatype.number:
+              min: 1
+              max: 100
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - devices
+          - referrers
+          - referrers_by_domain
+          - referring_domains
+          - referring_networks
+          - shorten_counts
+          - destinations
+        unit_reference:
+          type: string
+          x-faker: date.past
+    UpdateCustomBitlink:
+      type: object
+      properties:
+        bitlink_id:
+          type: string
+      example:
+        bitlink_id: chauncey.ly/1234abcd
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Clicks:
+      type: object
+      properties:
+        link_clicks:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkClicks'
+        units:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
     BitlinkUpdate:
       type: object
       properties:
@@ -598,45 +659,6 @@ components:
           items:
             $ref: '#/components/schemas/DynamicRoutingRule'
           description: Dynamic routing rules for this bitlink. Only present when at least one rule is configured.
-    LinkClicks:
-      type: object
-      properties:
-        clicks:
-          type: integer
-        date:
-          type: string
-    BadRequest:
-      description: BAD_REQUEST
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    MobileOS:
-      type: string
-      enum:
-      - ios
-      - android
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    AddCustomBitlink:
-      type: object
-      properties:
-        custom_bitlink:
-          type: string
-        bitlink_id:
-          type: string
-      example:
-        custom_bitlink: chauncey.ly/documentation
-        bitlink_id: chauncey.ly/1234abcd
     ClickMetric:
       type: object
       properties:
@@ -648,75 +670,69 @@ components:
           type: string
           example: bit.ly
           x-faker: internet.domainName
-    Clicks:
+    MobileOS:
+      type: string
+      enum:
+      - ios
+      - android
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    FieldError:
       type: object
       properties:
-        link_clicks:
-          type: array
-          items:
-            $ref: '#/components/schemas/LinkClicks'
-        units:
-          type: integer
-        unit:
+        field:
           type: string
-          enum:
-          - minute
-          - hour
-          - day
-          - week
-          - month
-        unit_reference:
+        error_code:
           type: string
-    CustomBitlink:
+        message:
+          type: string
+    InstallPreference:
+      type: string
+      enum:
+      - no_install
+      - auto_install
+      - promote_install
+    AddCustomBitlink:
       type: object
       properties:
         custom_bitlink:
           type: string
-        bitlink:
-          $ref: '#/components/schemas/BitlinkBody'
-        bitlink_history:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomBitlinkHistory'
-    DeeplinkRule:
-      type: object
-      properties:
-        guid:
+        bitlink_id:
           type: string
-        bitlink:
-          type: string
-        app_uri_path:
-          type: string
-        install_url:
-          type: string
-        app_guid:
-          type: string
-        os:
-          $ref: '#/components/schemas/MobileOS'
-        install_type:
-          $ref: '#/components/schemas/InstallPreference'
-        created:
-          type: string
-          description: ISO timestamp
-        modified:
-          type: string
-          description: ISO timestamp
-        brand_guid:
-          type: string
-    ClickMetrics:
-      type: object
+      example:
+        custom_bitlink: chauncey.ly/documentation
+        bitlink_id: chauncey.ly/1234abcd
+    NotFound:
+      description: NOT_FOUND
       allOf:
-      - $ref: '#/components/schemas/BaseMetrics'
-      - properties:
-          metrics:
-            type: array
-            items:
-              $ref: '#/components/schemas/ClickMetric'
+      - $ref: '#/components/schemas/Error'
     InternalError:
       description: INTERNAL_ERROR
       allOf:
       - $ref: '#/components/schemas/Error'
+    Gone:
+      description: GONE
+      allOf:
+      - $ref: '#/components/schemas/Error'
   parameters:
+    CustomBitlink:
+      name: custom_bitlink
+      description: A Custom Bitlink made of the domain and keyword
+      in: path
+      schema:
+        type: string
+      required: true
+      example: chauncey.ly/chauncey
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
     UnitAmount:
       name: units
       description: An integer representing the time units to query data for. pass -1 to return all units of time
@@ -726,22 +742,6 @@ components:
       required: true
       in: query
       example: 1
-    UnitReferenceTimeStamp:
-      name: unit_reference
-      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
-      schema:
-        type: string
-      required: false
-      in: query
-      example: 2006-01-02T15:04:05-0700
-    CustomBitlink:
-      name: custom_bitlink
-      description: A Custom Bitlink made of the domain and keyword
-      in: path
-      schema:
-        type: string
-      required: true
-      example: chauncey.ly/chauncey
     TimeUnit:
       name: unit
       description: A unit of time

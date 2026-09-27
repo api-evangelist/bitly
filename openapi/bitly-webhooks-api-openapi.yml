@@ -367,150 +367,6 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
-    HasReferences:
-      type: object
-      properties:
-        references:
-          type: object
-          additionalProperties:
-            type: string
-    NotFound:
-      description: NOT_FOUND
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: BAD_REQUEST
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
-    MonthlyLimitExceeded:
-      description: MONTHLY_LIMIT_EXCEEDED
-      allOf:
-      - $ref: '#/components/schemas/SimplifiedError'
-      example:
-        message: API_USAGE_LIMIT_EXCEEDED
-    UnprocessableEntity:
-      description: UNPROCESSABLE_ENTITY
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    WebhookCreate:
-      type: object
-      required:
-      - organization_guid
-      - name
-      - event
-      - url
-      properties:
-        is_active:
-          type: boolean
-        organization_guid:
-          type: string
-        group_guid:
-          type: string
-        name:
-          type: string
-        event:
-          type: string
-        url:
-          type: string
-        oauth_url:
-          type: string
-        client_id:
-          type: string
-        client_secret:
-          type: string
-        fetch_tags:
-          type: boolean
-      example:
-        is_active: true
-        organization_guid: Oa1bcd234eF
-        group_guid: Ba1bc23dE4F
-        name: My Webhook
-        event: decodes
-        url: https://bitly.com/webhooks
-        oauth_url: https://fake.com/oauth
-        client_id: fakeclientid123
-        client_secret: itsasecreticanttellyou
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    SimplifiedError:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-    WebhookUpdate:
-      type: object
-      required:
-      - guid
-      properties:
-        guid:
-          type: string
-        is_active:
-          type: boolean
-        organization_guid:
-          type: string
-        group_guid:
-          type: string
-        name:
-          type: string
-        event:
-          type: string
-        url:
-          type: string
-        oauth_url:
-          type: string
-        client_id:
-          type: string
-        client_secret:
-          type: string
-        fetch_tags:
-          type: boolean
-      example:
-        guid: Wa1bcDefG23
-        is_active: true
-        organization_guid: Oa1bcd234eF
-        group_guid: Ba1bc23dE4F
-        name: My Webhook
-        event: decodes
-        url: https://bitly.com/webhooks
-        oauth_url: https://fake.com/oauth
-        client_id: fakeclientid123
-        client_secret: itsasecreticanttellyou
-    InternalError:
-      description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    UpgradeRequired:
-      description: UPGRADE_REQUIRED
-      allOf:
-      - $ref: '#/components/schemas/Error'
     Webhook:
       type: object
       allOf:
@@ -565,10 +421,139 @@ components:
       - name
       - event
       - url
-    Forbidden:
-      description: FORBIDDEN
+    NotFound:
+      description: NOT_FOUND
       allOf:
       - $ref: '#/components/schemas/Error'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    WebhookUpdate:
+      type: object
+      required:
+      - guid
+      properties:
+        guid:
+          type: string
+        is_active:
+          type: boolean
+        organization_guid:
+          type: string
+        group_guid:
+          type: string
+        name:
+          type: string
+        event:
+          type: string
+        url:
+          type: string
+        oauth_url:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        fetch_tags:
+          type: boolean
+      example:
+        guid: Wa1bcDefG23
+        is_active: true
+        organization_guid: Oa1bcd234eF
+        group_guid: Ba1bc23dE4F
+        name: My Webhook
+        event: decodes
+        url: https://bitly.com/webhooks
+        oauth_url: https://fake.com/oauth
+        client_id: fakeclientid123
+        client_secret: itsasecreticanttellyou
+    WebhookCreate:
+      type: object
+      required:
+      - organization_guid
+      - name
+      - event
+      - url
+      properties:
+        is_active:
+          type: boolean
+        organization_guid:
+          type: string
+        group_guid:
+          type: string
+        name:
+          type: string
+        event:
+          type: string
+        url:
+          type: string
+        oauth_url:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        fetch_tags:
+          type: boolean
+      example:
+        is_active: true
+        organization_guid: Oa1bcd234eF
+        group_guid: Ba1bc23dE4F
+        name: My Webhook
+        event: decodes
+        url: https://bitly.com/webhooks
+        oauth_url: https://fake.com/oauth
+        client_id: fakeclientid123
+        client_secret: itsasecreticanttellyou
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
     Webhooks:
       type: object
       properties:
@@ -576,6 +561,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Webhook'
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
   parameters:
     OrganizationGUID:
       name: organization_guid
