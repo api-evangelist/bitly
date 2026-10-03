@@ -64,12 +64,21 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
-    BadRequest:
-      description: BAD_REQUEST
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: FORBIDDEN
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    BadRequest:
+      description: BAD_REQUEST
       allOf:
       - $ref: '#/components/schemas/Error'
     BSDsResponse:
@@ -79,6 +88,10 @@ components:
           type: array
           items:
             type: string
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
     Error:
       type: object
       properties:
@@ -92,23 +105,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldError'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
     InternalError:
       description: INTERNAL_ERROR
       allOf:
       - $ref: '#/components/schemas/Error'
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

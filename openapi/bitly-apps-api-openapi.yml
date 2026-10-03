@@ -68,27 +68,19 @@ components:
         type: string
       example: 1234a56b789cd0e123456fg7h8901j123km45n6p
   schemas:
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
     TemporarilyUnavailable:
       description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
     OAuthApp:
       type: object
       required:
@@ -115,19 +107,27 @@ components:
       description: NOT_FOUND
       allOf:
       - $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
     InternalError:
       description: INTERNAL_ERROR
       allOf:
       - $ref: '#/components/schemas/Error'
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http
