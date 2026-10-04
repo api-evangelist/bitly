@@ -332,6 +332,9 @@ apis:
   - type: OpenCollection
     url: collections/bitly-oauth-apps-api.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/bitly-capability-edges.yml
+  name: Bitly Business Capability Map
 - type: Overlay
   url: overlays/bitly-oauth-apps-overlay.yaml
 - type: AgenticAccess
