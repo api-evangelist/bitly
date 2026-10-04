@@ -366,45 +366,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
+  parameters:
+    WebhookGUID:
+      name: webhook_guid
+      description: A GUID for a Bitly webhook
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Wa1bcDefG23
+    OrganizationGUID:
+      name: organization_guid
+      description: A GUID for a Bitly organization
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Oa1bcd234eF
   schemas:
-    WebhookUpdate:
+    SimplifiedError:
       type: object
-      required:
-      - guid
       properties:
-        guid:
+        message:
           type: string
-        is_active:
-          type: boolean
-        organization_guid:
+        description:
           type: string
-        group_guid:
+        resource:
           type: string
-        name:
+    FieldError:
+      type: object
+      properties:
+        field:
           type: string
-        event:
+        error_code:
           type: string
-        url:
+        message:
           type: string
-        oauth_url:
-          type: string
-        client_id:
-          type: string
-        client_secret:
-          type: string
-        fetch_tags:
-          type: boolean
-      example:
-        guid: Wa1bcDefG23
-        is_active: true
-        organization_guid: Oa1bcd234eF
-        group_guid: Ba1bc23dE4F
-        name: My Webhook
-        event: decodes
-        url: https://bitly.com/webhooks
-        oauth_url: https://fake.com/oauth
-        client_id: fakeclientid123
-        client_secret: itsasecreticanttellyou
     Webhook:
       type: object
       allOf:
@@ -459,13 +456,77 @@ components:
       - name
       - event
       - url
-    Webhooks:
+    Error:
       type: object
       properties:
-        webhooks:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/Webhook'
+            $ref: '#/components/schemas/FieldError'
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    WebhookUpdate:
+      type: object
+      required:
+      - guid
+      properties:
+        guid:
+          type: string
+        is_active:
+          type: boolean
+        organization_guid:
+          type: string
+        group_guid:
+          type: string
+        name:
+          type: string
+        event:
+          type: string
+        url:
+          type: string
+        oauth_url:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        fetch_tags:
+          type: boolean
+      example:
+        guid: Wa1bcDefG23
+        is_active: true
+        organization_guid: Oa1bcd234eF
+        group_guid: Ba1bc23dE4F
+        name: My Webhook
+        event: decodes
+        url: https://bitly.com/webhooks
+        oauth_url: https://fake.com/oauth
+        client_id: fakeclientid123
+        client_secret: itsasecreticanttellyou
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
     WebhookCreate:
       type: object
       required:
@@ -504,27 +565,27 @@ components:
         oauth_url: https://fake.com/oauth
         client_id: fakeclientid123
         client_secret: itsasecreticanttellyou
-    UpgradeRequired:
-      description: UPGRADE_REQUIRED
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
       allOf:
-      - $ref: '#/components/schemas/Error'
-    InternalError:
-      description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
     TemporarilyUnavailable:
       description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
-    FieldError:
+    Webhooks:
       type: object
       properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
     HasReferences:
       type: object
       properties:
@@ -532,67 +593,6 @@ components:
           type: object
           additionalProperties:
             type: string
-    BadRequest:
-      description: BAD_REQUEST
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: UNPROCESSABLE_ENTITY
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    SimplifiedError:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-    NotFound:
-      description: NOT_FOUND
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    MonthlyLimitExceeded:
-      description: MONTHLY_LIMIT_EXCEEDED
-      allOf:
-      - $ref: '#/components/schemas/SimplifiedError'
-      example:
-        message: API_USAGE_LIMIT_EXCEEDED
-  parameters:
-    WebhookGUID:
-      name: webhook_guid
-      description: A GUID for a Bitly webhook
-      in: path
-      required: true
-      schema:
-        type: string
-      example: Wa1bcDefG23
-    OrganizationGUID:
-      name: organization_guid
-      description: A GUID for a Bitly organization
-      in: path
-      required: true
-      schema:
-        type: string
-      example: Oa1bcd234eF
   securitySchemes:
     bearerAuth:
       type: http

@@ -1363,41 +1363,6 @@ paths:
                 $ref: '#/components/schemas/InternalError'
 components:
   parameters:
-    FilterQRCodeType:
-      name: qrc_type
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-          enum:
-          - bitlink
-          - long_url
-        example:
-        - bitlink
-        default:
-        - bitlink
-        - long_url
-    FilterIsGS1:
-      name: is_gs1
-      description: a filter value if the resource is a GS1 QR code
-      in: query
-      schema:
-        type: string
-        default: both
-        enum:
-        - 'on'
-        - 'off'
-        - both
-      example: both
-    UnitReferenceTimeStamp:
-      name: unit_reference
-      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
-      schema:
-        type: string
-      required: false
-      in: query
-      example: 2006-01-02T15:04:05-0700
     FilterIsExpired:
       name: is_expired
       description: filter bitlinks by expiration status
@@ -1417,6 +1382,102 @@ components:
         type: integer
         default: 50
       example: 10
+    Archived:
+      name: archived
+      description: Whether or not to include archived resources
+      in: query
+      schema:
+        type: string
+        default: 'off'
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    FilterHasExpiration:
+      name: has_expiration
+      description: filter bitlinks by presence of expiration
+      in: query
+      schema:
+        type: string
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+    QRCodeID:
+      name: qrcode_id
+      in: path
+      description: The QR Code ID
+      required: true
+      schema:
+        type: string
+      example: Qabcde12345
+    FilterQRCodeType:
+      name: qrc_type
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - bitlink
+          - long_url
+        example:
+        - bitlink
+        default:
+        - bitlink
+        - long_url
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
+    UnitAmount:
+      name: units
+      description: An integer representing the time units to query data for. pass -1 to return all units of time
+      schema:
+        type: integer
+        default: -1
+      required: true
+      in: query
+      example: 1
+    CreatingLogin:
+      name: creating_login
+      description: Filter by the login of the authenticated user that created the QR Code
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+      example:
+      - chauncey
+    CreatedBefore:
+      name: created_before
+      description: Timestamp as an integer unix epoch (seconds only)
+      in: query
+      schema:
+        type: integer
+      example: 1694529902
+    SearchAfterQR:
+      name: search_after
+      description: Token used to search next batch of qr codes, only use response from API as input value.
+      in: query
+      schema:
+        type: string
+    GroupGUID:
+      name: group_guid
+      description: A GUID for a Bitly group
+      in: path
+      required: true
+      schema:
+        type: string
+      example: Ba1bc23dE4F
     Tags:
       name: tags
       description: Filter by given tags
@@ -1437,13 +1498,25 @@ components:
       schema:
         type: string
       example: dev.bitly.com/api-reference
-    Archived:
-      name: archived
-      description: Whether or not to include archived resources
+    FilterIsGS1:
+      name: is_gs1
+      description: a filter value if the resource is a GS1 QR code
       in: query
       schema:
         type: string
-        default: 'off'
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
+      example: both
+    FilterHasRenderCustomizations:
+      name: has_render_customizations
+      description: Whether or not QRCode has any render customizations (like color or shape changes)
+      in: query
+      schema:
+        type: string
+        default: both
         enum:
         - 'on'
         - 'off'
@@ -1456,23 +1529,17 @@ components:
       schema:
         type: integer
       example: 1694529902
-    UnitAmount:
-      name: units
-      description: An integer representing the time units to query data for. pass -1 to return all units of time
-      schema:
-        type: integer
-        default: -1
-      required: true
+    FilterHasDynamicRouting:
+      name: has_dynamic_routing
+      description: filter bitlinks by presence of dynamic routing rules
       in: query
-      example: 1
-    GroupGUID:
-      name: group_guid
-      description: A GUID for a Bitly group
-      in: path
-      required: true
       schema:
         type: string
-      example: Ba1bc23dE4F
+        default: both
+        enum:
+        - 'on'
+        - 'off'
+        - both
     Query:
       name: query
       description: The value that you would like to search
@@ -1488,127 +1555,354 @@ components:
       required: true
       in: query
       example: month
-    SearchAfterQR:
-      name: search_after
-      description: Token used to search next batch of qr codes, only use response from API as input value.
-      in: query
-      schema:
-        type: string
-    QRCodeID:
-      name: qrcode_id
-      in: path
-      description: The QR Code ID
-      required: true
-      schema:
-        type: string
-      example: Qabcde12345
-    FilterHasDynamicRouting:
-      name: has_dynamic_routing
-      description: filter bitlinks by presence of dynamic routing rules
-      in: query
-      schema:
-        type: string
-        default: both
-        enum:
-        - 'on'
-        - 'off'
-        - both
-    CreatedBefore:
-      name: created_before
-      description: Timestamp as an integer unix epoch (seconds only)
-      in: query
-      schema:
-        type: integer
-      example: 1694529902
-    CreatingLogin:
-      name: creating_login
-      description: Filter by the login of the authenticated user that created the QR Code
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-      style: form
-      explode: true
-      example:
-      - chauncey
-    FilterHasExpiration:
-      name: has_expiration
-      description: filter bitlinks by presence of expiration
-      in: query
-      schema:
-        type: string
-        default: both
-        enum:
-        - 'on'
-        - 'off'
-        - both
-    FilterHasRenderCustomizations:
-      name: has_render_customizations
-      description: Whether or not QRCode has any render customizations (like color or shape changes)
-      in: query
-      schema:
-        type: string
-        default: both
-        enum:
-        - 'on'
-        - 'off'
-        - both
-      example: both
   schemas:
-    QRCodeFrameRequest:
+    OtherScanMetrics:
       type: object
-      required:
-      - id
       properties:
-        id:
-          description: The unique id of the selected frame
-          $ref: '#/components/schemas/QRCodeFrameType'
+        other_city_scans:
+          type: integer
+        no_city_scans:
+          type: integer
+    BaseScanMetrics:
+      type: object
+      properties:
+        unit:
+          type: string
+        units:
+          type: integer
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - device_os
+          - browsers
+          - destinations
+        unit_reference:
+          type: string
+    GS1Metadata:
+      description: Contains GS1 related metadata
+      type: object
+      properties:
+        values:
+          description: A list of GS1 application identifiers and their values
+          type: array
+          items:
+            $ref: '#/components/schemas/GS1Value'
+    CityScanMetric:
+      type: object
+      properties:
+        scans:
+          type: integer
+        city:
+          type: string
+        subregion:
+          type: string
+        region:
+          type: string
+        country:
+          type: string
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    PublicQRCodeImageResponse:
+      description: Wraps the image data for a QR code.
+      type: object
+      properties:
+        qr_code_image:
+          description: The stringified data for the QR code's image
+          type: string
+    QRCodeGradient:
+      type: object
+      properties:
+        style:
+          description: The style of the gradient. Can be either linear or radial.
+          type: string
+          enum:
+          - no_gradient
+          - linear
+          - radial
+          default: no_gradient
+        angle:
+          description: The angle by which the gradient will be rotated. Only applies to linear gradients.
+          type: number
         colors:
-          description: An object of named colors denoting which color should go to which area of the frame
-          type: object
-          properties:
-            primary:
-              description: The primary color of the frame in hex code format
-              type: string
-            secondary:
-              description: The secondary color of the frame in hex code format
-              type: string
-            background:
-              description: The background color of the frame in hex code format
-              type: string
-        text:
-          description: The text to be inserted into the QR code's frame
-          type: object
-          properties:
-            primary:
-              $ref: '#/components/schemas/Text'
-            secondary:
-              $ref: '#/components/schemas/Text'
+          description: The list of hex colors and their offsets to be used in the gradient.
+          type: array
+          items:
+            $ref: '#/components/schemas/GradientColor'
+        exclude_corners:
+          description: Ignore gradient mask on corners
+          type: boolean
+    DynamicRoutingRule:
+      type: object
+      description: A dynamic routing rule that redirects traffic to a different destination based on user attributes.
+      properties:
+        long_url:
+          type: string
+          description: The destination URL for requests matching this rule.
+        country_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
+        country_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
+        region_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
+        region_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA", "CA-ON"]).
+        device_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
+        device_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that must NOT match for this rule to apply.
+        os_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
+        os_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that must NOT match for this rule to apply.
+    GradientColor:
+      type: object
+      properties:
+        color:
+          description: A color in hexadecimal format to be used in one of the gradient's <stop> elements
+          type: string
+          example: '#ff0098'
+        offset:
+          description: A number between 0-100 denoting the offset of the gradient color, interpreted as a percentage
+          type: integer
+          default: 0
     BitlinkBody:
       type: object
       allOf:
       - $ref: '#/components/schemas/HasReferences'
       - $ref: '#/components/schemas/BitlinkUpdate'
-    InternalError:
-      description: INTERNAL_ERROR
+    PublicStaticQRCodeResponse:
+      description: Response containing a generated static QR code image.
+      type: object
+      properties:
+        image:
+          type: string
+          format: byte
+          description: The image data, base64-encoded. Format is SVG or PNG depending on the requested format.
+    QRCodeCustomizationsStaticPublic:
+      description: Appearance options for a static QR code. gradient, background_gradient, frame, text, and logo are not supported.
+      type: object
+      properties:
+        background_color:
+          description: The QR code's background color in hex code format with values for alpha channel
+          type: string
+          example: '#ff07d280'
+        dot_pattern_color:
+          description: The QR code's dot pattern color in hex code format
+          type: string
+          example: '#ff07d2'
+        dot_pattern_type:
+          $ref: '#/components/schemas/QRCodeDotPatternType'
+        corners:
+          $ref: '#/components/schemas/QRCodeCorners'
+        branding:
+          $ref: '#/components/schemas/QRCodeBranding'
+        spec_settings:
+          $ref: '#/components/schemas/QRCodeSpecSettingsPublic'
+    BitlinkScans:
+      type: object
+      properties:
+        scans:
+          type: array
+          items:
+            $ref: '#/components/schemas/QRScans'
+        units:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
       allOf:
       - $ref: '#/components/schemas/Error'
-    QRCodeFrameType:
+    QRCodeTypeEnum:
+      description: The type of dynamic/static content the QR serves, e.g. Link In Bio page, micro site, bitlink, email, text, Wifi, etc.
       type: string
       enum:
-      - none
-      - border_only
-      - text_bottom
-      - tooltip_bottom
-      - arrow
-      - text_top
-      - text_bottom_in_frame
-      - script
-      - text_top_and_bottom
-      - url
-      - instagram
-      default: none
+      - bitlink
+      - long_url
+      - link_in_bio
+      - v_card
+      - wifi
+      - email
+      - phone
+      - text
+    QRCodeBranding:
+      type: object
+      properties:
+        bitly_brand:
+          description: A boolean that determines if the QR code should have the bitly brand in its bottom right corner
+          type: boolean
+    DeletedLink:
+      type: object
+      properties:
+        id:
+          type: string
+    QRCodeText:
+      description: Contains the center, top, and bottom text to be used in the QR code
+      type: object
+      properties:
+        center:
+          $ref: '#/components/schemas/Text'
+        top:
+          $ref: '#/components/schemas/Text'
+        bottom:
+          $ref: '#/components/schemas/Text'
+      example:
+        center:
+          content: Some example center text!
+          color: '#ff0098'
+          font: Helvetica
+        top:
+          content: Some example bottom text!
+          color: '#00ff00'
+          font: Helvetica
+        bottom:
+          content: Some example bottom text!
+          color: '#000000'
+          font: Helvetica
+    SimplifiedError:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+    QRCodeSpecSettingsPublic:
+      description: The QR code's editable spec settings, which for now is just the error correction
+      type: object
+      properties:
+        error_correction:
+          description: The amount of error correction that the QR code was generated with
+          type: integer
+    PublicUpdateQRCodeRequest:
+      description: Customization and content values for a QR code created through the public API
+      type: object
+      properties:
+        title:
+          type: string
+        render_customizations:
+          $ref: '#/components/schemas/QRCodeCustomizationsPublic'
+        archived:
+          description: A boolean representing if the QR code has been archived
+          type: boolean
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000). Minimum expiration time is 5 minutes from now and maximum is 1 year.
+        tags:
+          description: A list of tags to add to the QR code
+          type: array
+          items:
+            type: string
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this QR code. Providing this field replaces all existing rules. Send an empty array to clear all rules.
+      example:
+        title: Updated Title
+        archived: true
+        tags:
+        - tag1
+        - tag2
+        render_customizations:
+          background_color: '#ffffff'
+          dot_pattern_color: '#EF8000'
+          dot_pattern_type: rounded
+          corners:
+            corner_1:
+              inner_color: '#EF8000'
+              outer_color: '#EF8000'
+              shape: leaf
+            corner_2:
+              inner_color: '#EF8000'
+              outer_color: '#EF8000'
+              shape: leaf
+            corner_3:
+              inner_color: '#EF8000'
+              outer_color: '#EF8000'
+              shape: leaf
+          gradient:
+            style: linear
+            angle: 45
+            colors:
+            - color: '#c80404'
+              offset: 10
+            - color: '#042f86'
+              offset: 90
+            exclude_corners: false
+          background_gradient:
+            style: radial
+            colors:
+            - color: '#c696ee'
+              offset: 25
+            - color: '#d4e1a8'
+              offset: 50
+          logo:
+            image_guid: bitlylogo
+          frame:
+            id: text_bottom
+            colors:
+              primary: '#f55656'
+              background: '#ffffff'
+            text:
+              primary:
+                content: QR Frame
+              secondary:
+                content: Frame Text
+          branding:
+            bitly_brand: true
+          spec_settings:
+            error_correction: 4
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
     CityScanMetrics:
       type: object
       allOf:
@@ -1620,17 +1914,6 @@ components:
               $ref: '#/components/schemas/CityScanMetric'
           other_metrics:
             $ref: '#/components/schemas/OtherScanMetrics'
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    PublicQRCodeImageResponse:
-      description: Wraps the image data for a QR code.
-      type: object
-      properties:
-        qr_code_image:
-          description: The stringified data for the QR code's image
-          type: string
     BitlinkUpdate:
       type: object
       properties:
@@ -1686,122 +1969,42 @@ components:
           items:
             $ref: '#/components/schemas/DynamicRoutingRule'
           description: Dynamic routing rules for this bitlink. Only present when at least one rule is configured.
-    RedirectQRCodeRequest:
-      description: Request to redirect a QRCode
+    QRCodeDestination:
       type: object
-      required:
-      - long_url
       properties:
+        bitlink_id:
+          type: string
         long_url:
           type: string
-          example: https://www.google.com
-    QRCodesMinimal:
-      description: QR code paginated list Response
-      type: object
-      properties:
-        qr_codes:
-          type: array
-          items:
-            $ref: '#/components/schemas/QRCodeMinimal'
-        pagination:
-          $ref: '#/components/schemas/QRPagination'
-    PublicDeleteQRCodeResponse:
-      description: QR Code delete response
-      type: object
-      properties:
-        qrcodes_deleted:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeletedQRCode'
-        links_deleted:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeletedLink'
-    TimeUnit:
-      description: the unit of time queried for (minute, hour, day, week, month)
+        site_id:
+          type: string
+    Gone:
+      description: GONE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    DynamicRoutingPlatformEnum:
+      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
       type: string
       enum:
-      - minute
-      - hour
-      - day
-      - week
-      - month
-      default: day
-    QRCodeTypeEnum:
-      description: The type of dynamic/static content the QR serves, e.g. Link In Bio page, micro site, bitlink, email, text, Wifi, etc.
-      type: string
-      enum:
-      - bitlink
-      - long_url
-      - link_in_bio
-      - v_card
-      - wifi
-      - email
-      - phone
-      - text
-    QRCodeCustomizationsPublic:
-      description: Options for customizing a QR Code's appearance
+      - ios
+      - android
+    BitlinkScansSummary:
       type: object
       properties:
-        background_color:
-          description: The QR code's background color in hex code format with values for alpha channel
-          type: string
-          example: '#ff07d280'
-        dot_pattern_color:
-          description: The QR code's dot pattern color in hex code format
-          type: string
-          example: '#ff07d2'
-        dot_pattern_type:
-          $ref: '#/components/schemas/QRCodeDotPatternType'
-        corners:
-          $ref: '#/components/schemas/QRCodeCorners'
-        gradient:
-          $ref: '#/components/schemas/QRCodeGradient'
-        background_gradient:
-          $ref: '#/components/schemas/QRCodeGradient'
-        logo:
-          $ref: '#/components/schemas/QRCodeLogoPublic'
-        frame:
-          $ref: '#/components/schemas/QRCodeFrameRequest'
-        text:
-          $ref: '#/components/schemas/QRCodeText'
-        branding:
-          $ref: '#/components/schemas/QRCodeBranding'
-        spec_settings:
-          $ref: '#/components/schemas/QRCodeSpecSettingsPublic'
-    SimplifiedError:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-    QRCodeCorner:
-      description: Represents one corner, both inner and outer, of a QR code, with color and shape values
-      type: object
-      properties:
-        inner_color:
-          description: The inner color of a corner of the QR code in hex code format
-          type: string
-        outer_color:
-          description: The outer color of a corner of the QR code in hex code format
-          type: string
-        shape:
-          description: The shape one of the QR code's corners should take
+        total_scans:
+          type: integer
+        units:
+          type: integer
+        unit:
           type: string
           enum:
-          - standard
-          - slightly_round
-          - rounded
-          - extra_round
-          - leaf
-          - leaf_inner
-          - leaf_outer
-          - target
-          - concave
-          default: standard
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
     PublicCreateStaticQRCodeRequest:
       description: Request body for generating a static QR code image. Customizations such as gradient, background_gradient, frame, text and logo are not supported.
       type: object
@@ -1826,494 +2029,39 @@ components:
           background_color: '#ffffff'
           dot_pattern_color: '#EF8000'
           dot_pattern_type: rounded
-    DynamicRoutingRule:
+    QRCodeCorner:
+      description: Represents one corner, both inner and outer, of a QR code, with color and shape values
       type: object
-      description: A dynamic routing rule that redirects traffic to a different destination based on user attributes.
       properties:
-        long_url:
+        inner_color:
+          description: The inner color of a corner of the QR code in hex code format
           type: string
-          description: The destination URL for requests matching this rule.
-        country_match:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
-        country_exclude:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
-        region_match:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
-        region_exclude:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA", "CA-ON"]).
-        device_match:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
-          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
-        device_exclude:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
-          description: Device types that must NOT match for this rule to apply.
-        os_match:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
-          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
-        os_exclude:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
-          description: Operating systems that must NOT match for this rule to apply.
-    QRCodeBranding:
-      type: object
-      properties:
-        bitly_brand:
-          description: A boolean that determines if the QR code should have the bitly brand in its bottom right corner
-          type: boolean
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    DynamicRoutingDeviceEnum:
-      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+        outer_color:
+          description: The outer color of a corner of the QR code in hex code format
+          type: string
+        shape:
+          description: The shape one of the QR code's corners should take
+          type: string
+          enum:
+          - standard
+          - slightly_round
+          - rounded
+          - extra_round
+          - leaf
+          - leaf_inner
+          - leaf_outer
+          - target
+          - concave
+          default: standard
+    MobileOS:
       type: string
       enum:
-      - mobile
-      - tablet
-      - desktop
+      - ios
+      - android
     NotFound:
       description: NOT_FOUND
       allOf:
       - $ref: '#/components/schemas/Error'
-    QRCodeLogoPublic:
-      type: object
-      properties:
-        image_guid:
-          type: string
-          description: A GUID for an image uploaded to Bitly
-    HasReferences:
-      type: object
-      properties:
-        references:
-          type: object
-          additionalProperties:
-            type: string
-    DeletedQRCode:
-      type: object
-      properties:
-        id:
-          type: string
-    BitlinkScansSummary:
-      type: object
-      properties:
-        total_scans:
-          type: integer
-        units:
-          type: integer
-        unit:
-          type: string
-          enum:
-          - minute
-          - hour
-          - day
-          - week
-          - month
-        unit_reference:
-          type: string
-    QRCBulkUpdateRequest:
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          type: string
-          enum:
-          - archive
-          - edit_tags
-          description: archive or edit_tags
-        archive:
-          type: boolean
-        add_tags:
-          type: array
-          items:
-            type: string
-        remove_tags:
-          type: array
-          items:
-            type: string
-        qr_code_ids:
-          type: array
-          items:
-            type: string
-          description: this is limited to 100 QR code ids; Pages QR codes are not supported
-      example:
-        action: edit_tags
-        add_tags:
-        - tag1
-        - tag2
-        qr_code_ids:
-        - Qo9id25UxtOcnns
-        - Qb1a2c3d4e5f6g7
-    QRScans:
-      type: object
-      properties:
-        scans:
-          type: integer
-        date:
-          type: string
-    QRCodeGradient:
-      type: object
-      properties:
-        style:
-          description: The style of the gradient. Can be either linear or radial.
-          type: string
-          enum:
-          - no_gradient
-          - linear
-          - radial
-          default: no_gradient
-        angle:
-          description: The angle by which the gradient will be rotated. Only applies to linear gradients.
-          type: number
-        colors:
-          description: The list of hex colors and their offsets to be used in the gradient.
-          type: array
-          items:
-            $ref: '#/components/schemas/GradientColor'
-        exclude_corners:
-          description: Ignore gradient mask on corners
-          type: boolean
-    QRCodeDotPatternType:
-      type: string
-      enum:
-      - standard
-      - circle
-      - block
-      - blob
-      - rounded
-      - vertical
-      - horizontal
-      - triangle
-      - heart
-      - star
-      - diamond
-      default: standard
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    MonthlyLimitExceeded:
-      description: MONTHLY_LIMIT_EXCEEDED
-      allOf:
-      - $ref: '#/components/schemas/SimplifiedError'
-      example:
-        message: API_USAGE_LIMIT_EXCEEDED
-    OtherScanMetrics:
-      type: object
-      properties:
-        other_city_scans:
-          type: integer
-        no_city_scans:
-          type: integer
-    QRPagination:
-      type: object
-      description: This object specifies how to query the next set of results.
-      properties:
-        next:
-          type: string
-          description: a hyperlink to the next set of results.
-        search_after:
-          type: string
-          description: the identifier of where to begin searching for the next set of results.
-          example: Qn8sfFRC2tm
-        size:
-          type: integer
-          description: the number of results returned from this query.
-          example: 50
-    Gone:
-      description: GONE
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    QRCBulkUpdate:
-      type: object
-      properties:
-        qr_code_ids:
-          type: array
-          items:
-            type: string
-    DeletedLink:
-      type: object
-      properties:
-        id:
-          type: string
-    Text:
-      description: An object describing text with color
-      type: object
-      required:
-      - content
-      properties:
-        content:
-          description: The text to be used
-          type: string
-        color:
-          description: The color of the text in hex code format
-          type: string
-          default: '#ffffff'
-    QRCodeCustomizationsStaticPublic:
-      description: Appearance options for a static QR code. gradient, background_gradient, frame, text, and logo are not supported.
-      type: object
-      properties:
-        background_color:
-          description: The QR code's background color in hex code format with values for alpha channel
-          type: string
-          example: '#ff07d280'
-        dot_pattern_color:
-          description: The QR code's dot pattern color in hex code format
-          type: string
-          example: '#ff07d2'
-        dot_pattern_type:
-          $ref: '#/components/schemas/QRCodeDotPatternType'
-        corners:
-          $ref: '#/components/schemas/QRCodeCorners'
-        branding:
-          $ref: '#/components/schemas/QRCodeBranding'
-        spec_settings:
-          $ref: '#/components/schemas/QRCodeSpecSettingsPublic'
-    CityScanMetric:
-      type: object
-      properties:
-        scans:
-          type: integer
-        city:
-          type: string
-        subregion:
-          type: string
-        region:
-          type: string
-        country:
-          type: string
-    InstallPreference:
-      type: string
-      enum:
-      - no_install
-      - auto_install
-      - promote_install
-    QRCodeDetails:
-      type: object
-      properties:
-        qrcode_id:
-          type: string
-        group_guid:
-          type: string
-        title:
-          type: string
-        gs1:
-          $ref: '#/components/schemas/GS1Metadata'
-        render_customizations:
-          $ref: '#/components/schemas/QRCodeCustomizationsPublic'
-        qr_code_type:
-          $ref: '#/components/schemas/QRCodeTypeEnum'
-        bitlink_id:
-          description: The bitlink associated with the qr code. Not all qr codes are associated with one.
-          type: string
-        long_urls:
-          description: A list of destination URLs that the qr code leads to.
-          type: array
-          items:
-            type: string
-        serialized_content:
-          description: The serialized string of the QR code's content
-          type: string
-        archived:
-          type: boolean
-        created:
-          type: string
-        modified:
-          type: string
-        expiration_at:
-          type: string
-          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000)
-        tags:
-          description: A list of tags associated with QR code
-          type: array
-          items:
-            type: string
-        dynamic_routing:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingRule'
-          description: Dynamic routing rules for this QR code. Only present when at least one rule is configured.
-    QRCodeMinimal:
-      type: object
-      properties:
-        qrcode_id:
-          type: string
-        group_guid:
-          type: string
-        title:
-          type: string
-        is_customized:
-          description: Set to true if the QR code's customization values have been changed from their default setting
-          type: boolean
-        serialized_content:
-          description: A serialized string of the QR code's content
-          type: string
-        qr_code_type:
-          $ref: '#/components/schemas/QRCodeTypeEnum'
-        long_urls:
-          description: A list of destination URLs that the qr code leads to.
-          type: array
-          items:
-            type: string
-        bitlink_id:
-          description: The bitlink ID associated with the qr code. Not all qr codes are associated with one.
-          type: string
-        is_gs1:
-          description: Set to true if QR code has GS1 values.
-          type: boolean
-        created_by:
-          description: User that created the code.
-          type: string
-        tags:
-          description: A list of tags associated with QR code
-          type: array
-          items:
-            type: string
-        archived:
-          type: boolean
-        expiration_at:
-          type: string
-          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000)
-        dynamic_routing:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingRule'
-          description: Dynamic routing rules for this QR code. Only present when at least one rule is configured.
-        created:
-          type: string
-        modified:
-          type: string
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
-    QRCodeCorners:
-      description: 'An object representing all three corners of the QR code. The corners corresponding to each property are: corner_1 = top left, corner_2 = top right, and corner_3 = bottom right'
-      type: object
-      properties:
-        corner_1:
-          $ref: '#/components/schemas/QRCodeCorner'
-        corner_2:
-          $ref: '#/components/schemas/QRCodeCorner'
-        corner_3:
-          $ref: '#/components/schemas/QRCodeCorner'
-    BitlinkScans:
-      type: object
-      properties:
-        scans:
-          type: array
-          items:
-            $ref: '#/components/schemas/QRScans'
-        units:
-          type: integer
-        unit:
-          type: string
-          enum:
-          - minute
-          - hour
-          - day
-          - week
-          - month
-        unit_reference:
-          type: string
-    QRCodeText:
-      description: Contains the center, top, and bottom text to be used in the QR code
-      type: object
-      properties:
-        center:
-          $ref: '#/components/schemas/Text'
-        top:
-          $ref: '#/components/schemas/Text'
-        bottom:
-          $ref: '#/components/schemas/Text'
-      example:
-        center:
-          content: Some example center text!
-          color: '#ff0098'
-          font: Helvetica
-        top:
-          content: Some example bottom text!
-          color: '#00ff00'
-          font: Helvetica
-        bottom:
-          content: Some example bottom text!
-          color: '#000000'
-          font: Helvetica
-    GradientColor:
-      type: object
-      properties:
-        color:
-          description: A color in hexadecimal format to be used in one of the gradient's <stop> elements
-          type: string
-          example: '#ff0098'
-        offset:
-          description: A number between 0-100 denoting the offset of the gradient color, interpreted as a percentage
-          type: integer
-          default: 0
-    ScanMetric:
-      type: object
-      properties:
-        scans:
-          type: integer
-        value:
-          type: string
-    PublicStaticQRCodeResponse:
-      description: Response containing a generated static QR code image.
-      type: object
-      properties:
-        image:
-          type: string
-          format: byte
-          description: The image data, base64-encoded. Format is SVG or PNG depending on the requested format.
-    QRCodeSpecSettingsPublic:
-      description: The QR code's editable spec settings, which for now is just the error correction
-      type: object
-      properties:
-        error_correction:
-          description: The amount of error correction that the QR code was generated with
-          type: integer
-    QRCodeDestination:
-      type: object
-      properties:
-        bitlink_id:
-          type: string
-        long_url:
-          type: string
-        site_id:
-          type: string
     DeeplinkRule:
       type: object
       properties:
@@ -2339,10 +2087,32 @@ components:
           description: ISO timestamp
         brand_guid:
           type: string
-    UpgradeRequired:
-      description: UPGRADE_REQUIRED
+    QRCodeDotPatternType:
+      type: string
+      enum:
+      - standard
+      - circle
+      - block
+      - blob
+      - rounded
+      - vertical
+      - horizontal
+      - triangle
+      - heart
+      - star
+      - diamond
+      default: standard
+    InternalError:
+      description: INTERNAL_ERROR
       allOf:
       - $ref: '#/components/schemas/Error'
+    QRScans:
+      type: object
+      properties:
+        scans:
+          type: integer
+        date:
+          type: string
     PublicCreateQRCodeRequest:
       description: Customization and content values for a QR code created through the public API
       type: object
@@ -2439,12 +2209,6 @@ components:
             bitly_brand: true
           spec_settings:
             error_correction: 4
-    DynamicRoutingPlatformEnum:
-      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
-      type: string
-      enum:
-      - ios
-      - android
     GS1Value:
       type: object
       properties:
@@ -2454,23 +2218,294 @@ components:
         value:
           type: string
           description: A syntactically correct value associated with the application identifier in the key field.
-    BaseScanMetrics:
+    QRCodeCorners:
+      description: 'An object representing all three corners of the QR code. The corners corresponding to each property are: corner_1 = top left, corner_2 = top right, and corner_3 = bottom right'
       type: object
       properties:
-        unit:
+        corner_1:
+          $ref: '#/components/schemas/QRCodeCorner'
+        corner_2:
+          $ref: '#/components/schemas/QRCodeCorner'
+        corner_3:
+          $ref: '#/components/schemas/QRCodeCorner'
+    QRCodeMinimal:
+      type: object
+      properties:
+        qrcode_id:
           type: string
-        units:
-          type: integer
-        facet:
+        group_guid:
+          type: string
+        title:
+          type: string
+        is_customized:
+          description: Set to true if the QR code's customization values have been changed from their default setting
+          type: boolean
+        serialized_content:
+          description: A serialized string of the QR code's content
+          type: string
+        qr_code_type:
+          $ref: '#/components/schemas/QRCodeTypeEnum'
+        long_urls:
+          description: A list of destination URLs that the qr code leads to.
+          type: array
+          items:
+            type: string
+        bitlink_id:
+          description: The bitlink ID associated with the qr code. Not all qr codes are associated with one.
+          type: string
+        is_gs1:
+          description: Set to true if QR code has GS1 values.
+          type: boolean
+        created_by:
+          description: User that created the code.
+          type: string
+        tags:
+          description: A list of tags associated with QR code
+          type: array
+          items:
+            type: string
+        archived:
+          type: boolean
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000)
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this QR code. Only present when at least one rule is configured.
+        created:
+          type: string
+        modified:
+          type: string
+    QRCodesMinimal:
+      description: QR code paginated list Response
+      type: object
+      properties:
+        qr_codes:
+          type: array
+          items:
+            $ref: '#/components/schemas/QRCodeMinimal'
+        pagination:
+          $ref: '#/components/schemas/QRPagination'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    DeletedQRCode:
+      type: object
+      properties:
+        id:
+          type: string
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    QRCBulkUpdateRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
           type: string
           enum:
-          - countries
-          - cities
-          - device_os
-          - browsers
-          - destinations
-        unit_reference:
+          - archive
+          - edit_tags
+          description: archive or edit_tags
+        archive:
+          type: boolean
+        add_tags:
+          type: array
+          items:
+            type: string
+        remove_tags:
+          type: array
+          items:
+            type: string
+        qr_code_ids:
+          type: array
+          items:
+            type: string
+          description: this is limited to 100 QR code ids; Pages QR codes are not supported
+      example:
+        action: edit_tags
+        add_tags:
+        - tag1
+        - tag2
+        qr_code_ids:
+        - Qo9id25UxtOcnns
+        - Qb1a2c3d4e5f6g7
+    QRCodeFrameRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          description: The unique id of the selected frame
+          $ref: '#/components/schemas/QRCodeFrameType'
+        colors:
+          description: An object of named colors denoting which color should go to which area of the frame
+          type: object
+          properties:
+            primary:
+              description: The primary color of the frame in hex code format
+              type: string
+            secondary:
+              description: The secondary color of the frame in hex code format
+              type: string
+            background:
+              description: The background color of the frame in hex code format
+              type: string
+        text:
+          description: The text to be inserted into the QR code's frame
+          type: object
+          properties:
+            primary:
+              $ref: '#/components/schemas/Text'
+            secondary:
+              $ref: '#/components/schemas/Text'
+    QRCodeDetails:
+      type: object
+      properties:
+        qrcode_id:
           type: string
+        group_guid:
+          type: string
+        title:
+          type: string
+        gs1:
+          $ref: '#/components/schemas/GS1Metadata'
+        render_customizations:
+          $ref: '#/components/schemas/QRCodeCustomizationsPublic'
+        qr_code_type:
+          $ref: '#/components/schemas/QRCodeTypeEnum'
+        bitlink_id:
+          description: The bitlink associated with the qr code. Not all qr codes are associated with one.
+          type: string
+        long_urls:
+          description: A list of destination URLs that the qr code leads to.
+          type: array
+          items:
+            type: string
+        serialized_content:
+          description: The serialized string of the QR code's content
+          type: string
+        archived:
+          type: boolean
+        created:
+          type: string
+        modified:
+          type: string
+        expiration_at:
+          type: string
+          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000)
+        tags:
+          description: A list of tags associated with QR code
+          type: array
+          items:
+            type: string
+        dynamic_routing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingRule'
+          description: Dynamic routing rules for this QR code. Only present when at least one rule is configured.
+    Text:
+      description: An object describing text with color
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          description: The text to be used
+          type: string
+        color:
+          description: The color of the text in hex code format
+          type: string
+          default: '#ffffff'
+    QRCBulkUpdate:
+      type: object
+      properties:
+        qr_code_ids:
+          type: array
+          items:
+            type: string
+    QRPagination:
+      type: object
+      description: This object specifies how to query the next set of results.
+      properties:
+        next:
+          type: string
+          description: a hyperlink to the next set of results.
+        search_after:
+          type: string
+          description: the identifier of where to begin searching for the next set of results.
+          example: Qn8sfFRC2tm
+        size:
+          type: integer
+          description: the number of results returned from this query.
+          example: 50
+    InstallPreference:
+      type: string
+      enum:
+      - no_install
+      - auto_install
+      - promote_install
+    ScanMetric:
+      type: object
+      properties:
+        scans:
+          type: integer
+        value:
+          type: string
+    PublicDeleteQRCodeResponse:
+      description: QR Code delete response
+      type: object
+      properties:
+        qrcodes_deleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeletedQRCode'
+        links_deleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeletedLink'
+    RedirectQRCodeRequest:
+      description: Request to redirect a QRCode
+      type: object
+      required:
+      - long_url
+      properties:
+        long_url:
+          type: string
+          example: https://www.google.com
     ScanMetrics:
       type: object
       allOf:
@@ -2480,107 +2515,72 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/ScanMetric'
-    GS1Metadata:
-      description: Contains GS1 related metadata
-      type: object
-      properties:
-        values:
-          description: A list of GS1 application identifiers and their values
-          type: array
-          items:
-            $ref: '#/components/schemas/GS1Value'
-    MobileOS:
+    QRCodeFrameType:
       type: string
       enum:
-      - ios
-      - android
-    PublicUpdateQRCodeRequest:
-      description: Customization and content values for a QR code created through the public API
+      - none
+      - border_only
+      - text_bottom
+      - tooltip_bottom
+      - arrow
+      - text_top
+      - text_bottom_in_frame
+      - script
+      - text_top_and_bottom
+      - url
+      - instagram
+      default: none
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    DynamicRoutingDeviceEnum:
+      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+      type: string
+      enum:
+      - mobile
+      - tablet
+      - desktop
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    QRCodeLogoPublic:
       type: object
       properties:
-        title:
+        image_guid:
           type: string
-        render_customizations:
-          $ref: '#/components/schemas/QRCodeCustomizationsPublic'
-        archived:
-          description: A boolean representing if the QR code has been archived
-          type: boolean
-        expiration_at:
+          description: A GUID for an image uploaded to Bitly
+    QRCodeCustomizationsPublic:
+      description: Options for customizing a QR Code's appearance
+      type: object
+      properties:
+        background_color:
+          description: The QR code's background color in hex code format with values for alpha channel
           type: string
-          description: Optional expiration timestamp for the QR code's bitlink (e.g., 2025-01-28T14:30:00+0000). Minimum expiration time is 5 minutes from now and maximum is 1 year.
-        tags:
-          description: A list of tags to add to the QR code
-          type: array
-          items:
-            type: string
-        dynamic_routing:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingRule'
-          description: Dynamic routing rules for this QR code. Providing this field replaces all existing rules. Send an empty array to clear all rules.
-      example:
-        title: Updated Title
-        archived: true
-        tags:
-        - tag1
-        - tag2
-        render_customizations:
-          background_color: '#ffffff'
-          dot_pattern_color: '#EF8000'
-          dot_pattern_type: rounded
-          corners:
-            corner_1:
-              inner_color: '#EF8000'
-              outer_color: '#EF8000'
-              shape: leaf
-            corner_2:
-              inner_color: '#EF8000'
-              outer_color: '#EF8000'
-              shape: leaf
-            corner_3:
-              inner_color: '#EF8000'
-              outer_color: '#EF8000'
-              shape: leaf
-          gradient:
-            style: linear
-            angle: 45
-            colors:
-            - color: '#c80404'
-              offset: 10
-            - color: '#042f86'
-              offset: 90
-            exclude_corners: false
-          background_gradient:
-            style: radial
-            colors:
-            - color: '#c696ee'
-              offset: 25
-            - color: '#d4e1a8'
-              offset: 50
-          logo:
-            image_guid: bitlylogo
-          frame:
-            id: text_bottom
-            colors:
-              primary: '#f55656'
-              background: '#ffffff'
-            text:
-              primary:
-                content: QR Frame
-              secondary:
-                content: Frame Text
-          branding:
-            bitly_brand: true
-          spec_settings:
-            error_correction: 4
-    BadRequest:
-      description: BAD_REQUEST
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: UNPROCESSABLE_ENTITY
-      allOf:
-      - $ref: '#/components/schemas/Error'
+          example: '#ff07d280'
+        dot_pattern_color:
+          description: The QR code's dot pattern color in hex code format
+          type: string
+          example: '#ff07d2'
+        dot_pattern_type:
+          $ref: '#/components/schemas/QRCodeDotPatternType'
+        corners:
+          $ref: '#/components/schemas/QRCodeCorners'
+        gradient:
+          $ref: '#/components/schemas/QRCodeGradient'
+        background_gradient:
+          $ref: '#/components/schemas/QRCodeGradient'
+        logo:
+          $ref: '#/components/schemas/QRCodeLogoPublic'
+        frame:
+          $ref: '#/components/schemas/QRCodeFrameRequest'
+        text:
+          $ref: '#/components/schemas/QRCodeText'
+        branding:
+          $ref: '#/components/schemas/QRCodeBranding'
+        spec_settings:
+          $ref: '#/components/schemas/QRCodeSpecSettingsPublic'
   securitySchemes:
     bearerAuth:
       type: http

@@ -154,35 +154,6 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
-    PlatformLimit:
-      type: object
-      properties:
-        endpoint:
-          type: string
-        methods:
-          type: array
-          items:
-            $ref: '#/components/schemas/MethodLimit'
-    MethodLimit:
-      type: object
-      properties:
-        name:
-          type: string
-        limit:
-          type: integer
-        count:
-          type: integer
-    PlatformLimits:
-      type: object
-      properties:
-        platform_limits:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlatformLimit'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
     FieldError:
       type: object
       properties:
@@ -192,6 +163,51 @@ components:
           type: string
         message:
           type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    PlatformLimit:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/MethodLimit'
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    PlatformLimits:
+      type: object
+      properties:
+        platform_limits:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlatformLimit'
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
     UserUpdate:
       type: object
       properties:
@@ -202,14 +218,6 @@ components:
       example:
         name: Chauncey McPufferson
         default_group_guid: Ba1bc23dE4F
-    BadRequest:
-      description: BAD_REQUEST
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: UNPROCESSABLE_ENTITY
-      allOf:
-      - $ref: '#/components/schemas/Error'
     User:
       type: object
       required:
@@ -246,10 +254,19 @@ components:
       description: NOT_FOUND
       allOf:
       - $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: FORBIDDEN
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
+    MethodLimit:
+      type: object
+      properties:
+        name:
+          type: string
+        limit:
+          type: integer
+        count:
+          type: integer
     Email:
       type: object
       properties:
@@ -259,23 +276,6 @@ components:
           type: boolean
         is_verified:
           type: boolean
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    InternalError:
-      description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
   parameters:
     Path:
       name: path

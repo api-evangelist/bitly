@@ -64,10 +64,6 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
     FieldError:
       type: object
       properties:
@@ -77,21 +73,6 @@ components:
           type: string
         message:
           type: string
-    BadRequest:
-      description: BAD_REQUEST
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    BSDsResponse:
-      type: object
-      properties:
-        bsds:
-          type: array
-          items:
-            type: string
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
     Error:
       type: object
       properties:
@@ -105,8 +86,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldError'
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
     InternalError:
       description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BSDsResponse:
+      type: object
+      properties:
+        bsds:
+          type: array
+          items:
+            type: string
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
   securitySchemes:

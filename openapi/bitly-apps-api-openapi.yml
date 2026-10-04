@@ -58,20 +58,7 @@ paths:
       tags:
       - Apps
 components:
-  parameters:
-    ClientID:
-      name: client_id
-      description: The client ID of an OAuth app
-      in: path
-      required: true
-      schema:
-        type: string
-      example: 1234a56b789cd0e123456fg7h8901j123km45n6p
   schemas:
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
     FieldError:
       type: object
       properties:
@@ -81,6 +68,35 @@ components:
           type: string
         message:
           type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
     OAuthApp:
       type: object
       required:
@@ -103,31 +119,15 @@ components:
         internal_app:
           type: boolean
           description: True for Bitly's own first-party apps (dashboard, mobile apps), as opposed to third-party integrations.
-    NotFound:
-      description: NOT_FOUND
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    InternalError:
-      description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
+  parameters:
+    ClientID:
+      name: client_id
+      description: The client ID of an OAuth app
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 1234a56b789cd0e123456fg7h8901j123km45n6p
   securitySchemes:
     bearerAuth:
       type: http
