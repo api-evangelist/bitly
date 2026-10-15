@@ -58,7 +58,7 @@
     app_slug: bitly
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: bitly-n8n
   label: n8n
@@ -83,7 +83,7 @@
     node_path: Bitly
     trigger: false
     builder: n8n (built-in node)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: bitly-pipedream
   label: Pipedream
@@ -109,5 +109,5 @@
     actions: true
     sources: false
     builder: Pipedream repo (component)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
