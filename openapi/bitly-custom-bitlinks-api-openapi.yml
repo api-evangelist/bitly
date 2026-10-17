@@ -350,58 +350,119 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
-    DeeplinkRule:
+    UpdateCustomBitlink:
       type: object
       properties:
-        guid:
+        bitlink_id:
           type: string
-        bitlink:
+      example:
+        bitlink_id: chauncey.ly/1234abcd
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    CustomBitlinkHistory:
+      type: object
+      properties:
+        group_guid:
           type: string
-        app_uri_path:
+        keyword:
           type: string
-        install_url:
+        bsd:
           type: string
-        app_guid:
+        hash:
           type: string
-        os:
-          $ref: '#/components/schemas/MobileOS'
-        install_type:
-          $ref: '#/components/schemas/InstallPreference'
+        login:
+          type: string
+        long_url:
+          type: string
         created:
           type: string
-          description: ISO timestamp
-        modified:
+        first_created:
           type: string
-          description: ISO timestamp
-        brand_guid:
+        deactivated:
           type: string
-    BaseMetrics:
+        is_active:
+          type: boolean
+    DynamicRoutingRule:
+      type: object
+      description: A dynamic routing rule that redirects traffic to a different destination based on user attributes.
+      properties:
+        long_url:
+          type: string
+          description: The destination URL for requests matching this rule.
+        country_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
+        country_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
+        region_match:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
+        region_exclude:
+          type: array
+          items:
+            type: string
+          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA", "CA-ON"]).
+        device_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
+        device_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
+          description: Device types that must NOT match for this rule to apply.
+        os_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
+        os_exclude:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
+          description: Operating systems that must NOT match for this rule to apply.
+    MobileOS:
+      type: string
+      enum:
+      - ios
+      - android
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Error:
       type: object
       properties:
-        unit:
+        message:
           type: string
-          x-faker: internet.userName
-        units:
-          type: integer
-          x-faker:
-            datatype.number:
-              min: 1
-              max: 100
-        facet:
+        description:
           type: string
-          enum:
-          - countries
-          - cities
-          - devices
-          - referrers
-          - referrers_by_domain
-          - referring_domains
-          - referring_networks
-          - shorten_counts
-          - destinations
-        unit_reference:
+        resource:
           type: string
-          x-faker: date.past
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    DynamicRoutingPlatformEnum:
+      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
+      type: string
+      enum:
+      - ios
+      - android
     SimplifiedError:
       type: object
       properties:
@@ -411,96 +472,17 @@ components:
           type: string
         resource:
           type: string
-    FieldError:
+    LinkClicks:
       type: object
       properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
+        clicks:
+          type: integer
+        date:
           type: string
     BadRequest:
       description: BAD_REQUEST
       allOf:
       - $ref: '#/components/schemas/Error'
-    UpdateCustomBitlink:
-      type: object
-      properties:
-        bitlink_id:
-          type: string
-      example:
-        bitlink_id: chauncey.ly/1234abcd
-    TimeUnit:
-      description: the unit of time queried for (minute, hour, day, week, month)
-      type: string
-      enum:
-      - minute
-      - hour
-      - day
-      - week
-      - month
-      default: day
-    ClickMetrics:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseMetrics'
-      - properties:
-          metrics:
-            type: array
-            items:
-              $ref: '#/components/schemas/ClickMetric'
-    ClickMetric:
-      type: object
-      properties:
-        clicks:
-          type: integer
-          example: 123
-          x-faker: random.number
-        value:
-          type: string
-          example: bit.ly
-          x-faker: internet.domainName
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    InternalError:
-      description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    MonthlyLimitExceeded:
-      description: MONTHLY_LIMIT_EXCEEDED
-      allOf:
-      - $ref: '#/components/schemas/SimplifiedError'
-      example:
-        message: API_USAGE_LIMIT_EXCEEDED
-    HasReferences:
-      type: object
-      properties:
-        references:
-          type: object
-          additionalProperties:
-            type: string
-    Clicks:
-      type: object
-      properties:
-        link_clicks:
-          type: array
-          items:
-            $ref: '#/components/schemas/LinkClicks'
-        units:
-          type: integer
-        unit:
-          type: string
-          enum:
-          - minute
-          - hour
-          - day
-          - week
-          - month
-        unit_reference:
-          type: string
     BitlinkUpdate:
       type: object
       properties:
@@ -556,62 +538,8 @@ components:
           items:
             $ref: '#/components/schemas/DynamicRoutingRule'
           description: Dynamic routing rules for this bitlink. Only present when at least one rule is configured.
-    LinkClicks:
-      type: object
-      properties:
-        clicks:
-          type: integer
-        date:
-          type: string
-    DynamicRoutingRule:
-      type: object
-      description: A dynamic routing rule that redirects traffic to a different destination based on user attributes.
-      properties:
-        long_url:
-          type: string
-          description: The destination URL for requests matching this rule.
-        country_match:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-1 alpha-2 country codes that trigger this rule (e.g., ["US", "CA"]).
-        country_exclude:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-1 alpha-2 country codes that must NOT match for this rule to apply.
-        region_match:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-2 region codes that trigger this rule (e.g., ["US-CA", "CA-ON"]).
-        region_exclude:
-          type: array
-          items:
-            type: string
-          description: ISO 3166-2 region codes that must NOT match for this rule to apply (e.g., ["US-CA", "CA-ON"]).
-        device_match:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
-          description: Device types that trigger this rule (e.g., ["mobile", "tablet"]).
-        device_exclude:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingDeviceEnum'
-          description: Device types that must NOT match for this rule to apply.
-        os_match:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
-          description: Operating systems that trigger this rule (e.g., ["ios", "android"]).
-        os_exclude:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicRoutingPlatformEnum'
-          description: Operating systems that must NOT match for this rule to apply.
-    Gone:
-      description: GONE
+    NotFound:
+      description: NOT_FOUND
       allOf:
       - $ref: '#/components/schemas/Error'
     CustomBitlink:
@@ -625,17 +553,159 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomBitlinkHistory'
-    BitlinkBody:
-      type: object
+    UpgradeRequired:
+      description: UPGRADE_REQUIRED
       allOf:
-      - $ref: '#/components/schemas/HasReferences'
-      - $ref: '#/components/schemas/BitlinkUpdate'
+      - $ref: '#/components/schemas/Error'
     InstallPreference:
       type: string
       enum:
       - no_install
       - auto_install
       - promote_install
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
+    DeeplinkRule:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitlink:
+          type: string
+        app_uri_path:
+          type: string
+        install_url:
+          type: string
+        app_guid:
+          type: string
+        os:
+          $ref: '#/components/schemas/MobileOS'
+        install_type:
+          $ref: '#/components/schemas/InstallPreference'
+        created:
+          type: string
+          description: ISO timestamp
+        modified:
+          type: string
+          description: ISO timestamp
+        brand_guid:
+          type: string
+    DynamicRoutingDeviceEnum:
+      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
+      type: string
+      enum:
+      - mobile
+      - tablet
+      - desktop
+    BitlinkBody:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - $ref: '#/components/schemas/BitlinkUpdate'
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    MonthlyLimitExceeded:
+      description: MONTHLY_LIMIT_EXCEEDED
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedError'
+      example:
+        message: API_USAGE_LIMIT_EXCEEDED
+    HasReferences:
+      type: object
+      properties:
+        references:
+          type: object
+          additionalProperties:
+            type: string
+    ClickMetrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/ClickMetric'
+    ClickMetric:
+      type: object
+      properties:
+        clicks:
+          type: integer
+          example: 123
+          x-faker: random.number
+        value:
+          type: string
+          example: bit.ly
+          x-faker: internet.domainName
+    Gone:
+      description: GONE
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    BaseMetrics:
+      type: object
+      properties:
+        unit:
+          type: string
+          x-faker: internet.userName
+        units:
+          type: integer
+          x-faker:
+            datatype.number:
+              min: 1
+              max: 100
+        facet:
+          type: string
+          enum:
+          - countries
+          - cities
+          - devices
+          - referrers
+          - referrers_by_domain
+          - referring_domains
+          - referring_networks
+          - shorten_counts
+          - destinations
+        unit_reference:
+          type: string
+          x-faker: date.past
+    Clicks:
+      type: object
+      properties:
+        link_clicks:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkClicks'
+        units:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          - week
+          - month
+        unit_reference:
+          type: string
     AddCustomBitlink:
       type: object
       properties:
@@ -646,76 +716,6 @@ components:
       example:
         custom_bitlink: chauncey.ly/documentation
         bitlink_id: chauncey.ly/1234abcd
-    DynamicRoutingPlatformEnum:
-      description: Platform (OS) values for use in dynamic routing rules (os_match / os_exclude)
-      type: string
-      enum:
-      - ios
-      - android
-    CustomBitlinkHistory:
-      type: object
-      properties:
-        group_guid:
-          type: string
-        keyword:
-          type: string
-        bsd:
-          type: string
-        hash:
-          type: string
-        login:
-          type: string
-        long_url:
-          type: string
-        created:
-          type: string
-        first_created:
-          type: string
-        deactivated:
-          type: string
-        is_active:
-          type: boolean
-    UpgradeRequired:
-      description: UPGRADE_REQUIRED
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    DynamicRoutingDeviceEnum:
-      description: Device type values for use in dynamic routing rules (device_match / device_exclude)
-      type: string
-      enum:
-      - mobile
-      - tablet
-      - desktop
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    UnprocessableEntity:
-      description: UNPROCESSABLE_ENTITY
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    MobileOS:
-      type: string
-      enum:
-      - ios
-      - android
-    NotFound:
-      description: NOT_FOUND
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
   parameters:
     UnitReferenceTimeStamp:
       name: unit_reference

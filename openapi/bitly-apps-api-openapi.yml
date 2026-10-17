@@ -59,6 +59,10 @@ paths:
       - Apps
 components:
   schemas:
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
     FieldError:
       type: object
       properties:
@@ -68,33 +72,12 @@ components:
           type: string
         message:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    InternalError:
-      description: INTERNAL_ERROR
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
     NotFound:
       description: NOT_FOUND
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
     OAuthApp:
@@ -119,6 +102,23 @@ components:
         internal_app:
           type: boolean
           description: True for Bitly's own first-party apps (dashboard, mobile apps), as opposed to third-party integrations.
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
   parameters:
     ClientID:
       name: client_id

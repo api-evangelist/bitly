@@ -225,33 +225,67 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
-    BaseMetrics:
+    Organizations:
+      type: object
+      required:
+      - organizations
+      properties:
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+    PlanLimits:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HasReferences'
+      - properties:
+          organization_guid:
+            type: string
+          plan_limits:
+            type: array
+            items:
+              $ref: '#/components/schemas/PlanLimit'
+    Metric:
       type: object
       properties:
-        unit:
+        key:
           type: string
-          x-faker: internet.userName
-        units:
+        value:
           type: integer
-          x-faker:
-            datatype.number:
-              min: 1
-              max: 100
-        facet:
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        message:
           type: string
-          enum:
-          - countries
-          - cities
-          - devices
-          - referrers
-          - referrers_by_domain
-          - referring_domains
-          - referring_networks
-          - shorten_counts
-          - destinations
-        unit_reference:
+        description:
           type: string
-          x-faker: date.past
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    Forbidden:
+      description: FORBIDDEN
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Metrics:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseMetrics'
+      - properties:
+          metrics:
+            type: array
+            items:
+              $ref: '#/components/schemas/Metric'
     FieldError:
       type: object
       properties:
@@ -261,38 +295,10 @@ components:
           type: string
         message:
           type: string
-    TimeUnit:
-      description: the unit of time queried for (minute, hour, day, week, month)
-      type: string
-      enum:
-      - minute
-      - hour
-      - day
-      - week
-      - month
-      default: day
-    Metric:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: integer
-    Forbidden:
-      description: FORBIDDEN
+    TemporarilyUnavailable:
+      description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
-    InternalError:
-      description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    HasReferences:
-      type: object
-      properties:
-        references:
-          type: object
-          additionalProperties:
-            type: string
     PlanLimit:
       type: object
       properties:
@@ -358,65 +364,51 @@ components:
             enum:
             - none
             - sms
-    PlanLimits:
+    HasReferences:
       type: object
-      allOf:
-      - $ref: '#/components/schemas/HasReferences'
-      - properties:
-          organization_guid:
+      properties:
+        references:
+          type: object
+          additionalProperties:
             type: string
-          plan_limits:
-            type: array
-            items:
-              $ref: '#/components/schemas/PlanLimit'
-    Error:
+    TimeUnit:
+      description: the unit of time queried for (minute, hour, day, week, month)
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      default: day
+    BaseMetrics:
       type: object
       properties:
-        message:
+        unit:
           type: string
-        description:
+          x-faker: internet.userName
+        units:
+          type: integer
+          x-faker:
+            datatype.number:
+              min: 1
+              max: 100
+        facet:
           type: string
-        resource:
+          enum:
+          - countries
+          - cities
+          - devices
+          - referrers
+          - referrers_by_domain
+          - referring_domains
+          - referring_networks
+          - shorten_counts
+          - destinations
+        unit_reference:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    NotFound:
-      description: NOT_FOUND
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    TemporarilyUnavailable:
-      description: TEMPORARILY_UNAVAILABLE
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    Organizations:
-      type: object
-      required:
-      - organizations
-      properties:
-        organizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Organization'
-    Metrics:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseMetrics'
-      - properties:
-          metrics:
-            type: array
-            items:
-              $ref: '#/components/schemas/Metric'
+          x-faker: date.past
   parameters:
-    UnitReferenceTimeStamp:
-      name: unit_reference
-      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
-      schema:
-        type: string
-      required: false
-      in: query
-      example: 2006-01-02T15:04:05-0700
     OrganizationGUID:
       name: organization_guid
       description: A GUID for a Bitly organization
@@ -425,6 +417,14 @@ components:
       schema:
         type: string
       example: Oa1bcd234eF
+    UnitReferenceTimeStamp:
+      name: unit_reference
+      description: An ISO-8601 timestamp, indicating the most recent time for which to pull metrics. Will default to current time. Timestamp values should be url encoded (i.e. replace '+' with '%2B' and ':' with '%3A'; 2022-02-02T15:53:02+0000 becomes 2022-02-02T15%3A53%3A02%2B0000)
+      schema:
+        type: string
+      required: false
+      in: query
+      example: 2006-01-02T15:04:05-0700
     UnitAmount:
       name: units
       description: An integer representing the time units to query data for. pass -1 to return all units of time

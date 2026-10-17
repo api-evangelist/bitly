@@ -154,30 +154,8 @@ paths:
                 $ref: '#/components/schemas/TemporarilyUnavailable'
 components:
   schemas:
-    FieldError:
-      type: object
-      properties:
-        field:
-          type: string
-        error_code:
-          type: string
-        message:
-          type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        description:
-          type: string
-        resource:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldError'
-    UnprocessableEntity:
-      description: UNPROCESSABLE_ENTITY
+    Forbidden:
+      description: FORBIDDEN
       allOf:
       - $ref: '#/components/schemas/Error'
     PlatformLimit:
@@ -189,10 +167,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MethodLimit'
-    BadRequest:
-      description: BAD_REQUEST
+    UnprocessableEntity:
+      description: UNPROCESSABLE_ENTITY
       allOf:
       - $ref: '#/components/schemas/Error'
+    FieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        error_code:
+          type: string
+        message:
+          type: string
     PlatformLimits:
       type: object
       properties:
@@ -200,24 +187,24 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PlatformLimit'
-    Forbidden:
-      description: FORBIDDEN
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    InternalError:
-      description: INTERNAL_ERROR
-      allOf:
-      - $ref: '#/components/schemas/Error'
-    UserUpdate:
+    MethodLimit:
       type: object
       properties:
         name:
           type: string
-        default_group_guid:
+        limit:
+          type: integer
+        count:
+          type: integer
+    Email:
+      type: object
+      properties:
+        email:
           type: string
-      example:
-        name: Chauncey McPufferson
-        default_group_guid: Ba1bc23dE4F
+        is_primary:
+          type: boolean
+        is_verified:
+          type: boolean
     User:
       type: object
       required:
@@ -250,32 +237,45 @@ components:
           type: boolean
         default_group_guid:
           type: string
-    NotFound:
-      description: NOT_FOUND
-      allOf:
-      - $ref: '#/components/schemas/Error'
     TemporarilyUnavailable:
       description: TEMPORARILY_UNAVAILABLE
       allOf:
       - $ref: '#/components/schemas/Error'
-    MethodLimit:
+    NotFound:
+      description: NOT_FOUND
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: BAD_REQUEST
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    UserUpdate:
       type: object
       properties:
         name:
           type: string
-        limit:
-          type: integer
-        count:
-          type: integer
-    Email:
+        default_group_guid:
+          type: string
+      example:
+        name: Chauncey McPufferson
+        default_group_guid: Ba1bc23dE4F
+    InternalError:
+      description: INTERNAL_ERROR
+      allOf:
+      - $ref: '#/components/schemas/Error'
+    Error:
       type: object
       properties:
-        email:
+        message:
           type: string
-        is_primary:
-          type: boolean
-        is_verified:
-          type: boolean
+        description:
+          type: string
+        resource:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
   parameters:
     Path:
       name: path
