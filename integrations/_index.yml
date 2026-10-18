@@ -139,7 +139,7 @@
     - alpha
     in_cloud: true
     builder: unknown (community connector; contributor not in the record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: bitly-fivetran
   label: Fivetran
@@ -165,7 +165,7 @@
     - connectors/applications/bitly
     vendor_link: https://bitly.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: bitly-microsoft-teams-own
   label: Microsoft Teams (own)
