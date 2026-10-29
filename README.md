@@ -1,4 +1,4 @@
-# Bitly (bitly)
+# Bitly
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,67 +64,186 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Bitly is a URL shortening and link management platform that enables developers and marketers to create branded short links, generate QR codes, track engagement analytics, and manage link campaigns at scale. The Bitly v4 REST API provides programmatic access to link creation, custom domains, groups, campaigns, click metrics, and QR codes using Bearer token authentication.
+Bitly is a link management platform for creating, branding, routing and measuring short links, QR Codes and link-in-bio pages at scale. The Bitly v4 REST API is a 94-operation, bearer-authenticated JSON API at https://api-ssl.bitly.com/v4 covering Bitlink creation and expansion, custom back-halves, branded short domains, groups (workspaces) and organizations, campaigns and channels, dynamic and static QR Codes, bulk shortening, engagement webhooks, and a deep click/scan analytics surface sliced by country, city, device, OS, browser and referrer. Bitly publishes its own OpenAPI 3.0 definition and operates an official remote Model Context Protocol server, making it directly callable by AI agents.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/bitly/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/bitly/refs/heads/main/apis.yml)
+**Areas:** Links · URL Shorteners · QR Codes · Analytics · Marketing · Link Management · Webhook · Attribution · Agents · MCP
 
-## Scope
+## Bitly on APIs.io
 
-- **Type:** Index
+Everything profiled for Bitly is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bitly/](https://apis.io/providers/bitly/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (11)
 
-- Links
-- URL Shortener
-- QR Codes
-- Analytics
-- Marketing
+- [Bitly BSDs API](https://apis.io/apis/bitly/bitly-bsds-api/) — List the branded short domains (BSDs) available to the authenticated account. 1 operation(s), extracted verbatim from the OpenAPI Bitly publishes at…
+- [Bitly Bitlinks API](https://apis.io/apis/bitly/bitly-bitlinks-api/) — Create, expand, update, archive and delete Bitlinks, list them by group, and read per-link click, engagement, country, city, device and referrer metrics. 21…
+- [Bitly Campaigns API](https://apis.io/apis/bitly/bitly-campaigns-api/) — Manage marketing campaigns and the channels inside them, grouping Bitlinks for attribution. 8 operation(s), extracted verbatim from the OpenAPI Bitly…
+- [Bitly Custom Bitlinks API](https://apis.io/apis/bitly/bitly-custom-bitlinks-api/) — Create and update custom back-halves on existing Bitlinks and read clicks by destination for A/B rotations. 5 operation(s), extracted verbatim from the…
+- [Bitly Groups API](https://apis.io/apis/bitly/bitly-groups-api/) — Manage groups (workspaces) — preferences, tags, shorten counts, exports, feature usage and historical usage — plus the full group-level click, scan and…
+- [Bitly Organizations API](https://apis.io/apis/bitly/bitly-organizations-api/) — Read organizations, their plan limits, and shorten counts overall and by group. 5 operation(s), extracted verbatim from the OpenAPI Bitly publishes at…
+- [Bitly QR Codes API](https://apis.io/apis/bitly/bitly-qr-codes-api/) — Create dynamic and static QR Codes, customize their render, fetch the image, upgrade a code to a Bitlink, and read scan metrics by browser, city, country…
+- [Bitly User API](https://apis.io/apis/bitly/bitly-user-api/) — Read and update the authenticated user profile and read the platform limits applied to the account. 3 operation(s), extracted verbatim from the OpenAPI…
+- [Bitly Webhooks API](https://apis.io/apis/bitly/bitly-webhooks-api/) — Create, read, update, delete and verify webhook endpoints that receive Bitly engagement events. 6 operation(s), extracted verbatim from the OpenAPI Bitly…
+- [Bitly MCP Server](https://apis.io/apis/bitly/bitly-mcp-server/) — Bitly's official remote Model Context Protocol server, exposing 25 tools for link creation, QR Codes, analytics, groups, custom domains and bulk upload.…
+- [Bitly Apps API](https://apis.io/apis/bitly/bitly-apps-api/) — The Apps API from Bitly — 1 operation(s) for apps.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Bitly API v4
+Event-driven and webhook contracts.
 
-REST API for creating and managing Bitlinks, custom domains, groups, campaigns, QR codes, and click analytics. Authentication uses Bearer tokens issued from Bitly account settings or via OAuth 2.0.
+- [Bitly Engagement Webhooks](https://apis.io/asyncapis/bitly/bitly-engagement-webhooks/)
 
-- **Human URL:** [https://dev.bitly.com/api-reference](https://dev.bitly.com/api-reference)
-- **Base URL:** `https://api-ssl.bitly.com/v4`
+#### MCP servers (2)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Links
-- URL Shortener
-- QR Codes
-- Analytics
+- [Bitly MCP Server](https://apis.io/servers/bitly/bitly-mcp-server/)
+- [https://dev.bitly.com/bitly-mcp/](https://apis.io/servers/bitly/https-dev-bitly-com-bitly-mcp/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://dev.bitly.com/api-reference)
-- [OpenAPI](https://dev.bitly.com/v4/v4.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Getting Started](https://dev.bitly.com/docs/getting-started/introduction)
-- [Postman Collection](collections/bitly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/bitly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Common Properties
+- [Bitly Agentic Access](https://apis.io/agentic-access/bitly/bitly-agentic-access/)
 
-- [LinkedIn](https://www.linkedin.com/company/bitly)
+#### Collections (11)
+
+Postman and Open Collection request collections.
+
+- [Bitly API v4](https://apis.io/collections/bitly/open-bitly/)
+- [Bitly Bitlinks API](https://apis.io/collections/bitly/open-bitly-bitlinks-api/)
+- [Bitly BSDs API](https://apis.io/collections/bitly/open-bitly-bsds-api/)
+- [Bitly Campaigns API](https://apis.io/collections/bitly/open-bitly-campaigns-api/)
+- [Bitly Custom Bitlinks API](https://apis.io/collections/bitly/open-bitly-custom-bitlinks-api/)
+- [Bitly Groups API](https://apis.io/collections/bitly/open-bitly-groups-api/)
+- [Bitly OAuth Apps API](https://apis.io/collections/bitly/open-bitly-oauth-apps-api/)
+- [Bitly Organizations API](https://apis.io/collections/bitly/open-bitly-organizations-api/)
+- [Bitly QR Codes API](https://apis.io/collections/bitly/open-bitly-qr-codes-api/)
+- [Bitly User API](https://apis.io/collections/bitly/open-bitly-user-api/)
+- [Bitly Webhooks API](https://apis.io/collections/bitly/open-bitly-webhooks-api/)
+
+#### Overlays (20)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Bitly Apps Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-apps-api-phrasing-overlay/)
+- [Bitly Bitlinks Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-bitlinks-api-phrasing-overlay/)
+- [Bitly Bitlinks Overlay](https://apis.io/overlays/bitly/bitly-bitlinks-overlay/)
+- [Bitly Bsds Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-bsds-api-phrasing-overlay/)
+- [Bitly Bsds Overlay](https://apis.io/overlays/bitly/bitly-bsds-overlay/)
+- [Bitly Campaigns Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-campaigns-api-phrasing-overlay/)
+- [Bitly Campaigns Overlay](https://apis.io/overlays/bitly/bitly-campaigns-overlay/)
+- [Bitly Custom Bitlinks Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-custom-bitlinks-api-phrasing-overlay/)
+- [Bitly Custom Bitlinks Overlay](https://apis.io/overlays/bitly/bitly-custom-bitlinks-overlay/)
+- [Bitly Groups Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-groups-api-phrasing-overlay/)
+- [Bitly Groups Overlay](https://apis.io/overlays/bitly/bitly-groups-overlay/)
+- [Bitly Oauth Apps Overlay](https://apis.io/overlays/bitly/bitly-oauth-apps-overlay/)
+- [Bitly Organizations Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-organizations-api-phrasing-overlay/)
+- [Bitly Organizations Overlay](https://apis.io/overlays/bitly/bitly-organizations-overlay/)
+- [Bitly Qr Codes Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-qr-codes-api-phrasing-overlay/)
+- [Bitly Qr Codes Overlay](https://apis.io/overlays/bitly/bitly-qr-codes-overlay/)
+- [Bitly User Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-user-api-phrasing-overlay/)
+- [Bitly User Overlay](https://apis.io/overlays/bitly/bitly-user-overlay/)
+- [Bitly Webhooks Api Phrasing Overlay](https://apis.io/overlays/bitly/bitly-webhooks-api-phrasing-overlay/)
+- [Bitly Webhooks Overlay](https://apis.io/overlays/bitly/bitly-webhooks-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Bitly Authentication](https://apis.io/security/bitly/bitly-authentication/)
+- [Bitly Domain Security](https://apis.io/security/bitly/bitly-domain-security/)
+- [Bitly Trust Center](https://apis.io/security/bitly/bitly-trust-center/)
+- [Bitly Vulnerability Disclosure](https://apis.io/security/bitly/bitly-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Bitly Scopes](https://apis.io/scopes/bitly/bitly-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Bitly Plans Pricing](https://apis.io/plans/bitly/bitly-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Bitly Rate Limits](https://apis.io/rate-limits/bitly/bitly-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://bitly.com)
 - [Documentation](https://dev.bitly.com)
-- [API Reference](https://dev.bitly.com/api-reference)
+- [API reference](https://dev.bitly.com/api-reference)
 - [Pricing](https://bitly.com/pages/pricing)
-- [Sign Up](https://app.bitly.com/sign_up)
-- [Login](https://app.bitly.com/sign_in)
-- [Authentication](https://dev.bitly.com/docs/getting-started/authentication)
-- [Rate Limits](https://dev.bitly.com/docs/getting-started/rate-limits)
 - [Support](https://support.bitly.com)
-- [Status Page](https://bitly.statuspage.io)
-- [GitHub Organization](https://github.com/bitly)
+- [Blog](https://bitly.com/blog/)
+- [Trust centre](https://security.bitly.com)
+- [Terms of service](https://bitly.com/pages/terms-of-service)
+- [Privacy policy](https://bitly.com/pages/privacy)
+- [GitHub](https://github.com/bitly)
+- [Status](https://bitly.statuspage.io)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 70.5** — exemplar · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 62.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 84.2 |
+| Developer ergonomics | 74.4 |
+| Access clarity | 85.5 |
+
+**Agent readiness 59.4** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | verified |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bitly/](https://apis.io/providers/bitly/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Bitly: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bitly/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
